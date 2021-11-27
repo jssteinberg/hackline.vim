@@ -1,7 +1,5 @@
 " ============================================================
 " File: skyline.vim
-" Maintainer: ourigen <https://github.com/ourigen>
-" Description: An easily-configurable statusline plugin
 " ============================================================
 
 if exists('g:loaded_skyline')
@@ -15,9 +13,6 @@ set cpoptions&vim
 set laststatus=2
 
 " === User configuration variables ===
-" TODO: Changed skyline_gitbranch -> skyline_fugitive.
-" Update docs and add check if skyline_gitbranch exists
-let g:skyline_gitbranch = get(g:, 'skyline_gitbranch', '0')
 let g:skyline_fugitive = get(g:, 'skyline_fugitive', '0')
 let g:skyline_ale = get(g:, 'skyline_ale', '0')
 let g:skyline_path = get(g:, 'skyline_path', '1')
@@ -26,8 +21,8 @@ let g:skyline_fileformat = get(g:, 'skyline_fileformat', '1')
 let g:skyline_encoding = get(g:, 'skyline_encoding', '1')
 let g:skyline_wordcount = get(g:, 'skyline_wordcount', '0')
 let g:skyline_linecount = get(g:, 'skyline_linecount', '0')
-let g:skyline_percent = get(g:, 'skyline_percent', '1')
-let g:skyline_lineinfo = get(g:, 'skyline_lineinfo', '1')
+let g:skyline_percent = get(g:, 'skyline_percent', '0')
+let g:skyline_lineinfo = get(g:, 'skyline_lineinfo', '0')
 let g:skyline_filetype = get(g:, 'skyline_filetype', '1')
 let g:skyline_bufnum = get(g:, 'skyline_bufnum', '1')
 " ======
@@ -37,38 +32,31 @@ function! ActiveStatus()
 
     "=== Dynamic mode color ===
     let l:statusline.='%#String#'
-    let l:statusline.='%{(mode()=="n")?"▎  NORMAL  ":""}'
-    let l:statusline.='%{(mode()=="c")?"▎  COMMAND  ":""}'
+    let l:statusline.='%{(mode()=="n")?"[N]  ":""}'
+    let l:statusline.='%{(mode()=="c")?"[C]  ":""}'
     let l:statusline.='%#Function#'
-    let l:statusline.='%{(mode()=="i")?"▎  INSERT  ":""}'
-    let l:statusline.='%{(mode()=="t")?"▎  TERMINAL  ":""}'
+    let l:statusline.='%{(mode()=="i")?"[I]  ":""}'
+    let l:statusline.='%{(mode()=="t")?"[T]  ":""}'
     let l:statusline.='%#Statement#'
-    let l:statusline.='%{(mode()=="v")?"▎  VISUAL  ":""}'
-    let l:statusline.='%{(mode()=="\<C-v>")?"▎  VISUAL  ":""}'
+    let l:statusline.='%{(mode()=="v")?"[V]  ":""}'
+    let l:statusline.='%{(mode()=="\<C-v>")?"[V]  ":""}'
     let l:statusline.='%#Identifier#'
-    let l:statusline.='%{(mode()=="R")?"▎  REPLACE  ":""}'
-    let l:statusline.='%{(mode()=="s")?"▎  SELECT  ":""}'
+    let l:statusline.='%{(mode()=="R")?"[R]  ":""}'
+    let l:statusline.='%{(mode()=="s")?"[S]  ":""}'
 
     " === Resets color ===
     let l:statusline.='%#Normal#'
 
     " === Git branch ===
-    if g:skyline_gitbranch
-        echo 'g:skyline_gitbranch was changed to g:skyline_fugitive. Please update the setting'
-    endif
     if g:skyline_fugitive
         let l:statusline.='%#Type#'
-        " if exists('g:loaded_fugitive')
         let l:statusline.='%(%{skyline#fugitive#branch()}%)'
-        " else
-        "     let l:statusline.='%(%{skyline#base#GitBranch()}%)'
-        " endif
-        let l:statusline.='%#Normal#'
+        let l:statusline.='%#Normal#  '
     endif
 
     " === File path ===
     " g:skyline_pah :: 1 = tail, 2 = full path
-    let path_options = [ ' %t', ' %#Comment#%{skyline#base#directory()}%#Normal#%t' ]
+    let path_options = [ '%t', '%#Comment#%{skyline#base#directory()}%#Normal#%t' ]
     let l:statusline.=path_options[g:skyline_path]
 
     " === Filetype, modified, readonly flag [vim,+,RO] ===
@@ -127,18 +115,24 @@ function! ActiveStatus()
 
     " === Buffer number ===
     if g:skyline_bufnum
-        let l:statusline.='%( %#LineNr#[%n] %)'
+        let l:statusline.='%(%#TabLineSel# %n %)'
     endif
 
     return l:statusline
 endfunction
 
 function! InactiveStatus()
-    let l:statusline='%#StatusLineNC#'
+    let l:statusline='%#StatusLineNC#[-]  '
+
+    " === Git branch ===
+    if g:skyline_fugitive
+        let l:statusline.='%(%{skyline#fugitive#branch()}%)  '
+    endif
 
     " === File path ===
-    let path_options = [ ' %t', ' %F' ]
-    let statusline.=path_options[g:skyline_path]
+    " g:skyline_pah :: 1 = tail, 2 = full path
+    let path_options = [ '%t', '%{skyline#base#directory()}%t' ]
+    let l:statusline.=path_options[g:skyline_path]
 
     " === Modified flag [+] ===
     let l:statusline.='%( %M%)'
@@ -148,7 +142,7 @@ function! InactiveStatus()
 
     " === Buffer number ===
     if g:skyline_bufnum
-        let l:statusline.='%( [%n] %)'
+        let l:statusline.='%( %n %)'
     endif
 
     return l:statusline

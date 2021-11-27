@@ -28,30 +28,30 @@ let g:skyline_bufnum = get(g:, 'skyline_bufnum', '1')
 " ======
 
 function! ActiveStatus()
-    let l:statusline=''
+    let l:statusline='%#TabLineSel#  %#StatusLine# '
 
     "=== Dynamic mode color ===
-    let l:statusline.='%#String#'
-    let l:statusline.='%{(mode()=="n")?"[N]  ":""}'
-    let l:statusline.='%{(mode()=="c")?"[C]  ":""}'
-    let l:statusline.='%#Function#'
-    let l:statusline.='%{(mode()=="i")?"[I]  ":""}'
-    let l:statusline.='%{(mode()=="t")?"[T]  ":""}'
-    let l:statusline.='%#Statement#'
-    let l:statusline.='%{(mode()=="v")?"[V]  ":""}'
-    let l:statusline.='%{(mode()=="\<C-v>")?"[V]  ":""}'
-    let l:statusline.='%#Identifier#'
-    let l:statusline.='%{(mode()=="R")?"[R]  ":""}'
-    let l:statusline.='%{(mode()=="s")?"[S]  ":""}'
+    "let l:statusline.='%#String#'
+    let l:statusline.='%{(mode()=="n")?" [N]  ":""}'
+    let l:statusline.='%{(mode()=="c")?" [C]  ":""}'
+    "let l:statusline.='%#Function#'
+    let l:statusline.='%{(mode()=="i")?" [I]  ":""}'
+    let l:statusline.='%{(mode()=="t")?" [T]  ":""}'
+    "let l:statusline.='%#Statement#'
+    let l:statusline.='%{(mode()=="v")?" [V]  ":""}'
+    let l:statusline.='%{(mode()=="\<C-v>")?" [V]  ":""}'
+    "let l:statusline.='%#Identifier#'
+    let l:statusline.='%{(mode()=="R")?" [R]  ":""}'
+    let l:statusline.='%{(mode()=="s")?" [S]  ":""}'
 
     " === Resets color ===
-    let l:statusline.='%#Normal#'
+    let l:statusline.='%#StatusLine#'
 
     " === Git branch ===
     if g:skyline_fugitive
-        let l:statusline.='%#Type#'
+        "let l:statusline.='%#Type#'
         let l:statusline.='%(%{skyline#fugitive#branch()}%)'
-        let l:statusline.='%#Normal#  '
+        let l:statusline.=' %#Normal# '
     endif
 
     " === File path ===
@@ -122,27 +122,28 @@ function! ActiveStatus()
 endfunction
 
 function! InactiveStatus()
-    let l:statusline='%#StatusLineNC#[-]  '
+    let l:statusline='%#StatusLineNC#         '
 
     " === Git branch ===
     if g:skyline_fugitive
-        let l:statusline.='%(%{skyline#fugitive#branch()}%)  '
+        let l:statusline.='%(%{skyline#fugitive#branch()}%) '
     endif
 
     " === File path ===
     " g:skyline_pah :: 1 = tail, 2 = full path
     let path_options = [ '%t', '%{skyline#base#directory()}%t' ]
+    let l:statusline.='%#NonText# '
     let l:statusline.=path_options[g:skyline_path]
 
     " === Modified flag [+] ===
     let l:statusline.='%( %M%)'
 
     " === Divider ===
-    let l:statusline.='%='
+    let l:statusline.=' %#Normal#%='
 
     " === Buffer number ===
     if g:skyline_bufnum
-        let l:statusline.='%( %n %)'
+        let l:statusline.='%([%n]%)'
     endif
 
     return l:statusline

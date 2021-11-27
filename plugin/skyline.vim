@@ -13,6 +13,7 @@ set cpoptions&vim
 set laststatus=2
 
 " === User configuration variables ===
+let g:skyline_mode = get(g:, 'skyline_mode', '0')
 let g:skyline_fugitive = get(g:, 'skyline_fugitive', '0')
 let g:skyline_ale = get(g:, 'skyline_ale', '0')
 let g:skyline_path = get(g:, 'skyline_path', '1')
@@ -30,19 +31,21 @@ let g:skyline_bufnum = get(g:, 'skyline_bufnum', '1')
 function! ActiveStatus()
     let l:statusline='%#TabLineSel#  %#StatusLine# '
 
-    "=== Dynamic mode color ===
-    "let l:statusline.='%#String#'
-    let l:statusline.='%{(mode()=="n")?" [N]  ":""}'
-    let l:statusline.='%{(mode()=="c")?" [C]  ":""}'
-    "let l:statusline.='%#Function#'
-    let l:statusline.='%{(mode()=="i")?" [I]  ":""}'
-    let l:statusline.='%{(mode()=="t")?" [T]  ":""}'
-    "let l:statusline.='%#Statement#'
-    let l:statusline.='%{(mode()=="v")?" [V]  ":""}'
-    let l:statusline.='%{(mode()=="\<C-v>")?" [V]  ":""}'
-    "let l:statusline.='%#Identifier#'
-    let l:statusline.='%{(mode()=="R")?" [R]  ":""}'
-    let l:statusline.='%{(mode()=="s")?" [S]  ":""}'
+    if g:skyline_mode
+        "=== Dynamic mode color ===
+        "let l:statusline.='%#String#'
+        let l:statusline.='%{(mode()=="n")?" [N]  ":""}'
+        let l:statusline.='%{(mode()=="c")?" [C]  ":""}'
+        "let l:statusline.='%#Function#'
+        let l:statusline.='%{(mode()=="i")?" [I]  ":""}'
+        let l:statusline.='%{(mode()=="t")?" [T]  ":""}'
+        "let l:statusline.='%#Statement#'
+        let l:statusline.='%{(mode()=="v")?" [V]  ":""}'
+        let l:statusline.='%{(mode()=="\<C-v>")?" [V]  ":""}'
+        "let l:statusline.='%#Identifier#'
+        let l:statusline.='%{(mode()=="R")?" [R]  ":""}'
+        let l:statusline.='%{(mode()=="s")?" [S]  ":""}'
+    endif
 
     " === Resets color ===
     let l:statusline.='%#StatusLine#'
@@ -122,7 +125,7 @@ function! ActiveStatus()
 endfunction
 
 function! InactiveStatus()
-    let l:statusline='%#StatusLineNC#         '
+    let l:statusline='%#StatusLineNC#   '
 
     " === Git branch ===
     if g:skyline_fugitive

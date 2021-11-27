@@ -118,14 +118,14 @@ function! ActiveStatus()
 
     " === Buffer number ===
     if g:skyline_bufnum
-        let l:statusline.='%(%#TabLineSel# %n %)'
+        let l:statusline.=' %(%#TabLineSel# %n %)'
     endif
 
     return l:statusline
 endfunction
 
 function! InactiveStatus()
-    let l:statusline='%#StatusLineNC#   '
+    let l:statusline='%#TabLine#  %#StatusLineNC# '
 
     " === Git branch ===
     if g:skyline_fugitive
@@ -146,7 +146,7 @@ function! InactiveStatus()
 
     " === Buffer number ===
     if g:skyline_bufnum
-        let l:statusline.='%([%n]%)'
+        let l:statusline.=' %([%n]%)'
     endif
 
     return l:statusline

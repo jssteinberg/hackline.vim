@@ -4,7 +4,7 @@ function! skyline#base#directory() abort
         let l:directory = pathshorten(l:directory)
     endif
     if l:directory !=# '.' && l:directory !=# ''
-        return ' ' . l:directory  . '/'
+        return '' . l:directory  . '/'
     endif
     return ''
 endfunction

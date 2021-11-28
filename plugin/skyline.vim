@@ -5,14 +5,12 @@
 if exists('g:loaded_skyline')
     finish
 endif
-let g:loaded_skyline = 1
 
 let s:save_cpoptions = &cpoptions
-set cpoptions&vim
-
-set laststatus=2
+let s:skyline_path_options = [ '%t  ', '%{skyline#base#directory()}%t  ' ]
 
 " === User configuration variables ===
+let g:loaded_skyline = 1
 let g:skyline_mode = get(g:, 'skyline_mode', '0')
 let g:skyline_fugitive = get(g:, 'skyline_fugitive', '0')
 let g:skyline_ale = get(g:, 'skyline_ale', '0')
@@ -24,16 +22,31 @@ let g:skyline_linecount = get(g:, 'skyline_linecount', '0')
 let g:skyline_percent = get(g:, 'skyline_percent', '0')
 let g:skyline_lineinfo = get(g:, 'skyline_lineinfo', '0')
 let g:skyline_filetype = get(g:, 'skyline_filetype', '1')
-let g:skyline_bufnum = get(g:, 'skyline_bufnum', '0')
+let g:skyline_bufnum = get(g:, 'skyline_bufnum', '1')
 " ======
 
+set cpoptions&vim
+set laststatus=2
+
+if g:skyline_mode
+    set noshowmode
+endif
+
 function! InitStatus()
-    let l:statusline='   ' " Needs 3 spaces to 2 output for some reason...
+    let l:statusline='  '
 
     " === buffer number ===
     if g:skyline_bufnum
         let l:statusline.=':b'.bufnr().' '
+    else
+        let l:statusline.=' '
     endif
+
+    return l:statusline
+endfunction
+
+function! EndStatus()
+    let l:statusline=''
 
     return l:statusline
 endfunction
@@ -41,48 +54,31 @@ endfunction
 function! ActiveStatus()
     let l:statusline='%#IncSearch#'
     let l:statusline.='%{InitStatus()}'
-    let l:statusline.='%#StatusLine# '
-
-    if g:skyline_mode
-        "=== Dynamic mode color ===
-        "let l:statusline.='%#String#'
-        let l:statusline.='%{(mode()=="n")?" [N]  ":""}'
-        let l:statusline.='%{(mode()=="c")?" [C]  ":""}'
-        "let l:statusline.='%#Function#'
-        let l:statusline.='%{(mode()=="i")?" [I]  ":""}'
-        let l:statusline.='%{(mode()=="t")?" [T]  ":""}'
-        "let l:statusline.='%#Statement#'
-        let l:statusline.='%{(mode()=="v")?" [V]  ":""}'
-        let l:statusline.='%{(mode()=="\<C-v>")?" [V]  ":""}'
-        "let l:statusline.='%#Identifier#'
-        let l:statusline.='%{(mode()=="R")?" [R]  ":""}'
-        let l:statusline.='%{(mode()=="s")?" [S]  ":""}'
-    endif
-
-    " === Resets color ===
-    let l:statusline.='%#StatusLine#'
-
-    " === Git branch ===
-    if g:skyline_fugitive
-        "let l:statusline.='%#Type#'
-        let l:statusline.='%(%{skyline#fugitive#branch()}%) '
-        "let l:statusline.=' %#Normal# '
-    endif
 
     " === File path ===
     " g:skyline_pah :: 1 = tail, 2 = full path
-    let path_options = [ '%t', '%F' ]
-    let l:statusline.=path_options[g:skyline_path]
+    let l:statusline.=s:skyline_path_options[g:skyline_path]
 
-    " === Modified flag [+] ===
-    let l:statusline.='%( %M%)'
-
-    " === Filetype, modified, readonly flag [vim,+,RO] ===
-    if g:skyline_filetype
-        let l:statusline.=' %#Comment# %(%{&filetype}%R%)'
+    "=== Dynamic mode color ===
+    if g:skyline_mode
+        let l:statusline.='%#String#'
+        let l:statusline.='%{(mode()=="n")?" NORMAL":""}'
+        let l:statusline.='%{(mode()=="c")?" COMMAND":""}'
+        let l:statusline.='%#Function#'
+        let l:statusline.='%{(mode()=="i")?" INSERT":""}'
+        let l:statusline.='%{(mode()=="t")?" TERMINAL":""}'
+        let l:statusline.='%#Statement#'
+        let l:statusline.='%{(mode()=="v")?" VISUAL":""}'
+        let l:statusline.='%{(mode()=="\<C-v>")?" VISUAL BLOCK":""}'
+        let l:statusline.='%#Identifier#'
+        let l:statusline.='%{(mode()=="R")?" REPLACE":""}'
+        let l:statusline.='%{(mode()=="s")?" SELECT":""}'
     endif
+
+    " === Modified, readonly flag ===
+    let l:statusline.='%#Comment# %(%M%R%)'
     
-    let l:statusline.='%#Normal#'
+    let l:statusline.='%#Normal# '
 
     " === Divider ===
     let l:statusline.='%='
@@ -94,36 +90,50 @@ function! ActiveStatus()
         let l:statusline.='%#WarningMsg#%(%{skyline#ale#warnings()} %)'
         let l:statusline.='%#Normal#'
     endif
+    
+    " === File type ===
+    if g:skyline_filetype
+        let l:statusline.='%( %{&filetype} %)'
+    endif
 
     " === File format ===
     if g:skyline_fileformat
-        let l:statusline.='%( %{skyline#base#fileformat()}  %)'
+        let l:statusline.='%( %{skyline#base#fileformat()} %)'
     endif
 
     " === File encoding ===
     if g:skyline_encoding
-        let l:statusline.='%( %{skyline#base#fileencoding()}  %)'
+        let l:statusline.='%( %{skyline#base#fileencoding()} %)'
     endif
 
     " === Word count ===
     if g:skyline_wordcount
-        let l:statusline.='%( %{skyline#base#wordcount()} words  %)'
+        let l:statusline.='%( %{skyline#base#wordcount()} words %)'
     endif
 
     " === Line count ===
     if g:skyline_linecount
-        let l:statusline.=' %L lines  '
+        let l:statusline.=' %L lines '
     endif
 
     " === Relative line number ===
     if g:skyline_percent
-        let l:statusline.=' %3p%%  '
+        let l:statusline.=' %3p%% '
     endif
 
     " === Line:column number ===
     if g:skyline_lineinfo
-        let l:statusline.=' %3l:%-3c  '
+        let l:statusline.=' %3l:%-3c '
     endif
+
+    " === Git branch ===
+    if g:skyline_fugitive
+        "let l:statusline.='%#Type#'
+        let l:statusline.='%( %#Directory#%{skyline#fugitive#branch()}%) '
+        "let l:statusline.=' %#Normal# '
+    endif
+
+    let l:statusline.='%#IncSearch# %{EndStatus()}'
 
     return l:statusline
 endfunction
@@ -131,23 +141,18 @@ endfunction
 function! InactiveStatus()
     let l:statusline='%#StatusLineNC#'
     let l:statusline.='%{InitStatus()}'
-    let l:statusline.='%#StatusLineNC# '
-
-    " === Git branch ===
-    if g:skyline_fugitive
-        let l:statusline.='%(%{skyline#fugitive#branch()}%) '
-    endif
 
     " === File path ===
     " g:skyline_pah :: 1 = tail, 2 = full path
-    let path_options = [ '%t', '%F' ]
-    let l:statusline.=path_options[g:skyline_path]
+    let l:statusline.=s:skyline_path_options[g:skyline_path]
 
-    " === Modified flag [+] ===
-    let l:statusline.='%( %M%)'
+    " === Modified flag ===
+    let l:statusline.='%#Comment# %(%M%)'
 
     " === Divider ===
     let l:statusline.=' %#Normal#%='
+
+    let l:statusline.=' %{EndStatus()}'
 
     return l:statusline
 endfunction

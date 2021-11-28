@@ -79,13 +79,3 @@ function! skyline#base#filesize() abort
         return printf('%.1f', l:size/1024.0/1024.0/1024.0) .'g'
     endif
 endfunction
-
-" alternative branch parsing if fugitive.vim not installed
-" function! skyline#fugitive#GitBranch() abort
-"     let l:branch = system('cd '.expand('%:p:h').' && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d "\n"')
-"     if !strlen(l:branch) || !isdirectory(expand('%:p:h'))
-"         return ''
-"     else
-"         return ' ' . l:branch . ''
-"     endif
-" endfunction

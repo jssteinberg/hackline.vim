@@ -12,10 +12,11 @@
 
 Much slimmer alternatives to plugins like [powerline](https://github.com/powerline/powerline), [vim-airline](https://github.com/vim-airline/vim-airline), or [lightline.vim](https://github.com/itchyny/lightline.vim). But, of course, it is not as feature-packed.
 
-
 ## Installation
 
-vim-plug](https://github.com/junegunn/vim-plug) example, add to your `.vimrc` or `init.vim`:
+Requires a new version of Vim 8.2 or Neovim. On Macos, install with `brew install vim`.
+
+[vim-plug](https://github.com/junegunn/vim-plug) example, add to your `.vimrc` or `init.vim`:
 
 ```
 Plug 'jssteinberg/hackline.vim'

@@ -33,7 +33,7 @@ if g:hackline_mode
     set noshowmode
 endif
 
-function! InitStatus()
+function! StatusStart()
     let l:statusline='   '
 
     " === buffer number ===
@@ -44,9 +44,9 @@ function! InitStatus()
     return l:statusline
 endfunction
 
-function! EndStatus()
+function! StatusEnd()
     let l:statusline=' '
-    
+
     " === Relative line number ===
     if g:hackline_percent
         let l:statusline.=' %3p%% '
@@ -62,27 +62,27 @@ function! EndStatus()
     return l:statusline
 endfunction
 
-function! BufMiscStatus()
+function! StatusBufMisc()
     let l:statusline=''
 
     " === File type ===
     if g:hackline_filetype
-        let l:statusline.='%( %{&filetype} %)'
+        let l:statusline.=' '.&filetype.' '
     endif
 
     " === File format ===
     if g:hackline_fileformat
-        let l:statusline.='%( %{hackline#base#fileformat()} %)'
+        let l:statusline.=' '.hackline#base#fileformat().' '
     endif
 
     " === File encoding ===
     if g:hackline_encoding
-        let l:statusline.='%( %{hackline#base#fileencoding()} %)'
+        let l:statusline.=' '.hackline#base#fileencoding().' '
     endif
 
     " === Word count ===
     if g:hackline_wordcount
-        let l:statusline.='%( %{hackline#base#wordcount()} words %)'
+        let l:statusline.=' '.hackline#base#wordcount().' words '
     endif
 
     " === Line count ===
@@ -95,7 +95,7 @@ endfunction
 
 function! ActiveStatus()
     let l:statusline='%#IncSearch#'
-    let l:statusline.='%{InitStatus()}'
+    let l:statusline.='%{StatusStart()}'
 
     " === File path ===
     let l:statusline.=s:hackline_path_options[g:hackline_path]
@@ -118,7 +118,7 @@ function! ActiveStatus()
         let l:statusline.='%{(mode()=="r")?" replace":""}'
         let l:statusline.='%{(mode()=="s")?" select":""}'
     endif
-    
+
     let l:statusline.='%#Normal# '
 
     " === Divider ===
@@ -140,18 +140,18 @@ function! ActiveStatus()
 
     let l:statusline.='%#Normal#%#CursorLine# '
 
-    let l:statusline.='%{%BufMiscStatus()%}'
+    let l:statusline.='%{%StatusBufMisc()%}'
 
     let l:statusline.=' %#StatusLine#'
 
-    let l:statusline.='%{%EndStatus()%}'
+    let l:statusline.='%{%StatusEnd()%}'
 
     return l:statusline
 endfunction
 
 function! InactiveStatus()
     let l:statusline='%#StatusLineNC#'
-    let l:statusline.='%{InitStatus()}'
+    let l:statusline.='%{StatusStart()}'
 
     " === File path ===
     let l:statusline.=s:hackline_path_options[g:hackline_path]
@@ -162,9 +162,9 @@ function! InactiveStatus()
     " === Divider ===
     let l:statusline.='%#Comment#%= '
 
-    let l:statusline.='%{%BufMiscStatus()%}'
+    let l:statusline.='%{%StatusBufMisc()%}'
     let l:statusline.=' %#StatusLineNC#'
-    let l:statusline.='%{%EndStatus()%}'
+    let l:statusline.='%{%StatusEnd()%}'
 
     return l:statusline
 endfunction

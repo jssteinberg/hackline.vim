@@ -1,35 +1,35 @@
 " ============================================================
-" File: skyline.vim
+" File: hackline.vim
 " ============================================================
 
-if exists('g:loaded_skyline')
+if exists('g:loaded_hackline')
     finish
 endif
 
 let s:save_cpoptions = &cpoptions
-" g:skyline_pah :: 0 = tail, 1 = full path
-let s:skyline_path_options = [ '%t ', '%{skyline#base#directory()}%t ' ]
+" g:hackline_pah :: 0 = tail, 1 = full path
+let s:hackline_path_options = [ '%t ', '%{hackline#base#directory()}%t ' ]
 
 " === User configuration variables ===
-let g:loaded_skyline = 1
-let g:skyline_bufnum = get(g:, 'skyline_bufnum', '1')
-let g:skyline_path = get(g:, 'skyline_path', '1')
-let g:skyline_mode = get(g:, 'skyline_mode', '0')
-let g:skyline_fugitive = get(g:, 'skyline_fugitive', '0')
-let g:skyline_ale = get(g:, 'skyline_ale', '0')
-let g:skyline_fileformat = get(g:, 'skyline_fileformat', '1')
-let g:skyline_encoding = get(g:, 'skyline_encoding', '1')
-let g:skyline_filetype = get(g:, 'skyline_filetype', '1')
-let g:skyline_wordcount = get(g:, 'skyline_wordcount', '0')
-let g:skyline_linecount = get(g:, 'skyline_linecount', '0')
-let g:skyline_percent = get(g:, 'skyline_percent', '0')
-let g:skyline_lineinfo = get(g:, 'skyline_lineinfo', '0')
+let g:loaded_hackline = 1
+let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
+let g:hackline_path = get(g:, 'hackline_path', '1')
+let g:hackline_mode = get(g:, 'hackline_mode', '0')
+let g:hackline_fugitive = get(g:, 'hackline_fugitive', '0')
+let g:hackline_ale = get(g:, 'hackline_ale', '0')
+let g:hackline_fileformat = get(g:, 'hackline_fileformat', '1')
+let g:hackline_encoding = get(g:, 'hackline_encoding', '1')
+let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
+let g:hackline_wordcount = get(g:, 'hackline_wordcount', '0')
+let g:hackline_linecount = get(g:, 'hackline_linecount', '0')
+let g:hackline_percent = get(g:, 'hackline_percent', '0')
+let g:hackline_lineinfo = get(g:, 'hackline_lineinfo', '0')
 " ======
 
 set cpoptions&vim
 set laststatus=2
 
-if g:skyline_mode
+if g:hackline_mode
     set noshowmode
 endif
 
@@ -37,7 +37,7 @@ function! InitStatus()
     let l:statusline='   '
 
     " === buffer number ===
-    if g:skyline_bufnum
+    if g:hackline_bufnum
         let l:statusline.=':b'.bufnr().' '
     endif
 
@@ -48,12 +48,12 @@ function! EndStatus()
     let l:statusline=' '
     
     " === Relative line number ===
-    if g:skyline_percent
+    if g:hackline_percent
         let l:statusline.=' %3p%% '
     endif
 
     " === Line:column number ===
-    if g:skyline_lineinfo
+    if g:hackline_lineinfo
         let l:statusline.=' %3l:%-3c '
     endif
 
@@ -66,27 +66,27 @@ function! BufMiscStatus()
     let l:statusline=''
 
     " === File type ===
-    if g:skyline_filetype
+    if g:hackline_filetype
         let l:statusline.='%( %{&filetype} %)'
     endif
 
     " === File format ===
-    if g:skyline_fileformat
-        let l:statusline.='%( %{skyline#base#fileformat()} %)'
+    if g:hackline_fileformat
+        let l:statusline.='%( %{hackline#base#fileformat()} %)'
     endif
 
     " === File encoding ===
-    if g:skyline_encoding
-        let l:statusline.='%( %{skyline#base#fileencoding()} %)'
+    if g:hackline_encoding
+        let l:statusline.='%( %{hackline#base#fileencoding()} %)'
     endif
 
     " === Word count ===
-    if g:skyline_wordcount
-        let l:statusline.='%( %{skyline#base#wordcount()} words %)'
+    if g:hackline_wordcount
+        let l:statusline.='%( %{hackline#base#wordcount()} words %)'
     endif
 
     " === Line count ===
-    if g:skyline_linecount
+    if g:hackline_linecount
         let l:statusline.=' %L lines '
     endif
 
@@ -98,13 +98,13 @@ function! ActiveStatus()
     let l:statusline.='%{InitStatus()}'
 
     " === File path ===
-    let l:statusline.=s:skyline_path_options[g:skyline_path]
+    let l:statusline.=s:hackline_path_options[g:hackline_path]
 
     " === Modified, readonly flag ===
     let l:statusline.='%(%M%R%) '
 
     "=== Dynamic mode color ===
-    if g:skyline_mode
+    if g:hackline_mode
         let l:statusline.='%#String#'
         let l:statusline.='%{(mode()=="n")?" normal":""}'
         let l:statusline.='%{(mode()=="c")?" command":""}'
@@ -125,17 +125,17 @@ function! ActiveStatus()
     let l:statusline.='%='
 
     " === ALE lint status ===
-    if g:skyline_ale
-        let l:statusline.='%#String#%(%{skyline#ale#ok()} %)'
-        let l:statusline.='%#Error#%(%{skyline#ale#errors()} %)'
-        let l:statusline.='%#WarningMsg#%(%{skyline#ale#warnings()} %)'
+    if g:hackline_ale
+        let l:statusline.='%#String#%(%{hackline#ale#ok()} %)'
+        let l:statusline.='%#Error#%(%{hackline#ale#errors()} %)'
+        let l:statusline.='%#WarningMsg#%(%{hackline#ale#warnings()} %)'
         let l:statusline.='%#Normal#'
     endif
 
     " === Git branch ===
-    if g:skyline_fugitive
+    if g:hackline_fugitive
         let l:statusline.='%#Directory#'
-        let l:statusline.='%( %{skyline#fugitive#branch()} %)'
+        let l:statusline.='%( %{hackline#fugitive#branch()} %)'
     endif
 
     let l:statusline.='%#Normal#%#CursorLine# '
@@ -154,7 +154,7 @@ function! InactiveStatus()
     let l:statusline.='%{InitStatus()}'
 
     " === File path ===
-    let l:statusline.=s:skyline_path_options[g:skyline_path]
+    let l:statusline.=s:hackline_path_options[g:hackline_path]
 
     " === Modified, readonly flag ===
     let l:statusline.='%(%M%R%) '
@@ -169,7 +169,7 @@ function! InactiveStatus()
     return l:statusline
 endfunction
 
-augroup skyline
+augroup hackline
     autocmd!
     autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
     autocmd WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()

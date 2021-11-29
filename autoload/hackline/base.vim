@@ -1,4 +1,4 @@
-function! skyline#base#directory() abort
+function! hackline#base#directory() abort
     let l:directory = expand('%:h')
     if winwidth(0) <= 80
         let l:directory = pathshorten(l:directory)
@@ -9,7 +9,7 @@ function! skyline#base#directory() abort
     return ''
 endfunction
 
-function! skyline#base#filetype() abort
+function! hackline#base#filetype() abort
     if winwidth(0) > 100
         if &filetype !=# ''
             return &filetype
@@ -18,14 +18,14 @@ function! skyline#base#filetype() abort
     return ''
 endfunction
 
-function! skyline#base#fileformat() abort
+function! hackline#base#fileformat() abort
     if winwidth(0) > 100
         return &fileformat
     endif
     return ''
 endfunction
 
-function! skyline#base#fileencoding() abort
+function! hackline#base#fileencoding() abort
     if winwidth(0) > 100
         if &fileencoding !=# ''
             return &fileencoding
@@ -36,7 +36,7 @@ function! skyline#base#fileencoding() abort
     return ''
 endfunction
 
-function! skyline#base#wordcount() abort
+function! hackline#base#wordcount() abort
     let currentmode = mode()
     if !exists('g:lastmode_wc')
         let g:lastmode_wc = currentmode
@@ -64,7 +64,7 @@ function! skyline#base#wordcount() abort
     endif
 endfunction
 
-function! skyline#base#filesize() abort
+function! hackline#base#filesize() abort
     let l:size = getfsize(expand('%'))
     if l:size == 0 || l:size == -1 || l:size == -2
         return ''

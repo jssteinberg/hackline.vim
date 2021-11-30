@@ -65,6 +65,10 @@ endfunction
 function! StatusBufMisc()
     let l:statusline=''
 
+    "if exists('g:ale_enabled') && g:ale_enabled
+    "    let l:statusline.=' ALE '
+    "endif
+
     " === File type ===
     if g:hackline_filetype
         let l:statusline.=' '.&filetype.' '

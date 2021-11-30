@@ -14,7 +14,7 @@ let s:hackline_path_options = [ '%t ', '%{hackline#base#directory()}%t ' ]
 let g:loaded_hackline = 1
 let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
 let g:hackline_path = get(g:, 'hackline_path', '1')
-let g:hackline_mode = get(g:, 'hackline_mode', '0')
+let g:hackline_mode = get(g:, 'hackline_mode', '1')
 let g:hackline_fugitive = get(g:, 'hackline_fugitive', '0')
 let g:hackline_ale = get(g:, 'hackline_ale', '0')
 let g:hackline_fileformat = get(g:, 'hackline_fileformat', '1')
@@ -110,17 +110,17 @@ function! ActiveStatus()
     "=== Dynamic mode color ===
     if g:hackline_mode
         let l:statusline.='%#String#'
-        let l:statusline.='%{(mode()=="n")?" normal":""}'
-        let l:statusline.='%{(mode()=="c")?" command":""}'
+        let l:statusline.='%{(mode()=="n")?" N":""}'
+        let l:statusline.='%{(mode()=="c")?" C":""}'
         let l:statusline.='%#Function#'
-        let l:statusline.='%{(mode()=="i")?" insert":""}'
-        let l:statusline.='%{(mode()=="t")?" terminal":""}'
+        let l:statusline.='%{(mode()=="i")?" I":""}'
+        let l:statusline.='%{(mode()=="t")?" T":""}'
         let l:statusline.='%#Statement#'
-        let l:statusline.='%{(mode()=="v")?" visual":""}'
-        let l:statusline.='%{(mode()=="\<c-v>")?" visual block":""}'
+        let l:statusline.='%{(mode()=="v")?" V":""}'
+        let l:statusline.='%{(mode()=="\<c-v>")?" V":""}'
         let l:statusline.='%#Identifier#'
-        let l:statusline.='%{(mode()=="r")?" replace":""}'
-        let l:statusline.='%{(mode()=="s")?" select":""}'
+        let l:statusline.='%{(mode()=="r")?" R":""}'
+        let l:statusline.='%{(mode()=="s")?" S":""}'
     endif
 
     let l:statusline.='%#Normal# '

@@ -15,7 +15,7 @@ let g:loaded_hackline = 1
 let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
 let g:hackline_path = get(g:, 'hackline_path', '1')
 let g:hackline_mode = get(g:, 'hackline_mode', '1')
-let g:hackline_fugitive = get(g:, 'hackline_fugitive', '0')
+let g:hackline_fugitive = get(g:, 'hackline_fugitive', '1')
 let g:hackline_ale = get(g:, 'hackline_ale', '0')
 let g:hackline_fileformat = get(g:, 'hackline_fileformat', '1')
 let g:hackline_encoding = get(g:, 'hackline_encoding', '1')
@@ -23,7 +23,7 @@ let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
 let g:hackline_wordcount = get(g:, 'hackline_wordcount', '0')
 let g:hackline_linecount = get(g:, 'hackline_linecount', '0')
 let g:hackline_percent = get(g:, 'hackline_percent', '0')
-let g:hackline_lineinfo = get(g:, 'hackline_lineinfo', '0')
+let g:hackline_lineinfo = get(g:, 'hackline_lineinfo', '1')
 " ======
 
 set cpoptions&vim

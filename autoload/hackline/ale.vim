@@ -12,7 +12,7 @@ function! hackline#ale#warnings() abort
     endif
     let l:counts = ale#hackline#Count(bufnr(''))
     let l:all_warnings = l:counts.warning + l:counts.style_warning
-    return l:all_warnings == 0 ? '' : printf(' %d', all_warnings)
+    return l:all_warnings == 0 ? '' : printf('W %d', all_warnings)
 endfunction
 
 function! hackline#ale#errors() abort
@@ -21,7 +21,7 @@ function! hackline#ale#errors() abort
     endif
     let l:counts = ale#hackline#Count(bufnr(''))
     let l:all_errors = l:counts.error + l:counts.style_error
-    return l:all_errors == 0 ? '' : printf(' %d', all_errors)
+    return l:all_errors == 0 ? '' : printf('E %d', all_errors)
 endfunction
 
 function! hackline#ale#ok() abort
@@ -29,7 +29,7 @@ function! hackline#ale#ok() abort
         return ''
     endif
     let l:counts = ale#hackline#Count(bufnr(''))
-    return l:counts.total == 0 ? '' : ''
+    return l:counts.total == 0 ? 'OK' : ''
 endfunction
 
 " function! hackline#ale#allsigns() abort

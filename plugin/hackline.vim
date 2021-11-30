@@ -144,11 +144,12 @@ function! ActiveStatus()
 
     let l:statusline.='%#Normal#%#CursorLine# '
 
-    let l:statusline.='%{%StatusBufMisc()%}'
+    let l:statusline.='%{%StatusBufMisc()%} '
 
-    let l:statusline.=' %#StatusLine#'
-
-    let l:statusline.='%{%StatusEnd()%}'
+    if g:hackline_percent || g:hackline_lineinfo
+        let l:statusline.=' %#StatusLine#'
+        let l:statusline.='%{%StatusEnd()%}'
+    endif
 
     return l:statusline
 endfunction
@@ -166,9 +167,12 @@ function! InactiveStatus()
     " === Divider ===
     let l:statusline.='%#Comment#%= '
 
-    let l:statusline.='%{%StatusBufMisc()%}'
-    let l:statusline.=' %#StatusLineNC#'
-    let l:statusline.='%{%StatusEnd()%}'
+    let l:statusline.='%{%StatusBufMisc()%} '
+
+    if g:hackline_percent || g:hackline_lineinfo
+        let l:statusline.=' %#StatusLineNC#'
+        let l:statusline.='%{%StatusEnd()%}'
+    endif
 
     return l:statusline
 endfunction

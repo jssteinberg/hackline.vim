@@ -14,10 +14,16 @@ Much slimmer alternatives to plugins like [powerline](https://github.com/powerli
 
 Requires a new version of Vim 8.2 or Neovim that can re-evaluated results of an expression as a statusline format string. On Macos use Vim from Homebrew. Install with `brew install vim`.
 
-[vim-plug](https://github.com/junegunn/vim-plug) example, add to your `.vimrc` or `init.vim`:
+Vim [vim-plug](https://github.com/junegunn/vim-plug) installation:
 
 ```
 Plug 'jssteinberg/hackline.vim'
+```
+
+Or for Neovim with [packer.nvim](https://github.com/wbthomason/packer.nvim):
+
+```vim
+use {'jssteinberg/hackline.vim'}
 ```
 
 ## Options

@@ -8,7 +8,7 @@ endif
 
 let s:save_cpoptions = &cpoptions
 " g:hackline_pah :: 0 = tail, 1 = full path
-let s:hackline_path_options = [ '%t ', '%{hackline#base#directory()}%t ' ]
+let s:hackline_path_options = [ '%t ', '%{hackline#base#directory()}%t' ]
 
 " === User configuration variables ===
 let g:loaded_hackline = 1
@@ -40,24 +40,6 @@ function! StatusStart()
     if g:hackline_bufnum
         let l:statusline.=':b'.bufnr().' '
     endif
-
-    return l:statusline
-endfunction
-
-function! StatusEnd()
-    let l:statusline=' '
-
-    " === Relative line number ===
-    if g:hackline_percent
-        let l:statusline.=' %3p%% '
-    endif
-
-    " === Line:column number ===
-    if g:hackline_lineinfo
-        let l:statusline.=' %3l:%-3c '
-    endif
-
-    let l:statusline.='%<'
 
     return l:statusline
 endfunction
@@ -97,30 +79,50 @@ function! StatusBufMisc()
     return l:statusline
 endfunction
 
+function! StatusEnd()
+    let l:statusline=' '
+
+    " === Relative line number ===
+    if g:hackline_percent
+        let l:statusline.=' %3p%%'
+    endif
+
+    " === Line:column number ===
+    if g:hackline_lineinfo
+        let l:statusline.=' %3l:%-3c'
+    endif
+
+    let l:statusline.=' %<'
+
+    return l:statusline
+endfunction
+
 function! ActiveStatus()
     let l:statusline='%#IncSearch#'
     let l:statusline.='%{StatusStart()}'
+    let l:statusline.=' %#StatusLine# '
 
     " === File path ===
-    let l:statusline.=s:hackline_path_options[g:hackline_path]
+    let l:statusline.=' '.s:hackline_path_options[g:hackline_path].' '
 
     " === Modified, readonly flag ===
     let l:statusline.='%(%M%R%) '
 
     "=== Dynamic mode color ===
     if g:hackline_mode
-        let l:statusline.='%#String#'
-        let l:statusline.='%{(mode()=="n")?" N":""}'
-        let l:statusline.='%{(mode()=="c")?" C":""}'
+        let l:statusline.='%#Normal#'
+        let l:statusline.=     '%{(mode()=="n")?"  N   ":""}'
+        let l:statusline.='%#Comment#'
+        let l:statusline.=     '%{(mode()=="c")?" -C-  ":""}'
         let l:statusline.='%#Function#'
-        let l:statusline.='%{(mode()=="i")?" I":""}'
-        let l:statusline.='%{(mode()=="t")?" T":""}'
+        let l:statusline.=     '%{(mode()=="i")?" -I-  ":""}'
+        let l:statusline.=     '%{(mode()=="t")?" -T-  ":""}'
         let l:statusline.='%#Statement#'
-        let l:statusline.='%{(mode()=="v")?" V":""}'
-        let l:statusline.='%{(mode()=="\<c-v>")?" V":""}'
+        let l:statusline.=     '%{(mode()=="v")?" -V-  ":""}'
+        let l:statusline.='%{(mode()=="\<c-v>")?" -B-  ":""}'
         let l:statusline.='%#Identifier#'
-        let l:statusline.='%{(mode()=="r")?" R":""}'
-        let l:statusline.='%{(mode()=="s")?" S":""}'
+        let l:statusline.=     '%{(mode()=="r")?" -R-  ":""}'
+        let l:statusline.=     '%{(mode()=="s")?" -S-  ":""}'
     endif
 
     let l:statusline.='%#Normal# '
@@ -142,12 +144,12 @@ function! ActiveStatus()
         let l:statusline.='%( %{hackline#fugitive#branch()} %)'
     endif
 
-    let l:statusline.='%#Normal#%#CursorLine# '
+    let l:statusline.=' %#Normal#%#CursorLine# '
 
     let l:statusline.='%{%StatusBufMisc()%} '
 
     if g:hackline_percent || g:hackline_lineinfo
-        let l:statusline.=' %#StatusLine#'
+        let l:statusline.='%#StatusLine#'
         let l:statusline.='%{%StatusEnd()%}'
     endif
 
@@ -156,10 +158,10 @@ endfunction
 
 function! InactiveStatus()
     let l:statusline='%#StatusLineNC#'
-    let l:statusline.='%{StatusStart()}'
+    let l:statusline.='%{StatusStart()}  '
 
     " === File path ===
-    let l:statusline.=s:hackline_path_options[g:hackline_path]
+    let l:statusline.=' '.s:hackline_path_options[g:hackline_path].' '
 
     " === Modified, readonly flag ===
     let l:statusline.='%(%M%R%) '
@@ -170,7 +172,7 @@ function! InactiveStatus()
     let l:statusline.='%{%StatusBufMisc()%} '
 
     if g:hackline_percent || g:hackline_lineinfo
-        let l:statusline.=' %#StatusLineNC#'
+        let l:statusline.='%#StatusLineNC#'
         let l:statusline.='%{%StatusEnd()%}'
     endif
 

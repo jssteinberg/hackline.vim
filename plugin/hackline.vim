@@ -9,6 +9,7 @@ endif
 let s:save_cpoptions = &cpoptions
 " g:hackline_pah :: 0 = tail, 1 = full path
 let s:hackline_path_options = [ '%t ', '%{hackline#base#directory()}%t' ]
+let b:hackline_ale_status = ''
 
 " === User configuration variables ===
 let g:loaded_hackline = 1
@@ -44,12 +45,18 @@ function! StatusStart()
     return l:statusline
 endfunction
 
-function! StatusBufMisc()
+function! StatusLinterLsp()
     let l:statusline=''
 
-    "if exists('g:ale_enabled') && g:ale_enabled
-    "    let l:statusline.=' ALE '
-    "endif
+    if exists('g:ale_enabled') && g:ale_enabled
+        let l:statusline.=b:hackline_ale_status
+    endif
+
+    return l:statusline
+endfunction
+
+function! StatusBufMisc()
+    let l:statusline=''
 
     " === File type ===
     if g:hackline_filetype
@@ -168,9 +175,7 @@ function! InactiveStatus()
     " === Modified, readonly flag ===
     let l:statusline.='%(%M%R%) '
 
-    " === Divider ===
     let l:statusline.='%#Comment#%= '
-
     let l:statusline.='%{%StatusBufMisc()%} '
 
     if g:hackline_percent || g:hackline_lineinfo
@@ -185,6 +190,7 @@ augroup hackline
     autocmd!
     autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
     autocmd WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()
+    autocmd User ALEJobStarted let b:hackline_ale_status=' linter '
 augroup END
 
 set statusline=%!ActiveStatus()

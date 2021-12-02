@@ -38,6 +38,7 @@ let g:hackline_fugitive = 1 " Displays branch if fugitive is loaded
 let g:hackline_fileformat = 1
 let g:hackline_encoding = 1
 let g:hackline_filetype = 1
+let g:hackline_filesize = 0
 let g:hackline_wordcount = 0
 let g:hackline_linecount = 0
 let g:hackline_percent = 0

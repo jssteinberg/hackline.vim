@@ -19,6 +19,7 @@ let g:hackline_fugitive = get(g:, 'hackline_fugitive', '1')
 let g:hackline_fileformat = get(g:, 'hackline_fileformat', '1')
 let g:hackline_encoding = get(g:, 'hackline_encoding', '1')
 let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
+let g:hackline_filesize = get(g:, 'hackline_lineinfo', '0')
 let g:hackline_wordcount = get(g:, 'hackline_wordcount', '0')
 let g:hackline_linecount = get(g:, 'hackline_linecount', '0')
 let g:hackline_percent = get(g:, 'hackline_percent', '0')
@@ -73,6 +74,11 @@ function! StatusBufMisc()
     " === File encoding ===
     if g:hackline_encoding
         let l:statusline.=' '.hackline#base#fileencoding().' '
+    endif
+
+    " === File size ===
+    if g:hackline_filesize
+        let l:statusline.=' '.hackline#base#filesize().' '
     endif
 
     " === Word count ===

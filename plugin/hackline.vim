@@ -142,10 +142,11 @@ function! ActiveStatus()
         let l:statusline.='%( %{hackline#fugitive#branch()} %)'
     endif
 
-    let l:statusline.='%#Comment#'
-    let l:statusline.='%{%StatusLinterLsp()%}'
+    "let l:statusline.='%#Comment#'
+    "let l:statusline.=' %{%StatusLinterLsp()%}'
 
     let l:statusline.=' %#Normal#%#CursorLine# '
+    let l:statusline.='%{%StatusLinterLsp()%}'
     let l:statusline.='%{%StatusBufMisc()%} '
 
     if g:hackline_percent || g:hackline_lineinfo
@@ -181,7 +182,7 @@ augroup hackline
     autocmd!
     autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
     autocmd WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()
-    autocmd User ALEJobStarted let b:hackline_ale_status=' linter '
+    autocmd User ALEJobStarted let b:hackline_ale_status=' ALE  '
 augroup END
 
 set statusline=%!ActiveStatus()

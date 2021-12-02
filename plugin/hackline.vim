@@ -9,7 +9,6 @@ endif
 let s:save_cpoptions = &cpoptions
 "let s:hackline_path_options = [ '%t ', '%{hackline#base#directory()}%t' ]
 let s:hackline_path_options = [ '%t ', '%f' ]
-let b:hackline_ale_status = ''
 
 " === User configuration variables ===
 let g:loaded_hackline = 1
@@ -46,6 +45,10 @@ endfunction
 
 function! StatusLinterLsp()
     let l:statusline=''
+
+    if !exists('b:hackline_ale_status')
+        let b:hackline_ale_status = ''
+    endif
 
     if exists('g:ale_enabled') && g:ale_enabled
         let l:statusline.=b:hackline_ale_status

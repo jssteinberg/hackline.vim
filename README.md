@@ -41,5 +41,5 @@ let g:hackline_filetype = 1
 let g:hackline_wordcount = 0
 let g:hackline_linecount = 0
 let g:hackline_percent = 0
-let g:hackline_lineinfo = 1
+let g:hackline_lineinfo = 0
 ```

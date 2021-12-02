@@ -24,7 +24,7 @@ let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
 let g:hackline_wordcount = get(g:, 'hackline_wordcount', '0')
 let g:hackline_linecount = get(g:, 'hackline_linecount', '0')
 let g:hackline_percent = get(g:, 'hackline_percent', '0')
-let g:hackline_lineinfo = get(g:, 'hackline_lineinfo', '1')
+let g:hackline_lineinfo = get(g:, 'hackline_lineinfo', '0')
 " ======
 
 set cpoptions&vim

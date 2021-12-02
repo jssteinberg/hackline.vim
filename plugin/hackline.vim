@@ -1,13 +1,8 @@
-" ============================================================
-" File: hackline.vim
-" ============================================================
-
 if exists('g:loaded_hackline')
     finish
 endif
 
 let s:save_cpoptions = &cpoptions
-"let s:hackline_path_options = [ '%t ', '%{hackline#base#directory()}%t' ]
 let s:hackline_path_options = [ '%t ', '%f' ]
 
 " === User configuration variables ===
@@ -33,10 +28,89 @@ if g:hackline_mode
     set noshowmode
 endif
 
+augroup hackline
+    autocmd!
+    autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
+    autocmd WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()
+    autocmd User ALEJobStarted let b:hackline_ale_linting=1
+augroup END
+
+function! ActiveStatus()
+    let l:statusline='%#IncSearch#'
+    let l:statusline.='%{StatusStart()}'
+    let l:statusline.=' %#StatusLine# '
+
+    " === File path ===
+    let l:statusline.=' '.s:hackline_path_options[g:hackline_path].' '
+
+    " === Modified, readonly flag ===
+    let l:statusline.='%(%M%R%) '
+
+    "=== Dynamic mode color ===
+    if g:hackline_mode
+        let l:statusline.='%#Normal#'
+        let l:statusline.=     '%{(mode()=="n")?"      ":""}'
+        let l:statusline.='%#Comment#'
+        let l:statusline.=     '%{(mode()=="c")?" -C-  ":""}'
+        let l:statusline.='%#Function#'
+        let l:statusline.=     '%{(mode()=="i")?" -I-  ":""}'
+        let l:statusline.=     '%{(mode()=="t")?" -T-  ":""}'
+        let l:statusline.='%#Statement#'
+        let l:statusline.=     '%{(mode()=="v")?" -V-  ":""}'
+        let l:statusline.='%{(mode()=="\<c-v>")?" -B-  ":""}'
+        let l:statusline.='%#Identifier#'
+        let l:statusline.=     '%{(mode()=="r")?" -R-  ":""}'
+        let l:statusline.=     '%{(mode()=="s")?" -S-  ":""}'
+    endif
+
+    let l:statusline.='%#Normal# '
+
+    " === Divider ===
+    let l:statusline.='%='
+
+    " === Git branch ===
+    if g:hackline_fugitive
+        let l:statusline.='%#Directory#'
+        let l:statusline.='%( %{hackline#fugitive#branch()} %)'
+    endif
+
+    let l:statusline.=' %#Normal#%#CursorLine# '
+    let l:statusline.='%{%StatusLinterLsp()%}'
+    let l:statusline.='%{%StatusBufMisc()%} '
+
+    if g:hackline_percent || g:hackline_lineinfo
+        let l:statusline.='%#StatusLine#'
+        let l:statusline.='%{%StatusEnd()%}'
+    endif
+
+    return l:statusline
+endfunction
+
+function! InactiveStatus()
+    let l:statusline='%#StatusLineNC#'
+    let l:statusline.='%{StatusStart()}  '
+
+    " === File path ===
+    let l:statusline.=' '.s:hackline_path_options[g:hackline_path].' '
+
+    " === Modified, readonly flag ===
+    let l:statusline.='%(%M%R%) '
+
+    let l:statusline.='%#StatusLineNC#%= '
+    let l:statusline.='%{%StatusBufMisc()%} '
+
+    if g:hackline_percent || g:hackline_lineinfo
+        let l:statusline.='%#StatusLineNC#'
+        let l:statusline.='%{%StatusEnd()%}'
+    endif
+
+    return l:statusline
+endfunction
+
 function! StatusStart()
     let l:statusline='   '
 
-    " === buffer number ===
+    " === Buffer number ===
     if g:hackline_bufnum
         let l:statusline.=':b'.bufnr().' '
     endif
@@ -47,12 +121,13 @@ endfunction
 function! StatusLinterLsp()
     let l:statusline=''
 
-    if !exists('b:hackline_ale_status')
-        let b:hackline_ale_status = ''
+    if !exists('b:hackline_ale_linting')
+        let b:hackline_ale_linting = 0
     endif
 
-    if exists('g:ale_enabled') && g:ale_enabled
-        let l:statusline.=b:hackline_ale_status
+    " === Ale linter status ("ALE" for active, "" for inactive) ===
+    if exists('g:ale_enabled') && b:hackline_ale_linting
+        let l:statusline.=' ALE  '
     endif
 
     return l:statusline
@@ -63,7 +138,7 @@ function! StatusBufMisc()
 
     " === File type ===
     if g:hackline_filetype
-        let l:statusline.=' '.&filetype.' '
+        let l:statusline.=' '.hackline#base#filetype().' '
     endif
 
     " === File format ===
@@ -111,88 +186,6 @@ function! StatusEnd()
 
     return l:statusline
 endfunction
-
-function! ActiveStatus()
-    let l:statusline='%#IncSearch#'
-    let l:statusline.='%{StatusStart()}'
-    let l:statusline.=' %#StatusLine# '
-
-    " === File path ===
-    let l:statusline.=' '.s:hackline_path_options[g:hackline_path].' '
-
-    " === Modified, readonly flag ===
-    let l:statusline.='%(%M%R%) '
-
-    "=== Dynamic mode color ===
-    if g:hackline_mode
-        let l:statusline.='%#Normal#'
-        let l:statusline.=     '%{(mode()=="n")?"      ":""}'
-        let l:statusline.='%#Comment#'
-        let l:statusline.=     '%{(mode()=="c")?" -C-  ":""}'
-        let l:statusline.='%#Function#'
-        let l:statusline.=     '%{(mode()=="i")?" -I-  ":""}'
-        let l:statusline.=     '%{(mode()=="t")?" -T-  ":""}'
-        let l:statusline.='%#Statement#'
-        let l:statusline.=     '%{(mode()=="v")?" -V-  ":""}'
-        let l:statusline.='%{(mode()=="\<c-v>")?" -B-  ":""}'
-        let l:statusline.='%#Identifier#'
-        let l:statusline.=     '%{(mode()=="r")?" -R-  ":""}'
-        let l:statusline.=     '%{(mode()=="s")?" -S-  ":""}'
-    endif
-
-    let l:statusline.='%#Normal# '
-
-    " === Divider ===
-    let l:statusline.='%='
-
-    " === Git branch ===
-    if g:hackline_fugitive
-        let l:statusline.='%#Directory#'
-        let l:statusline.='%( %{hackline#fugitive#branch()} %)'
-    endif
-
-    "let l:statusline.='%#Comment#'
-    "let l:statusline.=' %{%StatusLinterLsp()%}'
-
-    let l:statusline.=' %#Normal#%#CursorLine# '
-    let l:statusline.='%{%StatusLinterLsp()%}'
-    let l:statusline.='%{%StatusBufMisc()%} '
-
-    if g:hackline_percent || g:hackline_lineinfo
-        let l:statusline.='%#StatusLine#'
-        let l:statusline.='%{%StatusEnd()%}'
-    endif
-
-    return l:statusline
-endfunction
-
-function! InactiveStatus()
-    let l:statusline='%#StatusLineNC#'
-    let l:statusline.='%{StatusStart()}  '
-
-    " === File path ===
-    let l:statusline.=' '.s:hackline_path_options[g:hackline_path].' '
-
-    " === Modified, readonly flag ===
-    let l:statusline.='%(%M%R%) '
-
-    let l:statusline.='%#StatusLineNC#%= '
-    let l:statusline.='%{%StatusBufMisc()%} '
-
-    if g:hackline_percent || g:hackline_lineinfo
-        let l:statusline.='%#StatusLineNC#'
-        let l:statusline.='%{%StatusEnd()%}'
-    endif
-
-    return l:statusline
-endfunction
-
-augroup hackline
-    autocmd!
-    autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
-    autocmd WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()
-    autocmd User ALEJobStarted let b:hackline_ale_status=' ALE  '
-augroup END
 
 set statusline=%!ActiveStatus()
 

@@ -111,7 +111,7 @@ function! ActiveStatus()
     "=== Dynamic mode color ===
     if g:hackline_mode
         let l:statusline.='%#Normal#'
-        let l:statusline.=     '%{(mode()=="n")?"  N   ":""}'
+        let l:statusline.=     '%{(mode()=="n")?"      ":""}'
         let l:statusline.='%#Comment#'
         let l:statusline.=     '%{(mode()=="c")?" -C-  ":""}'
         let l:statusline.='%#Function#'

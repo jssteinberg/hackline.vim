@@ -32,7 +32,7 @@ Global variables to customize. Default:
 
 ```vim
 let g:hackline_bufnum = 1
-let g:hackline_path = 1 " 0 = tail, 1 = full path
+let g:hackline_path = 1 " 0 = tail, 1 = path
 let g:hackline_mode = 1
 let g:hackline_fugitive = 1 " Displays branch if fugitive is loaded
 let g:hackline_fileformat = 1

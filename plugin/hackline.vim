@@ -7,8 +7,8 @@ if exists('g:loaded_hackline')
 endif
 
 let s:save_cpoptions = &cpoptions
-" g:hackline_pah :: 0 = tail, 1 = full path
-let s:hackline_path_options = [ '%t ', '%{hackline#base#directory()}%t' ]
+"let s:hackline_path_options = [ '%t ', '%{hackline#base#directory()}%t' ]
+let s:hackline_path_options = [ '%t ', '%f' ]
 let b:hackline_ale_status = ''
 
 " === User configuration variables ===

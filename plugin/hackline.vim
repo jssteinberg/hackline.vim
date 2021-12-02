@@ -140,13 +140,14 @@ function! ActiveStatus()
 
     " === Git branch ===
     if g:hackline_fugitive
-        let l:statusline.=' *'
         let l:statusline.='%#Directory#'
         let l:statusline.='%( %{hackline#fugitive#branch()} %)'
     endif
 
-    let l:statusline.=' %#Normal#%#CursorLine# '
+    let l:statusline.='%#Comment#'
+    let l:statusline.='%{%StatusLinterLsp()%}'
 
+    let l:statusline.=' %#Normal#%#CursorLine# '
     let l:statusline.='%{%StatusBufMisc()%} '
 
     if g:hackline_percent || g:hackline_lineinfo

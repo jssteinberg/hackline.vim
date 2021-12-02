@@ -140,6 +140,7 @@ function! ActiveStatus()
 
     " === Git branch ===
     if g:hackline_fugitive
+        let l:statusline.=' *'
         let l:statusline.='%#Directory#'
         let l:statusline.='%( %{hackline#fugitive#branch()} %)'
     endif

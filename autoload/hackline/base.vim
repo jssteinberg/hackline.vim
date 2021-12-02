@@ -1,15 +1,3 @@
-" Remove?
-"function! hackline#base#directory() abort
-"    let l:directory = expand('%:h')
-"    if winwidth(0) <= 80
-"        let l:directory = pathshorten(l:directory)
-"    endif
-"    if l:directory !=# '.' && l:directory !=# ''
-"        return '' . l:directory  . '/'
-"    endif
-"    return ''
-"endfunction
-
 function! hackline#base#filetype() abort
     if winwidth(0) > 100
         if &filetype !=# ''

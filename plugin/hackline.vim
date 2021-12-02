@@ -176,7 +176,7 @@ function! InactiveStatus()
     " === Modified, readonly flag ===
     let l:statusline.='%(%M%R%) '
 
-    let l:statusline.='%#Comment#%= '
+    let l:statusline.='%#StatusLineNC#%= '
     let l:statusline.='%{%StatusBufMisc()%} '
 
     if g:hackline_percent || g:hackline_lineinfo

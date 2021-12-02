@@ -17,7 +17,6 @@ let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
 let g:hackline_path = get(g:, 'hackline_path', '1')
 let g:hackline_mode = get(g:, 'hackline_mode', '1')
 let g:hackline_fugitive = get(g:, 'hackline_fugitive', '1')
-let g:hackline_ale = get(g:, 'hackline_ale', '0')
 let g:hackline_fileformat = get(g:, 'hackline_fileformat', '1')
 let g:hackline_encoding = get(g:, 'hackline_encoding', '1')
 let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
@@ -136,14 +135,6 @@ function! ActiveStatus()
 
     " === Divider ===
     let l:statusline.='%='
-
-    " === ALE lint status ===
-    if g:hackline_ale
-        let l:statusline.='%#String#%(%{hackline#ale#ok()} %)'
-        let l:statusline.='%#Error#%(%{hackline#ale#errors()} %)'
-        let l:statusline.='%#WarningMsg#%(%{hackline#ale#warnings()} %)'
-        let l:statusline.='%#Normal#'
-    endif
 
     " === Git branch ===
     if g:hackline_fugitive

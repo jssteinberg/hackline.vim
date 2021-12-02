@@ -1,12 +1,12 @@
-if exists('g:loaded_hackline')
-    finish
-endif
+if exists('g:loaded_hackline') | finish | endif
+let g:loaded_hackline = v:true
 
-let s:save_cpoptions = &cpoptions
+let s:save_cpo = &cpo
+set cpo&vim
+
 let s:hackline_path_options = [ '%t ', '%f' ]
 
 " === User configuration variables ===
-let g:loaded_hackline = 1
 let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
 let g:hackline_path = get(g:, 'hackline_path', '1')
 let g:hackline_mode = get(g:, 'hackline_mode', '1')
@@ -19,21 +19,16 @@ let g:hackline_wordcount = get(g:, 'hackline_wordcount', '0')
 let g:hackline_linecount = get(g:, 'hackline_linecount', '0')
 let g:hackline_percent = get(g:, 'hackline_percent', '0')
 let g:hackline_lineinfo = get(g:, 'hackline_lineinfo', '0')
-" ======
 
-set cpoptions&vim
 set laststatus=2
+if g:hackline_mode | set noshowmode | endif
 
-if g:hackline_mode
-    set noshowmode
-endif
-
-augroup hackline
-    autocmd!
-    autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
-    autocmd WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()
-    autocmd User ALEJobStarted let b:hackline_ale_linting=1
-augroup END
+aug hackline
+    au!
+    au WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
+    au WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()
+    au User ALEJobStarted let b:hackline_ale_linting=1
+aug END
 
 function! ActiveStatus()
     let l:statusline='%#IncSearch#'
@@ -187,7 +182,5 @@ function! StatusEnd()
     return l:statusline
 endfunction
 
-set statusline=%!ActiveStatus()
-
-let &cpoptions = s:save_cpoptions
-unlet s:save_cpoptions
+let &cpo = s:save_cpo
+unlet s:save_cpo

@@ -117,15 +117,31 @@ endfunction
 
 function! StatusLinterLsp()
     let l:ale_linters=''
+    let l:lsp_linters=''
+    let l:statusline=''
 
     try " destructure g:ale_buffer_info
         let l:ale_linters.=reduce(get(get(g:ale_buffer_info, buffer_number()), 'loclist'), { acc, val -> acc.' '.val['linter_name'] }, '')
     catch | endtry
 
+    try " destructure g:ale_buffer_info TODO: test vim without lua
+        "vim.lsp.get_active_clients()
+        let l:lsp_linters.=luaeval("require('hackline.lsp').servers()")
+    catch | endtry
+
     " === Linter status ===
     if l:ale_linters != ''
-        return ' ALE'.l:ale_linters.' '
-    else | return '' | endif
+        "let l:statusline.=' ALE'.l:ale_linters.' '
+        let l:statusline.=' ALE '
+    endif
+    if l:lsp_linters != ''
+        let l:statusline.=' LSP'.l:lsp_linters.' '
+    endif
+
+    unlet l:ale_linters
+    unlet l:lsp_linters
+
+    return l:statusline
 endfunction
 
 function! StatusBufMisc()

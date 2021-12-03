@@ -5,6 +5,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 let s:hackline_path_options = [ '%t ', '%f' ]
+let b:hackline_set_ale=0
 
 " === User configuration variables ===
 let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
@@ -27,6 +28,7 @@ aug hackline
     au!
     au WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
     au WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()
+    au User ALEJobStarted let b:hackline_set_ale=1
 aug END
 
 function! ActiveStatus()
@@ -133,13 +135,14 @@ function! StatusLinterLsp()
     if l:ale_linters != ''
         "let l:statusline.=' ALE'.l:ale_linters.' '
         let l:statusline.=' ALE '
+    elseif exists('b:hackline_set_ale') && b:hackline_set_ale == 1
+        " ALE linter is active
+        let l:statusline.=' ALE '
     endif
+
     if l:lsp_linters != ''
         let l:statusline.=' LSP'.l:lsp_linters.' '
     endif
-
-    unlet l:ale_linters
-    unlet l:lsp_linters
 
     return l:statusline
 endfunction

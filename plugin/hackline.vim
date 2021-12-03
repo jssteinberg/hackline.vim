@@ -16,7 +16,7 @@ let g:hackline_encoding = get(g:, 'hackline_encoding', '1')
 let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
 let g:hackline_filesize = get(g:, 'hackline_lineinfo', '0')
 let g:hackline_wordcount = get(g:, 'hackline_wordcount', '0')
-let g:hackline_linecount = get(g:, 'hackline_linecount', '0')
+let g:hackline_linecount = get(g:, 'hackline_linecount', '1')
 let g:hackline_percent = get(g:, 'hackline_percent', '0')
 let g:hackline_lineinfo = get(g:, 'hackline_lineinfo', '0')
 
@@ -27,7 +27,6 @@ aug hackline
     au!
     au WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
     au WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()
-    au User ALEJobStarted let b:hackline_ale_linting=1
 aug END
 
 function! ActiveStatus()
@@ -63,14 +62,17 @@ function! ActiveStatus()
     " === Divider ===
     let l:statusline.='%='
 
+    let l:statusline.=' %#Comment#'
+    let l:statusline.='%{%StatusLinterLsp()%}'
+    
     " === Git branch ===
     if g:hackline_fugitive
         let l:statusline.='%#Directory#'
         let l:statusline.='%( %{hackline#fugitive#branch()} %)'
     endif
 
-    let l:statusline.=' %#Normal#%#CursorLine# '
-    let l:statusline.='%{%StatusLinterLsp()%}'
+    let l:statusline.=' %#Normal#'
+    let l:statusline.='%#CursorLine# '
     let l:statusline.='%{%StatusBufMisc()%} '
 
     if g:hackline_percent || g:hackline_lineinfo
@@ -114,18 +116,16 @@ function! StatusStart()
 endfunction
 
 function! StatusLinterLsp()
-    let l:statusline=''
+    let l:ale_linters=''
 
-    if !exists('b:hackline_ale_linting')
-        let b:hackline_ale_linting = 0
-    endif
+    try " destructure g:ale_buffer_info
+        let l:ale_linters.=reduce(get(get(g:ale_buffer_info, buffer_number()), 'loclist'), { acc, val -> acc.' '.val['linter_name'] }, '')
+    catch | endtry
 
-    " === Ale linter status ("ALE" for active, "" for inactive) ===
-    if exists('g:ale_enabled') && b:hackline_ale_linting
-        let l:statusline.=' ALE  '
-    endif
-
-    return l:statusline
+    " === Linter status ===
+    if l:ale_linters != ''
+        return ' ALE'.l:ale_linters.' '
+    else | return '' | endif
 endfunction
 
 function! StatusBufMisc()

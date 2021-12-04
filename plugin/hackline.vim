@@ -4,7 +4,8 @@ let g:loaded_hackline = v:true
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:hackline_path_options = [ '%t ', '%f' ]
+"let s:hackline_path_options = [ '%t ', '%f' ]
+let s:hackline_path_options = [ '%t', '%{hackline#base#filepath()}' ]
 let b:hackline_set_ale=0
 
 " === User configuration variables ===

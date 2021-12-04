@@ -1,18 +1,19 @@
 # hackline.vim
 
-*An opinionated statusline (in beta---things may break) for grownups. Easy to copy and hack. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).*
+*Under dev---things may break.*
+
+An opinionated statusline. Easy to copy and hack. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
 
 * Minimal mode flag for pros, or turn it off and use native showmode.
 * No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.
 * No icons or need for patched font.
 * Word and line count modules (from skyline.vim), nice for writers.
+* Adjusts for narrow windows.
 
 Plugins integrations:
 
 * A git branch module (from skyline.vim), supported by [vim-fugitive](https://github.com/tpope/vim-fugitive).
-* Shows buffer-active ALE linters.
-
-Much slimmer alternatives to plugins like [powerline](https://github.com/powerline/powerline), [vim-airline](https://github.com/vim-airline/vim-airline), or [lightline.vim](https://github.com/itchyny/lightline.vim). But, of course, it is not as feature-packed.
+* Shows if ALE is active and number of error/warnings.
 
 ## Installation
 

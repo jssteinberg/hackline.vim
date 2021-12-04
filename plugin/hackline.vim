@@ -16,10 +16,10 @@ let g:hackline_fugitive = get(g:, 'hackline_fugitive', '1')
 let g:hackline_fileformat = get(g:, 'hackline_fileformat', '1')
 let g:hackline_encoding = get(g:, 'hackline_encoding', '1')
 let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
-let g:hackline_filesize = get(g:, 'hackline_lineinfo', '0')
+let g:hackline_filesize = get(g:, 'hackline_filesize', '0')
 let g:hackline_wordcount = get(g:, 'hackline_wordcount', '0')
-let g:hackline_linecount = get(g:, 'hackline_linecount', '1')
-let g:hackline_percent = get(g:, 'hackline_percent', '0')
+let g:hackline_linecount = get(g:, 'hackline_linecount', '0')
+let g:hackline_percent = get(g:, 'hackline_percent', '1')
 let g:hackline_lineinfo = get(g:, 'hackline_lineinfo', '0')
 
 set laststatus=2
@@ -75,12 +75,13 @@ function! ActiveStatus()
     endif
 
     let l:statusline.=' %#Normal#'
-    let l:statusline.='%#CursorLine# '
-    let l:statusline.='%{%StatusBufMisc()%} '
+    let l:statusline.='%#StatusLine# '
+    let l:statusline.='%{%StatusBufMisc()%}'
 
     if g:hackline_percent || g:hackline_lineinfo
-        let l:statusline.='%#StatusLine#'
-        let l:statusline.='%{%StatusEnd()%}'
+        if winwidth(0) > 100
+            let l:statusline.='%{%StatusEnd()%}'
+        endif
     endif
 
     return l:statusline
@@ -97,11 +98,12 @@ function! InactiveStatus()
     let l:statusline.='%(%M%R%) '
 
     let l:statusline.='%#StatusLineNC#%= '
-    let l:statusline.='%{%StatusBufMisc()%} '
+    let l:statusline.='%{%StatusBufMisc()%}'
 
     if g:hackline_percent || g:hackline_lineinfo
-        let l:statusline.='%#StatusLineNC#'
-        let l:statusline.='%{%StatusEnd()%}'
+        if winwidth(0) > 100
+            let l:statusline.='%{%StatusEnd()%}'
+        endif
     endif
 
     return l:statusline
@@ -183,16 +185,16 @@ function! StatusBufMisc()
 endfunction
 
 function! StatusEnd()
-    let l:statusline=' '
+    let l:statusline=''
 
     " === Relative line number ===
     if g:hackline_percent
-        let l:statusline.=' %3p%%'
+        let l:statusline.=' %p%%/%L '
     endif
 
     " === Line:column number ===
     if g:hackline_lineinfo
-        let l:statusline.=' %3l:%-3c'
+        let l:statusline.=' %l:%v '
     endif
 
     let l:statusline.=' %<'

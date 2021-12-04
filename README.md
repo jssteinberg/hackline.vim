@@ -1,11 +1,11 @@
 # hackline.vim
 
-*An opinionated statusline (in beta---things may break) for grownups. Mostly in vimscript. Easy for you to copy and hack. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).*
+*An opinionated statusline (in beta---things may break) for grownups. Easy to copy and hack. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).*
 
-* Mode is minimal to barely tell you what mode it is, or do you need a spoon you noob! (Then turn it off and use native showmode).
+* Minimal mode flag for pros, or turn it off and use native showmode.
 * No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.
-* Should work out of the box---so no need for patched font, or are you that shallow?
-* Word and line count modules (from skyline.vim), perfect Vimmers that are writers.
+* No icons or need for patched font.
+* Word and line count modules (from skyline.vim), nice for writers.
 
 Plugins integrations:
 
@@ -45,6 +45,6 @@ let g:hackline_filetype = 1
 let g:hackline_filesize = 0
 let g:hackline_wordcount = 0
 let g:hackline_linecount = 0
-let g:hackline_percent = 0
+let g:hackline_percent = 1
 let g:hackline_lineinfo = 0
 ```

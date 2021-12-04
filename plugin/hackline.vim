@@ -119,27 +119,25 @@ function! StatusStart()
 endfunction
 
 function! StatusLinterLsp()
-    let l:ale_linters=''
+    let l:ale_linters=0
     let l:lsp_linters=''
     let l:statusline=''
 
     try " destructure g:ale_buffer_info
-        let l:ale_linters.=reduce(get(get(g:ale_buffer_info, buffer_number()), 'loclist'), { acc, val -> acc.' '.val['linter_name'] }, '')
+        let l:ale_linters=reduce(get(get(g:ale_buffer_info, buffer_number()), 'loclist'), { acc, val -> acc + 1 }, 0)
     catch | endtry
+
+    " ALE active linter/LSP
+    if l:ale_linters > 0
+        let l:statusline.=' ALE:'.string(l:ale_linters).' '
+    elseif exists('b:hackline_set_ale') && b:hackline_set_ale == 1
+        let l:statusline.=' ALE '
+    endif
 
     try " destructure g:ale_buffer_info TODO: test vim without lua
         "vim.lsp.get_active_clients()
         let l:lsp_linters.=luaeval("require('hackline.lsp').servers()")
     catch | endtry
-
-    " === Linter status ===
-    if l:ale_linters != ''
-        "let l:statusline.=' ALE'.l:ale_linters.' '
-        let l:statusline.=' ALE '
-    elseif exists('b:hackline_set_ale') && b:hackline_set_ale == 1
-        " ALE linter is active
-        let l:statusline.=' ALE '
-    endif
 
     if l:lsp_linters != ''
         let l:statusline.=' LSP'.l:lsp_linters.' '

@@ -7,7 +7,7 @@ An opinionated statusline. Easy to copy and hack. Originally a fork of [skyline.
 * Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
 * No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.
 * No icons or need for patched font.
-* Word and line count modules (from skyline.vim), nice for writers.
+* Word count modules (from skyline.vim), nice for writers.
 * Adjusts for narrow windows.
 
 Plugins integrations:

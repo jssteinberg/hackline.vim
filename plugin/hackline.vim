@@ -29,6 +29,8 @@ aug hackline
     au!
     au WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
     au WinLeave,BufLeave * setlocal statusline=%!InactiveStatus()
+    "au WinEnter,BufEnter * setlocal statusline=%!hackline#statusline#val('active')
+    "au WinLeave,BufLeave * setlocal statusline=%!hackline#statusline#val()
     au User ALEJobStarted let b:hackline_set_ale=1
 aug END
 
@@ -65,9 +67,6 @@ function! ActiveStatus()
     " === Divider ===
     let l:statusline.='%='
 
-    let l:statusline.=' %#Comment#'
-    let l:statusline.='%{%StatusLinterLsp()%}'
-    
     " === Git branch ===
     if g:hackline_fugitive
         let l:statusline.='%#Directory#'
@@ -76,6 +75,7 @@ function! ActiveStatus()
 
     let l:statusline.=' %#Normal#'
     let l:statusline.='%#StatusLine# '
+    let l:statusline.='%{%StatusLinterLsp()%} '
     let l:statusline.='%{%StatusBufMisc()%}'
 
     if g:hackline_percent || g:hackline_lineinfo

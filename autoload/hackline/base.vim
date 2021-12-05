@@ -1,3 +1,15 @@
+function! hackline#base#bufnumber() abort
+    if !g:hackline_bufnum
+        return ''
+    endif
+
+    if winwidth(0) <= 80
+        return ' '.bufnr().' '
+    endif
+
+    return ' :b'.bufnr().' '
+endfunction
+
 function! hackline#base#filepath() abort
     let l:directory = expand('%:~:.')
     if winwidth(0) <= 80

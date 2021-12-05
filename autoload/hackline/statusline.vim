@@ -1,14 +1,13 @@
 function! hackline#statusline#val(status = 'inactive') abort
-    let l:statusline='%#StatusLineNC#'
+    let s:active = a:status == 'active'
+    let l:statusline=''
 
-    if a:status == 'active'
-        let l:statusline='%#StatusLine#'
-    endif
-
-    "let l:statusline.='%{hackline#base#bufnumber()}'
-    "let l:statusline.='%{hackline#base#filepath()}'
+    let l:statusline.= s:active ? '%#IncSearch# ' : '%#StatusLineNC# '
+    let l:statusline.='%{hackline#base#bufnumber()}'
+    let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
+    let l:statusline.='%{hackline#base#filepath()}'
     "let l:statusline.='%{hackline#base#bufflags()}'
     "let l:statusline.='%{hackline#base#mode()}'
 
-    return l:statusline . a:status
+    return l:statusline
 endfunction

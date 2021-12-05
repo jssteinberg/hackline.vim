@@ -1,13 +1,81 @@
-function! hackline#statusline#val(status = 'inactive') abort
+function! hackline#statusline#val (status = 'inactive')
     let s:active = a:status == 'active'
     let l:statusline=''
 
-    let l:statusline.= s:active ? '%#IncSearch# ' : '%#StatusLineNC# '
-    let l:statusline.='%{hackline#base#bufnumber()}'
-    let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
-    let l:statusline.='%{hackline#base#filepath()}'
-    "let l:statusline.='%{hackline#base#bufflags()}'
-    "let l:statusline.='%{hackline#base#mode()}'
+    " Create statusline
+    " -----------------
 
-    return l:statusline
+    " Left side
+
+    let l:statusline.= s:active ? '%#IncSearch#' : '%#StatusLineNC#'
+    if !s:active |              let l:statusline .= "  --- " | endif
+    " Normal mode
+    let l:statusline .= s:active && mode() == "n" ? "  Vim " : ""
+    if s:active && g:hackline_mode
+        " Command mode
+        let l:statusline .= mode() == "c" ? "%#Cursor# --C--" : ""
+        " Insert mode
+        let l:statusline .= mode() == "i" ? "%#DiffAdd# --I--" : ""
+        " Terminal mode
+        let l:statusline .= mode() == "t" ? "%#DiffAdd# --T--" : ""
+        " Visual mode
+        let l:statusline .= mode() == "v" ? "%#PmenuSel# --V--" : ""
+        let l:statusline .= mode() == "\<c-v>" ? "%#PmenuSel# --B--" : ""
+        " Replace mode
+        let l:statusline .= mode() == "r" ? "%#DiffDelete# --R--" : ""
+        " Select mode
+        let l:statusline .= mode() == "s" ? "%#DiffDelete# --S--" : ""
+    endif
+    let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
+    if g:hackline_bufnum
+        let l:statusline.='%( %{hackline#base#bufnumber()} %)'
+    endif
+    if winwidth(0) > 60
+        let l:statusline.= s:active ? ' %#Normal# ' : ' %#StatusLineNC# '
+    else
+        let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
+    endif
+    let l:statusline.='%( %{hackline#base#filepath()} %)%([%M%R] %)'
+    let l:statusline.='%='
+
+    " Right side
+
+    if winwidth(0) > 60
+        if g:hackline_fugitive && s:active
+            let l:statusline.='%( %#Directory#%{hackline#fugitive#branch()} %)'
+        endif
+        let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
+        if g:hackline_ale
+            let l:statusline.='%( %{hackline#ale#status()} %)'
+        endif
+        if g:hackline_nvim_lsp
+            let l:statusline.='%( %{hackline#lsp#status()} %)'
+        endif
+    endif
+    if winwidth(0) > 40
+        if g:hackline_filetype
+            let l:statusline.='%( %{hackline#base#filetype()} %)'
+        endif
+    endif
+    if winwidth(0) > 100
+        if g:hackline_fileformat
+            let l:statusline.='%( %{&fileformat} %)'
+        endif
+        if g:hackline_encoding
+            let l:statusline.='%( %{hackline#base#fileencoding()} %)'
+        endif
+        if g:hackline_filesize
+            let l:statusline.='%( %{hackline#base#filesize()} %)'
+        endif
+        if g:hackline_wordcount
+            let l:statusline.='%( %{hackline#base#wordcount()} words )'
+        endif
+    endif
+    if winwidth(0) > 60
+        if g:hackline_custom_end != ''
+            let l:statusline.='%{%g:hackline_custom_end%}'
+        endif
+    endif
+
+    return l:statusline.' %<'
 endfunction

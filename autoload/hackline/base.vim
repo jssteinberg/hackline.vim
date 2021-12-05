@@ -1,22 +1,17 @@
 function! hackline#base#bufnumber() abort
-    if !g:hackline_bufnum
-        return ''
-    endif
-
     if winwidth(0) <= 80
-        return ' '.bufnr().' '
+        return 'b'.bufnr()
     endif
-
-    return ' :b'.bufnr().' '
+    return ':b'.bufnr()
 endfunction
 
 function! hackline#base#filepath() abort
-    let l:directory = expand('%:~:.')
-    if winwidth(0) <= 80
-        let l:directory = pathshorten(l:directory)
+    let l:path = expand('%:p:.')
+    if winwidth(0) <= 100
+        let l:path = pathshorten(l:path)
     endif
-    if l:directory !=# '.' && l:directory !=# ''
-        return ' ' . l:directory  . ''
+    if l:path !=# '.' && l:path !=# ''
+        return l:path
     endif
     return ''
 endfunction
@@ -28,22 +23,12 @@ function! hackline#base#filetype() abort
     return ''
 endfunction
 
-function! hackline#base#fileformat() abort
-    if winwidth(0) > 100
-        return &fileformat
-    endif
-    return ''
-endfunction
-
 function! hackline#base#fileencoding() abort
-    if winwidth(0) > 100
-        if &fileencoding !=# ''
-            return &fileencoding
-        else
-            return &encoding
-        endif
+    if &fileencoding !=# ''
+        return &fileencoding
+    else
+        return &encoding
     endif
-    return ''
 endfunction
 
 function! hackline#base#wordcount() abort

@@ -13,6 +13,7 @@ An opinionated statusline. Easy to copy and hack. Originally a fork of [skyline.
 Plugins integrations:
 
 * A git branch module (from skyline.vim), supported by [vim-fugitive](https://github.com/tpope/vim-fugitive).
+* Shows connected Neovim LSP.
 * Shows if ALE is active and number of error/warnings.
 
 ## Installation

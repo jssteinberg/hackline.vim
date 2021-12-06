@@ -15,7 +15,7 @@ let g:hackline_encoding = get(g:, 'hackline_encoding', '1')
 let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
 let g:hackline_filesize = get(g:, 'hackline_filesize', '0')
 let g:hackline_wordcount = get(g:, 'hackline_wordcount', '0')
-let g:hackline_custom_end = get(g:, 'hackline_custom_end', '%( %p%%/%L %)')
+let g:hackline_custom_end = get(g:, 'hackline_custom_end', '%( %P/%L %)')
 
 let b:hackline_get_ale=0
 

@@ -9,9 +9,10 @@ An opinionated statusline. Easy to copy and hack. Originally a fork of [skyline.
 
 * Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
 * No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.
+* Adjusts statusline for smaller widths.
 * No icons or need for patched font.
-* Word count modules (from skyline.vim), nice for writers.
-* Adjusts for narrow windows.
+* Word count modules (from skyline.vim).
+* File size modules (from skyline.vim).
 
 Plugins integrations:
 
@@ -46,5 +47,5 @@ let g:hackline_encoding = 1
 let g:hackline_filetype = 1
 let g:hackline_filesize = 0
 let g:hackline_wordcount = 0
-let g:hackline_custom_end = '%( %p%%/%L %)'
+let g:hackline_custom_end = '%( %P/%L %)'
 ```

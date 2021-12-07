@@ -1,5 +1,5 @@
 function! hackline#base#bufnumber() abort
-    if winwidth(0) <= 80
+    if winwidth(0) <= 60
         return 'b'.bufnr()
     endif
     return ':b'.bufnr()

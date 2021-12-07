@@ -7,7 +7,7 @@ function! hackline#lsp#status()
     catch | endtry
 
     if l:lsp_linters != ''
-        let l:statusline.='LSP:'.l:lsp_linters.''
+        let l:statusline.=l:lsp_linters
     endif
 
     return l:statusline

@@ -30,6 +30,17 @@ function! hackline#statusline#val (status = 'inactive')
     if g:hackline_bufnum
         let l:statusline.='%( %{hackline#base#bufnumber()} %)'
     endif
+    if g:hackline_filetype
+        let l:statusline.='%( %{hackline#base#filetype()} %)'
+    endif
+    if winwidth(0) > 60
+        if g:hackline_ale
+            let l:statusline.='%( %{hackline#ale#status()} %)'
+        endif
+        if g:hackline_nvim_lsp
+            let l:statusline.='%( %{hackline#lsp#status()} %)'
+        endif
+    endif
     if winwidth(0) > 60
         let l:statusline.= s:active ? ' %#Normal# ' : ' %#StatusLineNC# '
     else
@@ -45,17 +56,6 @@ function! hackline#statusline#val (status = 'inactive')
             let l:statusline.='%( %#Directory#%{hackline#fugitive#branch()} %)'
         endif
         let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
-        if g:hackline_ale
-            let l:statusline.='%( %{hackline#ale#status()} %)'
-        endif
-        if g:hackline_nvim_lsp
-            let l:statusline.='%( %{hackline#lsp#status()} %)'
-        endif
-    endif
-    if winwidth(0) > 40
-        if g:hackline_filetype
-            let l:statusline.='%( %{hackline#base#filetype()} %)'
-        endif
     endif
     if winwidth(0) > 100
         if g:hackline_fileformat

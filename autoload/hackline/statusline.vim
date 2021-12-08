@@ -1,5 +1,7 @@
 function! hackline#statusline#val (status = 'inactive')
     let s:active = a:status == 'active'
+    let s:md = 60
+    let s:lg = 100
     let l:statusline=''
 
     " Create statusline
@@ -8,9 +10,9 @@ function! hackline#statusline#val (status = 'inactive')
     " Left side
 
     let l:statusline.= s:active ? '%#IncSearch#' : '%#StatusLineNC#'
-    if !s:active |              let l:statusline .= "  --- " | endif
+    if !s:active | let l:statusline .= "      " | endif
     " Normal mode
-    let l:statusline .= s:active && mode() == "n" ? "  Vim " : ""
+    let l:statusline .= s:active && mode() == "n" ? (has('nvim') ? "  Neo " : "  Vim ") : ""
     if s:active && g:hackline_mode
         " Command mode
         let l:statusline .= mode() == "c" ? "%#Cursor# --C--" : ""
@@ -33,7 +35,7 @@ function! hackline#statusline#val (status = 'inactive')
     if g:hackline_filetype
         let l:statusline.='%( %{hackline#base#filetype()} %)'
     endif
-    if winwidth(0) > 60
+    if winwidth(0) > s:md
         if g:hackline_ale
             let l:statusline.='%( %{hackline#ale#status()} %)'
         endif
@@ -41,7 +43,7 @@ function! hackline#statusline#val (status = 'inactive')
             let l:statusline.='%( %{hackline#lsp#status()} %)'
         endif
     endif
-    if winwidth(0) > 60
+    if winwidth(0) > s:md
         let l:statusline.= s:active ? ' %#Normal# ' : ' %#StatusLineNC# '
     else
         let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
@@ -51,13 +53,13 @@ function! hackline#statusline#val (status = 'inactive')
 
     " Right side
 
-    if winwidth(0) > 60
+    if winwidth(0) > s:md
         if g:hackline_fugitive && s:active
             let l:statusline.='%( %#Directory#%{hackline#fugitive#branch()} %)'
         endif
         let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
     endif
-    if winwidth(0) > 100
+    if winwidth(0) > s:lg
         if g:hackline_fileformat
             let l:statusline.='%( %{&fileformat} %)'
         endif
@@ -71,11 +73,13 @@ function! hackline#statusline#val (status = 'inactive')
             let l:statusline.='%( %{hackline#base#wordcount()} words )'
         endif
     endif
-    if winwidth(0) > 60
+    if winwidth(0) > s:md
         if g:hackline_custom_end != ''
             let l:statusline.='%{%g:hackline_custom_end%}'
         endif
     endif
 
-    return l:statusline.' %<'
+    let l:statusline .= ' %<'
+
+    return l:statusline
 endfunction

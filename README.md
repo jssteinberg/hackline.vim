@@ -9,7 +9,7 @@ An opinionated statusline. Easy to copy and hack. Originally a fork of [skyline.
 
 * Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
 * No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.
-* Adjusts statusline for smaller widths.
+* Adjusts statusline for smaller widths. Sort statusline items logically for many buffer types, including netrw.
 * No icons or need for patched font.
 * Word count modules (from skyline.vim).
 * File size modules (from skyline.vim).

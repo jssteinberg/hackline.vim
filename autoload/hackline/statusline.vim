@@ -28,10 +28,16 @@ function! hackline#statusline#val (status = 'inactive')
         " Select mode
         let l:statusline .= mode() == "s" ? "%#DiffDelete# --S--" : ""
     endif
-    let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
     if g:hackline_bufnum
-        let l:statusline.='%( %{hackline#base#bufnumber()} %)'
+        if s:active && mode() == "n"
+            let l:statusline.='%(:%#IncSearch# %{hackline#base#bufnumber()} %)'
+        elseif s:active
+            let l:statusline.='%( %#StatusLine# %{hackline#base#bufnumber()} %)'
+        else
+            let l:statusline.='%(  %{hackline#base#bufnumber()} %)'
+        endif
     endif
+    let l:statusline.= s:active ? ' %#StatusLine# ' : '%#StatusLineNC#::'
     if g:hackline_filetype
         let l:statusline.='%( %{hackline#base#filetype()} %)'
     endif
@@ -44,9 +50,9 @@ function! hackline#statusline#val (status = 'inactive')
         endif
     endif
     if winwidth(0) > s:md
-        let l:statusline.= s:active ? ' %#Normal# ' : ' %#StatusLineNC# '
+        let l:statusline.= s:active ? ' %#Normal# ' : '::%#StatusLineNC#'
     else
-        let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
+        let l:statusline.= s:active ? ' %#StatusLine# ' : '::%#StatusLineNC#'
     endif
     let l:statusline.='%( %{hackline#base#filepath()} %)%([%M%R] %)'
     let l:statusline.='%='

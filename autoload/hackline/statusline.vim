@@ -11,14 +11,14 @@ function! hackline#statusline#val (status = 'inactive')
     " Left side
 
     let l:statusline.= s:active ? '%#IncSearch#' : '%#StatusLineNC#'
-    if !s:active | let l:statusline .= "      " | endif
+    if !s:active | let l:statusline .= "    >>" | endif
     " Normal mode
     let l:statusline .= s:active && mode() == "n" ? (has('nvim') ? "  Neo " : "  Vim ") : ""
     if s:active && g:hackline_mode
         " Command mode
         let l:statusline .= mode() == "c" ? "%#Cursor# --C--" : ""
         " Insert mode
-        let l:statusline .= mode() == "i" ? "%#Todo# --I--" : ""
+        let l:statusline .= mode() == "i" ? "%#DiffAdd# --I--" : ""
         " Terminal mode
         let l:statusline .= mode() == "t" ? "%#Todo# --T--" : ""
         " Visual mode
@@ -35,10 +35,10 @@ function! hackline#statusline#val (status = 'inactive')
         elseif s:active
             let l:statusline.='%( %#StatusLine# %{hackline#base#bufnumber()} %)'
         else
-            let l:statusline.='%(  %{hackline#base#bufnumber()} %)'
+            let l:statusline.='%(> %{hackline#base#bufnumber()} %)'
         endif
     endif
-    let l:statusline.= s:active ? ' %#StatusLine# ' : '%#StatusLineNC#::'
+    let l:statusline.= s:active ? ' %#StatusLine# ' : '%#StatusLineNC#>>'
     if g:hackline_filetype
         let l:statusline.='%( %{&filetype} %)'
     endif

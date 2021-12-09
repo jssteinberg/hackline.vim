@@ -21,8 +21,8 @@ let b:hackline_get_ale=0
 
 aug hackline
     au!
-    au WinEnter,BufEnter * setlocal statusline=%!hackline#statusline#val('active')
-    au WinLeave,BufLeave * setlocal statusline=%!hackline#statusline#val()
+    au WinEnter,BufEnter,FocusGained * setlocal statusline=%!hackline#statusline#val('active')
+    au WinLeave,BufLeave,FocusLost * setlocal statusline=%!hackline#statusline#val()
     au User ALEJobStarted let b:hackline_get_ale=1
 aug END
 

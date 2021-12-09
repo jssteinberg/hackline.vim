@@ -1,8 +1,5 @@
 # hackline.vim
 
-<img width="951" alt="Skjermbilde 2021-12-05 kl  22 03 09" src="https://user-images.githubusercontent.com/729055/144764748-1cb3d1a6-9ade-4915-a973-cc9d0338b4fb.png">
-<img width="1416" alt="Skjermbilde 2021-12-05 kl  22 31 42" src="https://user-images.githubusercontent.com/729055/144764795-bf2a5252-7079-4f68-85e4-453de959e4e9.png">
-
 *Version 0.2---things may break.*
 
 A light weight statusline package embracing vanilla capabilities. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).

@@ -9,7 +9,7 @@ A light weight statusline package embracing vanilla capabilities. Easy to copy a
 
 * Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
 * No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.
-* Adjusts statusline for smaller widths. Sort statusline items logically for many buffer types, including netrw.
+* Adjusts statusline for smaller widths. Sort statusline items for nicest truncation for most buffer types, without targeting any buffer types.
 * No icons or need for patched font.
 * Word count module (from skyline.vim).
 * File size module (from skyline.vim).

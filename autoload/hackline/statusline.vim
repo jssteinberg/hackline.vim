@@ -37,9 +37,9 @@ function! hackline#statusline#val (status = 'inactive')
             let l:statusline.='%(  %{hackline#base#bufnumber()} %)'
         endif
     endif
-    let l:statusline.= s:active ? ' %#StatusLine#  ' : '%#StatusLineNC# ::'
-    if g:hackline_filetype && &filetype
-        let l:statusline.='%(  %{&filetype} %)'
+    let l:statusline.= s:active ? ' %#StatusLine# ' : '%#StatusLineNC#::'
+    if g:hackline_filetype
+        let l:statusline.='%( %{&filetype} %)'
     endif
     if winwidth(0) > s:md
         if g:hackline_ale

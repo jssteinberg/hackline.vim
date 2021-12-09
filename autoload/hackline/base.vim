@@ -2,9 +2,9 @@ function! hackline#base#bufnumber() abort
     return bufnr()
 endfunction
 
-function! hackline#base#filepath() abort
+function! hackline#base#filepath(width = 100) abort
     let l:path = expand('%:p:.')
-    if winwidth(0) <= 100
+    if winwidth(0) <= a:width
         let l:path = pathshorten(l:path)
     endif
     if l:path !=# '.' && l:path !=# ''

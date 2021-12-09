@@ -2,6 +2,7 @@ function! hackline#statusline#val (status = 'inactive')
     let s:active = a:status == 'active'
     let s:md = 60
     let s:lg = 100
+    let s:xl = 120
     let l:statusline=''
 
     " Create statusline
@@ -17,9 +18,9 @@ function! hackline#statusline#val (status = 'inactive')
         " Command mode
         let l:statusline .= mode() == "c" ? "%#Cursor# --C--" : ""
         " Insert mode
-        let l:statusline .= mode() == "i" ? "%#DiffAdd# --I--" : ""
+        let l:statusline .= mode() == "i" ? "%#Todo# --I--" : ""
         " Terminal mode
-        let l:statusline .= mode() == "t" ? "%#DiffAdd# --T--" : ""
+        let l:statusline .= mode() == "t" ? "%#Todo# --T--" : ""
         " Visual mode
         let l:statusline .= mode() == "v" ? "%#PmenuSel# --V--" : ""
         let l:statusline .= mode() == "\<c-v>" ? "%#PmenuSel# --B--" : ""
@@ -81,7 +82,7 @@ function! hackline#statusline#val (status = 'inactive')
         endif
     endif
 
-    let l:statusline .= ' %<'
+    let l:statusline .= ' '
 
     return l:statusline
 endfunction

@@ -47,17 +47,21 @@ function! hackline#statusline#val (status = 'inactive')
         let l:statusline.=g:hackline_nvim_lsp ? '%( %{hackline#lsp#status()} %)' : ''
     endif
     if winwidth(0) > s:md
-        let l:statusline.=s:active ? ' %#Title# ' : '::%#StatusLineNC#'
+        let l:statusline.=s:active ? ' %#Comment# ' : '<<%#StatusLineNC#'
     else
-        let l:statusline.=s:active ? ' %#StatusLine# ' : '::%#StatusLineNC#'
+        let l:statusline.=s:active ? ' %#StatusLine# ' : '<<%#StatusLineNC#'
     endif
-    let l:statusline.='%<%( %{hackline#base#filepath('.s:lg.')} %)%([%M%R] %)'
+    if s:active
+        let l:statusline.='%<%( %{hackline#base#filepath('.s:lg.')}%#Title#%t %)%([%M] %)'
+    else
+        let l:statusline.='%<%( %{hackline#base#filepath('.s:lg.')}%t %)%([%M] %)'
+    endif
     let l:statusline.='%='
 
     " Right side
 
     if winwidth(0) > s:md
-        if g:hackline_fugitive && s:active
+        if g:hackline_git && s:active
             let l:statusline.='%( %#Constant#%{hackline#git#branch()} %)'
         endif
         let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '

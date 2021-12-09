@@ -16,7 +16,7 @@ An opinionated statusline. Easy to copy and hack. Originally a fork of [skyline.
 
 Plugins integrations:
 
-* A git branch module (from skyline.vim), supported by [vim-fugitive](https://github.com/tpope/vim-fugitive).
+* Shows current git branch if one of either plugin [vim-gitbranch](https://github.com/itchyny/vim-gitbranch) or [vim-fugitive](https://github.com/tpope/vim-fugitive) is loaded.
 * Shows connected Neovim LSP.
 * Shows if ALE is active and number of error/warnings.
 

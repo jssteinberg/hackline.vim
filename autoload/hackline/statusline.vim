@@ -42,30 +42,26 @@ function! hackline#statusline#val (status = 'inactive')
         let l:statusline.='%( %{&filetype} %)'
     endif
     if winwidth(0) > s:md
-        if g:hackline_ale
-            let l:statusline.='%( %{hackline#ale#status()} %)'
-        endif
-        if g:hackline_nvim_lsp
-            let l:statusline.='%( %{hackline#lsp#status()} %)'
-        endif
+        let l:statusline.=g:hackline_ale ? '%( %{hackline#ale#status()} %)' : ''
+        let l:statusline.=g:hackline_nvim_lsp ? '%( %{hackline#lsp#status()} %)' : ''
     endif
     if winwidth(0) > s:md
-        let l:statusline.= s:active ? ' %#Directory# ' : '::%#StatusLineNC#'
+        let l:statusline.=s:active ? ' %#Title# ' : '::%#StatusLineNC#'
     else
-        let l:statusline.= s:active ? ' %#StatusLine# ' : '::%#StatusLineNC#'
+        let l:statusline.=s:active ? ' %#StatusLine# ' : '::%#StatusLineNC#'
     endif
-    let l:statusline.='%( %{hackline#base#filepath()} %)%([%M%R] %)'
+    let l:statusline.='%<%( %{hackline#base#filepath('.s:lg.')} %)%([%M%R] %)'
     let l:statusline.='%='
 
     " Right side
 
     if winwidth(0) > s:md
         if g:hackline_fugitive && s:active
-            let l:statusline.='%( %#Directory#%{hackline#fugitive#branch()} %)'
+            let l:statusline.='%( %#Constant#%{hackline#git#branch()} %)'
         endif
         let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
     endif
-    if winwidth(0) > s:lg
+    if winwidth(0) > s:xl
         if g:hackline_fileformat
             let l:statusline.='%( %{&fileformat} %)'
         endif

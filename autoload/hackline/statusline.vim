@@ -50,7 +50,7 @@ function! hackline#statusline#val (status = 'inactive')
         endif
     endif
     if winwidth(0) > s:md
-        let l:statusline.= s:active ? ' %#Normal# ' : '::%#StatusLineNC#'
+        let l:statusline.= s:active ? ' %#Directory# ' : '::%#StatusLineNC#'
     else
         let l:statusline.= s:active ? ' %#StatusLine# ' : '::%#StatusLineNC#'
     endif

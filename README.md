@@ -5,7 +5,7 @@
 
 *Version 0.2---things may break.*
 
-An opinionated statusline. Easy to copy and hack. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
+A light weight statusline package embracing vanilla capabilities. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
 
 * Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
 * No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.
@@ -22,12 +22,17 @@ Plugins integrations:
 
 ## Installation
 
-Requires a newer version of Vim > 8.2.1... or Neovim. Basically a version that can re-evaluated results of an expression as a statusline format string. **Not tested on Vims without lua.** On Macos, Vim from Homebrew works.
+Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer version that supports re-evaluating expression results as a statusline format string. Not tested on Vim without lua---for Mac, Homebrew Vim works.
 
-Vim [vim-plug](https://github.com/junegunn/vim-plug) installation:
+Pick your poison:
 
 ```
-Plug 'jssteinberg/hackline.vim'
+use{'jssteinberg/hackline.vim'} -- packer.nvim, or with additional requirements:
+use{'jssteinberg/hackline.vim', requires = {'itchyny/vim-gitbranch'}} -- For Git branch without fugitive.vim
+
+Plug 'jssteinberg/hackline.vim' " vim-plug
+
+call packager#add('jssteinberg/hackline.vim') " Vim packager
 ```
 
 ## Options
@@ -39,7 +44,7 @@ Default values:
 ```vim
 let g:hackline_bufnum = 1
 let g:hackline_mode = 1
-let g:hackline_fugitive = 1 " Displays branch if fugitive is loaded
+let g:hackline_git = 1 " Current branch if available from vim-gitbranch or fugitive.vim
 let g:hackline_ale = 1 " ALE info if available
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_fileformat = 1

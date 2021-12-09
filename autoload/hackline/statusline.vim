@@ -33,7 +33,7 @@ function! hackline#statusline#val (status = 'inactive')
         if s:active && mode() == "n"
             let l:statusline.='%(:%#IncSearch# %{hackline#base#bufnumber()} %)'
         elseif s:active
-            let l:statusline.='%( %#StatusLine# %{hackline#base#bufnumber()} %)'
+            let l:statusline.='%(  %{hackline#base#bufnumber()} %)'
         else
             let l:statusline.='%(> %{hackline#base#bufnumber()} %)'
         endif

@@ -13,13 +13,6 @@ function! hackline#base#filepath() abort
     return ''
 endfunction
 
-function! hackline#base#filetype() abort
-    if &filetype !=# ''
-        return &filetype
-    endif
-    return ''
-endfunction
-
 function! hackline#base#fileencoding() abort
     if &fileencoding !=# ''
         return &fileencoding

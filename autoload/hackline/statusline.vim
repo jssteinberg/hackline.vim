@@ -11,50 +11,51 @@ function! hackline#statusline#val (status = 'inactive')
     " Left side
 
     let l:statusline.= s:active ? '%#IncSearch#' : '%#StatusLineNC#'
-    if !s:active | let l:statusline .= "    >>" | endif
+    if !s:active | let l:statusline .= "    > " | endif
     " Normal mode
     let l:statusline .= s:active && mode() == "n" ? (has('nvim') ? "  Neo " : "  Vim ") : ""
     if s:active && g:hackline_mode
         " Command mode
-        let l:statusline .= mode() == "c" ? "%#Cursor# --C--" : ""
+        let l:statusline .= mode() == "c" ? "%#Cursor#  C <<" : ""
         " Insert mode
-        let l:statusline .= mode() == "i" ? "%#DiffAdd# --I--" : ""
+        let l:statusline .= mode() == "i" ? "%#DiffAdd#  I <<" : ""
         " Terminal mode
-        let l:statusline .= mode() == "t" ? "%#Todo# --T--" : ""
+        let l:statusline .= mode() == "t" ? "%#Todo#  T <<" : ""
         " Visual mode
-        let l:statusline .= mode() == "v" ? "%#PmenuSel# --V--" : ""
-        let l:statusline .= mode() == "\<c-v>" ? "%#PmenuSel# --B--" : ""
+        let l:statusline .= mode() == "v" ? "%#PmenuSel#  V <<" : ""
+        let l:statusline .= mode() == "\<c-v>" ? "%#PmenuSel#  B <<" : ""
         " Replace mode
-        let l:statusline .= mode() == "r" ? "%#DiffDelete# --R--" : ""
+        let l:statusline .= mode() == "r" ? "%#DiffDelete#  R <<" : ""
         " Select mode
-        let l:statusline .= mode() == "s" ? "%#DiffDelete# --S--" : ""
+        let l:statusline .= mode() == "s" ? "%#DiffDelete#  S <<" : ""
     endif
     if g:hackline_bufnum
-        if s:active && mode() == "n"
-            let l:statusline.='%(:%#IncSearch# %{hackline#base#bufnumber()} %)'
+        if s:active && mode() == 'n'
+            let l:statusline.='%(: %{hackline#base#bufnumber()} %)'
         elseif s:active
-            let l:statusline.='%(  %{hackline#base#bufnumber()} %)'
+            let l:statusline.='%(< %{hackline#base#bufnumber()} %)'
         else
-            let l:statusline.='%(> %{hackline#base#bufnumber()} %)'
+            let l:statusline.='%(  %{hackline#base#bufnumber()} %)'
         endif
     endif
-    let l:statusline.= s:active ? ' %#StatusLine# ' : '%#StatusLineNC#>>'
+    let l:statusline.= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
     if g:hackline_filetype
         let l:statusline.='%( %{&filetype} %)'
     endif
     if winwidth(0) > s:md
-        let l:statusline.=g:hackline_ale ? '%( %{hackline#ale#status()} %)' : ''
-        let l:statusline.=g:hackline_nvim_lsp ? '%( %{hackline#lsp#status()} %)' : ''
-    endif
-    if winwidth(0) > s:md
-        let l:statusline.=s:active ? ' %#Comment# ' : '<<%#StatusLineNC#'
+        let l:statusline.=s:active ? ' %#Comment# ' : ' %#StatusLineNC# '
     else
-        let l:statusline.=s:active ? ' %#StatusLine# ' : '<<%#StatusLineNC#'
+        let l:statusline.=s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
     endif
     if s:active && winwidth(0) > s:md
-        let l:statusline.='%<%( %{hackline#base#filepath('.s:lg.')}%#Title#%t %)%([%M] %)'
+        let l:statusline.='%( %<%)%( %{hackline#base#filepath('.s:lg.')}%#Title#%t %)%(%M %)'
     else
-        let l:statusline.='%<%( %{hackline#base#filepath('.s:lg.')}%t %)%([%M] %)'
+        let l:statusline.='%(%<%)%( %{hackline#base#filepath('.s:lg.')}%t %)%(%M %)'
+    endif
+    if winwidth(0) > s:md
+        let l:statusline.= s:active ? '%#Comment#' : '%#StatusLineNC#'
+        let l:statusline.=g:hackline_ale ? '%( :  %{hackline#ale#status()} %)' : ''
+        let l:statusline.=g:hackline_nvim_lsp ? '%( :  %{hackline#lsp#status()} %)' : ''
     endif
     let l:statusline.='%='
 

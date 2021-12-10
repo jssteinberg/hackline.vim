@@ -4,15 +4,15 @@ let g:loaded_hackline = v:true
 let s:save_cpo = &cpo
 set cpo&vim
 
-" === User configuration variables ===
-let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
+" Global vars for some customization
 let g:hackline_mode = get(g:, 'hackline_mode', '1')
+let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
+let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
 let g:hackline_git = get(g:, 'hackline_git', '1')
 let g:hackline_ale = get(g:, 'hackline_ale', '1')
 let g:hackline_nvim_lsp = get(g:, 'hackline_nvim_lsp', '1')
 let g:hackline_fileformat = get(g:, 'hackline_fileformat', '1')
 let g:hackline_encoding = get(g:, 'hackline_encoding', '1')
-let g:hackline_filetype = get(g:, 'hackline_filetype', '1')
 let g:hackline_filesize = get(g:, 'hackline_filesize', '0')
 let g:hackline_wordcount = get(g:, 'hackline_wordcount', '0')
 let g:hackline_custom_end = get(g:, 'hackline_custom_end', '%( %P/%L %)')

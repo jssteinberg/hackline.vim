@@ -1,11 +1,8 @@
 # hackline.vim
 
-*Version 0.5---things may break.*
+*Version 0.6---things may break.*
 
 A light weight statusline package embracing vanilla capabilities. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
-
-![Screenshot 2021-12-09 at 23 58 11](https://user-images.githubusercontent.com/729055/145489837-73adf221-74bf-4830-ab57-0860ea545799.jpg)
-![Screenshot 2021-12-09 at 23 58 23](https://user-images.githubusercontent.com/729055/145489886-39d6f9a3-43ff-4be0-9ea6-979da34dfb40.jpg)
 
 * Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
 * No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.

@@ -2,7 +2,7 @@
 
 *Version 0.6---things may break.*
 
-A light weight statusline embracing vanilla capabilities. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
+A light statusline for Vim and Neovim, embracing newer vanilla capabilities of the fabled editor. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
 
 ![Screenshot 2021-12-10 at 23 20 52](https://user-images.githubusercontent.com/729055/145653885-cacb4eef-226c-43fd-9ed7-bc5d966ed6f2.jpg)
 ![Screenshot 2021-12-10 at 23 21 10](https://user-images.githubusercontent.com/729055/145653891-75489d8c-6e9d-4a87-8bb5-1f35b0bb7c2a.jpg)

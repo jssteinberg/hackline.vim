@@ -104,7 +104,7 @@ function! hackline#statusline#val (status = 'inactive')
             let l:statusline .= '%( %{hackline#base#filesize()} %)'
         endif
         if g:hackline_wordcount
-            let l:statusline .= '%( %{hackline#base#wordcount()} words )'
+            let l:statusline .= '%( %{hackline#base#wordcount()} words %)'
         endif
     endif
     if winwidth(0) > s:w.md

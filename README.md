@@ -2,7 +2,11 @@
 
 *Version 0.6---things may break.*
 
-A light weight statusline package embracing vanilla capabilities. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
+A light weight statusline embracing vanilla capabilities. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
+
+![Screenshot 2021-12-10 at 23 20 52](https://user-images.githubusercontent.com/729055/145653885-cacb4eef-226c-43fd-9ed7-bc5d966ed6f2.jpg)
+![Screenshot 2021-12-10 at 23 21 10](https://user-images.githubusercontent.com/729055/145653891-75489d8c-6e9d-4a87-8bb5-1f35b0bb7c2a.jpg)
+![Screenshot 2021-12-10 at 23 21 43](https://user-images.githubusercontent.com/729055/145653894-97033937-4fee-4225-918f-af9020e083f7.jpg)
 
 * Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
 * No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.

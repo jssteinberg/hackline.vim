@@ -13,9 +13,10 @@ function! hackline#statusline#val (status = 'inactive')
                 \   r: 'DiffDelete',
                 \   s: 'DiffDelete',
                 \ },
-                \ middle_start: 'Comment',
-                \ tail: 'Constant',
-                \ middle_end: 'Comment',
+                \ middle_start: 'Normal',
+                \ dir: 'Comment',
+                \ tail: 'Normal',
+                \ middle_end: 'Normal',
                 \ end: 'StatusLine',
                 \ inactive: 'StatusLineNC' }
     let s:hi = hackline#utils#getStsHis(s:highlight_groups)
@@ -71,9 +72,9 @@ function! hackline#statusline#val (status = 'inactive')
     endif
 
     if s:active && winwidth(0) > s:w.md
-        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:w.lg.')}'.s:hi.tail.'%t %)%(%M %)'
+        let l:statusline .= '%(%<%)%( '.s:hi.dir.'%{hackline#base#filepath('.s:w.lg.')}'.s:hi.tail.'%t%)%( %M% %)'.s:hi.middle_start
     else
-        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:w.lg.')}%t %)%(%M %)'
+        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:w.lg.')}%t%)%( %M% %)'
     endif
 
     let l:statusline .= '%='

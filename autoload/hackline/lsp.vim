@@ -1,4 +1,6 @@
 function! hackline#lsp#status()
+    if !has('nvim') | return '' | endif
+
     let l:lsp_linters=''
     let l:statusline=''
 

@@ -3,28 +3,47 @@ function! hackline#statusline#val (status = 'inactive')
     let s:md = 60
     let s:lg = 100
     let s:xl = 120
+    let s:highlight_groups = #{
+                \ start: 'IncSearch',
+                \ modes: #{
+                \   c: 'Cursor',
+                \   i: 'DiffAdd',
+                \   t: 'Todo',
+                \   v: 'PmenuSel',
+                \   vb: 'PmenuSel',
+                \   r: 'DiffDelete',
+                \   s: 'DiffDelete',
+                \ },
+                \ middle_start: 'Comment',
+                \ tail: 'Constant',
+                \ middle_end: 'Comment',
+                \ end: 'StatusLine',
+                \ inactive: 'StatusLineNC',
+                \ }
+    let s:hi = hackline#utils#getStsHis(s:highlight_groups)
+
     let l:statusline=''
 
     " Statusline Left Side
     " --------------------
 
-    let l:statusline .= s:active ? '%#IncSearch#' : '%#StatusLineNC#'
+    let l:statusline .= s:active ? s:hi.start : s:hi.inactive
 
     " Modes
     if s:active && g:hackline_mode && mode() != 'n'
         " Command mode
-        let l:statusline .= mode() == 'c' ?        '%#Cursor#  «C» ' : ''
+        let l:statusline .= mode() == 'c' ?       s:hi.modes.c.'  «C» ' : ''
         " Insert mode
-        let l:statusline .= mode() == 'i' ?       '%#DiffAdd#  «I» ' : ''
+        let l:statusline .= mode() == 'i' ?       s:hi.modes.i.'  «I» ' : ''
         " Terminal mode
-        let l:statusline .= mode() == 't' ?          '%#Todo#  «T» ' : ''
+        let l:statusline .= mode() == 't' ?       s:hi.modes.t.'  «T» ' : ''
         " Visual mode
-        let l:statusline .= mode() == 'v' ?      '%#PmenuSel#  «V» ' : ''
-        let l:statusline .= mode() == '\<c-v>' ? '%#PmenuSel#  «V» ' : ''
+        let l:statusline .= mode() == 'v' ?       s:hi.modes.v.'  «V» ' : ''
+        let l:statusline .= mode() == '\<c-v>' ? s:hi.modes.vb.'  «V» ' : ''
         " Replace mode
-        let l:statusline .= mode() == 'r' ?    '%#DiffDelete#  «R» ' : ''
+        let l:statusline .= mode() == 'r' ?       s:hi.modes.r.'  «R» ' : ''
         " Select mode
-        let l:statusline .= mode() == 's' ?    '%#DiffDelete#  «S» ' : ''
+        let l:statusline .= mode() == 's' ?       s:hi.modes.s.'  «S» ' : ''
     elseif s:active
         let l:statusline .= !g:hackline_mode || mode() == 'n' ? (has('nvim') ? '  Neo ' : '  Vim ') : ''
     else
@@ -43,9 +62,9 @@ function! hackline#statusline#val (status = 'inactive')
     endif
 
     if winwidth(0) > s:md
-        let l:statusline .= s:active ? ' %#NonText# ' : ' %#StatusLineNC#>'
+        let l:statusline .= s:active ? ' '.s:hi.middle_start.' ' : ' >'
     else
-        let l:statusline .= s:active ? '  ' : ' %#StatusLineNC#>'
+        let l:statusline .= s:active ? '  ' : ' >'
     endif
 
     " Buffer number
@@ -56,13 +75,13 @@ function! hackline#statusline#val (status = 'inactive')
     endif
 
     if s:active && winwidth(0) > s:md
-        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:lg.')}%#Constant#%t %)%(%M %)'
+        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:lg.')}'.s:hi.tail.'%t %)%(%M %)'
     else
         let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:lg.')}%t %)%(%M %)'
     endif
 
     if winwidth(0) > s:md
-        let l:statusline .= s:active ? '%#NonText#' : '%#StatusLineNC#'
+        let l:statusline .= s:active ? s:hi.middle_end : ''
 
         if s:active
             let l:statusline .= g:hackline_ale ? '%( « %{hackline#ale#status()} %)' : ''
@@ -82,9 +101,9 @@ function! hackline#statusline#val (status = 'inactive')
     let l:statusline .= '%='
 
     if winwidth(0) > s:md
-        let l:statusline .= s:active ? ' %#StatusLine# ' : ' %#StatusLineNC# '
+        let l:statusline .= s:active ? ' '.s:hi.end.' ' : '  '
     else
-        let l:statusline .= s:active ? '  ' : ' %#StatusLineNC#>'
+        let l:statusline .= s:active ? '  ' : ' >'
     endif
 
     " Statusline Right Side

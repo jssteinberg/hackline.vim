@@ -5,16 +5,13 @@ function! hackline#statusline#val (status = 'inactive')
     let s:xl = 120
     let l:statusline=''
 
-    " Create statusline
-    " -----------------
-
-    " Left side
+    " Statusline Left Side
+    " --------------------
 
     let l:statusline .= s:active ? '%#IncSearch#' : '%#StatusLineNC#'
-    if !s:active | let l:statusline .= '   <  ' | endif
-    " Normal mode
-    let l:statusline .= s:active && mode() == 'n' ? (has('nvim') ? '  Neo ' : '  Vim ') : ''
-    if s:active && g:hackline_mode
+
+    " Modes
+    if s:active && g:hackline_mode && mode() != 'n'
         " Command mode
         let l:statusline .= mode() == 'c' ?        '%#Cursor#  «C» ' : ''
         " Insert mode
@@ -28,9 +25,15 @@ function! hackline#statusline#val (status = 'inactive')
         let l:statusline .= mode() == 'r' ?    '%#DiffDelete#  «R» ' : ''
         " Select mode
         let l:statusline .= mode() == 's' ?    '%#DiffDelete#  «S» ' : ''
+    elseif s:active
+        let l:statusline .= !g:hackline_mode || mode() == 'n' ? (has('nvim') ? '  Neo ' : '  Vim ') : ''
+    else
+        let l:statusline .= '   <  '
     endif
+
+    " Filetype (has ties with mode)
     if g:hackline_filetype
-        if s:active && mode() != 'n'
+        if g:hackline_mode && s:active && mode() != 'n'
             let l:statusline .= '%( %{&filetype}  %)'
         elseif s:active
             let l:statusline .= '%(‹%{&filetype}› %)'
@@ -38,21 +41,26 @@ function! hackline#statusline#val (status = 'inactive')
             let l:statusline .= '%( %{&filetype}  %)'
         endif
     endif
+
     if winwidth(0) > s:md
-        let l:statusline .= s:active ? ' %#Comment# ' : ' %#StatusLineNC#>'
+        let l:statusline .= s:active ? ' %#NonText# ' : ' %#StatusLineNC#>'
     else
         let l:statusline .= s:active ? '  ' : ' %#StatusLineNC#>'
     endif
-    if g:hackline_bufnum
-        let l:statusline .= s:active && winwidth(0) > s:md ?
-                    \ '%( %#NonText#‹b%{hackline#base#bufnumber()}%#NonText#› %)' : s:active ?
-                    \ '%(:b%{hackline#base#bufnumber()}  %)' : '%(  %{hackline#base#bufnumber()}  %)'
+
+    " Buffer number
+    if g:hackline_bufnum && winwidth(0) > s:md
+        let l:statusline .= s:active ? '%( ‹b%{hackline#base#bufnumber()}› %)' : '%(  b%{hackline#base#bufnumber()}  %)'
+    elseif g:hackline_bufnum
+        let l:statusline .= s:active ? '%(b%{hackline#base#bufnumber()}  %)' : '%( %{hackline#base#bufnumber()}  %)'
     endif
+
     if s:active && winwidth(0) > s:md
-        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:lg.')}%#Normal#%t %)%(%M %)'
+        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:lg.')}%#Constant#%t %)%(%M %)'
     else
         let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:lg.')}%t %)%(%M %)'
     endif
+
     if winwidth(0) > s:md
         let l:statusline .= s:active ? '%#NonText#' : '%#StatusLineNC#'
 
@@ -79,7 +87,8 @@ function! hackline#statusline#val (status = 'inactive')
         let l:statusline .= s:active ? '  ' : ' %#StatusLineNC#>'
     endif
 
-    " Right side
+    " Statusline Right Side
+    " ---------------------
 
     if winwidth(0) > s:xl
         if g:hackline_fileformat

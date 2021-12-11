@@ -18,6 +18,7 @@ function! hackline#statusline#val (status = 'inactive')
                 \ tail: 'Normal',
                 \ middle_end: 'Normal',
                 \ end: 'StatusLine',
+                \ active_sm: 'StatusLine',
                 \ inactive: 'StatusLineNC' }
     let s:hi = hackline#utils#getStsHis(s:highlight_groups)
 
@@ -26,7 +27,7 @@ function! hackline#statusline#val (status = 'inactive')
     " Statusline Left Side
     " --------------------
 
-    let l:statusline .= s:active ? s:hi.start : s:hi.inactive
+    let l:statusline .= s:active ? winwidth(0) > s:w.md ? s:hi.start : s:hi.active_sm : s:hi.inactive
 
     " Modes
     if s:active && g:hackline_mode && mode() != 'n'

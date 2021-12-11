@@ -1,4 +1,4 @@
-if exists('g:loaded_hackline') || !has('nvim-0.5') | finish | endif
+if exists('g:loaded_hackline') | finish | endif
 let g:loaded_hackline = v:true
 
 let s:save_cpo = &cpo

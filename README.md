@@ -14,7 +14,7 @@ A light weight statusline package embracing vanilla capabilities. Easy to copy a
 
 Plugins integrations:
 
-* Shows current git branch if one of either plugin [vim-gitbranch](https://github.com/itchyny/vim-gitbranch) or [vim-fugitive](https://github.com/tpope/vim-fugitive) is loaded.
+* Will display git info by looking for plugins in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
 * Shows connected Neovim LSP.
 * Shows if ALE is active and number of error/warnings.
 

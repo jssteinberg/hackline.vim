@@ -1,8 +1,7 @@
 function! hackline#statusline#val (status = 'inactive')
     let s:active = a:status == 'active'
-    let s:md = 60
-    let s:lg = 100
-    let s:xl = 120
+    let s:w = #{ md: 60, lg: 100, xl: 120 }
+    let s:sep = #{ l: '›', r: '‹' }
     let s:highlight_groups = #{
                 \ start: 'IncSearch',
                 \ modes: #{
@@ -18,8 +17,7 @@ function! hackline#statusline#val (status = 'inactive')
                 \ tail: 'Constant',
                 \ middle_end: 'Comment',
                 \ end: 'StatusLine',
-                \ inactive: 'StatusLineNC',
-                \ }
+                \ inactive: 'StatusLineNC' }
     let s:hi = hackline#utils#getStsHis(s:highlight_groups)
 
     let l:statusline=''
@@ -47,69 +45,55 @@ function! hackline#statusline#val (status = 'inactive')
     elseif s:active
         let l:statusline .= !g:hackline_mode || mode() == 'n' ? (has('nvim') ? '  Neo ' : '  Vim ') : ''
     else
-        let l:statusline .= '   <  '
+        let l:statusline .= '     <'
     endif
 
     " Filetype (has ties with mode)
     if g:hackline_filetype
-        if g:hackline_mode && s:active && mode() != 'n'
-            let l:statusline .= '%( %{&filetype}  %)'
-        elseif s:active
-            let l:statusline .= '%(‹%{&filetype}› %)'
+        if s:active
+            let l:statusline .= '%('.s:sep.l.' %{&filetype} %)'
         else
-            let l:statusline .= '%( %{&filetype}  %)'
+            let l:statusline .= '%(  %{&filetype} %)'
         endif
     endif
 
-    if winwidth(0) > s:md
+    if winwidth(0) > s:w.md
         let l:statusline .= s:active ? ' '.s:hi.middle_start.' ' : ' >'
     else
         let l:statusline .= s:active ? '  ' : ' >'
     endif
 
     " Buffer number
-    if g:hackline_bufnum && winwidth(0) > s:md
-        let l:statusline .= s:active ? '%( ‹b%{hackline#base#bufnumber()}› %)' : '%(  b%{hackline#base#bufnumber()}  %)'
+    if g:hackline_bufnum && winwidth(0) > s:w.md
+        let l:statusline .= s:active ? '%( b%{hackline#base#bufnumber()} '.s:sep.l.'%)' : '%(  %{hackline#base#bufnumber()}  %)'
     elseif g:hackline_bufnum
-        let l:statusline .= s:active ? '%(b%{hackline#base#bufnumber()}  %)' : '%( %{hackline#base#bufnumber()}  %)'
+        let l:statusline .= s:active ? '%(b%{hackline#base#bufnumber()}   %)' : '%(  %{hackline#base#bufnumber()}  %)'
     endif
 
-    if s:active && winwidth(0) > s:md
-        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:lg.')}'.s:hi.tail.'%t %)%(%M %)'
+    if s:active && winwidth(0) > s:w.md
+        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:w.lg.')}'.s:hi.tail.'%t %)%(%M %)'
     else
-        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:lg.')}%t %)%(%M %)'
-    endif
-
-    if winwidth(0) > s:md
-        let l:statusline .= s:active ? s:hi.middle_end : ''
-
-        if s:active
-            let l:statusline .= g:hackline_ale ? '%( « %{hackline#ale#status()} %)' : ''
-            let l:statusline .= g:hackline_nvim_lsp ? '%( « %{hackline#lsp#status()} %)' : ''
-        else
-            let l:statusline .= g:hackline_ale ? '%( « %{hackline#ale#status()} %)' : ''
-            let l:statusline .= g:hackline_nvim_lsp ? '%( « %{hackline#lsp#status()} %)' : ''
-        endif
-    endif
-
-    if winwidth(0) > s:md
-        if g:hackline_git && s:active
-            let l:statusline .= '%( %{hackline#git#branch()} %)'
-        endif
+        let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:w.lg.')}%t %)%(%M %)'
     endif
 
     let l:statusline .= '%='
 
-    if winwidth(0) > s:md
-        let l:statusline .= s:active ? ' '.s:hi.end.' ' : '  '
-    else
-        let l:statusline .= s:active ? '  ' : ' >'
-    endif
-
     " Statusline Right Side
     " ---------------------
 
-    if winwidth(0) > s:xl
+    if s:active && winwidth(0) > s:w.md
+        let l:statusline .= s:hi.middle_end
+        let l:statusline .= g:hackline_ale ? '%('.s:sep.r.' %{hackline#ale#status()} %)' : ''
+        let l:statusline .= g:hackline_nvim_lsp ? '%('.s:sep.r.' %{hackline#lsp#status()} %)' : ''
+    endif
+
+    if g:hackline_git && s:active && winwidth(0) > s:w.md
+        let l:statusline .= '%('.s:sep.r.' %{hackline#git#branch()} %)'
+    endif
+
+    let l:statusline .= winwidth(0) > s:w.md && s:active ? ' '.s:hi.end.' ' : '  '
+
+    if winwidth(0) > s:w.xl
         if g:hackline_fileformat
             let l:statusline .= '%( %{&fileformat} %)'
         endif
@@ -123,7 +107,7 @@ function! hackline#statusline#val (status = 'inactive')
             let l:statusline .= '%( %{hackline#base#wordcount()} words )'
         endif
     endif
-    if winwidth(0) > s:md
+    if winwidth(0) > s:w.md
         if g:hackline_custom_end != ''
             let l:statusline .= '%{%g:hackline_custom_end%}'
         endif

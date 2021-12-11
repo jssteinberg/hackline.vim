@@ -9,9 +9,10 @@ function! hackline#git#branch() abort
         let l:branch = fugitive#head()
     endif
 
-    if exists('b:gitsigns_status')
-        let l:branch .= ' '.get(b:,'gitsigns_status','')
-    endif
+    " TODO: Fix spacing if empty
+    "if exists('b:gitsigns_status')
+    "    let l:branch .= ' '.get(b:,'gitsigns_status','')
+    "endif
 
     return l:branch !=# '' ? '* ' . branch : ''
 endfunction

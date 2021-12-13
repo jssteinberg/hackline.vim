@@ -2,23 +2,24 @@
 
 *Version 0.6---things may break.*
 
-A light statusline for Vim and Neovim, embracing newer vanilla capabilities of the fabled editor. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
+A minimalistic, light statusline for Vim and Neovim, embracing newer vanilla capabilities of (N)vim. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
 
 ![Skjermbilde 2021-12-12 kl  19 37 28](https://user-images.githubusercontent.com/729055/145725137-e9244f03-a1ad-49b9-8f91-42ff6d7f8a42.jpg)
 ![Skjermbilde 2021-12-12 kl  19 36 13](https://user-images.githubusercontent.com/729055/145725141-0f2b8ed2-72c0-4e3f-8b91-57c15cecfca0.jpg)
 ![Skjermbilde 2021-12-12 kl  19 36 55](https://user-images.githubusercontent.com/729055/145725144-76eedabc-5f63-4397-8aa0-c458fb56add4.jpg)
 
+* No icons or need for patched font.
+* Will look good with any newer colorscheme since it uses normal Vim highlight groups---no theme needed.
+* Has good contrast for horizontal splits.
 * Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
-* No themes available or needed---uses usual Vim highlight groups. Has good contrast for horizontal splits.
 * Adjusts statusline for smaller widths.
 * Sort statusline items for nicest truncation for most buffer types, without targeting specific buffer types.
-* No icons or need for patched font.
 * Word count module (from skyline.vim).
 * File size module (from skyline.vim).
 
 Plugins integrations:
 
-* Will display git info by looking for plugins in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
+* Displays git info by using the one of the following packages/plugins, in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
 * Shows connected Neovim LSP.
 * Shows if ALE is active and number of error/warnings.
 

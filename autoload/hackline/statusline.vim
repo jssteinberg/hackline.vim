@@ -84,9 +84,9 @@ function! hackline#statusline#val (status = 'inactive')
 	endif
 
 	if s:active && winwidth(0) > s:w.md
-		let l:statusline .= '%(%<%)%( '.s:hi.dir.'%{hackline#base#filepath('.s:w.lg.')}'.s:hi.tail.'%t%)%( %M% %)'.s:hi.middle_start
+		let l:statusline .= '%(%<%)%( '.s:hi.dir.'%{hackline#base#filepath('.s:w.lg.')}'.s:hi.tail.'%t%)%( %M %)'.s:hi.middle_start
 	else
-		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:w.lg.')}%t%)%( %M% %)'
+		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:w.lg.')}%t%)%( %M %)'
 	endif
 
 	let l:statusline .= '%='

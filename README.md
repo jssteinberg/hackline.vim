@@ -47,7 +47,7 @@ Default values:
 ```vim
 let g:hackline_bufnum = 1
 let g:hackline_mode = 1
-let g:hackline_git = 1 " Current branch if available from vim-gitbranch or fugitive.vim
+let g:hackline_git = 1 " Current branch if available from plugins
 let g:hackline_ale = 1 " ALE info if available
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_encoding = 1

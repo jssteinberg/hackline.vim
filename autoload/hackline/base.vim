@@ -1,7 +1,3 @@
-function! hackline#base#bufnumber() abort
-    return bufnr()
-endfunction
-
 function! hackline#base#filepath(width = 100) abort
     let l:path = expand('%:p:.:h')
     if winwidth(0) <= a:width

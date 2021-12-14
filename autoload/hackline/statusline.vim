@@ -79,9 +79,9 @@ function! hackline#statusline#val (status = 'inactive')
 
 	" Buffer number
 	if g:hackline_bufnum && winwidth(0) > s:w.md
-		let l:statusline .= s:active ? '%( b%{hackline#base#bufnumber()} '.s:sep.l.'%)' : '%(  %{hackline#base#bufnumber()}  %)'
+		let l:statusline .= s:active ? '%( b%{bufnr()} '.s:sep.l.'%)' : '%(  %{bufnr()}  %)'
 	elseif g:hackline_bufnum
-		let l:statusline .= s:active ? '%(b%{hackline#base#bufnumber()}   %)' : '%(  %{hackline#base#bufnumber()}  %)'
+		let l:statusline .= s:active ? '%(b%{bufnr()}   %)' : '%(  %{bufnr()}  %)'
 	endif
 
 	if s:active && winwidth(0) > s:w.md
@@ -108,9 +108,6 @@ function! hackline#statusline#val (status = 'inactive')
 	let l:statusline .= winwidth(0) > s:w.md && s:active ? ' '.s:hi.end.' ' : '  '
 
 	if winwidth(0) > s:w.xl
-		if g:hackline_fileformat
-			let l:statusline .= '%( %{&fileformat} %)'
-		endif
 		if g:hackline_encoding
 			let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
 		endif

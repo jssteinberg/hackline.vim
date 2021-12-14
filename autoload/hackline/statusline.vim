@@ -1,8 +1,8 @@
 function! hackline#statusline#val (status = 'inactive')
-	let s:active = a:status == 'active'
-	let s:w = #{ md: 60, lg: 100, xl: 120 }
-	let s:sep = #{ l: '›', r: '‹' }
-	let s:labels = #{
+	let l:active = a:status == 'active'
+	let l:w = #{ md: 60, lg: 100, xl: 120 }
+	let l:sep = #{ l: '›', r: '‹' }
+	let l:labels = #{
 				\ n: has('nvim') ? 'Neo' : 'Vim',
 				\ c: '«C»',
 				\ i: '«I»',
@@ -12,7 +12,7 @@ function! hackline#statusline#val (status = 'inactive')
 				\ r: '«R»',
 				\ inactive: '   ',
 				\ }
-	let s:highlight_groups = #{
+	let l:hi = hackline#utils#getStsHis(#{
 				\ start: 'IncSearch',
 				\ modes: #{
 				\   c: 'Cursor',
@@ -31,63 +31,62 @@ function! hackline#statusline#val (status = 'inactive')
 				\ end: 'StatusLine',
 				\ active_sm: 'StatusLine',
 				\ inactive: 'StatusLineNC'
-				\ }
-	let s:hi = hackline#utils#getStsHis(s:highlight_groups)
+				\ })
 
 	let l:statusline=''
 
 	" Statusline Left Side
 	" --------------------
 
-	let l:statusline .= s:active ? winwidth(0) > s:w.md ? s:hi.start : s:hi.active_sm : s:hi.inactive
+	let l:statusline .= l:active ? winwidth(0) > l:w.md ? l:hi.start : l:hi.active_sm : l:hi.inactive
 
 	" Modes
-	if s:active && g:hackline_mode && mode() != 'n'
+	if l:active && g:hackline_mode && mode() != 'n'
 		" Command mode
-		let l:statusline .= mode() == 'c' ?        s:hi.modes.c.'  '.s:labels.c.' ' : ''
+		let l:statusline .= mode() == 'c' ?        l:hi.modes.c.'  '.l:labels.c.' ' : ''
 		" Insert mode
-		let l:statusline .= mode() == 'i' ?        s:hi.modes.i.'  '.s:labels.i.' ' : ''
+		let l:statusline .= mode() == 'i' ?        l:hi.modes.i.'  '.l:labels.i.' ' : ''
 		" Terminal mode
-		let l:statusline .= mode() == 't' ?        s:hi.modes.t.'  '.s:labels.t.' ' : ''
+		let l:statusline .= mode() == 't' ?        l:hi.modes.t.'  '.l:labels.t.' ' : ''
 		" Visual mode
-		let l:statusline .= mode() == 'v' ?        s:hi.modes.v.'  '.s:labels.v.' ' : ''
-		let l:statusline .= mode() == '\<c-v>' ?  s:hi.modes.vb.'  '.s:labels.v.' ' : ''
+		let l:statusline .= mode() == 'v' ?        l:hi.modes.v.'  '.l:labels.v.' ' : ''
+		let l:statusline .= mode() == '\<c-v>' ?  l:hi.modes.vb.'  '.l:labels.v.' ' : ''
 		" Replace mode
-		let l:statusline .= mode() == 'r' ?        s:hi.modes.r.'  '.s:labels.r.' ' : ''
+		let l:statusline .= mode() == 'r' ?        l:hi.modes.r.'  '.l:labels.r.' ' : ''
 		" Select mode
-		let l:statusline .= mode() == 's' ?        s:hi.modes.s.'  '.s:labels.s.' ' : ''
-	elseif s:active
-		let l:statusline .= !g:hackline_mode || mode() == 'n' ? '  '.s:labels.n.' ' : ''
+		let l:statusline .= mode() == 's' ?        l:hi.modes.s.'  '.l:labels.s.' ' : ''
+	elseif l:active
+		let l:statusline .= !g:hackline_mode || mode() == 'n' ? '  '.l:labels.n.' ' : ''
 	else
-		let l:statusline .= '  '.s:labels.inactive.'<'
+		let l:statusline .= '  '.l:labels.inactive.'<'
 	endif
 
 	" Filetype (has ties with mode)
 	if g:hackline_filetype
-		if s:active
-			let l:statusline .= '%('.s:sep.l.' %{&filetype} %)'
+		if l:active
+			let l:statusline .= '%('.l:sep.l.' %{&filetype} %)'
 		else
 			let l:statusline .= '%(  %{&filetype} %)'
 		endif
 	endif
 
-	if winwidth(0) > s:w.md
-		let l:statusline .= s:active ? ' '.s:hi.middle_start.' ' : ' >'
+	if winwidth(0) > l:w.md
+		let l:statusline .= l:active ? ' '.l:hi.middle_start.' ' : ' >'
 	else
-		let l:statusline .= s:active ? '  ' : ' >'
+		let l:statusline .= l:active ? '  ' : ' >'
 	endif
 
 	" Buffer number
-	if g:hackline_bufnum && winwidth(0) > s:w.md
-		let l:statusline .= s:active ? '%( b%{bufnr()} '.s:sep.l.'%)' : '%(  %{bufnr()}  %)'
+	if g:hackline_bufnum && winwidth(0) > l:w.md
+		let l:statusline .= l:active ? '%( b%{bufnr()} '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
 	elseif g:hackline_bufnum
-		let l:statusline .= s:active ? '%(b%{bufnr()}   %)' : '%(  %{bufnr()}  %)'
+		let l:statusline .= l:active ? '%(b%{bufnr()}   %)' : '%(  %{bufnr()}  %)'
 	endif
 
-	if s:active && winwidth(0) > s:w.md
-		let l:statusline .= '%(%<%)%( '.s:hi.dir.'%{hackline#base#filepath('.s:w.lg.')}'.s:hi.tail.'%t%)%( %M %)'.s:hi.middle_start
+	if l:active && winwidth(0) > l:w.md
+		let l:statusline .= '%(%<%)%( '.l:hi.dir.'%{hackline#base#filepath('.l:w.lg.')}'.l:hi.tail.'%t%)%( %M %)'.l:hi.middle_start
 	else
-		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.s:w.lg.')}%t%)%( %M %)'
+		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.l:w.lg.')}%t%)%( %M %)'
 	endif
 
 	let l:statusline .= '%='
@@ -95,19 +94,19 @@ function! hackline#statusline#val (status = 'inactive')
 	" Statusline Right Side
 	" ---------------------
 
-	if s:active && winwidth(0) > s:w.md
-		let l:statusline .= s:hi.middle_end
-		let l:statusline .= g:hackline_ale ? '%('.s:sep.r.'-'.s:sep.l.' %{hackline#ale#status()} %)' : ''
-		let l:statusline .= g:hackline_nvim_lsp ? '%('.s:sep.r.'-'.s:sep.l.' %{hackline#lsp#status()} %)' : ''
+	if l:active && winwidth(0) > l:w.md
+		let l:statusline .= l:hi.middle_end
+		let l:statusline .= g:hackline_ale ? '%('.l:sep.r.'-'.l:sep.l.' %{hackline#ale#status()} %)' : ''
+		let l:statusline .= g:hackline_nvim_lsp ? '%('.l:sep.r.'-'.l:sep.l.' %{hackline#lsp#status()} %)' : ''
 	endif
 
-	if g:hackline_git && s:active && winwidth(0) > s:w.md
-		let l:statusline .= '%('.s:sep.r.' '.s:hi.git.'%{hackline#git#branch()}'.s:hi.middle_end.' %)'
+	if g:hackline_git && l:active && winwidth(0) > l:w.md
+		let l:statusline .= '%('.l:sep.r.' '.l:hi.git.'%{hackline#git#branch()}'.l:hi.middle_end.' %)'
 	endif
 
-	let l:statusline .= winwidth(0) > s:w.md && s:active ? ' '.s:hi.end.' ' : '  '
+	let l:statusline .= winwidth(0) > l:w.md && l:active ? ' '.l:hi.end.' ' : '  '
 
-	if winwidth(0) > s:w.xl
+	if winwidth(0) > l:w.xl
 		if g:hackline_encoding
 			let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
 		endif
@@ -118,7 +117,7 @@ function! hackline#statusline#val (status = 'inactive')
 			let l:statusline .= '%( %{hackline#base#wordcount()} words %)'
 		endif
 	endif
-	if winwidth(0) > s:w.md
+	if winwidth(0) > l:w.md
 		if g:hackline_custom_end != ''
 			let l:statusline .= '%{%g:hackline_custom_end%}'
 		endif

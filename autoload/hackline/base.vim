@@ -30,11 +30,11 @@ function! hackline#base#wordcount() abort
         if v:statusmsg ==# '--No lines in buffer--'
             let b:wordcount = 0
         else
-            let s:split_wc = split(v:statusmsg)
-            if index(s:split_wc, 'Selected') < 0
-                let b:wordcount = str2nr(s:split_wc[11])
+            let l:split_wc = split(v:statusmsg)
+            if index(l:split_wc, 'Selected') < 0
+                let b:wordcount = str2nr(l:split_wc[11])
             else
-                let b:wordcount = str2nr(s:split_wc[5])
+                let b:wordcount = str2nr(l:split_wc[5])
             endif
             let v:statusmsg = l:old_status
         endif

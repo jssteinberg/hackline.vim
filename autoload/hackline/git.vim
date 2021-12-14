@@ -14,5 +14,5 @@ function! hackline#git#branch() abort
     "    let l:branch .= ' '.get(b:,'gitsigns_status','')
     "endif
 
-    return l:branch !=# '' ? '* ' . branch : ''
+    return l:branch !=# '' ? branch : ''
 endfunction

@@ -1,6 +1,6 @@
 # hackline.vim
 
-*Version 0.6---things may break.*
+*Version 0.7---things may break.*
 
 A minimalistic, light statusline for Vim and Neovim, embracing newer vanilla capabilities of (N)vim. Easy to copy and hack! Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim).
 

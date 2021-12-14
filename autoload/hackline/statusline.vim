@@ -1,7 +1,6 @@
 function! hackline#statusline#val (status = 'inactive')
 	let l:active = a:status == 'active'
 	let l:w = #{ md: 60, lg: 100, xl: 120 }
-	let l:sep = #{ l: '›', r: '‹' }
 	let l:labels = #{
 				\ n: has('nvim') ? 'Neo' : 'Vim',
 				\ c: '«C»',
@@ -23,15 +22,16 @@ function! hackline#statusline#val (status = 'inactive')
 				\   r: 'DiffDelete',
 				\   s: 'DiffDelete',
 				\ },
-				\ middle_start: 'Normal',
+				\ mid: 'Comment',
+				\ mid_item: 'Normal',
 				\ dir: 'Comment',
 				\ tail: 'Normal',
-				\ middle_end: 'Normal',
-				\ git: 'Operator',
+				\ git: 'String',
 				\ end: 'StatusLine',
 				\ active_sm: 'StatusLine',
 				\ inactive: 'StatusLineNC'
 				\ })
+	let l:sep = #{ l: '›', r: '‹' }
 
 	let l:statusline=''
 
@@ -73,21 +73,21 @@ function! hackline#statusline#val (status = 'inactive')
 
 	" Change highlight group or add sign
 	if winwidth(0) > l:w.md
-		let l:statusline .= l:active ? ' '.l:hi.middle_start.' ' : ' >'
+		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : ' >'
 	else
 		let l:statusline .= l:active ? '  ' : ' >'
 	endif
 
 	" Show buffer number dependent on state/width
 	if g:hackline_bufnum && winwidth(0) > l:w.md
-		let l:statusline .= l:active ? '%( b%{bufnr()} '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
+		let l:statusline .= l:active ? '%( '.l:hi.mid_item.'b%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
 	elseif g:hackline_bufnum
 		let l:statusline .= l:active ? '%(b%{bufnr()}   %)' : '%(  %{bufnr()}  %)'
 	endif
 
 	" Show filepath, active and bigger screen gets highlight groups
 	if l:active && winwidth(0) > l:w.md
-		let l:statusline .= '%(%<%)%( '.l:hi.dir.'%{hackline#base#filepath('.l:w.lg.')}'.l:hi.tail.'%t%)%( %M %)'.l:hi.middle_start
+		let l:statusline .= '%(%<%)%( '.l:hi.dir.'%{hackline#base#filepath('.l:w.lg.')}'.l:hi.tail.'%t%)%( %M %)'.l:hi.mid
 	else
 		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.l:w.lg.')}%t%)%( %M %)'
 	endif
@@ -98,14 +98,14 @@ function! hackline#statusline#val (status = 'inactive')
 
 	" Show ALE and LSP info
 	if l:active && winwidth(0) > l:w.md
-		let l:statusline .= l:hi.middle_end
-		let l:statusline .= g:hackline_ale ? '%('.l:sep.r.'-'.l:sep.l.' %{hackline#ale#status()} %)' : ''
-		let l:statusline .= g:hackline_nvim_lsp ? '%('.l:sep.r.'-'.l:sep.l.' %{hackline#lsp#status()} %)' : ''
+		let l:statusline .= l:hi.mid
+		let l:statusline .= g:hackline_ale ? '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)' : ''
+		let l:statusline .= g:hackline_nvim_lsp ? '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#lsp#status()}'.l:hi.mid.' %)' : ''
 	endif
 
 	" Show git info
 	if g:hackline_git && l:active && winwidth(0) > l:w.md
-		let l:statusline .= '%('.l:sep.r.' '.l:hi.git.'%{hackline#git#branch()}'.l:hi.middle_end.' %)'
+		let l:statusline .= '%('.l:sep.r.' '.l:hi.mid_item.'* '.l:hi.git.'%{hackline#git#branch()}'.l:hi.mid.' %)'
 	endif
 
 	" Change highlight group if active and bigger screen

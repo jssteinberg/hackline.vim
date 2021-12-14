@@ -27,6 +27,7 @@ function! hackline#statusline#val (status = 'inactive')
 				\ dir: 'Comment',
 				\ tail: 'Normal',
 				\ middle_end: 'Normal',
+				\ git: 'Operator',
 				\ end: 'StatusLine',
 				\ active_sm: 'StatusLine',
 				\ inactive: 'StatusLineNC'
@@ -101,7 +102,7 @@ function! hackline#statusline#val (status = 'inactive')
 	endif
 
 	if g:hackline_git && s:active && winwidth(0) > s:w.md
-		let l:statusline .= '%('.s:sep.r.' %{hackline#git#branch()} %)'
+		let l:statusline .= '%('.s:sep.r.' '.s:hi.git.'%{hackline#git#branch()}'.s:hi.middle_end.' %)'
 	endif
 
 	let l:statusline .= winwidth(0) > s:w.md && s:active ? ' '.s:hi.end.' ' : '  '

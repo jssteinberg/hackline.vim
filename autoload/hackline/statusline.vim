@@ -38,9 +38,10 @@ function! hackline#statusline#val (status = 'inactive')
 	" Statusline Left Side
 	" --------------------
 
+	" Set initial highlight group (color)
 	let l:statusline .= l:active ? winwidth(0) > l:w.md ? l:hi.start : l:hi.active_sm : l:hi.inactive
 
-	" Modes
+	" Logic for modes
 	if l:active && g:hackline_mode && mode() != 'n'
 		" Command mode
 		let l:statusline .= mode() == 'c' ?        l:hi.modes.c.'  '.l:labels.c.' ' : ''
@@ -61,7 +62,7 @@ function! hackline#statusline#val (status = 'inactive')
 		let l:statusline .= l:labels.inactive == '' ? '     <' : '  '.l:labels.inactive.'<'
 	endif
 
-	" Filetype (has ties with mode)
+	" Show filetype
 	if g:hackline_filetype
 		if l:active
 			let l:statusline .= '%('.l:sep.l.' %{&filetype} %)'
@@ -70,42 +71,47 @@ function! hackline#statusline#val (status = 'inactive')
 		endif
 	endif
 
+	" Change highlight group or add sign
 	if winwidth(0) > l:w.md
 		let l:statusline .= l:active ? ' '.l:hi.middle_start.' ' : ' >'
 	else
 		let l:statusline .= l:active ? '  ' : ' >'
 	endif
 
-	" Buffer number
+	" Show buffer number dependent on state/width
 	if g:hackline_bufnum && winwidth(0) > l:w.md
 		let l:statusline .= l:active ? '%( b%{bufnr()} '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
 	elseif g:hackline_bufnum
 		let l:statusline .= l:active ? '%(b%{bufnr()}   %)' : '%(  %{bufnr()}  %)'
 	endif
 
+	" Show filepath, active and bigger screen gets highlight groups
 	if l:active && winwidth(0) > l:w.md
 		let l:statusline .= '%(%<%)%( '.l:hi.dir.'%{hackline#base#filepath('.l:w.lg.')}'.l:hi.tail.'%t%)%( %M %)'.l:hi.middle_start
 	else
 		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.l:w.lg.')}%t%)%( %M %)'
 	endif
 
-	let l:statusline .= '%='
-
 	" Statusline Right Side
 	" ---------------------
+	let l:statusline .= '%='
 
+	" Show ALE and LSP info
 	if l:active && winwidth(0) > l:w.md
 		let l:statusline .= l:hi.middle_end
 		let l:statusline .= g:hackline_ale ? '%('.l:sep.r.'-'.l:sep.l.' %{hackline#ale#status()} %)' : ''
 		let l:statusline .= g:hackline_nvim_lsp ? '%('.l:sep.r.'-'.l:sep.l.' %{hackline#lsp#status()} %)' : ''
 	endif
 
+	" Show git info
 	if g:hackline_git && l:active && winwidth(0) > l:w.md
 		let l:statusline .= '%('.l:sep.r.' '.l:hi.git.'%{hackline#git#branch()}'.l:hi.middle_end.' %)'
 	endif
 
+	" Change highlight group if active and bigger screen
 	let l:statusline .= winwidth(0) > l:w.md && l:active ? ' '.l:hi.end.' ' : '  '
 
+	" Show misc. file info
 	if winwidth(0) > l:w.xl
 		if g:hackline_encoding
 			let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
@@ -117,12 +123,15 @@ function! hackline#statusline#val (status = 'inactive')
 			let l:statusline .= '%( %{hackline#base#wordcount()} words %)'
 		endif
 	endif
+
+	" Show custom end content
 	if winwidth(0) > l:w.md
 		if g:hackline_custom_end != ''
 			let l:statusline .= '%{%g:hackline_custom_end%}'
 		endif
 	endif
 
+	" Spacing
 	let l:statusline .= ' '
 
 	return l:statusline

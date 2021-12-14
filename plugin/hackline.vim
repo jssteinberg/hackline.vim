@@ -19,10 +19,10 @@ let g:hackline_custom_end = get(g:, 'hackline_custom_end', '%( %{&fileformat} %)
 let b:hackline_get_ale=0
 
 aug hackline
-    au!
-    au WinEnter,BufEnter,FocusGained * setlocal statusline=%!hackline#statusline#val('active')
-    au WinLeave,BufLeave,FocusLost * setlocal statusline=%!hackline#statusline#val()
-    au User ALEJobStarted let b:hackline_get_ale=1
+	au!
+	au WinEnter,BufEnter,FocusGained * setlocal statusline=%!hackline#statusline#val('active')
+	au WinLeave,BufLeave,FocusLost * setlocal statusline=%!hackline#statusline#val()
+	au User ALEJobStarted let b:hackline_get_ale=1
 aug END
 
 set laststatus=2

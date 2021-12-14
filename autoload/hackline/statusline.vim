@@ -10,7 +10,7 @@ function! hackline#statusline#val (status = 'inactive')
 				\ v: '«V»',
 				\ s: '«S»',
 				\ r: '«R»',
-				\ inactive: '   ',
+				\ inactive: '',
 				\ }
 	let l:hi = hackline#utils#getStsHis(#{
 				\ start: 'IncSearch',
@@ -58,7 +58,7 @@ function! hackline#statusline#val (status = 'inactive')
 	elseif l:active
 		let l:statusline .= !g:hackline_mode || mode() == 'n' ? '  '.l:labels.n.' ' : ''
 	else
-		let l:statusline .= '  '.l:labels.inactive.'<'
+		let l:statusline .= l:labels.inactive == '' ? '     <' : '  '.l:labels.inactive.'<'
 	endif
 
 	" Filetype (has ties with mode)

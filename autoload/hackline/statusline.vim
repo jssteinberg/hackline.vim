@@ -82,14 +82,14 @@ function! hackline#statusline#val (status = 'inactive')
 
 	" Show filepath, active and bigger screen gets highlight groups
 	if l:active && winwidth(0) > l:w.md
-		let l:statusline .= '%(%<%)%( '.l:hi.dir.'%{hackline#base#filepath('.l:w.lg.')}'.l:hi.tail.'%t%)%( %M %)'.l:hi.mid
+		let l:statusline .= '%(%<%)%( '.l:hi.dir.'%{hackline#base#filepath('.l:w.lg.')}'.l:hi.tail.'%t %)%(%M %)'.l:hi.mid
 	else
-		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.l:w.lg.')}%t%)%( %M %)'
+		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.l:w.lg.')}%t %)%(%M %)'
 	endif
 
 	" Statusline Right Side
 	" ---------------------
-	let l:statusline .= '%='
+	let l:statusline .= ' %='
 
 	" Show ALE and LSP info
 	if l:active && winwidth(0) > l:w.md

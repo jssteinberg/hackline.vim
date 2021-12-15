@@ -2,11 +2,11 @@
 
 A minimalistic, light statusline for newer Vims/Neovims, embracing newer vanilla capabilities of the editor. *No, this is not Lua (with exceptions), only easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.8---things change and break.*
 
+Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jssteinberg/hackline.vim'}`.
+
 ![Skjermbilde 2021-12-12 kl  19 37 28](https://user-images.githubusercontent.com/729055/145725137-e9244f03-a1ad-49b9-8f91-42ff6d7f8a42.jpg)
 ![Skjermbilde 2021-12-12 kl  19 36 13](https://user-images.githubusercontent.com/729055/145725141-0f2b8ed2-72c0-4e3f-8b91-57c15cecfca0.jpg)
 ![Skjermbilde 2021-12-12 kl  19 36 55](https://user-images.githubusercontent.com/729055/145725144-76eedabc-5f63-4397-8aa0-c458fb56add4.jpg)
-
-Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jssteinberg/hackline.vim'}`.
 
 ## Features
 

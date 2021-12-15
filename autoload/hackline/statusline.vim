@@ -111,12 +111,6 @@ function! hackline#statusline#val (status = 'inactive')
 		if g:hackline_encoding
 			let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
 		endif
-		if g:hackline_filesize
-			let l:statusline .= '%( %{hackline#base#filesize()} %)'
-		endif
-		if g:hackline_wordcount
-			let l:statusline .= '%( %{hackline#base#wordcount()} words %)'
-		endif
 	endif
 
 	" Show custom end content

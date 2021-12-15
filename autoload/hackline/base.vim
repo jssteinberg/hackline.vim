@@ -51,12 +51,12 @@ function! hackline#base#filesize() abort
         return ''
     endif
     if l:size < 1024
-        return l:size . 'bytes'
+        return l:size . 'B'
     elseif l:size < 1024*1024
-        return printf('%.1f', l:size/1024.0) .'k'
+        return printf('%.1f', l:size/1024.0) .'kB'
     elseif l:size < 1024*1024*1024
-        return printf('%.1f', l:size/1024.0/1024.0) .'m'
+        return printf('%.1f', l:size/1024.0/1024.0) .'MB'
     else
-        return printf('%.1f', l:size/1024.0/1024.0/1024.0) .'g'
+        return printf('%.1f', l:size/1024.0/1024.0/1024.0) .'GB'
     endif
 endfunction

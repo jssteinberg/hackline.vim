@@ -14,14 +14,22 @@ A minimalistic, light statusline for Vim and Neovim, embracing newer vanilla cap
 * Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
 * Adjusts statusline for smaller widths.
 * Sort statusline items for nicest truncation for most buffer types, without targeting specific buffer types.
-* Word count module (from skyline.vim).
-* File size module (from skyline.vim).
 
-Plugins integrations:
+Integrations:
 
 * Displays git info by using the one of the following packages/plugins, in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
 * Shows connected Neovim LSP.
 * Shows if ALE is active and number of error/warnings.
+
+Extra functions:
+
+* Word count function (from skyline.vim): `hackline#base#wordcount()`.
+* File size function (from skyline.vim): `hackline#base#filesize()`.
+
+```vim
+let g:hackline_custom_end =
+			\ '%( %{&fileformat} %)%( %{hackline#base#wordcount()}words %)%( %{hackline#base#filesize()} %) %P/%L '
+```
 
 ## Installation
 
@@ -45,14 +53,12 @@ Global variables for simple customization.
 Default values:
 
 ```vim
-let g:hackline_bufnum = 1
 let g:hackline_mode = 1
-let g:hackline_git = 1 " Current branch if available from plugins
+let g:hackline_bufnum = 1
+let g:hackline_filetype = 1
 let g:hackline_ale = 1 " ALE info if available
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
+let g:hackline_git = 1 " Current branch if available from plugins
 let g:hackline_encoding = 1
-let g:hackline_filetype = 1
-let g:hackline_filesize = 0
-let g:hackline_wordcount = 0
-let g:hackline_custom_end = '%( %{&fileformat} %) %P/%L ' " Valid statusline value
+let g:hackline_custom_end = '%( %{&fileformat} %)%( %{hackline#base#filesize()} %) %P/%L ' " Valid statusline value
 ```

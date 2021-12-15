@@ -12,7 +12,11 @@ let g:hackline_ale = get(g:, 'hackline_ale', '1')
 let g:hackline_nvim_lsp = get(g:, 'hackline_nvim_lsp', '1')
 let g:hackline_git = get(g:, 'hackline_git', '1')
 let g:hackline_encoding = get(g:, 'hackline_encoding', '1')
-let g:hackline_custom_end = get(g:, 'hackline_custom_end', '%( %{&fileformat} %)%( %{hackline#base#filesize()} %) %P/%L ')
+let g:hackline_custom_end = get(g:, 'hackline_custom_end', '
+			\%( %{&fileformat} %)
+			\%( %{hackline#base#filesize()} %)
+			\ %P/%L 
+			\')
 
 let b:hackline_get_ale=0
 

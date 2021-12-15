@@ -54,5 +54,5 @@ let g:hackline_encoding = 1
 let g:hackline_filetype = 1
 let g:hackline_filesize = 0
 let g:hackline_wordcount = 0
-let g:hackline_custom_end = '%( %{&fileformat} %) %P/%L ' " Valid statusline value
+let g:hackline_custom_end = '%( %{&fileformat} %) %P/%L ' " Any valid statusline value
 ```

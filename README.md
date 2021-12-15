@@ -10,23 +10,23 @@ Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jsst
 
 ## Features
 
-* No icons or need for patched font.
-* Will look good with any newer colorscheme since it uses normal Vim highlight groups---no theme needed.
-* Has good contrast for horizontal splits.
-* Minimal mode flag for Vim professionals! (Sets `noshowmode` if on).
-* Adjusts statusline for smaller widths.
-* Sort statusline items for nicest truncation for most buffer types, without targeting specific buffer types.
+* **No icons** or need for patched font.
+* **No themes**---uses normal color highlight groups. Looks good with any newer colorscheme.
+* **Good contrast** for horizontal splits.
+* **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on).
+* **Responsive**---adjusts statusline for smaller widths.
+* **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers. *Helps to keep a light weight.*
 
 ### Integrations
 
-* Displays git info by using the one of the following packages/plugins, in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
-* Shows connected Neovim LSP.
-* Shows if ALE is active and number of error/warnings.
+* **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
+* **LSP** currently connected with Neovim buffer.
+* **ALE** if active for buffer and the number of errors and warnings.
 
 ### Extra functions
 
-* Word count function (from skyline.vim): `hackline#base#wordcount()`.
-* File size function (from skyline.vim): `hackline#base#filesize()`.
+* **Word count** function (from skyline.vim): `hackline#base#wordcount()`.
+* **File size** function (from skyline.vim): `hackline#base#filesize()`.
 
 Example use:
 

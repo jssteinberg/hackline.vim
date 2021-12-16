@@ -111,6 +111,9 @@ function! hackline#statusline#val (status = 'inactive')
 		if g:hackline_encoding
 			let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
 		endif
+		if g:hackline_fileformat
+			let l:statusline .= '%( %{&fileformat} %)'
+		endif
 	endif
 
 	" Show custom end content

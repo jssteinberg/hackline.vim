@@ -1,3 +1,11 @@
+function! hackline#base#tab_info(sep = '-') abort
+    let l:info = 'tabs' . a:sep .. &tabstop
+    if &expandtab
+        let l:info = 'spaces' . a:sep .. shiftwidth()
+    endif
+    return l:info
+endfunction
+
 function! hackline#base#filepath(width = 100) abort
     let l:path = expand('%:p:.:h')
     if winwidth(0) <= a:width

@@ -25,6 +25,7 @@ Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jsst
 
 ### Extra functions
 
+* **Tabs or spaces**, and size, function `hackline#base#tab_info()`.
 * **Word count** function (from skyline.vim): `hackline#base#wordcount()`.
 * **File size** function (from skyline.vim): `hackline#base#filesize()`.
 
@@ -71,5 +72,10 @@ let g:hackline_ale = 1 " ALE info if available
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_git = 1 " Current branch if available from plugins
 let g:hackline_encoding = 1
-let g:hackline_custom_end = '%( %{&fileformat} %)%( %{hackline#base#filesize()} %) %P/%L ' " Valid statusline value
+let g:hackline_fileformat = 1
+" Any valid statusline value
+let g:hackline_custom_end = '
+			\%( %{hackline#base#tab_info()} %)
+			\ %P/%L 
+			\'
 ```

@@ -10,30 +10,30 @@ Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jsst
 
 ## Features
 
-* **No icons** or need for patched font.
-* **No themes**---uses normal color highlight groups. Looks good with any newer colorscheme.
-* **Good contrast** for horizontal splits.
-* **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on).
-* **Responsive**---adjusts statusline for smaller widths.
-* **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers. *Helps to keep a light weight.*
+- **No icons** or need for patched font.
+- **No themes**---uses normal color highlight groups. Looks good with any newer colorscheme.
+- **Good contrast** for horizontal splits.
+- **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on).
+- **Responsive**---adjusts statusline for smaller widths.
+- **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers. *Helps to keep a light weight.*
 
 ### Integrations
 
-* **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
-* **LSP** currently connected with Neovim buffer.
-* **ALE** if active for buffer and the number of errors and warnings.
+- **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
+- **LSP** currently connected with Neovim buffer.
+- **ALE** if active for buffer and the number of errors and warnings.
 
 ### Extra functions
 
-* **Tabs or spaces**, and size, function `hackline#base#tab_info()`.
-* **Word count** function (from skyline.vim): `hackline#base#wordcount()`.
-* **File size** function (from skyline.vim): `hackline#base#filesize()`.
+- **Tabs or spaces**, and size, function `hackline#base#tab_info()`.
+- **Word count** function (from skyline.vim): `hackline#base#wordcount()`.
+- **File size** function (from skyline.vim): `hackline#base#filesize()`.
 
 Example use:
 
 ```vim
 let g:hackline_custom_end = '
-			\%( %{hackline#base#wordcount()}words %)
+			\%( words %{hackline#base#wordcount()} %)
 			\%( %{hackline#base#filesize()} %)
 			\ %P/%L 
 			\'
@@ -46,16 +46,21 @@ Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer 
 Install examples:
 
 ```lua
-use{'jssteinberg/hackline.vim'} -- packer.nvim, or with additional requirements:
+-- packer.nvim
+use{'jssteinberg/hackline.vim'}
 ```
 
 ```lua
-use{'jssteinberg/hackline.vim', requires = {'itchyny/vim-gitbranch'}} -- For Git branch without gitsigns or fugitive
+-- packer.nvim with git info (without gitsigns or fugitive)
+use{'jssteinberg/hackline.vim', requires = {'itchyny/vim-gitbranch'}}
 ```
 
 ```vim
-call packager#add('jssteinberg/hackline.vim') " Vim packager
+" Vim packager
+call packager#add('jssteinberg/hackline.vim')
 ```
+
+(And it should be equally simple with vim-plug).
 
 ## Options
 

@@ -1,7 +1,8 @@
-function! hackline#base#tab_info(sep = '-') abort
-    let l:info = 'tabs' . a:sep .. &tabstop
+function! hackline#base#tab_info(truncate = 0) abort
+    let l:info = !a:truncate ? 'tabs' : 'tabs'
     if &expandtab
-        let l:info = 'spaces' . a:sep .. shiftwidth()
+        let l:info = !a:truncate ? 'expandtab ' : 'et '
+        let l:info .= shiftwidth()
     endif
     return l:info
 endfunction

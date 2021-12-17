@@ -1,6 +1,6 @@
 # hackline.vim
 
-A minimalistic, light statusline for newer Vims/Neovims, embracing newer vanilla capabilities of the editor. *No, this is not Lua (with exceptions), only easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.8---things change and break.*
+A minimalistic, light statusline package (plugin) for newer Vims/Neovims, embracing newer vanilla capabilities of the editor. *No, this is not Lua (with exceptions), only easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9---things change and break.*
 
 Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jssteinberg/hackline.vim'}`.
 
@@ -33,7 +33,6 @@ Example use:
 
 ```vim
 let g:hackline_custom_end = '
-			\%( %{&fileformat} %)
 			\%( %{hackline#base#wordcount()}words %)
 			\%( %{hackline#base#filesize()} %)
 			\ %P/%L 
@@ -73,9 +72,9 @@ let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_git = 1 " Current branch if available from plugins
 let g:hackline_encoding = 1
 let g:hackline_fileformat = 1
+let g:hackline_tab_info = 1
 " Any valid statusline value
 let g:hackline_custom_end = '
-			\%( %{hackline#base#tab_info()} %)
 			\ %P/%L 
 			\'
 ```

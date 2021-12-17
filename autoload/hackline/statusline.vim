@@ -3,8 +3,12 @@ function! hackline#statusline#val (status = 'inactive')
 	let l:w = #{ md: 60, lg: 100, xl: 120 }
 	let l:labels = #{
 				\ n: has('nvim') ? 'Neo' : 'Vim',
-				\ c: '«C»',  i: '«I»',  t: '«T»',  v: '«V»',  s: '«S»',  r: '«R»',
-				\ inactive: '',
+				\ c: '«C»',
+				\ i: '«I»',
+				\ t: '«T»',
+				\ v: '«V»',
+				\ s: '«S»',
+				\ r: '«R»',
 				\ }
 	let l:hi = hackline#utils#getStsHis(#{
 				\ start: 'IncSearch',
@@ -54,7 +58,7 @@ function! hackline#statusline#val (status = 'inactive')
 	elseif l:active
 		let l:statusline .= !g:hackline_mode || mode() == 'n' ? '  '.l:labels.n.' ' : ''
 	else
-		let l:statusline .= l:labels.inactive == '' ? '     <' : '  '.l:labels.inactive.'<'
+		let l:statusline .= '     <'
 	endif
 
 	" Show filetype
@@ -116,8 +120,14 @@ function! hackline#statusline#val (status = 'inactive')
 		endif
 	endif
 
+	if g:hackline_tab_info && winwidth(0) > l:w.lg
+		let l:statusline .= '%( %{hackline#base#tab_info()} %)'
+	elseif g:hackline_tab_info && winwidth(0) > l:w.md
+		let l:statusline .= '%( %{hackline#base#tab_info(1)} %)'
+	endif
+
 	" Show custom end content
-	if winwidth(0) > l:w.md
+	if winwidth(0) > l:w.lg
 		if g:hackline_custom_end != ''
 			let l:statusline .= '%{%g:hackline_custom_end%}'
 		endif

@@ -67,7 +67,7 @@ function! hackline#statusline#val (status = 'inactive')
 		if l:active
 			let l:statusline .= '%('.l:sep.l.' %{&filetype} %)'
 		else
-			let l:statusline .= '%(  %{&filetype} %)'
+			let l:statusline .= '%( ~%{&filetype}~%)'
 		endif
 	endif
 

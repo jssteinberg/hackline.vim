@@ -1,16 +1,16 @@
 function! hackline#lsp#status()
-    if !has('nvim') | return '' | endif
+	if !has('nvim') | return '' | endif
 
-    let l:lsp_linters=''
-    let l:statusline=''
+	let l:lsp_linters=''
+	let l:statusline=''
 
-    try " destructure g:ale_buffer_info TODO: test vim without lua
-        let l:lsp_linters.=luaeval("require('hackline.lsp').servers()")
-    catch | endtry
+	try " destructure g:ale_buffer_info TODO: test vim without lua
+		let l:lsp_linters.=luaeval("require('hackline.lsp').servers()")
+	catch | endtry
 
-    if l:lsp_linters != ''
-        let l:statusline.=l:lsp_linters
-    endif
+	if l:lsp_linters != ''
+		let l:statusline.=l:lsp_linters
+	endif
 
-    return l:statusline
+	return l:statusline
 endfunction

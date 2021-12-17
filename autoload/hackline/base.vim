@@ -1,8 +1,11 @@
 function! hackline#base#tab_info(truncate = 0) abort
     let l:info = !a:truncate ? 'tabs' : 'tabs'
     if &expandtab
-        let l:info = !a:truncate ? 'expandtab ' : 'et '
+        let l:info = !a:truncate ? 'expandtab:' : 'et:'
         let l:info .= shiftwidth()
+    elseif &tabstop > 0
+        let l:info = !a:truncate ? 'tabstop:' : 'ts:'
+        let l:info .= &tabstop
     endif
     return l:info
 endfunction

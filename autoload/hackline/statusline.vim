@@ -1,6 +1,6 @@
 function! hackline#statusline#val (status = 'inactive')
 	let l:active = a:status == 'active'
-	let l:w = #{ md: 60, lg: 100, xl: 120 }
+	let l:w = #{ md: 60, lg: 90, xl: 120 }
 	let l:labels = #{
 				\ n: g:hackline_signature != '' ? g:hackline_signature : has('nvim') ? 'Neo' : 'Vim',
 				\ c: '«C»',

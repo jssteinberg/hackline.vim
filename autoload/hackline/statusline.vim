@@ -2,24 +2,25 @@ function! hackline#statusline#val (status = 'inactive')
 	let l:active = a:status == 'active'
 	let l:w = #{ md: 60, lg: 100, xl: 120 }
 	let l:labels = #{
-				\ n: has('nvim') ? 'Neo' : 'Vim',
+				\ n: g:hackline_signature != '' ? g:hackline_signature : has('nvim') ? 'Neo' : 'Vim',
 				\ c: '«C»',
 				\ i: '«I»',
 				\ t: '«T»',
 				\ v: '«V»',
+				\ vb: '«V»',
 				\ s: '«S»',
 				\ r: '«R»',
 				\ }
 	let l:hi = hackline#utils#getStsHis(#{
-				\ start: 'IncSearch',
+				\ start: 'Cursor',
 				\ modes: #{
-				\   c: 'Cursor',
+				\   c: 'Todo',
 				\   i: 'DiffAdd',
 				\   t: 'Todo',
 				\   v: 'PmenuSel',
 				\   vb: 'PmenuSel',
-				\   r: 'DiffDelete',
-				\   s: 'DiffDelete',
+				\   r: 'IncSearch',
+				\   s: 'IncSearch',
 				\ },
 				\ mid: 'Comment',
 				\ mid_item: 'Normal',

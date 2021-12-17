@@ -5,6 +5,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 " Global vars for some customization
+let g:hackline_signature = get(g:, 'hackline_signature', '')
 let g:hackline_mode = get(g:, 'hackline_mode', '1')
 let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
 let g:hackline_filetype = get(g:, 'hackline_filetype', '1')

@@ -23,8 +23,10 @@ let b:hackline_get_ale=0
 
 aug hackline
 	au!
-	au WinEnter,BufEnter,FocusGained * setlocal statusline=%!hackline#statusline#val('active')
-	au WinLeave,BufLeave,FocusLost * setlocal statusline=%!hackline#statusline#val()
+	" BufReadPre to initially set inactive statusline
+	au BufReadPre,WinLeave,FocusLost * setlocal statusline=%!hackline#statusline#val()
+	" CursorHold to set active for the often strangeness that is netrw
+	au CursorHold,BufEnter,WinEnter,FocusGained * setlocal statusline=%!hackline#statusline#val('active')
 	au User ALEJobStarted let b:hackline_get_ale=1
 aug END
 

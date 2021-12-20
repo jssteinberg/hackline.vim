@@ -4,6 +4,10 @@ A minimalistic, light statusline package (plugin) for newer Vims/Neovims, embrac
 
 Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jssteinberg/hackline.vim'}`.
 
+![Normal mode](https://user-images.githubusercontent.com/729055/146759428-348d7aa8-0bea-4122-84b6-10bcb792d431.jpg)
+![Visual mode and open project drawer](https://user-images.githubusercontent.com/729055/146759489-02bb6e9d-efda-4527-8f44-74a8febbae67.jpg)
+![Insert mode](https://user-images.githubusercontent.com/729055/146759512-8c0c4518-a1d4-40ad-b6b3-b941afe0f681.jpg)
+
 ## Features
 
 - **No icons** or need for patched font.

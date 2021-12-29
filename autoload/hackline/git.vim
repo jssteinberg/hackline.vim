@@ -3,10 +3,10 @@ function! hackline#git#branch() abort
 
     if exists('b:gitsigns_head')
         let l:branch = get(b:,'gitsigns_head','')
-    elseif exists('*gitbranch#name')
-        let l:branch = gitbranch#name()
     elseif exists('g:loaded_fugitive')
         let l:branch = fugitive#head()
+    elseif exists('*gitbranch#name')
+        let l:branch = gitbranch#name()
     endif
 
     " TODO: Fix spacing if empty

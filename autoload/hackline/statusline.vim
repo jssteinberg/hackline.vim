@@ -85,8 +85,6 @@ function! hackline#statusline#val (status = 'inactive')
 		let l:statusline .= '%( %M%)'
 	endif
 
-
-
 	" Show buffer number dependent on state/width
 	if g:hackline_bufnum && winwidth(0) > l:w.md
 		let l:statusline .= l:active ? '%( '.l:hi.mid_item.'b%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'

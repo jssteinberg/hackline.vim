@@ -78,6 +78,15 @@ function! hackline#statusline#val (status = 'inactive')
 		let l:statusline .= l:active ? '  ' : ' >'
 	endif
 
+	" Modified flag
+	if l:active
+		let l:statusline .= '%( '.l:hi.mid_item.'%M'.l:hi.mid.'%)'
+	else
+		let l:statusline .= '%( %M%)'
+	endif
+
+
+
 	" Show buffer number dependent on state/width
 	if g:hackline_bufnum && winwidth(0) > l:w.md
 		let l:statusline .= l:active ? '%( '.l:hi.mid_item.'b%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
@@ -87,9 +96,9 @@ function! hackline#statusline#val (status = 'inactive')
 
 	" Show filepath, active and bigger screen gets highlight groups
 	if l:active && winwidth(0) > l:w.md
-		let l:statusline .= '%(%<%)%( '.l:hi.dir.'%{hackline#base#filepath('.l:w.lg.')}'.l:hi.tail.'%t %)%(%M %)'.l:hi.mid
+		let l:statusline .= '%(%<%)%( '.l:hi.dir.'%{hackline#base#filepath('.l:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
 	else
-		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.l:w.lg.')}%t %)%(%M %)'
+		let l:statusline .= '%(%<%)%( %{hackline#base#filepath('.l:w.lg.')}%t %)'
 	endif
 
 	" Statusline Right Side

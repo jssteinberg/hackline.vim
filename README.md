@@ -1,6 +1,6 @@
 # hackline.vim
 
-The paradoxically minimalistic and light statusline, but with all batteries included (with some optional plugin dependencies). A package (plugin) for Vim and Neovim, embracing newer vanilla capabilities of the editor. *Not Lua (with exceptions). Only easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.1---things are more rare to change and break.*
+A minimalistic and light statusline, paradoxically with all batteries included (with some optional plugin dependencies), for Vim/Neovim, embracing newer vanilla capabilities of the editor. *Not Lua (with exceptions), only easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.1---things are more rare to change and break.*
 
 Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jssteinberg/hackline.vim'}`.
 

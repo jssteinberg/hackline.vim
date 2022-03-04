@@ -43,19 +43,19 @@ function! hackline#statusline#val (status = 'inactive')
 
 	" Logic for modes
 	if l:active && g:hackline_mode && mode() != 'n'
-		" Command mode
-		let l:statusline .= mode() == 'c' ?        l:hi.modes.c.'  '.l:labels.c.' ' : ''
-		" Insert mode
-		let l:statusline .= mode() == 'i' ?        l:hi.modes.i.'  '.l:labels.i.' ' : ''
-		" Terminal mode
-		let l:statusline .= mode() == 't' ?        l:hi.modes.t.'  '.l:labels.t.' ' : ''
-		" Visual mode
-		let l:statusline .= mode() == 'v' ?        l:hi.modes.v.'  '.l:labels.v.' ' : ''
-		let l:statusline .= mode() == '\<c-v>' ?  l:hi.modes.vb.'  '.l:labels.v.' ' : ''
-		" Replace mode
-		let l:statusline .= mode() == 'r' ?        l:hi.modes.r.'  '.l:labels.r.' ' : ''
-		" Select mode
-		let l:statusline .= mode() == 's' ?        l:hi.modes.s.'  '.l:labels.s.' ' : ''
+		if mode() == "i"
+			let l:statusline .= l:hi.modes.i.'  '.l:labels.i.' '
+		elseif mode() == "c"
+			let l:statusline .= l:hi.modes.c.'  '.l:labels.c.' '
+		elseif mode() == "t"
+			let l:statusline .= l:hi.modes.t.'  '.l:labels.t.' '
+		elseif mode() == "r"
+			let l:statusline .= l:hi.modes.r.'  '.l:labels.r.' '
+		elseif mode() == "s"
+			let l:statusline .= l:hi.modes.s.'  '.l:labels.s.' '
+		else
+			let l:statusline .= l:hi.modes.v.'  '.l:labels.v.' '
+		endif
 	elseif l:active
 		let l:statusline .= !g:hackline_mode || mode() == 'n' ? '  '.l:labels.n.' ' : ''
 	else

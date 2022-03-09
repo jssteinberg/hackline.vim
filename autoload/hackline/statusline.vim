@@ -12,7 +12,7 @@ function! hackline#statusline#val (status = 'inactive')
 				\ r: '«R»',
 				\ }
 	let l:hi = hackline#utils#getStsHis(#{
-				\ start: 'Cursor',
+				\ start: 'StatusLine',
 				\ modes: #{
 				\   c: 'Todo',
 				\   i: 'DiffAdd',

@@ -28,7 +28,7 @@ function! hackline#statusline#val (status = 'inactive')
 				\ tail: 'Normal',
 				\ git: 'String',
 				\ end: 'StatusLine',
-				\ active_sm: 'Cursor',
+				\ active_sm: 'StatusLine',
 				\ inactive: 'StatusLineNC'
 				\ })
 	let l:sep = #{ l: '›', r: '‹' }

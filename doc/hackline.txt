@@ -1,1 +1,1 @@
-hackline.txt*	A simple statusline for Vim and Neovim
+hackline.txt A minimalistic and light statusline, paradoxically with all batteries included (with some optional plugin dependencies).

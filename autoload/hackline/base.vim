@@ -1,5 +1,6 @@
 function! hackline#base#tab_info(truncate = 0) abort
 	let l:info = !a:truncate ? 'tabs' : 'tabs'
+
 	if &expandtab
 		let l:info = !a:truncate ? 'expandtab(sw=' : 'et(sw='
 		let l:info .= shiftwidth() . ')'
@@ -12,17 +13,21 @@ function! hackline#base#tab_info(truncate = 0) abort
 		let l:info = !a:truncate ? 'tabstop=' : 'ts='
 		let l:info .= &tabstop
 	endif
+
 	return l:info
 endfunction
 
 function! hackline#base#filepath(width = 100) abort
 	let l:path = expand('%:p:.:h')
+
 	if winwidth(0) <= a:width
 		let l:path = pathshorten(l:path)
 	endif
+
 	if l:path !=# '.' && l:path !=# ''
 		return l:path == '/' ? l:path : l:path.'/'
 	endif
+
 	return ''
 endfunction
 
@@ -36,9 +41,11 @@ endfunction
 
 function! hackline#base#wordcount() abort
 	let currentmode = mode()
+
 	if !exists('g:lastmode_wc')
 		let g:lastmode_wc = currentmode
 	endif
+
 	if &modified || !exists('b:wordcount') || currentmode =~? '\c.*v' || currentmode != g:lastmode_wc
 		let g:lastmode_wc = currentmode
 		let l:old_position = getpos('.')

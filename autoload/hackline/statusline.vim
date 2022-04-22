@@ -1,6 +1,7 @@
+let s:w = #{ md: 60, lg: 90, xl: 120 }
+
 function! hackline#statusline#val (status = 'inactive')
 	let l:active = a:status == 'active'
-	let l:w = #{ md: 60, lg: 90, xl: 120 }
 	let l:labels = #{
 				\ n: g:hackline_signature != '' ? g:hackline_signature : has('nvim') ? 'Neo' : 'Vim',
 				\ c: '«C»',
@@ -39,7 +40,7 @@ function! hackline#statusline#val (status = 'inactive')
 	" --------------------
 
 	" Set initial highlight group (color)
-	let l:statusline .= l:active ? winwidth(0) > l:w.md ? l:hi.start : l:hi.active_sm : l:hi.inactive
+	let l:statusline .= l:active ? s:has_winwidth("md") ? l:hi.start : l:hi.active_sm : l:hi.inactive
 
 	" Logic for modes
 	if l:active && g:hackline_mode && mode() != 'n'
@@ -72,31 +73,31 @@ function! hackline#statusline#val (status = 'inactive')
 	endif
 
 	" Change highlight group or add sign
-	if winwidth(0) > l:w.md
+	if s:has_winwidth("md")
 		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : ' >'
 	else
 		let l:statusline .= l:active ? '  ' : ' >'
 	endif
 
 	" Show buffer number dependent on state/width
-	if g:hackline_bufnum && winwidth(0) > l:w.md
+	if g:hackline_bufnum && s:has_winwidth("md")
 		let l:statusline .= l:active ? '%( '.l:hi.mid_item.'b%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
 	elseif g:hackline_bufnum
 		let l:statusline .= l:active ? '%(b%{bufnr()}   %)' : '%(  %{bufnr()}  %)'
 	endif
 
 	" Modified flag
-	if l:active && winwidth(0) > l:w.md
+	if l:active && s:has_winwidth("md")
 		let l:statusline .= '%( '.l:hi.mid_item.'%m'.l:hi.mid.'%) '
 	else
 		let l:statusline .= '%( %m%) '
 	endif
 
 	" Show filepath, active and bigger screen gets highlight groups
-	if l:active && winwidth(0) > l:w.md
-		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#filepath('.l:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
+	if l:active && s:has_winwidth("md")
+		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#filepath('.s:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
 	else
-		let l:statusline .= '%(%<%)%(%{hackline#base#filepath('.l:w.lg.')}%t %)'
+		let l:statusline .= '%(%<%)%(%{hackline#base#filepath('.s:w.lg.')}%t %)'
 	endif
 
 	" Statusline Right Side
@@ -104,7 +105,7 @@ function! hackline#statusline#val (status = 'inactive')
 	let l:statusline .= ' %='
 
 	" Show ALE and LSP info
-	if l:active && winwidth(0) > l:w.md
+	if l:active && s:has_winwidth("md")
 		let l:statusline .= l:hi.mid
 		let l:statusline .= g:hackline_ale ? '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)' : ''
 		let l:statusline .= g:hackline_nvim_lsp ? '%('.l:sep.r.' '.l:hi.mid_item.'Lsp:%{hackline#lsp#status()}'.l:hi.mid.' %)' : ''
@@ -112,15 +113,15 @@ function! hackline#statusline#val (status = 'inactive')
 	endif
 
 	" Show git info
-	if g:hackline_git && l:active && winwidth(0) > l:w.md
+	if g:hackline_git && l:active && s:has_winwidth("md")
 		let l:statusline .= '%('.l:sep.r.' '.l:hi.mid_item.'* '.l:hi.git.'%{hackline#git#branch()}'.l:hi.mid.' %)'
 	endif
 
 	" Change highlight group if active and bigger screen
-	let l:statusline .= winwidth(0) > l:w.md && l:active ? ' '.l:hi.end.' ' : '  '
+	let l:statusline .= s:has_winwidth("md") && l:active ? ' '.l:hi.end.' ' : '  '
 
 	" Show misc. file info
-	if winwidth(0) > l:w.xl
+	if s:has_winwidth("xl")
 		if g:hackline_encoding
 			let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
 		endif
@@ -129,14 +130,14 @@ function! hackline#statusline#val (status = 'inactive')
 		endif
 	endif
 
-	if g:hackline_tab_info && winwidth(0) > l:w.lg
+	if g:hackline_tab_info && s:has_winwidth("lg")
 		let l:statusline .= '%( %{hackline#base#tab_info()} %)'
-	elseif g:hackline_tab_info && winwidth(0) > l:w.md
+	elseif g:hackline_tab_info && s:has_winwidth("md")
 		let l:statusline .= '%( %{hackline#base#tab_info(1)} %)'
 	endif
 
 	" Show custom end content
-	if winwidth(0) > l:w.lg
+	if s:has_winwidth("lg")
 		if g:hackline_custom_end != ''
 			let l:statusline .= '%{%g:hackline_custom_end%}'
 		endif
@@ -146,4 +147,18 @@ function! hackline#statusline#val (status = 'inactive')
 	let l:statusline .= ' '
 
 	return l:statusline
+endfunction
+
+function s:has_winwidth (w = "")
+	if &laststatus == 3
+		return v:true
+	elseif a:w == "md" &&  winwidth(0) > s:w.md
+		return v:true
+	elseif a:w == "lg" &&  winwidth(0) > s:w.lg
+		return v:true
+	elseif a:w == "xl" &&  winwidth(0) > s:w.xl
+		return v:true
+	endif
+
+	return v:false
 endfunction

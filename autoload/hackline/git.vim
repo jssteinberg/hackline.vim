@@ -3,8 +3,8 @@ function! hackline#git#branch() abort
 
 	if exists('b:gitsigns_head')
 		let l:branch = get(b:,'gitsigns_head','')
-	elseif exists('g:loaded_fugitive')
-		let l:branch = fugitive#head()
+	elseif exists('*FugitiveHead')
+		let l:branch = FugitiveHead()
 	elseif exists('*gitbranch#name')
 		let l:branch = gitbranch#name()
 	endif

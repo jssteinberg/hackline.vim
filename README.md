@@ -41,7 +41,7 @@ let g:hackline_custom_end = '
 
 ## Installation
 
-Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer version that supports re-evaluating expression results as a statusline format string. Not tested on Vim without lua---for Mac, Homebrew Vim works.
+Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer version that supports re-evaluating expression results as a statusline format string. Not tested on Vim without lua. For Mac, Vim from Homebrew works.
 
 Install examples:
 
@@ -84,3 +84,8 @@ let g:hackline_custom_end = '
 			\ %P/%L 
 			\'
 ```
+
+## TODO
+
+- Nvim LSP no. of buffer warning/errors
+- Dirty Git branch?

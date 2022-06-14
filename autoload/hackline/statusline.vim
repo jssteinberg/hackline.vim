@@ -108,7 +108,7 @@ function! hackline#statusline#val (status = 'inactive')
 	if l:active && s:has_winwidth("md")
 		let l:statusline .= l:hi.mid
 		let l:statusline .= g:hackline_ale ? '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)' : ''
-		let l:statusline .= g:hackline_nvim_lsp ? '%('.l:sep.r.' '.l:hi.mid_item.'Lsp:%{hackline#lsp#status()}'.l:hi.mid.' %)' : ''
+		let l:statusline .= g:hackline_nvim_lsp ? '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#lsp#status()}'.l:hi.mid.' %)' : ''
 		let l:statusline .= g:hackline_vim_lsp && exists("b:hackline_get_vim_lsp") ? l:sep.r.' '.l:hi.mid_item.'Lsp'.l:hi.mid.' ' : ''
 	endif
 

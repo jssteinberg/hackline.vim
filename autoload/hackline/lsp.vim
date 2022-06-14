@@ -5,7 +5,7 @@ function! hackline#lsp#status()
 	let l:statusline=''
 
 	try " TODO: test vim without lua
-		let l:lsp_linters.=luaeval("require('hackline.lsp').servers()")
+		let l:lsp_linters.=luaeval("require('hackline.lsp').named_servers()")
 	catch | endtry
 
 	if l:lsp_linters != ''

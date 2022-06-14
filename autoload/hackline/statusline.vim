@@ -104,7 +104,7 @@ function! hackline#statusline#val (status = 'inactive')
 	" ---------------------
 	let l:statusline .= ' %='
 
-	" Show ALE and LSP info
+	" Show LSP info
 	if l:active && s:has_winwidth("md")
 		let l:statusline .= l:hi.mid
 		let l:statusline .= g:hackline_ale ? '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)' : ''

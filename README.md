@@ -20,8 +20,11 @@ Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jsst
 ### Integrations
 
 - **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
-- **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig) or [vim-lsp](https://github.com/prabirshrestha/vim-lsp).
+- **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig).
+<!--
+And [vim-lsp](https://github.com/prabirshrestha/vim-lsp).
 - **ALE** if active for buffer and the number of errors and warnings.
+-->
 
 ### Extra functions
 
@@ -72,9 +75,9 @@ Default values:
 let g:hackline_mode = 1
 let g:hackline_bufnum = 1
 let g:hackline_filetype = 1
-let g:hackline_ale = 1 " ALE info if available
+let g:hackline_ale = 0 " ALE info if available (not tested much)
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
-let g:hackline_vim_lsp = 1 " Vim LSP info if available
+let g:hackline_vim_lsp = 0 " Vim LSP info if available (not tested much)
 let g:hackline_git = 1 " Current branch if available from plugins
 let g:hackline_encoding = 1
 let g:hackline_fileformat = 1

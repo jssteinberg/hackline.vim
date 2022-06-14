@@ -1,9 +1,9 @@
 local M = {}
 
 local length = function(T)
-  local count = 0
-  for _ in pairs(T) do count = count + 1 end
-  return count
+	local count = 0
+	for _ in pairs(T) do count = count + 1 end
+	return count
 end
 
 M.get_connected_client_names = function()

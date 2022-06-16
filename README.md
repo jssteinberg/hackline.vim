@@ -1,16 +1,16 @@
 # hackline.vim
 
-A minimalistic and light statusline, though with important batteries included (some through optional plugin dependencies). For Vim and Neovim. *No, it's not Lua (with exceptions), but IMO easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.2---it will probably not have breaking changes or break in general.*
+A light Neovim/Vim statusline. Light and simple code, though with important batteries included (some through optional plugin dependencies). *No, it's not coded in Lua (with exceptions), but IMO easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.2---it will probably not have breaking changes or break in general.*
 
 Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jssteinberg/hackline.vim'}`.
+
+*hackline.vim colors depends on colorscheme. With [Iceberg](https://cocopon.github.io/iceberg.vim/):*
 
 ![normal](https://user-images.githubusercontent.com/729055/174136946-1f0cc857-a4cf-46b8-9781-8b8d336b776c.jpg)
 ![insert](https://user-images.githubusercontent.com/729055/174136970-bca8a857-9bc8-4a38-bf51-1484b626263b.jpg)
 ![visual](https://user-images.githubusercontent.com/729055/174136979-7599b2ca-67a8-462f-9436-2100ff27087a.jpg)
 ![narrow](https://user-images.githubusercontent.com/729055/174137072-07b9f0bd-6b95-41ca-b536-5dc6a8ade4a1.jpg)
 ![split](https://user-images.githubusercontent.com/729055/174137089-ed5f0fde-b41e-49ef-bd98-dd16f9ade287.jpg)
-
-*(Colors will depend on colorscheme.)*
 
 ## Features
 
@@ -20,6 +20,8 @@ Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jss
 - **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on).
 - **Responsive**---adjusts statusline for smaller widths.
 - **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers. *Helps to keep a light weight.*
+
+*Someone should confirm loading time. Low right?*
 
 ### Integrations
 
@@ -60,6 +62,10 @@ use{'jssteinberg/hackline.vim'}
 ```lua
 -- packer.nvim with git info (without gitsigns or fugitive)
 use{'jssteinberg/hackline.vim', requires = {'itchyny/vim-gitbranch'}}
+
+-- Even lazyload it (does that makes sense?):
+use { 'jssteinberg/hackline.vim', event = 'CursorHold' }
+use { 'itchyny/vim-gitbranch', event = 'CursorHold' }
 ```
 
 ```vim

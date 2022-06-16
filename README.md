@@ -111,7 +111,8 @@ call jetpack#add('jssteinberg/hackline.vim') " Light statusline
 
 (And it should be equally simple with vim-plug).
 
-## TODO
+## *Plans*
 
+- Versions: Create a v1 branch once it hits v1, and keep main branch as stable as possible with new updates.
 - Nvim LSP number of buffer warning/errors?
 - Update/add dirty Git branch (through plugin support---vgit?).

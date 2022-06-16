@@ -32,6 +32,7 @@ And [vim-lsp](https://github.com/prabirshrestha/vim-lsp).
 - **ALE** if active for buffer and the number of errors and warnings.
 -->
 
+let g:hackline_vim_lsp = 1 " Vim LSP info if available
 ### Extra functions
 
 - **Tabs or spaces**, and size, function `hackline#base#tab_info()`.

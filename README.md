@@ -83,7 +83,7 @@ let g:hackline_custom_end = '
 
 Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer version that supports re-evaluating expression results as a statusline format string. Not tested on Vim without lua. For Mac, Vim from Homebrew works.
 
-Install examples:
+Install in Neovim:
 
 ```lua
 -- packer.nvim
@@ -99,9 +99,14 @@ use { 'jssteinberg/hackline.vim', event = 'CursorHold' }
 use { 'itchyny/vim-gitbranch', event = 'CursorHold' }
 ```
 
+Install in Vim:
+
 ```vim
 " Vim packager
 call packager#add('jssteinberg/hackline.vim')
+
+" vim-jetpack
+call jetpack#add('jssteinberg/hackline.vim') " Light statusline
 ```
 
 (And it should be equally simple with vim-plug).

@@ -1,6 +1,6 @@
 # hackline.vim
 
-A minimalistic and light statusline, though with important batteries included (some through optional plugin dependencies). For Vim and Neovim. *No, it's not Lua (with exceptions), but IMO easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.1---things are more rare to change and break.*
+A minimalistic and light statusline, though with important batteries included (some through optional plugin dependencies). For Vim and Neovim. *No, it's not Lua (with exceptions), but IMO easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.2---it will probably not have breaking changes or break in general.*
 
 Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jssteinberg/hackline.vim'}`.
 
@@ -15,7 +15,7 @@ Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jss
 ## Features
 
 - **No icons** or need for patched font.
-- **No themes**---uses normal color highlight groups. Looks good with any newer colorscheme.
+- **No new color highlight groups**---uses already exisiting color highlight groups to avoid colorschemes having to support the plugin specifically.
 - **Good contrast** for horizontal splits.
 - **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on).
 - **Responsive**---adjusts statusline for smaller widths.
@@ -76,6 +76,7 @@ Global variables for simple customization.
 Default values:
 
 ```vim
+let g:hackline_laststatus = 2
 let g:hackline_mode = 1
 let g:hackline_bufnum = 1
 let g:hackline_filetype = 1
@@ -94,5 +95,5 @@ let g:hackline_custom_end = '
 
 ## TODO
 
-- Nvim LSP no. of buffer warning/errors
-- Dirty Git branch?
+- Nvim LSP number of buffer warning/errors?
+- Update/add dirty Git branch (through plugin support---vgit?).

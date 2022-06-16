@@ -1,10 +1,12 @@
 if exists('g:loaded_hackline') | finish | endif
-let g:loaded_hackline = v:true
 
+let g:loaded_hackline = v:true
 let s:save_cpo = &cpo
+
 set cpo&vim
 
 " Global vars for some customization
+let g:hackline_laststatus = get(g:, 'hackline_laststatus', '2')
 let g:hackline_signature = get(g:, 'hackline_signature', '')
 let g:hackline_mode = get(g:, 'hackline_mode', '1')
 let g:hackline_bufnum = get(g:, 'hackline_bufnum', '1')
@@ -30,8 +32,10 @@ aug hackline
 	au User ALEJobStarted let b:hackline_get_ale=1
 aug END
 
-set laststatus=2
+exe('set laststatus=' . g:hackline_laststatus)
+
 if g:hackline_mode | set noshowmode | endif
 
 let &cpo = s:save_cpo
+
 unlet s:save_cpo

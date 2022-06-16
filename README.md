@@ -27,12 +27,42 @@ Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jss
 
 - **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
 - **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig).
+And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
 <!--
-And [vim-lsp](https://github.com/prabirshrestha/vim-lsp).
 - **ALE** if active for buffer and the number of errors and warnings.
 -->
 
+### Options
+
+Global variables for simple customization.
+
+Default values:
+
+```vim
+let g:hackline_laststatus = 2
+let g:hackline_mode = 1
+let g:hackline_bufnum = 1
+let g:hackline_filetype = 1
+let g:hackline_ale = 0 " ALE info if available (not tested much)
+let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
+let g:hackline_git = 1 " Current branch if available from plugins
+let g:hackline_encoding = 1
+let g:hackline_fileformat = 1
+let g:hackline_tab_info = 1
+" Any valid statusline value
+let g:hackline_custom_end = '
+			\ %P/%L 
+			\'
+```
+
+Or, in Neovim, redefine with Lua:
+
+```lua
+vim.g.hackline_laststatus = 3
+-- ...etc.
+```
+
 ### Extra functions
 
 - **Tabs or spaces**, and size, function `hackline#base#tab_info()`.
@@ -75,37 +105,6 @@ call packager#add('jssteinberg/hackline.vim')
 ```
 
 (And it should be equally simple with vim-plug).
-
-## Options
-
-Global variables for simple customization.
-
-Default values:
-
-```vim
-let g:hackline_laststatus = 2
-let g:hackline_mode = 1
-let g:hackline_bufnum = 1
-let g:hackline_filetype = 1
-let g:hackline_ale = 0 " ALE info if available (not tested much)
-let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
-let g:hackline_vim_lsp = 0 " Vim LSP info if available (not tested much)
-let g:hackline_git = 1 " Current branch if available from plugins
-let g:hackline_encoding = 1
-let g:hackline_fileformat = 1
-let g:hackline_tab_info = 1
-" Any valid statusline value
-let g:hackline_custom_end = '
-			\ %P/%L 
-			\'
-```
-
-Or, in Neovim, redefine with Lua:
-
-```lua
-vim.g.hackline_laststatus = 3
--- ...etc.
-```
 
 ## TODO
 

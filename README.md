@@ -1,12 +1,16 @@
 # hackline.vim
 
-A minimalistic and light statusline, paradoxically with all batteries included (with some optional plugin dependencies), for Vim/Neovim, embracing newer vanilla capabilities of the editor. *Not Lua (with exceptions), only easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.1---things are more rare to change and break.*
+A minimalistic and light statusline, though with important batteries included (some through optional plugin dependencies). For Vim and Neovim. *No, it's not Lua (with exceptions), but IMO easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.1---things are more rare to change and break.*
 
-Plug-and-play with any simple way to install, e.g., with packer.nvim: `use{'jssteinberg/hackline.vim'}`.
+Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jssteinberg/hackline.vim'}`.
 
-![Normal mode](https://user-images.githubusercontent.com/729055/146759428-348d7aa8-0bea-4122-84b6-10bcb792d431.jpg)
-![Visual mode and open project drawer](https://user-images.githubusercontent.com/729055/146759489-02bb6e9d-efda-4527-8f44-74a8febbae67.jpg)
-![Insert mode](https://user-images.githubusercontent.com/729055/146759512-8c0c4518-a1d4-40ad-b6b3-b941afe0f681.jpg)
+![normal](https://user-images.githubusercontent.com/729055/174136946-1f0cc857-a4cf-46b8-9781-8b8d336b776c.jpg)
+![insert](https://user-images.githubusercontent.com/729055/174136970-bca8a857-9bc8-4a38-bf51-1484b626263b.jpg)
+![visual](https://user-images.githubusercontent.com/729055/174136979-7599b2ca-67a8-462f-9436-2100ff27087a.jpg)
+![narrow](https://user-images.githubusercontent.com/729055/174137072-07b9f0bd-6b95-41ca-b536-5dc6a8ade4a1.jpg)
+![split](https://user-images.githubusercontent.com/729055/174137089-ed5f0fde-b41e-49ef-bd98-dd16f9ade287.jpg)
+
+*(Colors will depend on colorscheme.)*
 
 ## Features
 

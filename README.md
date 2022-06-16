@@ -99,6 +99,13 @@ let g:hackline_custom_end = '
 			\'
 ```
 
+Or, in Neovim, redefine with Lua:
+
+```lua
+vim.g.hackline_laststatus = 3
+-- ...etc.
+```
+
 ## TODO
 
 - Nvim LSP number of buffer warning/errors?

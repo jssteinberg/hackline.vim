@@ -4,7 +4,7 @@ A light Neovim/Vim statusline. Light and simple code, though with important batt
 
 Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jssteinberg/hackline.vim'}`.
 
-*hackline.vim colors depends on colorscheme. With [Iceberg](https://cocopon.github.io/iceberg.vim/):*
+*hackline.vim colors depends on colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/) (don't mind the bottom line of the terminal, which is tmux):*
 
 ![normal](https://user-images.githubusercontent.com/729055/174136946-1f0cc857-a4cf-46b8-9781-8b8d336b776c.jpg)
 ![insert](https://user-images.githubusercontent.com/729055/174136970-bca8a857-9bc8-4a38-bf51-1484b626263b.jpg)

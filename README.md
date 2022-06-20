@@ -1,6 +1,6 @@
 # hackline.vim
 
-A light Neovim/Vim statusline. Light and simple code, though with important batteries included (some through optional plugin dependencies). *No, it's not coded in Lua (with exceptions), but IMO easy to hack Vimscript. Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.2---it will probably not have breaking changes or break in general.*
+A light Neovim/Vim statusline. Light and simple code, though with important batteries included (some through optional plugin dependencies). *Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.2---it will probably not have breaking changes or break in general.*
 
 Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jssteinberg/hackline.vim'}`.
 

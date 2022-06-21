@@ -39,7 +39,7 @@ M.named_servers = function()
 		return ''
 	end
 
-	return table.concat(connected, '/')
+	return table.concat(connected, ' ')
 end
 
 return M

@@ -16,7 +16,6 @@ Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jss
 
 - **No icons** or need for patched font.
 - **No new color highlight groups**---uses already exisiting color highlight groups to avoid colorschemes having to support the plugin specifically.
-- **Good contrast** for horizontal splits.
 - **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on).
 - **Responsive**---adjusts statusline for smaller widths.
 - **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers. *Helps to keep a light weight.*

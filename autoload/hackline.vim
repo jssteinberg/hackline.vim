@@ -25,3 +25,9 @@ function! hackline#highlight_groups()
 
 	return hackline#utils#getStatuslineHighlights( l:highlight_groups )
 endfunction
+
+function! hackline#signature()
+	let l:fallback_sign = has("nvim") ? "Neo" : "Vim"
+
+	return get(g:, "hackline_sign", l:fallback_sign)
+endfunction

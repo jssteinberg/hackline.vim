@@ -3,7 +3,7 @@ let s:w = #{ md: 60, lg: 90, xl: 120 }
 function! hackline#statusline#val (status = 'inactive')
 	let l:active = a:status == 'active'
 	let l:labels = #{
-				\ n: g:hackline_signature != '' ? g:hackline_signature : has('nvim') ? 'Neo' : 'Vim',
+				\ n: hackline#signature(),
 				\ c: '«C»',
 				\ i: '«I»',
 				\ t: '«T»',

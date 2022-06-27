@@ -38,24 +38,28 @@ Global variables for simple customization.
 Default values:
 
 ```vim
-" Statusline content
+" Active status:
 let g:hackline_laststatus = 2
 let g:hackline_mode = 1
 let g:hackline_bufnum = 1
 let g:hackline_filetype = 1
-let g:hackline_ale = 0 " ALE info if available (not tested much)
+let g:hackline_ale = 0 " ALE errors and warnings if available (not tested much)
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 let g:hackline_git = 1 " Current branch if available from plugins
 let g:hackline_encoding = 1
 let g:hackline_fileformat = 1
 let g:hackline_tab_info = 1
-" any valid statusline value that will be added to end of statusline
+
+" Normal mode sign
+let g:hackline_sign = has("nvim") ? "Neo" : "Vim"
+
+" A valid statusline value that will be added to end of statusline:
 let g:hackline_custom_end = '
 			\ %P/%L 
 			\'
 
-" Mode highlight groups
+" Mode highlight groups:
 let g:hackline_highlight_normal = 'StatusLine'
 let g:hackline_highlight_command = 'Todo'
 let g:hackline_highlight_insert = 'DiffAdd'
@@ -65,7 +69,7 @@ let g:hackline_highlight_replace = 'IncSearch'
 let g:hackline_highlight_select = 'IncSearch'
 ```
 
-Or, in Neovim, redefine with Lua:
+Or, in Neovim, you can define with Lua like so:
 
 ```lua
 vim.g.hackline_laststatus = 3
@@ -74,9 +78,9 @@ vim.g.hackline_laststatus = 3
 
 ### Extra functions
 
-- **Tabs or spaces**, and size, function `hackline#base#tab_info()`.
-- **Word count** function (from skyline.vim): `hackline#base#wordcount()`.
-- **File size** function (from skyline.vim): `hackline#base#filesize()`.
+- **File size** function (originally from skyline.vim): `hackline#base#filesize()`
+- **Word count** function (originally from skyline.vim): `hackline#base#wordcount()`
+- **Tabs or spaces**, and their size, function (active by default from `g:hackline_tab_info`): `hackline#base#tab_info()`
 
 Example use:
 
@@ -92,7 +96,7 @@ let g:hackline_custom_end = '
 
 Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer version that supports re-evaluating expression results as a statusline format string. Not tested on Vim without lua. For Mac, Vim from Homebrew works.
 
-Install in Neovim:
+Neovim install:
 
 ```lua
 -- packer.nvim
@@ -108,14 +112,17 @@ use { 'jssteinberg/hackline.vim', event = 'CursorHold' }
 use { 'itchyny/vim-gitbranch', event = 'CursorHold' }
 ```
 
-Install in Vim:
+Vim install:
 
 ```vim
+" minpac
+call minpac#add('jssteinberg/hackline.vim')
+
 " Vim packager
 call packager#add('jssteinberg/hackline.vim')
 
 " vim-jetpack
-call jetpack#add('jssteinberg/hackline.vim') " Light statusline
+call jetpack#add('jssteinberg/hackline.vim')
 ```
 
 (And it should be equally simple with vim-plug).
@@ -126,3 +133,4 @@ call jetpack#add('jssteinberg/hackline.vim') " Light statusline
 - Add Vim help documentation.
 - Nvim LSP number of buffer warning/errors?
 - Update/add dirty Git branch (through plugin support---vgit?).
+- Support hi `StatusLineTerm` and `StatusLineTermNC`?

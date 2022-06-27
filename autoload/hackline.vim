@@ -31,3 +31,53 @@ function! hackline#signature()
 
 	return get(g:, "hackline_sign", l:fallback_sign)
 endfunction
+
+function! hackline#mode()
+	return get(g:, "hackline_mode", "1")
+endfunction
+
+function! hackline#filetype()
+	return get(g:, "hackline_filetype", "1")
+endfunction
+
+function! hackline#bufnum()
+	return get(g:, "hackline_bufnum", "1")
+endfunction
+
+function! hackline#ale()
+	return get(g:, "hackline_ale", "0")
+endfunction
+
+function! hackline#nvim_lsp()
+	return get(g:, "hackline_nvim_lsp", "1")
+endfunction
+
+function! hackline#vim_lsp()
+	return get(g:, "hackline_vim_lsp", "1") && exists("b:hackline_get_vim_lsp")
+endfunction
+
+function! hackline#git()
+	return get(g:, "hackline_git", "1")
+endfunction
+
+function! hackline#encoding()
+	return get(g:, "hackline_encoding", "1")
+endfunction
+
+function! hackline#fileformat()
+	return get(g:, "hackline_fileformat", "1")
+endfunction
+
+function! hackline#tab_info()
+	return get(g:, "hackline_tab_info", "1")
+endfunction
+
+function! hackline#custom_end()
+	return get(g:, "hackline_custom_end", "
+				\ %P/%L 
+				\")
+endfunction
+
+function! hackline#laststatus()
+	return get(g:, 'hackline_laststatus', '2')
+endfunction

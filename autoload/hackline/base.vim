@@ -1,3 +1,5 @@
+" Basic content for statusline
+
 function! hackline#base#tab_info(truncate = 0) abort
 	let l:info = !a:truncate ? 'tabs' : 'tabs'
 

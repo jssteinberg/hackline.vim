@@ -43,7 +43,7 @@ function! hackline#statusline#val (status = 'inactive')
 	else
 		" A certain number of spaces here so content is equally placed on active and inactive
 		" statusline to avoid that main statusline content jumps around.
-		let l:statusline .= '     <'
+		let l:statusline .= '     ‹'
 	endif
 
 	" Show filetype
@@ -51,15 +51,15 @@ function! hackline#statusline#val (status = 'inactive')
 		if l:active
 			let l:statusline .= '%('.l:sep.l.' %{&filetype} %)'
 		else
-			let l:statusline .= '%( ~%{&filetype}~%)'
+			let l:statusline .= '%(  %{&filetype} %)'
 		endif
 	endif
 
 	" Change highlight group or add sign
 	if s:has_winwidth("md")
-		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : ' >'
+		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : ' ›'
 	else
-		let l:statusline .= l:active ? '  ' : ' >'
+		let l:statusline .= l:active ? '  ' : ' ›'
 	endif
 
 	" Show buffer number dependent on state/width

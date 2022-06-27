@@ -1,6 +1,6 @@
 let s:w = #{ md: 60, lg: 90, xl: 120 }
 
-function! hackline#statusline#val (status = 'inactive')
+function hackline#statusline#val (status = 'inactive')
 	let l:active = a:status == 'active'
 	let l:labels = #{
 				\ n: hackline#signature(),

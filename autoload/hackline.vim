@@ -1,7 +1,7 @@
 " Default config for hackline.vim
 " TODO: Move all default config to this file...
 
-function! hackline#highlight_groups()
+function hackline#highlight_groups()
 	let l:highlight_groups = #{
 				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
 				\ modes: #{
@@ -26,58 +26,66 @@ function! hackline#highlight_groups()
 	return hackline#utils#getStatuslineHighlights( l:highlight_groups )
 endfunction
 
-function! hackline#signature()
+function hackline#signature()
 	let l:fallback_sign = has("nvim") ? "Neo" : "Vim"
 
 	return get(g:, "hackline_sign", l:fallback_sign)
 endfunction
 
-function! hackline#mode()
+function hackline#mode()
 	return get(g:, "hackline_mode", "1")
 endfunction
 
-function! hackline#filetype()
+function hackline#filetype()
 	return get(g:, "hackline_filetype", "1")
 endfunction
 
-function! hackline#bufnum()
+function hackline#bufnum()
 	return get(g:, "hackline_bufnum", "1")
 endfunction
 
-function! hackline#ale()
+function hackline#ale()
 	return get(g:, "hackline_ale", "0")
 endfunction
 
-function! hackline#nvim_lsp()
+function hackline#nvim_lsp()
 	return get(g:, "hackline_nvim_lsp", "1")
 endfunction
 
-function! hackline#vim_lsp()
+function hackline#vim_lsp()
 	return get(g:, "hackline_vim_lsp", "1") && exists("b:hackline_get_vim_lsp")
 endfunction
 
-function! hackline#git()
+function hackline#git()
 	return get(g:, "hackline_git", "1")
 endfunction
 
-function! hackline#encoding()
+function hackline#encoding()
 	return get(g:, "hackline_encoding", "1")
 endfunction
 
-function! hackline#fileformat()
+function hackline#fileformat()
 	return get(g:, "hackline_fileformat", "1")
 endfunction
 
-function! hackline#tab_info()
+function hackline#tab_info()
 	return get(g:, "hackline_tab_info", "1")
 endfunction
 
-function! hackline#custom_end()
+function hackline#custom_end()
 	return get(g:, "hackline_custom_end", "
 				\ %P/%L 
 				\")
 endfunction
 
-function! hackline#laststatus()
+function hackline#laststatus()
 	return get(g:, 'hackline_laststatus', '2')
+endfunction
+
+function hackline#statusline()
+	return hackline#statusline#val('active')
+endfunction
+
+function hackline#statusline_nc()
+	return hackline#statusline#val()
 endfunction

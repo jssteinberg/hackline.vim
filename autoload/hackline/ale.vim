@@ -1,4 +1,4 @@
-function! hackline#ale#status()
+function hackline#ale#status() abort
     let l:ale_linters=0
     let l:statusline=''
 

@@ -1,6 +1,6 @@
 " Basic content for statusline
 
-function! hackline#base#tab_info(truncate = 0) abort
+function hackline#base#tab_info(truncate = 0) abort
 	let l:info = !a:truncate ? 'tabs' : 'tabs'
 
 	if &expandtab
@@ -19,7 +19,7 @@ function! hackline#base#tab_info(truncate = 0) abort
 	return l:info
 endfunction
 
-function! hackline#base#filepath(width = 100) abort
+function hackline#base#filepath(width = 100) abort
 	let l:path = expand('%:p:.:h')
 
 	if winwidth(0) <= a:width
@@ -33,7 +33,7 @@ function! hackline#base#filepath(width = 100) abort
 	return ''
 endfunction
 
-function! hackline#base#fileencoding() abort
+function hackline#base#fileencoding() abort
 	if &fileencoding !=# ''
 		return &fileencoding
 	else
@@ -41,7 +41,7 @@ function! hackline#base#fileencoding() abort
 	endif
 endfunction
 
-function! hackline#base#wordcount() abort
+function hackline#base#wordcount() abort
 	let currentmode = mode()
 
 	if !exists('g:lastmode_wc')
@@ -71,7 +71,7 @@ function! hackline#base#wordcount() abort
 	endif
 endfunction
 
-function! hackline#base#filesize() abort
+function hackline#base#filesize() abort
 	let l:size = getfsize(expand('%'))
 	if l:size == 0 || l:size == -1 || l:size == -2
 		return ''

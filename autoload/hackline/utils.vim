@@ -1,5 +1,5 @@
 " Returns statusline friendly highlight group values
-function! hackline#utils#getStatuslineHighlights( his ) abort
+function hackline#utils#getStatuslineHighlights( his ) abort
 	for key in keys(a:his)
 		if type(a:his[key]) == type({})
 			" recursion

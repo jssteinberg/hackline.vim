@@ -38,6 +38,7 @@ Global variables for simple customization.
 Default values:
 
 ```vim
+" Statusline content
 let g:hackline_laststatus = 2
 let g:hackline_mode = 1
 let g:hackline_bufnum = 1
@@ -49,10 +50,19 @@ let g:hackline_git = 1 " Current branch if available from plugins
 let g:hackline_encoding = 1
 let g:hackline_fileformat = 1
 let g:hackline_tab_info = 1
-" Any valid statusline value
+" any valid statusline value that will be added to end of statusline
 let g:hackline_custom_end = '
 			\ %P/%L 
 			\'
+
+" Mode highlight groups
+let g:hackline_normal = 'StatusLine'
+let g:hackline_command = 'Todo'
+let g:hackline_insert = 'DiffAdd'
+let g:hackline_terminal = 'Todo'
+let g:hackline_visual = 'PmenuSel'
+let g:hackline_replace = 'IncSearch'
+let g:hackline_select = 'IncSearch'
 ```
 
 Or, in Neovim, redefine with Lua:
@@ -113,5 +123,6 @@ call jetpack#add('jssteinberg/hackline.vim') " Light statusline
 ## *Plans*
 
 - Versions: Create a v1 branch once it hits v1, and keep main branch as stable as possible with new updates.
+- Add Vim help documentation.
 - Nvim LSP number of buffer warning/errors?
 - Update/add dirty Git branch (through plugin support---vgit?).

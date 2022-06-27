@@ -12,26 +12,7 @@ function! hackline#statusline#val (status = 'inactive')
 				\ s: '«S»',
 				\ r: '«R»',
 				\ }
-	let l:hi = hackline#utils#getStsHis(#{
-				\ start: 'StatusLine',
-				\ modes: #{
-				\   c: 'Todo',
-				\   i: 'DiffAdd',
-				\   t: 'Todo',
-				\   v: 'PmenuSel',
-				\   vb: 'PmenuSel',
-				\   r: 'IncSearch',
-				\   s: 'IncSearch',
-				\ },
-				\ mid: 'Comment',
-				\ mid_item: 'Normal',
-				\ dir: 'Comment',
-				\ tail: 'Normal',
-				\ git: 'String',
-				\ end: 'StatusLine',
-				\ active_sm: 'StatusLine',
-				\ inactive: 'StatusLineNC'
-				\ })
+	let l:hi = hackline#highlight_groups()
 	let l:sep = #{ l: '›', r: '‹' }
 
 	let l:statusline=''
@@ -60,6 +41,8 @@ function! hackline#statusline#val (status = 'inactive')
 	elseif l:active
 		let l:statusline .= !g:hackline_mode || mode() == 'n' ? '  '.l:labels.n.' ' : ''
 	else
+		" A certain number of spaces here so content is equally placed on active and inactive
+		" statusline to avoid that main statusline content jumps around.
 		let l:statusline .= '     <'
 	endif
 

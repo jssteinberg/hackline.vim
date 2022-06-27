@@ -79,12 +79,18 @@ let g:hackline_highlight_normal = 'HacklineNormal'
 hi! link HacklineNormal Search
 " ...or something else:
 hi HacklineNormal guibg=... guifg=...
+```
 
+```vim
 " If you have a patched font, you can get a minor powerline feel:
 let g:hackline_separators = #{ l: "", r: "" }
 ```
 
-Or, in Neovim, you can configure with Lua like so:
+![some-power](https://user-images.githubusercontent.com/729055/176041696-46676bbe-2a18-4f7a-aad0-75cbdb56b1ac.jpg)
+
+---
+
+In Neovim, you can configure with Lua like so:
 
 ```lua
 vim.g.hackline_laststatus = 3

@@ -56,13 +56,13 @@ let g:hackline_custom_end = '
 			\'
 
 " Mode highlight groups
-let g:hackline_normal = 'StatusLine'
-let g:hackline_command = 'Todo'
-let g:hackline_insert = 'DiffAdd'
-let g:hackline_terminal = 'Todo'
-let g:hackline_visual = 'PmenuSel'
-let g:hackline_replace = 'IncSearch'
-let g:hackline_select = 'IncSearch'
+let g:hackline_highlight_normal = 'StatusLine'
+let g:hackline_highlight_command = 'Todo'
+let g:hackline_highlight_insert = 'DiffAdd'
+let g:hackline_highlight_terminal = 'Todo'
+let g:hackline_highlight_visual = 'PmenuSel'
+let g:hackline_highlight_replace = 'IncSearch'
+let g:hackline_highlight_select = 'IncSearch'
 ```
 
 Or, in Neovim, redefine with Lua:

@@ -3,15 +3,15 @@
 
 function! hackline#highlight_groups()
 	let l:highlight_groups = #{
-				\ start: get(g:, "hackline_normal", "StatusLine"),
+				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
 				\ modes: #{
-				\   c: get(g:, "hackline_command", "Todo"),
-				\   i: get(g:, "hackline_insert", "DiffAdd"),
-				\   t: get(g:, "hackline_terminal", "Todo"),
-				\   v: get(g:, "hackline_visual", "PmenuSel"),
-				\   vb: get(g:, "hackline_visual", "PmenuSel"),
-				\   r: get(g:, "hackline_replace", "IncSearch"),
-				\   s: get(g:, "hackline_select", "IncSearch"),
+				\   c:  get(g:, "hackline_highlight_command",  "Todo"),
+				\   i:  get(g:, "hackline_highlight_insert",   "DiffAdd"),
+				\   t:  get(g:, "hackline_highlight_terminal", "Todo"),
+				\   v:  get(g:, "hackline_highlight_visual",   "PmenuSel"),
+				\   vb: get(g:, "hackline_highlight_visual",   "PmenuSel"),
+				\   r:  get(g:, "hackline_highlight_replace",  "IncSearch"),
+				\   s:  get(g:, "hackline_highlight_select",   "IncSearch"),
 				\ },
 				\ mid: 'Comment',
 				\ mid_item: 'Normal',
@@ -19,7 +19,7 @@ function! hackline#highlight_groups()
 				\ tail: 'Normal',
 				\ git: 'String',
 				\ end: 'StatusLine',
-				\ active_sm: get(g:, "hackline_normal", "StatusLine"),
+				\ active_sm: get(g:, "hackline_highlight_normal", "StatusLine"),
 				\ inactive: 'StatusLineNC'
 				\ }
 

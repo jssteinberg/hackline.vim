@@ -57,12 +57,15 @@ let g:hackline_custom_end = '
 
 " Mode highlight groups:
 let g:hackline_highlight_normal = 'StatusLine'
-let g:hackline_highlight_command = 'Todo'
-let g:hackline_highlight_insert = 'DiffAdd'
-let g:hackline_highlight_terminal = 'Todo'
+let g:hackline_highlight_insert = 'Todo'
 let g:hackline_highlight_visual = 'PmenuSel'
 let g:hackline_highlight_replace = 'IncSearch'
 let g:hackline_highlight_select = 'IncSearch'
+let g:hackline_highlight_command = 'DiffAdd'
+let g:hackline_highlight_terminal = 'DiffAdd'
+" Highlight groups for more content with background by default:
+let g:hackline_highlight_end = 'StatusLine'
+let g:hackline_highlight_inactive = 'StatusLineNC'
 
 " ...which means you can define your own highlight groups:
 let g:hackline_highlight_normal = 'HacklineNormal'

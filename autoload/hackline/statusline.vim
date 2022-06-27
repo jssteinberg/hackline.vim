@@ -1,6 +1,6 @@
 let s:w = #{ md: 60, lg: 90, xl: 120 }
 
-function hackline#statusline#val (status = 'inactive')
+function hackline#statusline#val (status = 'inactive') abort
 	let l:active = a:status == 'active'
 	let l:labels = #{
 				\ n: hackline#signature(),
@@ -132,7 +132,7 @@ function hackline#statusline#val (status = 'inactive')
 	return l:statusline
 endfunction
 
-function s:has_winwidth (w = "")
+function s:has_winwidth (w = "") abort
 	if &laststatus == 3
 		return v:true
 	elseif a:w == "md" &&  winwidth(0) > s:w.md

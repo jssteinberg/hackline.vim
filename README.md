@@ -1,8 +1,14 @@
 # hackline.vim
 
-A light Neovim/Vim statusline. Light and simple code, though with important batteries included (some through optional plugin dependencies). *Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.2---it will probably not have breaking changes or break in general.*
+A lightweight Neovim/Vim statusline plugin. No setup required, no patched font. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugin dependencies for no duplicate code. *Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.3---it will probably not have breaking changes or break in general.*
 
-Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jssteinberg/hackline.vim'}`.
+- **No icons** or need for patched font.
+- **No new color highlight groups**---uses already exisiting color highlight groups to avoid colorschemes having to support the plugin specifically.
+- **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on, which it is by default).
+- **Responsive**---adjusts statusline for smaller widths.
+- **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
+
+*Someone should confirm loading time. Low right?*
 
 *hackline.vim colors depends on colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/) (don't mind the bottom line of the terminal, which is tmux):*
 
@@ -11,16 +17,6 @@ Plug-and-play with any simple way to install, e.g., using packer.nvim: `use{'jss
 ![visual](https://user-images.githubusercontent.com/729055/174136979-7599b2ca-67a8-462f-9436-2100ff27087a.jpg)
 ![narrow](https://user-images.githubusercontent.com/729055/174137072-07b9f0bd-6b95-41ca-b536-5dc6a8ade4a1.jpg)
 ![split](https://user-images.githubusercontent.com/729055/174137089-ed5f0fde-b41e-49ef-bd98-dd16f9ade287.jpg)
-
-## Features
-
-- **No icons** or need for patched font.
-- **No new color highlight groups**---uses already exisiting color highlight groups to avoid colorschemes having to support the plugin specifically.
-- **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on).
-- **Responsive**---adjusts statusline for smaller widths.
-- **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers. *Helps to keep a light weight.*
-
-*Someone should confirm loading time. Low right?*
 
 ### Integrations
 
@@ -67,9 +63,16 @@ let g:hackline_highlight_terminal = 'Todo'
 let g:hackline_highlight_visual = 'PmenuSel'
 let g:hackline_highlight_replace = 'IncSearch'
 let g:hackline_highlight_select = 'IncSearch'
+
+" ...which means you can define your own highlight groups:
+let g:hackline_highlight_normal = 'HacklineNormal'
+" and something:
+hi! link HacklineNormal Search
+" or something else:
+hi HacklineNormal guibg=... guifg=...
 ```
 
-Or, in Neovim, you can define with Lua like so:
+Or, in Neovim, you can configure with Lua like so:
 
 ```lua
 vim.g.hackline_laststatus = 3
@@ -127,9 +130,9 @@ call jetpack#add('jssteinberg/hackline.vim')
 
 (And it should be equally simple with vim-plug).
 
-## *Plans*
+## *Future*
 
-- Versions: Create a v1 branch once it hits v1, and keep main branch as stable as possible with new updates.
+- Versioning: A v1 branch/tag will be created once it hits v1. Main branch wil be kept as stable as possible with new updates.
 - Add Vim help documentation.
 - Nvim LSP number of buffer warning/errors?
 - Update/add dirty Git branch (through plugin support---vgit?).

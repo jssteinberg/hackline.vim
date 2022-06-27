@@ -36,9 +36,9 @@ endfunction
 function hackline#base#fileencoding() abort
 	if &fileencoding !=# ''
 		return &fileencoding
-	else
-		return &encoding
 	endif
+
+	return &encoding
 endfunction
 
 function hackline#base#wordcount() abort

@@ -81,7 +81,7 @@ hi! link HacklineNormal Search
 hi HacklineNormal guibg=... guifg=...
 
 " If you have a patched font, you can get a minor powerline feel:
-let g:hackline_separators = { l = "", r = "" }
+let g:hackline_separators = #{ l: "", r: "" }
 ```
 
 Or, in Neovim, you can configure with Lua like so:

@@ -13,7 +13,8 @@ function hackline#statusline#val (status = 'inactive') abort
 				\ r: '«R»',
 				\ }
 	let l:hi = hackline#highlight_groups()
-	let l:sep = #{ l: '›', r: '‹' }
+	" let l:sep = #{ l: '›', r: '‹' }
+	let l:sep = hackline#separators()
 
 	let l:statusline=''
 
@@ -43,7 +44,7 @@ function hackline#statusline#val (status = 'inactive') abort
 	else
 		" A certain number of spaces here so content is equally placed on active and inactive
 		" statusline to avoid that main statusline content jumps around.
-		let l:statusline .= '     ‹'
+		let l:statusline .= '     '.l:sep.r
 	endif
 
 	" Show filetype
@@ -57,9 +58,9 @@ function hackline#statusline#val (status = 'inactive') abort
 
 	" Change highlight group or add sign
 	if s:has_winwidth("md")
-		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : ' ›'
+		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : ' '.l:sep.l
 	else
-		let l:statusline .= l:active ? '  ' : ' ›'
+		let l:statusline .= l:active ? '  ' : ' '.l:sep.l
 	endif
 
 	" Show buffer number dependent on state/width

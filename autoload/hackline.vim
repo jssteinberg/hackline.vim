@@ -31,6 +31,10 @@ function hackline#signature() abort
 	return get(g:, "hackline_sign", l:fallback_sign)
 endfunction
 
+function hackline#separators() abort
+	return get(g:, "hackline_separators", #{ l: '›', r: '‹' })
+endfunction
+
 function hackline#mode() abort
 	return get(g:, "hackline_mode", "1")
 endfunction

@@ -67,12 +67,21 @@ let g:hackline_highlight_terminal = 'DiffAdd'
 let g:hackline_highlight_end = 'StatusLine'
 let g:hackline_highlight_inactive = 'StatusLineNC'
 
-" ...which means you can define your own highlight groups:
+" Separators:
+let g:hackline_separators = #{ l: '›', r: '‹' }
+
+
+" Some examples
+
+" You can define your own highlight groups:
 let g:hackline_highlight_normal = 'HacklineNormal'
-" and something:
+" ...and something:
 hi! link HacklineNormal Search
-" or something else:
+" ...or something else:
 hi HacklineNormal guibg=... guifg=...
+
+" If you have a patched font, you can get a minor powerline feel:
+let g:hackline_separators = { l = "", r = "" }
 ```
 
 Or, in Neovim, you can configure with Lua like so:

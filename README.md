@@ -82,14 +82,13 @@ vim.g.hackline_laststatus = 3
 ### Extra functions
 
 - **File size** function (originally from skyline.vim): `hackline#base#filesize()`
-- **Word count** function (originally from skyline.vim): `hackline#base#wordcount()`
 - **Tabs or spaces**, and their size, function (active by default from `g:hackline_tab_info`): `hackline#base#tab_info()`
 
 Example use:
 
 ```vim
 let g:hackline_custom_end = '
-			\%( words %{hackline#base#wordcount()} %)
+			\%( words %{wordcount()} %)
 			\%( %{hackline#base#filesize()} %)
 			\ %P/%L 
 			\'

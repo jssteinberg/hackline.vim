@@ -1,6 +1,6 @@
 # hackline.vim
 
-A lightweight Neovim/Vim statusline plugin. No setup required, no patched font. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugin dependencies for no duplicate code. *Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.3---it will probably not have breaking changes or break in general.*
+A lightweight Neovim/Vim statusline plugin. No setup required, no patched font required. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugins. *Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.3---it will probably not have breaking changes or break in general.*
 
 - **No icons** or need for patched font.
 - **No new color highlight groups**---uses already exisiting color highlight groups to avoid colorschemes having to support the plugin specifically.

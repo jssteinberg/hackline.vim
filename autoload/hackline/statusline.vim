@@ -13,7 +13,6 @@ function hackline#statusline#val (status = 'inactive') abort
 				\ r: '«R»',
 				\ }
 	let l:hi = hackline#highlight_groups()
-	" let l:sep = #{ l: '›', r: '‹' }
 	let l:sep = hackline#separators()
 
 	let l:statusline=''

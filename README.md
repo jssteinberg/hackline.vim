@@ -1,12 +1,19 @@
 # hackline.vim
 
-A lightweight Neovim/Vim statusline plugin. No setup required, no patched font required. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugins.
+A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugins.
 
-- **No icons** or need for patched font.
-- **No new color highlight groups**---uses already exisiting color highlight groups to avoid colorschemes having to support the plugin specifically.
+- **No prerequisites** like icons or patched font.
+- **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
 - **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on, which it is by default).
 - **Responsive**---adjusts statusline for smaller widths.
 - **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
+
+Integrations:
+
+- **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch).
+- **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig).
+And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
+- **ALE** errors and warnings if active for buffer.
 
 *Someone should confirm loading time. Low right?*
 
@@ -18,16 +25,7 @@ By default colors depends on your colorscheme. Here with [Iceberg](https://cocop
 ![narrow](https://user-images.githubusercontent.com/729055/174137072-07b9f0bd-6b95-41ca-b536-5dc6a8ade4a1.jpg)
 ![split](https://user-images.githubusercontent.com/729055/174137089-ed5f0fde-b41e-49ef-bd98-dd16f9ade287.jpg)
 
-### Integrations
-
-- **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch).
-- **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig).
-And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
-<!--
-- **ALE** if active for buffer and the number of errors and warnings.
--->
-
-### Options
+## Options
 
 Global variables for simple customization.
 

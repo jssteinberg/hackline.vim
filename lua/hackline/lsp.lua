@@ -22,24 +22,10 @@ M.get_connected_client_names = function()
 	return connected_clients
 end
 
-M.servers = function()
+M.length_connected = function()
 	local connected = M.get_connected_client_names()
 
-	if next(connected) == nil then
-		return ''
-	end
-
-	return '(' .. length(connected) .. ')'
-end
-
-M.named_servers = function()
-	local connected = M.get_connected_client_names()
-
-	if next(connected) == nil then
-		return ''
-	end
-
-	return table.concat(connected, ' ')
+	return length(connected)
 end
 
 return M

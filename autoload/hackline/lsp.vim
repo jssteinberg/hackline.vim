@@ -1,16 +1,11 @@
-function hackline#lsp#status() abort
+function hackline#lsp#length_connected() abort
 	if !has('nvim') | return '' | endif
 
-	let l:lsp_linters=''
-	let l:statusline=''
+	let l:res = 0
 
-	try " TODO: test vim without lua
-		let l:lsp_linters.=luaeval("require('hackline.lsp').named_servers()")
+	try
+		let l:res = luaeval("require('hackline.lsp').length_connected()")
 	catch | endtry
 
-	if l:lsp_linters != ''
-		let l:statusline.=l:lsp_linters
-	endif
-
-	return l:statusline
+	return l:res ? l:res : ''
 endfunction

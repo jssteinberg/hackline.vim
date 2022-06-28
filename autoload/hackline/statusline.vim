@@ -85,11 +85,11 @@ function hackline#statusline#val (status = 'inactive') abort
 	if l:active && s:has_winwidth("md") && hackline#ale()
 		let l:statusline .=  '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)'
 	endif
-	if l:active && s:has_winwidth("md") && hackline#nvim_lsp()
-		let l:statusline .= '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#lsp#status()}'.l:hi.mid.' %)'
+	if l:active && hackline#nvim_lsp()
+		let l:statusline .= '%('.l:sep.r.' :LspInfo'.l:hi.mid_item.'%{hackline#lsp#length_connected()}'.l:hi.mid.' %)'
 	endif
-	if l:active && s:has_winwidth("md") && hackline#vim_lsp()
-		let l:statusline .= l:sep.r.' '.l:hi.mid_item.'LspStatus:on'.l:hi.mid.' '
+	if l:active && hackline#vim_lsp()
+		let l:statusline .= l:sep.r.' LSP:'.l:hi.mid_item.'active'.l:hi.mid.' '
 	endif
 
 	" Git info

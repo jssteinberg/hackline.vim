@@ -1,10 +1,12 @@
+![normal](https://user-images.githubusercontent.com/729055/174136946-1f0cc857-a4cf-46b8-9781-8b8d336b776c.jpg)
+
 # hackline.vim
 
 A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugins.
 
-- **No prerequisites** like icons or patched font.
+- **No prerequisites** like icons or patched font, but there are variables to use some for something like this. ![some-power](https://user-images.githubusercontent.com/729055/176041696-46676bbe-2a18-4f7a-aad0-75cbdb56b1ac.jpg)
 - **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
-- **Minimal mode flag** for Vim professionals! (Sets `noshowmode` if on, which it is by default).
+- **Minimal mode flag** for Vim professionals! Sets `noshowmode` if on---on by default.
 - **Responsive**---adjusts statusline for smaller widths.
 - **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
 
@@ -19,7 +21,6 @@ And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if ac
 
 By default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/) (don't mind the bottom line of the terminal, which is tmux):
 
-![normal](https://user-images.githubusercontent.com/729055/174136946-1f0cc857-a4cf-46b8-9781-8b8d336b776c.jpg)
 ![insert](https://user-images.githubusercontent.com/729055/174136970-bca8a857-9bc8-4a38-bf51-1484b626263b.jpg)
 ![visual](https://user-images.githubusercontent.com/729055/174136979-7599b2ca-67a8-462f-9436-2100ff27087a.jpg)
 ![narrow](https://user-images.githubusercontent.com/729055/174137072-07b9f0bd-6b95-41ca-b536-5dc6a8ade4a1.jpg)

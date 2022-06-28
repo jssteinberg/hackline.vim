@@ -19,7 +19,7 @@ And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if ac
 
 *Someone should confirm loading time. Low right?*
 
-By default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/) (don't mind the bottom line of the terminal, which is tmux):
+Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/):
 
 ![insert](https://user-images.githubusercontent.com/729055/176217647-9c464f60-91d3-405f-8fc0-c66feaca1541.png)
 ![visual](https://user-images.githubusercontent.com/729055/176217668-2f5a1ccd-4f0a-469f-8912-fad630dd0e03.png)

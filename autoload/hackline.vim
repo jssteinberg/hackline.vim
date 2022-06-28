@@ -61,7 +61,7 @@ function hackline#filetype() abort
 endfunction
 
 function hackline#bufnum() abort
-	return get(g:, "hackline_bufnum", "1")
+	return get(g:, "hackline_bufnum", "0")
 endfunction
 
 function hackline#ale() abort

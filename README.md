@@ -1,6 +1,6 @@
 # hackline.vim
 
-A lightweight Neovim/Vim statusline plugin. No setup required, no patched font required. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugins. *Originally a fork of [skyline.vim](https://github.com/ourigen/skyline.vim). This is approx. version 0.9.3---it will probably not have breaking changes or break in general.*
+A lightweight Neovim/Vim statusline plugin. No setup required, no patched font required. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugins.
 
 - **No icons** or need for patched font.
 - **No new color highlight groups**---uses already exisiting color highlight groups to avoid colorschemes having to support the plugin specifically.
@@ -20,7 +20,7 @@ By default colors depends on your colorscheme. Here with [Iceberg](https://cocop
 
 ### Integrations
 
-- **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch), [vim-fugitive](https://github.com/tpope/vim-fugitive).
+- **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch).
 - **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig).
 And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
 <!--
@@ -161,7 +161,13 @@ call jetpack#add('jssteinberg/hackline.vim')
 
 (And it should be equally simple with vim-plug).
 
-## *Future*
+## About development
+
+This is approx. version 0.9.3---it will probably not have breaking changes or break in general. Check tags and branches for older/newer versions.
+
+Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/skyline.vim) which has a different look.
+
+### *Future*
 
 - Versioning: A v1 branch/tag will be created once it hits v1. Main branch wil be kept as stable as possible with new updates.
 - Add Vim help documentation.

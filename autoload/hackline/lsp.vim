@@ -7,5 +7,5 @@ function hackline#lsp#length_connected() abort
 		let l:res = luaeval("require('hackline.lsp').length_connected()")
 	catch | endtry
 
-	return l:res ? l:res : ''
+	return l:res != 0 ? l:res : ''
 endfunction

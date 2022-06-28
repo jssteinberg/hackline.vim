@@ -48,6 +48,10 @@ function hackline#separators() abort
 	return get(g:, "hackline_separators", #{ l: '›', r: '‹' })
 endfunction
 
+function hackline#branch_sign() abort
+	return get(g:, "hackline_branch_sign", "* ")
+endfunction
+
 function hackline#mode() abort
 	return get(g:, "hackline_mode", "1")
 endfunction

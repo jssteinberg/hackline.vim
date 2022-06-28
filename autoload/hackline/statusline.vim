@@ -78,17 +78,23 @@ function hackline#statusline#val (status = 'inactive') abort
 	" ---------------------
 	let l:statusline .= ' %='
 
-	" Show LSP info
+	" LSP info
 	if l:active && s:has_winwidth("md")
 		let l:statusline .= l:hi.mid
-		let l:statusline .= hackline#ale() ? '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)' : ''
-		let l:statusline .= hackline#nvim_lsp() ? '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#lsp#status()}'.l:hi.mid.' %)' : ''
-		let l:statusline .= hackline#vim_lsp() ? l:sep.r.' '.l:hi.mid_item.'LspStatus:on'.l:hi.mid.' ' : ''
+	endif
+	if l:active && s:has_winwidth("md") && hackline#ale()
+		let l:statusline .=  '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)'
+	endif
+	if l:active && s:has_winwidth("md") && hackline#nvim_lsp()
+		let l:statusline .= '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#lsp#status()}'.l:hi.mid.' %)'
+	endif
+	if l:active && s:has_winwidth("md") && hackline#vim_lsp()
+		let l:statusline .= l:sep.r.' '.l:hi.mid_item.'LspStatus:on'.l:hi.mid.' '
 	endif
 
-	" Show git info
+	" Git info
 	if hackline#git() && l:active && s:has_winwidth("md")
-		let l:statusline .= '%('.l:sep.r.' '.l:hi.mid_item.'* '.l:hi.git.'%{hackline#git#branch()}'.l:hi.mid.' %)'
+		let l:statusline .= '%('.l:sep.r.' '.l:hi.mid_item..hackline#branch_sign()..l:hi.git.'%{hackline#git#branch()}'.l:hi.mid.' %)'
 	endif
 
 	" Change highlight group if active and bigger screen

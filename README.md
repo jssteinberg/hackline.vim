@@ -47,6 +47,10 @@ let g:hackline_encoding = 1
 let g:hackline_fileformat = 1
 let g:hackline_tab_info = 1
 
+" Separators and signs:
+let g:hackline_separators = #{ l: '›', r: '‹' }
+let g:hackline_branch_sign = "* "
+
 " Mode labels:
 let g:hackline_sign = has("nvim") ? "Neo" : "Vim"
 let g:hackline_label_command  = "«C»"
@@ -72,9 +76,6 @@ let g:hackline_highlight_terminal = 'DiffAdd'
 " Highlight groups for more content with background by default:
 let g:hackline_highlight_end = 'StatusLine'
 let g:hackline_highlight_inactive = 'StatusLineNC'
-
-" Separators:
-let g:hackline_separators = #{ l: '›', r: '‹' }
 ```
 
 In Neovim, you can configure with Lua like so:
@@ -107,6 +108,7 @@ hi HacklineNormal guibg=... guifg=...
 ```vim
 " If you have a patched font, you can get a minor powerline feel:
 let g:hackline_separators = #{ l: "", r: "" }
+let g:hackline_branch_sign = " "
 ```
 
 ![some-power](https://user-images.githubusercontent.com/729055/176041696-46676bbe-2a18-4f7a-aad0-75cbdb56b1ac.jpg)

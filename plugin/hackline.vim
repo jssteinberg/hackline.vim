@@ -4,7 +4,7 @@ let s:save_cpo = &cpo
 
 set cpo&vim
 
-exe('set laststatus=' . hackline#laststatus())
+if &laststatus != 3 | exe('set laststatus=' . hackline#laststatus()) | endif
 if hackline#mode() | set noshowmode | endif
 
 aug init_hackline_statusline

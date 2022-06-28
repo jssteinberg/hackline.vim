@@ -10,7 +10,7 @@ A lightweight Neovim/Vim statusline plugin. No setup required, no patched font r
 
 *Someone should confirm loading time. Low right?*
 
-*hackline.vim colors depends on colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/) (don't mind the bottom line of the terminal, which is tmux):*
+By default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/) (don't mind the bottom line of the terminal, which is tmux):
 
 ![normal](https://user-images.githubusercontent.com/729055/174136946-1f0cc857-a4cf-46b8-9781-8b8d336b776c.jpg)
 ![insert](https://user-images.githubusercontent.com/729055/174136970-bca8a857-9bc8-4a38-bf51-1484b626263b.jpg)

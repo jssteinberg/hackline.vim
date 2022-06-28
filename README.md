@@ -69,10 +69,13 @@ let g:hackline_highlight_inactive = 'StatusLineNC'
 
 " Separators:
 let g:hackline_separators = #{ l: '›', r: '‹' }
+```
 
+---
 
-" Some examples
+Some examples
 
+```vim
 " You can define your own highlight groups:
 let g:hackline_highlight_normal = 'HacklineNormal'
 " ...and something:

@@ -116,7 +116,7 @@ Example use:
 
 ```vim
 let g:hackline_custom_end = '
-			\%( words %{wordcount()} %)
+			\%( words %{wordcount().words} %)
 			\%( %{hackline#base#filesize()} %)
 			\ %P/%L 
 			\'

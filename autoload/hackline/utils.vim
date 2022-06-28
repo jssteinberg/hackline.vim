@@ -1,7 +1,9 @@
-function! hackline#utils#getStsHis(his) abort
+" Returns statusline friendly highlight group values
+function hackline#utils#getStatuslineHighlights( his ) abort
 	for key in keys(a:his)
 		if type(a:his[key]) == type({})
-			let a:his[key] = hackline#utils#getStsHis(a:his[key])
+			" recursion
+			let a:his[key] = hackline#utils#getStatuslineHighlights( a:his[key] )
 		else
 			let a:his[key] = a:his[key] != '' ? '%#'.a:his[key].'#' : ''
 		endif

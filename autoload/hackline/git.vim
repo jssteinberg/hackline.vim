@@ -1,4 +1,4 @@
-function! hackline#git#branch() abort
+function hackline#git#branch() abort
 	let l:branch = ''
 
 	if exists('b:gitsigns_head')

@@ -1,4 +1,6 @@
-function! hackline#base#tab_info(truncate = 0) abort
+" Basic content for statusline
+
+function hackline#base#tab_info(truncate = 0) abort
 	let l:info = !a:truncate ? 'tabs' : 'tabs'
 
 	if &expandtab
@@ -17,7 +19,7 @@ function! hackline#base#tab_info(truncate = 0) abort
 	return l:info
 endfunction
 
-function! hackline#base#filepath(width = 100) abort
+function hackline#base#filepath(width = 100) abort
 	let l:path = expand('%:p:.:h')
 
 	if winwidth(0) <= a:width
@@ -31,45 +33,19 @@ function! hackline#base#filepath(width = 100) abort
 	return ''
 endfunction
 
-function! hackline#base#fileencoding() abort
+function hackline#base#fileencoding() abort
 	if &fileencoding !=# ''
 		return &fileencoding
-	else
-		return &encoding
 	endif
+
+	return &encoding
 endfunction
 
-function! hackline#base#wordcount() abort
-	let currentmode = mode()
-
-	if !exists('g:lastmode_wc')
-		let g:lastmode_wc = currentmode
-	endif
-
-	if &modified || !exists('b:wordcount') || currentmode =~? '\c.*v' || currentmode != g:lastmode_wc
-		let g:lastmode_wc = currentmode
-		let l:old_position = getpos('.')
-		let l:old_status = v:statusmsg
-		execute "silent normal g\<c-g>"
-		if v:statusmsg ==# '--No lines in buffer--'
-			let b:wordcount = 0
-		else
-			let l:split_wc = split(v:statusmsg)
-			if index(l:split_wc, 'Selected') < 0
-				let b:wordcount = str2nr(l:split_wc[11])
-			else
-				let b:wordcount = str2nr(l:split_wc[5])
-			endif
-			let v:statusmsg = l:old_status
-		endif
-		call setpos('.', l:old_position)
-		return b:wordcount
-	else
-		return b:wordcount
-	endif
+function hackline#base#wordcount() abort
+	return wordcount().words
 endfunction
 
-function! hackline#base#filesize() abort
+function hackline#base#filesize() abort
 	let l:size = getfsize(expand('%'))
 	if l:size == 0 || l:size == -1 || l:size == -2
 		return ''

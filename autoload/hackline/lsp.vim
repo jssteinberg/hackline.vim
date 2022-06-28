@@ -1,4 +1,4 @@
-function! hackline#lsp#status()
+function hackline#lsp#status() abort
 	if !has('nvim') | return '' | endif
 
 	let l:lsp_linters=''

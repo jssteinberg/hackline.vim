@@ -2,16 +2,7 @@ let s:w = #{ md: 60, lg: 90, xl: 120 }
 
 function hackline#statusline#val (status = 'inactive') abort
 	let l:active = a:status == 'active'
-	let l:labels = #{
-				\ n: hackline#signature(),
-				\ c: '«C»',
-				\ i: '«I»',
-				\ t: '«T»',
-				\ v: '«V»',
-				\ vb: '«V»',
-				\ s: '«S»',
-				\ r: '«R»',
-				\ }
+	let l:labels = hackline#mode_labels()
 	let l:hi = hackline#highlight_groups()
 	let l:sep = hackline#separators()
 

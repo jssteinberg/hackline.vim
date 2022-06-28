@@ -31,6 +31,19 @@ function hackline#signature() abort
 	return get(g:, "hackline_sign", l:fallback_sign)
 endfunction
 
+function hackline#mode_labels() abort
+	return #{
+				\ n: hackline#signature(),
+				\ c: get(g:, "hackline_label_command", "«C»"),
+				\ i: get(g:, "hackline_label_insert", "«I»"),
+				\ t: get(g:, "hackline_label_terminal", "«T»"),
+				\ v: get(g:, "hackline_label_visual", "«V»"),
+				\ vb: get(g:, "hackline_label_visual", "«V»"),
+				\ s: get(g:, "hackline_label_select", "«S»"),
+				\ r: get(g:, "hackline_label_replace", "«R»"),
+				\ }
+endfunction
+
 function hackline#separators() abort
 	return get(g:, "hackline_separators", #{ l: '›', r: '‹' })
 endfunction

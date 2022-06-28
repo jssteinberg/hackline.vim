@@ -77,6 +77,13 @@ let g:hackline_highlight_inactive = 'StatusLineNC'
 let g:hackline_separators = #{ l: '›', r: '‹' }
 ```
 
+In Neovim, you can configure with Lua like so:
+
+```lua
+vim.g.hackline_laststatus = 3
+-- ...etc.
+```
+
 ---
 
 Some examples
@@ -104,29 +111,20 @@ let g:hackline_separators = #{ l: "", r: "" }
 
 ![some-power](https://user-images.githubusercontent.com/729055/176041696-46676bbe-2a18-4f7a-aad0-75cbdb56b1ac.jpg)
 
----
-
-In Neovim, you can configure with Lua like so:
-
-```lua
-vim.g.hackline_laststatus = 3
--- ...etc.
-```
-
-### Extra functions
-
-- **File size** function (originally from skyline.vim): `hackline#base#filesize()`
-- **Tabs or spaces**, and their size, function (active by default from `g:hackline_tab_info`): `hackline#base#tab_info()`
-
-Example use:
-
 ```vim
+" Custom end is avaluated as statusline content:
 let g:hackline_custom_end = '
 			\%( words %{wordcount().words} %)
 			\%( %{hackline#base#filesize()} %)
 			\ %P/%L 
 			\'
 ```
+
+### Extra functions
+
+- **File size** function (originally from skyline.vim): `hackline#base#filesize()`
+- **Tabs or spaces**, and their size, function (active by default from `g:hackline_tab_info`): `hackline#base#tab_info()`
+- Also see `:help statusline`
 
 ## Installation
 

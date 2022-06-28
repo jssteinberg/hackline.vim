@@ -1,10 +1,10 @@
-![normal](https://user-images.githubusercontent.com/729055/174136946-1f0cc857-a4cf-46b8-9781-8b8d336b776c.jpg)
+![normal](https://user-images.githubusercontent.com/729055/176217352-d0942b97-e04d-4de4-b9e1-dd2f75cda5cc.png)
 
 # hackline.vim
 
 A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugins.
 
-- **No prerequisites** like icons or patched font, but there are variables to use some for something like this. ![some-power](https://user-images.githubusercontent.com/729055/176041696-46676bbe-2a18-4f7a-aad0-75cbdb56b1ac.jpg)
+- **No prerequisites** like icons or patched font, but there are simple variables for adding it.
 - **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
 - **Minimal mode flag** for Vim professionals! Sets `noshowmode` if on---on by default.
 - **Responsive**---adjusts statusline for smaller widths.
@@ -21,10 +21,9 @@ And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if ac
 
 By default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/) (don't mind the bottom line of the terminal, which is tmux):
 
-![insert](https://user-images.githubusercontent.com/729055/174136970-bca8a857-9bc8-4a38-bf51-1484b626263b.jpg)
-![visual](https://user-images.githubusercontent.com/729055/174136979-7599b2ca-67a8-462f-9436-2100ff27087a.jpg)
-![narrow](https://user-images.githubusercontent.com/729055/174137072-07b9f0bd-6b95-41ca-b536-5dc6a8ade4a1.jpg)
-![split](https://user-images.githubusercontent.com/729055/174137089-ed5f0fde-b41e-49ef-bd98-dd16f9ade287.jpg)
+![insert](https://user-images.githubusercontent.com/729055/176217647-9c464f60-91d3-405f-8fc0-c66feaca1541.png)
+![visual](https://user-images.githubusercontent.com/729055/176217668-2f5a1ccd-4f0a-469f-8912-fad630dd0e03.png)
+![replace](https://user-images.githubusercontent.com/729055/176217697-f548262d-d277-4752-8419-b064d6e0df67.png)
 
 ## Options
 
@@ -110,7 +109,7 @@ let g:hackline_separators = #{ l: "", r: "" }
 let g:hackline_branch_sign = " "
 ```
 
-![some-power](https://user-images.githubusercontent.com/729055/176041696-46676bbe-2a18-4f7a-aad0-75cbdb56b1ac.jpg)
+![power](https://user-images.githubusercontent.com/729055/176217828-f5642220-9b6f-4306-a5f3-ec166eee31a9.png)
 
 ```vim
 " Custom end is avaluated as statusline content:

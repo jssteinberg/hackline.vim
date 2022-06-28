@@ -76,6 +76,13 @@ let g:hackline_separators = #{ l: '›', r: '‹' }
 Some examples
 
 ```vim
+" Add your own three letter signature:
+let g:hackline_sign = "Hck"
+" ..or signal 'normal mode':
+let g:hackline_sign = "«N»"
+```
+
+```vim
 " You can define your own highlight groups:
 let g:hackline_highlight_normal = 'HacklineNormal'
 " ...and something:

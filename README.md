@@ -63,7 +63,8 @@ let g:hackline_custom_end = '
 			\ %P/%L 
 			\'
 
-" Mode highlight groups:
+" Highlight groups:
+let g:hackline_highlight_inactive = 'StatusLineNC'
 let g:hackline_highlight_normal = 'StatusLine'
 let g:hackline_highlight_insert = 'Todo'
 let g:hackline_highlight_visual = 'PmenuSel'
@@ -71,9 +72,10 @@ let g:hackline_highlight_replace = 'IncSearch'
 let g:hackline_highlight_select = 'IncSearch'
 let g:hackline_highlight_command = 'DiffAdd'
 let g:hackline_highlight_terminal = 'DiffAdd'
-" Highlight groups for more content with background by default:
+let g:hackline_highlight_secondary = 'Comment'
+let g:hackline_highlight_items = 'Normal'
+let g:hackline_hightlight_branch = 'String'
 let g:hackline_highlight_end = 'StatusLine'
-let g:hackline_highlight_inactive = 'StatusLineNC'
 ```
 
 In Neovim, you can configure with Lua like so:

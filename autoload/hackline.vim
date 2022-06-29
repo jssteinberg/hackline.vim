@@ -16,7 +16,7 @@ function hackline#highlight_groups() abort
 				\ mid_item: get(g:, "hackline_highlight_items", "Normal"),
 				\ dir: get(g:, "hackline_highlight_secondary", "Comment"),
 				\ tail: get(g:, "hackline_highlight_items", "Normal"),
-				\ git: get(g:, "hackline_hightlight_branch", "String"),
+				\ branch: get(g:, "hackline_hightlight_branch", "String"),
 				\ end: get(g:, "hackline_highlight_end", "StatusLine"),
 				\ active_sm: get(g:, "hackline_highlight_normal", "StatusLine"),
 				\ inactive: get(g:, "hackline_highlight_inactive", "StatusLineNC"),

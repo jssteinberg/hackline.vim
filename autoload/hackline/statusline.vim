@@ -123,11 +123,9 @@ function hackline#statusline#val (status = 'inactive') abort
 		let l:statusline .= '%( %{hackline#base#tab_info(1)} %)'
 	endif
 
-	" Show custom end content
-	if s:has_winwidth("lg")
-		if hackline#custom_end() != ''
-			let l:statusline .= '%{%hackline#custom_end()%}'
-		endif
+	" show custom end content
+	if hackline#custom_end() != ''
+		let l:statusline .= '%{%hackline#custom_end()%}'
 	endif
 
 	" Spacing

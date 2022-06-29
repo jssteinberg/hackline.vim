@@ -60,7 +60,7 @@ function hackline#filetype() abort
 	return get(g:, "hackline_filetype", "1")
 endfunction
 
-function hackline#bufnum() abort
+function hackline#bufnr() abort
 	return get(g:, "hackline_bufnum", "0")
 endfunction
 

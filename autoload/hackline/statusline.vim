@@ -54,10 +54,10 @@ function hackline#statusline#val (status = 'inactive') abort
 	endif
 
 	" Show buffer number dependent on state/width
-	if hackline#bufnum() && s:has_winwidth("md")
-		let l:statusline .= l:active ? '%( '.l:hi.mid_item.'b%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
-	elseif hackline#bufnum()
-		let l:statusline .= l:active ? '%(b%{bufnr()}   %)' : '%(  %{bufnr()}  %)'
+	if hackline#bufnr() && s:has_winwidth("md")
+		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
+	elseif hackline#bufnr()
+		let l:statusline .= l:active ? '%(:b%{bufnr()}   %)' : '%(  b%{bufnr()}  %)'
 	endif
 
 	" Modified flag

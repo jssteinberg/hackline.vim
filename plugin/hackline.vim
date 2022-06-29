@@ -4,6 +4,10 @@ let s:save_cpo = &cpo
 
 set cpo&vim
 
+" TODO: remove at some point
+" echo "hackline.vim will get breaking changes (alt. use v1 branch)"
+echo "hackline.vim v2 has breaking changes (alt. use v1 branch)"
+
 if &laststatus != 3 | exe('set laststatus=' . hackline#laststatus()) | endif
 if hackline#mode() | set noshowmode | endif
 

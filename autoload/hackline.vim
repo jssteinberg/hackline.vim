@@ -52,6 +52,12 @@ function hackline#branch_sign() abort
 	return get(g:, "hackline_branch_sign", "* ")
 endfunction
 
+function hackline#custom_end() abort
+	return get(g:, "hackline_custom_end", "
+				\ %P/%L 
+				\")
+endfunction
+
 function hackline#mode() abort
 	return get(g:, "hackline_mode", "1")
 endfunction
@@ -86,16 +92,6 @@ endfunction
 
 function hackline#fileformat() abort
 	return get(g:, "hackline_fileformat", "1")
-endfunction
-
-function hackline#tab_info() abort
-	return get(g:, "hackline_tab_info", "1")
-endfunction
-
-function hackline#custom_end() abort
-	return get(g:, "hackline_custom_end", "
-				\ %P/%L 
-				\")
 endfunction
 
 function hackline#laststatus() abort

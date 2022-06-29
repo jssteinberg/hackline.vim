@@ -34,7 +34,7 @@ function hackline#statusline#val (status = 'inactive') abort
 	else
 		" A certain number of spaces here so content is equally placed on active and inactive
 		" statusline to avoid that main statusline content jumps around.
-		let l:statusline .= '     '.l:sep.r
+		let l:statusline .= '      '
 	endif
 
 	" Show filetype
@@ -48,9 +48,9 @@ function hackline#statusline#val (status = 'inactive') abort
 
 	" Change highlight group or add sign
 	if s:has_winwidth("md")
-		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : ' '.l:sep.l
+		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : '  '
 	else
-		let l:statusline .= l:active ? '  ' : ' '.l:sep.l
+		let l:statusline .= '  '
 	endif
 
 	" Show buffer number dependent on state/width
@@ -69,9 +69,9 @@ function hackline#statusline#val (status = 'inactive') abort
 
 	" Show filepath, active and bigger screen gets highlight groups
 	if l:active && s:has_winwidth("md")
-		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#filepath('.s:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
+		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#directories('.s:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
 	else
-		let l:statusline .= '%(%<%)%(%{hackline#base#filepath('.s:w.lg.')}%t %)'
+		let l:statusline .= '%(%<%)%(%{hackline#base#directories('.s:w.lg.')}%t %)'
 	endif
 
 	" Statusline Right Side
@@ -115,12 +115,6 @@ function hackline#statusline#val (status = 'inactive') abort
 		if hackline#fileformat()
 			let l:statusline .= '%( %{&fileformat} %)'
 		endif
-	endif
-
-	if hackline#tab_info() && s:has_winwidth("lg")
-		let l:statusline .= '%( %{hackline#base#tab_info()} %)'
-	elseif hackline#tab_info() && s:has_winwidth("md")
-		let l:statusline .= '%( %{hackline#base#tab_info(1)} %)'
 	endif
 
 	" show custom end content

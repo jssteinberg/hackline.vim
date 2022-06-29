@@ -43,7 +43,6 @@ let g:hackline_vim_lsp = 1 " Vim LSP info if available
 let g:hackline_git = 1 " Current branch if available from plugins
 let g:hackline_encoding = 1
 let g:hackline_fileformat = 1
-let g:hackline_tab_info = 1
 
 " Separators and signs:
 let g:hackline_separators = #{ l: '›', r: '‹' }
@@ -78,13 +77,6 @@ let g:hackline_hightlight_branch = 'String'
 let g:hackline_highlight_end = 'StatusLine'
 ```
 
-In Neovim, you can configure with Lua like so:
-
-```lua
-vim.g.hackline_laststatus = 3
--- ...etc.
-```
-
 ---
 
 Some examples
@@ -116,16 +108,29 @@ let g:hackline_branch_sign = " "
 ```vim
 " Custom end is avaluated as statusline content:
 let g:hackline_custom_end = '
-			\%( words %{wordcount().words} %)
 			\%( %{hackline#base#filesize()} %)
 			\ %P/%L 
 			\'
 ```
 
+---
+
+In Neovim, you can configure with Lua like so:
+
+```lua
+vim.g.hackline_laststatus = 3
+vim.g.hackline_custom_end =
+	"%( %{hackline#tab#info(1)} %)"
+	.. " %P/%L "
+vim.g.hackline_branch_sign = " "
+vim.g.hackline_separators = { l = "", r = "" }
+-- ...etc.
+```
+
 ### Extra functions
 
 - **File size** function (originally from skyline.vim): `hackline#base#filesize()`
-- **Tabs or spaces**, and their size, function (active by default from `g:hackline_tab_info`): `hackline#base#tab_info()`
+- **Tabs or spaces**, and their size, function: `hackline#tab#info()` (pass parameter `1` to truncate info).
 - Also see `:help statusline`
 
 ## Installation
@@ -165,13 +170,14 @@ call jetpack#add('jssteinberg/hackline.vim')
 
 ## About development
 
-This is approx. version 0.9.3---it will probably not have breaking changes or break in general. Check tags and branches for older/newer versions.
+This is v2.0.0.
+
+Version 1: See branch v1.
 
 Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/skyline.vim) which has a different look.
 
 ### *Future*
 
-- Versioning: A v1 branch/tag will be created once it hits v1. Main branch wil be kept as stable as possible with new updates.
 - Add Vim help documentation.
 - Nvim LSP number of buffer warning/errors?
 - Update/add dirty Git branch (through plugin support---vgit?).

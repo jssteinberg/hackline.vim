@@ -88,7 +88,7 @@ function hackline#statusline#val (status = 'inactive') abort
 	endif
 	" Nvim LSP
 	if l:active && hackline#nvim_lsp() && s:has_winwidth("md")
-		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#length_connected()} LSP' . l:hi.mid . ':' . l:hi.mid_item . 'attached' . l:hi.mid . ' %)'
+		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#length_connected()} LSP' . l:hi.mid . ':running %)'
 	elseif l:active && hackline#nvim_lsp()
 		let l:statusline .= '%(' . l:sep.r . ' %{hackline#lsp#length_connected()} LSP %)'
 	endif

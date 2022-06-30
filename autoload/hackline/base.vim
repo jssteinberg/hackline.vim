@@ -43,5 +43,5 @@ function hackline#base#filesize() abort
 endfunction
 
 function hackline#base#tab_info(...) abort
-	echo "Use hackline#tab#info() for hackline.vim tab info (deprecated: hackline#base#tab_info())."
+	echom "Deprecated `hackline#base#tab_info()`! Use `hackline#tab#info()` for hackline.vim tab info."
 endfunction

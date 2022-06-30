@@ -41,3 +41,7 @@ function hackline#base#filesize() abort
 		return printf('%.1f', l:size/1024.0/1024.0/1024.0) .'GB'
 	endif
 endfunction
+
+function hackline#base#tab_info(...) abort
+	echo "Use hackline#tab#info() for hackline.vim tab info."
+endfunction

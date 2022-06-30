@@ -118,10 +118,10 @@ let g:hackline_custom_end = '
 In Neovim, you can configure with Lua like so:
 
 ```lua
-vim.g.hackline_laststatus = 3
 vim.g.hackline_custom_end =
 	"%( %{hackline#tab#info(1)} %)"
 	.. " %P/%L "
+vim.g.hackline_laststatus = 3
 vim.g.hackline_branch_sign = " "
 vim.g.hackline_separators = { l = "", r = "" }
 -- ...etc.

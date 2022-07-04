@@ -67,7 +67,11 @@ function hackline#filetype() abort
 endfunction
 
 function hackline#bufnr() abort
-	return get(g:, "hackline_bufnum", "0")
+	if get(g:, "hackline_bufnum", "0")
+		echom "Deprecated `g:hackline_bufnum`! Use `g:hackline_bufnr` for hackline.vim number of buffer."
+	endif
+
+	return get(g:, "hackline_bufnr", "0")
 endfunction
 
 function hackline#ale() abort

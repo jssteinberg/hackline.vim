@@ -47,15 +47,15 @@ function hackline#statusline#val (status = 'inactive') abort
 	endif
 
 	" Change highlight group or add sign
-	if s:has_winwidth("md")
-		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : '  '
+	if s:has_winwidth("md") && l:active
+		let l:statusline .= ' ' . l:hi.mid . ' '
 	else
-		let l:statusline .= '  '
+		let l:statusline .= l:sep.l .. l:sep.l
 	endif
 
 	" Show buffer number dependent on state/width
 	if hackline#bufnr() && s:has_winwidth("md")
-		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
+		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(   %{bufnr()}  %)'
 	elseif hackline#bufnr()
 		let l:statusline .= l:active ? '%(:b%{bufnr()}   %)' : '%(  b%{bufnr()}  %)'
 	endif
@@ -88,17 +88,17 @@ function hackline#statusline#val (status = 'inactive') abort
 	endif
 	" Nvim LSP
 	if l:active && hackline#nvim_lsp() && s:has_winwidth("xl")
-		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#names_connected()}' . l:hi.mid . ' (' . l:hi.mid_item . 'LSP' . l:hi.mid . ') %)'
+		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#names_connected()}' . l:hi.mid . '(' . l:hi.mid_item . 'LSP' . l:hi.mid . ') %)'
 	elseif l:active && hackline#nvim_lsp() && s:has_winwidth("md")
-		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#length_connected()}' . l:hi.mid . ' (' . l:hi.mid_item . 'LSP' . l:hi.mid . ') %)'
+		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#length_connected()}' . l:hi.mid . '(' . l:hi.mid_item . 'LSP' . l:hi.mid . ') %)'
 	elseif l:active && hackline#nvim_lsp()
-		let l:statusline .= '%(' . l:sep.r . ' %{hackline#lsp#length_connected()} (LSP) %)'
+		let l:statusline .= '%(' . l:sep.r . ' %{hackline#lsp#length_connected()}(LSP) %)'
 	endif
 	" Vim LSP
 	if l:active && hackline#vim_lsp() && s:has_winwidth("md")
-		let l:statusline .= l:sep.r. ' ' .l:hi.mid_item. 'LSP' .l:hi.mid. ' attached '
+		let l:statusline .= l:sep.r . ' ' . l:hi.mid_item . 'LSP' . l:hi.mid . ' '
 	elseif l:active && hackline#vim_lsp()
-		let l:statusline .= l:sep.r.' LSP attached '
+		let l:statusline .= l:sep.r.' LSP '
 	endif
 
 	" Git info

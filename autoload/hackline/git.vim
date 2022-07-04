@@ -12,11 +12,15 @@ function hackline#git#branch() abort
 		let l:branch = gitbranch#name()
 	endif
 
-	return l:branch !=# '' ? branch : ''
+	return l:branch !=# '' ? l:branch : ''
 endfunction
 
 function hackline#git#status() abort
+	let l:status = ''
+
 	if get(b:,'gitsigns_status','') != ''
-		return get(b:,'gitsigns_status','')
+		let l:status = get(b:,'gitsigns_status','')
 	endif
+
+	return l:status !=# '' ? l:status : ''
 endfunction

@@ -47,15 +47,15 @@ function hackline#statusline#val (status = 'inactive') abort
 	endif
 
 	" Change highlight group or add sign
-	if s:has_winwidth("md")
-		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : '  '
+	if s:has_winwidth("md") && l:active
+		let l:statusline .= ' ' . l:hi.mid . ' '
 	else
 		let l:statusline .= '  '
 	endif
 
 	" Show buffer number dependent on state/width
 	if hackline#bufnr() && s:has_winwidth("md")
-		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(  %{bufnr()}  %)'
+		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(   %{bufnr()}  %)'
 	elseif hackline#bufnr()
 		let l:statusline .= l:active ? '%(:b%{bufnr()}   %)' : '%(  b%{bufnr()}  %)'
 	endif

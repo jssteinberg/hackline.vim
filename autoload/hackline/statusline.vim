@@ -34,7 +34,7 @@ function hackline#statusline#val (status = 'inactive') abort
 	else
 		" A certain number of spaces here so content is equally placed on active and inactive
 		" statusline to avoid that main statusline content jumps around.
-		let l:statusline .= '     '.l:sep.r
+		let l:statusline .= '      '
 	endif
 
 	" Show filetype
@@ -48,9 +48,9 @@ function hackline#statusline#val (status = 'inactive') abort
 
 	" Change highlight group or add sign
 	if s:has_winwidth("md")
-		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : ' '.l:sep.l
+		let l:statusline .= l:active ? ' '.l:hi.mid.' ' : '  '
 	else
-		let l:statusline .= l:active ? '  ' : ' '.l:sep.l
+		let l:statusline .= '  '
 	endif
 
 	" Show buffer number dependent on state/width
@@ -69,9 +69,9 @@ function hackline#statusline#val (status = 'inactive') abort
 
 	" Show filepath, active and bigger screen gets highlight groups
 	if l:active && s:has_winwidth("md")
-		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#filepath('.s:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
+		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#directories('.s:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
 	else
-		let l:statusline .= '%(%<%)%(%{hackline#base#filepath('.s:w.lg.')}%t %)'
+		let l:statusline .= '%(%<%)%(%{hackline#base#directories('.s:w.lg.')}%t %)'
 	endif
 
 	" Statusline Right Side
@@ -87,16 +87,18 @@ function hackline#statusline#val (status = 'inactive') abort
 		let l:statusline .=  '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)'
 	endif
 	" Nvim LSP
-	if l:active && hackline#nvim_lsp() && s:has_winwidth("md")
-		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#length_connected()} LSP' . l:hi.mid . ':running %)'
+	if l:active && hackline#nvim_lsp() && s:has_winwidth("xl")
+		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#names_connected()}' . l:hi.mid . '(' . l:hi.mid_item . 'LSP' . l:hi.mid . ') %)'
+	elseif l:active && hackline#nvim_lsp() && s:has_winwidth("md")
+		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#length_connected()}' . l:hi.mid . '(' . l:hi.mid_item . 'LSP' . l:hi.mid . ') %)'
 	elseif l:active && hackline#nvim_lsp()
-		let l:statusline .= '%(' . l:sep.r . ' %{hackline#lsp#length_connected()} LSP %)'
+		let l:statusline .= '%(' . l:sep.r . ' %{hackline#lsp#length_connected()}(LSP) %)'
 	endif
 	" Vim LSP
 	if l:active && hackline#vim_lsp() && s:has_winwidth("md")
-		let l:statusline .= l:sep.r. ' ' .l:hi.mid_item. 'LSP' .l:hi.mid. ':running '
+		let l:statusline .= l:sep.r . ' ' . l:hi.mid_item . 'LSP' . l:hi.mid . ' '
 	elseif l:active && hackline#vim_lsp()
-		let l:statusline .= l:sep.r.' LSP:running '
+		let l:statusline .= l:sep.r.' LSP '
 	endif
 
 	" Git info
@@ -115,12 +117,6 @@ function hackline#statusline#val (status = 'inactive') abort
 		if hackline#fileformat()
 			let l:statusline .= '%( %{&fileformat} %)'
 		endif
-	endif
-
-	if hackline#tab_info() && s:has_winwidth("lg")
-		let l:statusline .= '%( %{hackline#base#tab_info()} %)'
-	elseif hackline#tab_info() && s:has_winwidth("md")
-		let l:statusline .= '%( %{hackline#base#tab_info(1)} %)'
 	endif
 
 	" show custom end content

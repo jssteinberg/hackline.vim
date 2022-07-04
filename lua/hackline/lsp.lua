@@ -22,6 +22,12 @@ M.get_connected_client_names = function()
 	return connected_clients
 end
 
+M.names_connected = function()
+	local connected = M.get_connected_client_names()
+
+	return table.concat(connected, "/")
+end
+
 M.length_connected = function()
 	local connected = M.get_connected_client_names()
 

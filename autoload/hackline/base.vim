@@ -1,25 +1,6 @@
 " Basic content for statusline
 
-function hackline#base#tab_info(truncate = 0) abort
-	let l:info = !a:truncate ? 'tabs' : 'tabs'
-
-	if &expandtab
-		let l:info = !a:truncate ? 'expandtab(sw=' : 'et(sw='
-		let l:info .= shiftwidth() . ')'
-	elseif shiftwidth() > 0 && shiftwidth() != &tabstop
-		" Tabs but differing tabstop and shiftwidth vals = strangenest
-		let l:info = 'ts='
-		let l:info .= &tabstop
-		let l:info .= '(sw=' . shiftwidth() . ')'
-	elseif &tabstop > 0
-		let l:info = !a:truncate ? 'tabstop=' : 'ts='
-		let l:info .= &tabstop
-	endif
-
-	return l:info
-endfunction
-
-function hackline#base#filepath(width = 100) abort
+function hackline#base#directories(width = 100) abort
 	let l:path = expand('%:p:.:h')
 
 	if winwidth(0) <= a:width
@@ -59,4 +40,8 @@ function hackline#base#filesize() abort
 	else
 		return printf('%.1f', l:size/1024.0/1024.0/1024.0) .'GB'
 	endif
+endfunction
+
+function hackline#base#tab_info(...) abort
+	echom "Deprecated `hackline#base#tab_info()`! Use `hackline#tab#info()` for hackline.vim tab info."
 endfunction

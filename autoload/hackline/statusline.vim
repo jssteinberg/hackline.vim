@@ -50,7 +50,7 @@ function hackline#statusline#val (status = 'inactive') abort
 	if s:has_winwidth("md") && l:active
 		let l:statusline .= ' ' . l:hi.mid . ' '
 	else
-		let l:statusline .= '  '
+		let l:statusline .= l:sep.l .. l:sep.l
 	endif
 
 	" Show buffer number dependent on state/width

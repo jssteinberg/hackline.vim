@@ -15,7 +15,12 @@ function hackline#statusline#val (status = 'inactive') abort
 	let l:statusline .= l:active ? s:has_winwidth("md") ? l:hi.start : l:hi.active_sm : l:hi.inactive
 
 	" Logic for modes
-	if l:active && hackline#mode() && mode() != 'n'
+	if !l:active
+		" A certain number of spaces here so content is equally placed on active and inactive
+		" statusline to avoid that main statusline content jumps around.
+		let l:statusline .= '      '
+	elseif l:active && hackline#mode() && mode() != 'n'
+
 		if mode() == "i"
 			let l:statusline .= l:hi.modes.i.'  '.l:labels.i.' '
 		elseif mode() == "c"
@@ -29,12 +34,11 @@ function hackline#statusline#val (status = 'inactive') abort
 		else
 			let l:statusline .= l:hi.modes.v.'  '.l:labels.v.' '
 		endif
-	elseif l:active
-		let l:statusline .= !hackline#mode() || mode() == 'n' ? '  '.l:labels.n.' ' : ''
+
+	elseif !hackline#mode() || mode() == 'n'
+		let l:statusline .= '  '.l:labels.n.' '
 	else
-		" A certain number of spaces here so content is equally placed on active and inactive
-		" statusline to avoid that main statusline content jumps around.
-		let l:statusline .= '      '
+		let l:statusline .= ''
 	endif
 
 	" Show filetype
@@ -49,8 +53,10 @@ function hackline#statusline#val (status = 'inactive') abort
 	" Change highlight group or add sign
 	if s:has_winwidth("md") && l:active
 		let l:statusline .= ' ' . l:hi.mid . ' '
-	else
+	elseif hackline#modified() == "1"
 		let l:statusline .= l:sep.l .. l:sep.l
+	else
+		let l:statusline .= '  '
 	endif
 
 	" Show buffer number dependent on state/width
@@ -58,12 +64,14 @@ function hackline#statusline#val (status = 'inactive') abort
 		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(   %{bufnr()}  %)'
 	elseif hackline#bufnr()
 		let l:statusline .= l:active ? '%(:b%{bufnr()}   %)' : '%(  b%{bufnr()}  %)'
+	else
+		let l:statusline .= ' '
 	endif
 
 	" Modified flag
-	if l:active && s:has_winwidth("md")
+	if l:active && s:has_winwidth("md") && hackline#modified() == "1"
 		let l:statusline .= '%( ['.l:hi.mid_item.'%M'.l:hi.mid.']%) '
-	else
+	elseif hackline#modified() == "1"
 		let l:statusline .= '%(  %M %) '
 	endif
 

@@ -36,6 +36,7 @@ Default values:
 let g:hackline_laststatus = 2
 let g:hackline_mode = 1
 let g:hackline_bufnr = 0
+let g:hackline_modified = 1 " 0, 1 or 2. 2 shows modified flag over normal mode (sign)
 let g:hackline_filetype = 1
 let g:hackline_ale = 0 " ALE errors and warnings if available
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available

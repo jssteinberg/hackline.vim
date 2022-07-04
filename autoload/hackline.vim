@@ -25,8 +25,12 @@ function hackline#highlight_groups() abort
 	return hackline#utils#getStatuslineHighlights( l:highlight_groups )
 endfunction
 
+function hackline#modified() abort
+	return get(g:, "hackline_modified", "1")
+endfunction
+
 function hackline#signature() abort
-	let l:fallback_sign = has("nvim") ? "Neo" : "Vim"
+	let l:fallback_sign = &modified && hackline#modified() == "2" ? "/+/" : has("nvim") ? "Neo" : "Vim"
 
 	return get(g:, "hackline_sign", l:fallback_sign)
 endfunction

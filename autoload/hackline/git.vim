@@ -16,11 +16,8 @@ function hackline#git#branch() abort
 endfunction
 
 function hackline#git#status() abort
-	let l:status = ''
+	" gitsigns
+	let l:status = get(b:,'gitsigns_status','')
 
-	if get(b:,'gitsigns_status','') != ''
-		let l:status = get(b:,'gitsigns_status','')
-	endif
-
-	return l:status !=# '' ? l:status : ''
+	return l:status != '' ? l:status : ''
 endfunction

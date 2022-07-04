@@ -1,6 +1,5 @@
-let s:w = #{ md: 60, lg: 90, xl: 120 }
-
-function hackline#statusline#val (status = 'inactive') abort
+function hackline#ui#statusline#val (status = 'inactive') abort
+	let l:w = hackline#breakpoints()
 	let l:active = a:status == 'active'
 	let l:labels = hackline#mode_labels()
 	let l:hi = hackline#highlight_groups()
@@ -12,7 +11,7 @@ function hackline#statusline#val (status = 'inactive') abort
 	" --------------------
 
 	" Set initial highlight group (color)
-	let l:statusline .= l:active ? s:has_winwidth("md") ? l:hi.start : l:hi.active_sm : l:hi.inactive
+	let l:statusline .= l:active ? hackline#util#has_winwidth("md") ? l:hi.start : l:hi.active_sm : l:hi.inactive
 
 	" Logic for modes
 	if !l:active
@@ -51,7 +50,7 @@ function hackline#statusline#val (status = 'inactive') abort
 	endif
 
 	" Change highlight group or add sign
-	if s:has_winwidth("md") && l:active
+	if hackline#util#has_winwidth("md") && l:active
 		let l:statusline .= ' ' . l:hi.mid . ' '
 	elseif hackline#modified() == "1"
 		let l:statusline .= l:sep.l .. l:sep.l
@@ -60,7 +59,7 @@ function hackline#statusline#val (status = 'inactive') abort
 	endif
 
 	" Show buffer number dependent on state/width
-	if hackline#bufnr() && s:has_winwidth("md")
+	if hackline#bufnr() && hackline#util#has_winwidth("md")
 		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(   %{bufnr()}  %)'
 	elseif hackline#bufnr()
 		let l:statusline .= l:active ? '%(:b%{bufnr()}   %)' : '%(  b%{bufnr()}  %)'
@@ -69,57 +68,57 @@ function hackline#statusline#val (status = 'inactive') abort
 	endif
 
 	" Modified flag
-	if l:active && s:has_winwidth("md") && hackline#modified() == "1"
+	if l:active && hackline#util#has_winwidth("md") && hackline#modified() == "1"
 		let l:statusline .= '%( ['.l:hi.mid_item.'%M'.l:hi.mid.']%) '
 	elseif hackline#modified() == "1"
 		let l:statusline .= '%(  %M %) '
 	endif
 
 	" Show filepath, active and bigger screen gets highlight groups
-	if l:active && s:has_winwidth("md")
-		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#directories('.s:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
+	if l:active && hackline#util#has_winwidth("md")
+		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#directories('.l:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
 	else
-		let l:statusline .= '%(%<%)%(%{hackline#base#directories('.s:w.lg.')}%t %)'
+		let l:statusline .= '%(%<%)%(%{hackline#base#directories('.l:w.lg.')}%t %)'
 	endif
 
 	" Statusline Right Side
 	" ---------------------
 	let l:statusline .= ' %='
 
-	if l:active && s:has_winwidth("md")
+	if l:active && hackline#util#has_winwidth("md")
 		let l:statusline .= l:hi.mid
 	endif
 
 	" Ale
-	if l:active && s:has_winwidth("md") && hackline#ale()
+	if l:active && hackline#util#has_winwidth("md") && hackline#ale()
 		let l:statusline .=  '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)'
 	endif
 	" Nvim LSP
-	if l:active && hackline#nvim_lsp() && s:has_winwidth("xl")
+	if l:active && hackline#nvim_lsp() && hackline#util#has_winwidth("xl")
 		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#names_connected()}' . l:hi.mid . '(' . l:hi.mid_item . 'LSP' . l:hi.mid . ') %)'
-	elseif l:active && hackline#nvim_lsp() && s:has_winwidth("md")
+	elseif l:active && hackline#nvim_lsp() && hackline#util#has_winwidth("md")
 		let l:statusline .= '%(' . l:sep.r . ' ' . l:hi.mid_item . '%{hackline#lsp#length_connected()}' . l:hi.mid . '(' . l:hi.mid_item . 'LSP' . l:hi.mid . ') %)'
 	elseif l:active && hackline#nvim_lsp()
 		let l:statusline .= '%(' . l:sep.r . ' %{hackline#lsp#length_connected()}(LSP) %)'
 	endif
 	" Vim LSP
-	if l:active && hackline#vim_lsp() && s:has_winwidth("md")
+	if l:active && hackline#vim_lsp() && hackline#util#has_winwidth("md")
 		let l:statusline .= l:sep.r . ' ' . l:hi.mid_item . 'LSP' . l:hi.mid . ' '
 	elseif l:active && hackline#vim_lsp()
 		let l:statusline .= l:sep.r.' LSP '
 	endif
 
 	" Git info
-	if hackline#git() && l:active && s:has_winwidth("md")
+	if hackline#git() && l:active && hackline#util#has_winwidth("md")
 		let l:statusline .= '%('.l:sep.r.' '.l:hi.mid_item..hackline#branch_sign()..l:hi.branch.'%{hackline#git#branch()}'.l:hi.mid.' %)'
 		let l:statusline .= '%('.l:hi.mid_item.'%{hackline#git#status()}'.l:hi.mid.' %)'
 	endif
 
 	" Change highlight group if active and bigger screen
-	let l:statusline .= s:has_winwidth("md") && l:active ? ' '.l:hi.end.' ' : '  '
+	let l:statusline .= hackline#util#has_winwidth("md") && l:active ? ' '.l:hi.end.' ' : '  '
 
 	" Show misc. file info
-	if s:has_winwidth("xl")
+	if hackline#util#has_winwidth("xl")
 		if hackline#encoding()
 			let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
 		endif
@@ -137,18 +136,4 @@ function hackline#statusline#val (status = 'inactive') abort
 	let l:statusline .= ' '
 
 	return l:statusline
-endfunction
-
-function s:has_winwidth (w = "") abort
-	if &laststatus == 3
-		return v:true
-	elseif a:w == "md" &&  winwidth(0) > s:w.md
-		return v:true
-	elseif a:w == "lg" &&  winwidth(0) > s:w.lg
-		return v:true
-	elseif a:w == "xl" &&  winwidth(0) > s:w.xl
-		return v:true
-	endif
-
-	return v:false
 endfunction

@@ -22,7 +22,7 @@ function hackline#highlight_groups() abort
 				\ inactive: get(g:, "hackline_highlight_inactive", "StatusLineNC"),
 				\ }
 
-	return hackline#utils#getStatuslineHighlights( l:highlight_groups )
+	return hackline#util#getStatuslineHighlights( l:highlight_groups )
 endfunction
 
 function hackline#modified() abort
@@ -106,10 +106,14 @@ function hackline#laststatus() abort
 	return get(g:, 'hackline_laststatus', '2')
 endfunction
 
+function hackline#breakpoints() abort
+	return #{ md: 60, lg: 90, xl: 120 }
+endfunction
+
 function hackline#statusline() abort
-	return hackline#statusline#val('active')
+	return hackline#ui#statusline#val('active')
 endfunction
 
 function hackline#statusline_nc() abort
-	return hackline#statusline#val()
+	return hackline#ui#statusline#val()
 endfunction

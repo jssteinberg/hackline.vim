@@ -71,9 +71,9 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 
 	" Modified flag
 	if l:active && hackline#util#has_winwidth("md") && hackline#modified() == "1"
-		let l:statusline .= '%( ['.l:hi.mod.'%M'.l:hi.mid.']%) '
+		let l:statusline .= '%(['.l:hi.mod.'%M'.l:hi.mid.']%) '
 	elseif hackline#modified() == "1"
-		let l:statusline .= '%(  %M %) '
+		let l:statusline .= '%( %M %) '
 	endif
 
 	" Show filepath, active and bigger screen gets highlight groups

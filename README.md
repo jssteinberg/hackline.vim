@@ -78,6 +78,7 @@ let g:hackline_highlight_command = 'DiffAdd'
 let g:hackline_highlight_terminal = 'DiffAdd'
 let g:hackline_highlight_secondary = 'Comment'
 let g:hackline_highlight_items = 'Normal'
+let g:hackline_highlight_modified = 'Search'
 let g:hackline_hightlight_branch = 'String'
 let g:hackline_highlight_end = 'StatusLine'
 ```

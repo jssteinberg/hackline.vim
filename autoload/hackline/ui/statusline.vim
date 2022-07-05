@@ -34,6 +34,8 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 			let l:statusline .= l:hi.modes.v.'  '.l:labels.v.' '
 		endif
 
+	elseif (!hackline#mode() || mode() == 'n') && hackline#modified() == "2" && &modified
+		let l:statusline .= l:hi.mod . '  '.l:labels.n.' '
 	elseif !hackline#mode() || mode() == 'n'
 		let l:statusline .= '  '.l:labels.n.' '
 	else
@@ -69,7 +71,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 
 	" Modified flag
 	if l:active && hackline#util#has_winwidth("md") && hackline#modified() == "1"
-		let l:statusline .= '%( ['.l:hi.mid_item.'%M'.l:hi.mid.']%) '
+		let l:statusline .= '%( ['.l:hi.mod.'%M'.l:hi.mid.']%) '
 	elseif hackline#modified() == "1"
 		let l:statusline .= '%(  %M %) '
 	endif

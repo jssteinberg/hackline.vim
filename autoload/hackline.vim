@@ -3,6 +3,7 @@
 function hackline#highlight_groups() abort
 	let l:highlight_groups = #{
 				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
+				\ mod: get(g:, "hackline_highlight_modified", hackline#modified() == 2 ? "Search" : "Normal"),
 				\ modes: #{
 				\   i:  get(g:, "hackline_highlight_insert",   "Todo"),
 				\   v:  get(g:, "hackline_highlight_visual",   "PmenuSel"),
@@ -30,9 +31,9 @@ function hackline#modified() abort
 endfunction
 
 function hackline#signature() abort
-	let l:fallback_sign = &modified && hackline#modified() == "2" ? "/+/" : has("nvim") ? "Neo" : "Vim"
+	let l:fallback_sign = has("nvim") ? "Neo" : "Vim"
 
-	return get(g:, "hackline_sign", l:fallback_sign)
+	return &modified && hackline#modified() == "2" ? "/+/" : get(g:, "hackline_sign", l:fallback_sign)
 endfunction
 
 function hackline#mode_labels() abort

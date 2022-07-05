@@ -2,7 +2,7 @@
 
 # hackline.vim
 
-A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugins.
+A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. Enjoy the simplicity! Yet it's quite fully featured, with some features through optional plugins.
 
 - **No prerequisites** like icons or patched font, but there are simple variables for adding it.
 - **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
@@ -24,6 +24,10 @@ Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.
 ![insert](https://user-images.githubusercontent.com/729055/176217647-9c464f60-91d3-405f-8fc0-c66feaca1541.png)
 ![visual](https://user-images.githubusercontent.com/729055/176217668-2f5a1ccd-4f0a-469f-8912-fad630dd0e03.png)
 ![replace](https://user-images.githubusercontent.com/729055/176217697-f548262d-d277-4752-8419-b064d6e0df67.png)
+
+## Why another statusline plugin?
+
+hackline.vim is hacked to be the lightest statusline plugin for experienced Vimmers, with no config needed for a full experience (this especially includes no need to have a patched font).
 
 ## Options
 

@@ -12,8 +12,7 @@ aug init_hackline_statusline
 	" BufReadPre to initially set inactive statusline
 	au BufReadPre,WinLeave,FocusLost * setlocal statusline=%!hackline#statusline_nc()
 	" CursorHold to set active for the often strangeness that is netrw
-	"au CursorHold,BufEnter,WinEnter,FocusGained * setlocal statusline=%!hackline#statusline()
-	au BufEnter,WinEnter,FocusGained * setlocal statusline=%!hackline#statusline()
+	au CursorHold,BufEnter,WinEnter,FocusGained * setlocal statusline=%!hackline#statusline()
 	" Detect vim-lsp
 	au User lsp_buffer_enabled let b:hackline_get_vim_lsp=1
 	" Detect ALE

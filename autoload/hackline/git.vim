@@ -1,4 +1,5 @@
 function hackline#git#branch() abort
+
 	" gitsigns
 	let l:branch = get(b:,'gitsigns_head','')
 

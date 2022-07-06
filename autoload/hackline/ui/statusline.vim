@@ -41,7 +41,11 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 
 	" Show filetype
 	if hackline#filetype()
-		let l:statusline .= '%('.l:sep.l.' %{&filetype} %)'
+		if l:active
+			let l:statusline .= '%('.l:sep.l.' %{&filetype} %)'
+		else
+			let l:statusline .= '%(  %{&filetype} %)'
+		endif
 	endif
 
 	" Change highlight group or add sign

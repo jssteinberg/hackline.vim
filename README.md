@@ -51,7 +51,7 @@ let g:hackline_fileformat = 1
 
 " Separators and signs:
 let g:hackline_separators = #{ l: '›', r: '‹' }
-let g:hackline_branch_sign = "* "
+let g:hackline_branch_sign = "*"
 
 " Mode labels:
 let g:hackline_sign = has("nvim") ? "Neo" : "Vim"
@@ -184,7 +184,7 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 ### *Future*
 
+- Rm git support, add support for bring-your-own
 - Add Vim help documentation.
 - Nvim LSP number of buffer warning/errors?
-- Update/add dirty Git branch (through plugin support---vgit?).
 - Support hi `StatusLineTerm` and `StatusLineTermNC`?

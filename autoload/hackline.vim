@@ -54,7 +54,7 @@ function hackline#separators() abort
 endfunction
 
 function hackline#branch_sign() abort
-	return get(g:, "hackline_branch_sign", "* ")
+	return get(g:, "hackline_branch_sign", "*")
 endfunction
 
 function hackline#custom_end() abort

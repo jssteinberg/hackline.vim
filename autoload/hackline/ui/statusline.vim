@@ -14,11 +14,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	let l:statusline .= l:active ? hackline#util#has_winwidth("md") ? l:hi.start : l:hi.active_sm : l:hi.inactive
 
 	" Logic for modes
-	if !l:active
-		" A certain number of spaces here so content is equally placed on active and inactive
-		" statusline to avoid that main statusline content jumps around.
-		let l:statusline .= '      '
-	elseif l:active && hackline#mode() && mode() != 'n'
+	if l:active && hackline#mode() && mode() != 'n'
 
 		if mode() == "i"
 			let l:statusline .= l:hi.modes.i.'  '.l:labels.i.' '
@@ -35,7 +31,8 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 		endif
 
 	elseif (!hackline#mode() || mode() == 'n') && hackline#modified() == "2" && &modified
-		let l:statusline .= l:hi.mod . '  '.l:labels.n.' '
+		let l:statusline .= l:active ? l:hi.mod : ''
+		let l:statusline .= '  '.l:labels.n.' '
 	elseif !hackline#mode() || mode() == 'n'
 		let l:statusline .= '  '.l:labels.n.' '
 	else
@@ -44,11 +41,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 
 	" Show filetype
 	if hackline#filetype()
-		if l:active
-			let l:statusline .= '%('.l:sep.l.' %{&filetype} %)'
-		else
-			let l:statusline .= '%(  %{&filetype} %)'
-		endif
+		let l:statusline .= '%('.l:sep.l.' %{&filetype} %)'
 	endif
 
 	" Change highlight group or add sign

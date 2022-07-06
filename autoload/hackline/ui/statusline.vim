@@ -111,9 +111,8 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	endif
 
 	" Git info
-	if hackline#git() && l:active && hackline#util#has_winwidth("md")
-		let l:statusline .= '%('.l:sep.r.' '.l:hi.mid_item..hackline#branch_sign()..l:hi.branch.'%{hackline#git#branch()}'.l:hi.mid.'%)'
-		let l:statusline .= '%(('.l:hi.mid_item.'%{hackline#git#status()}'.l:hi.mid.')%) '
+	if hackline#git()
+		let l:statusline .= hackline#ui#git#info(l:active, l:sep, l:hi)
 	endif
 
 	" Change highlight group if active and bigger screen

@@ -14,7 +14,11 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	let l:statusline .= l:active ? hackline#util#has_winwidth("md") ? l:hi.start : l:hi.active_sm : l:hi.inactive
 
 	" Logic for modes
-	if l:active && hackline#mode() && mode() != 'n'
+	if !l:active
+		" A certain number of spaces here so content is equally placed on active and inactive
+		" statusline to avoid that main statusline content jumps around.
+		let l:statusline .= '      '
+	elseif l:active && hackline#mode() && mode() != 'n'
 
 		if mode() == "i"
 			let l:statusline .= l:hi.modes.i.'  '.l:labels.i.' '

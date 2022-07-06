@@ -21,7 +21,9 @@ function hackline#git#status() abort
 	" vgit
 	try
 		let l:stats = get(b:,'vgit_status')
-		let l:status = '+' . l:stats.added . '/-' . l:stats.removed . '/~' . l:stats.changed
+		let l:status = hackline#git_signs().added .. l:stats.added
+					\. '/' . hackline#git_signs().removed .. l:stats.removed
+					\. '/' . hackline#git_signs().changed .. l:stats.changed
 	catch | endtry
 
 	return l:status != '' ? l:status : ''

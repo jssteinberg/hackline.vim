@@ -12,7 +12,7 @@ A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. 
 
 Integrations:
 
-- **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch).
+- **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
 - **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig).
 And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
 - **ALE** errors and warnings if active for buffer.
@@ -52,6 +52,12 @@ let g:hackline_fileformat = 1
 " Separators and signs:
 let g:hackline_separators = #{ l: '›', r: '‹' }
 let g:hackline_branch_sign = "*"
+" only for vgit
+let g:hackline_git_signs = #{
+			\added: "+",
+			\removed: "-",
+			\changed: "~",
+			\}
 
 " Mode labels:
 let g:hackline_sign = has("nvim") ? "Neo" : "Vim"
@@ -184,7 +190,7 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 ### *Future*
 
-- Rm git support, add support for bring-your-own
+- Rm direct git plugin support, add support for bring-your-own Git info.
 - Add Vim help documentation.
 - Nvim LSP number of buffer warning/errors?
 - Support hi `StatusLineTerm` and `StatusLineTermNC`?

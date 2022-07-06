@@ -53,10 +53,6 @@ function hackline#separators() abort
 	return get(g:, "hackline_separators", #{ l: '›', r: '‹' })
 endfunction
 
-function hackline#branch_sign() abort
-	return get(g:, "hackline_branch_sign", "*")
-endfunction
-
 function hackline#custom_end() abort
 	return get(g:, "hackline_custom_end", "
 				\ %P/%L 
@@ -93,6 +89,18 @@ endfunction
 
 function hackline#git() abort
 	return get(g:, "hackline_git", "1")
+endfunction
+
+function hackline#branch_sign() abort
+	return get(g:, "hackline_branch_sign", "*")
+endfunction
+
+function hackline#git_signs() abort
+	return get(g:, "hackline_git_signs", #{
+				\added: "+",
+				\removed: "-",
+				\changed: "~",
+				\})
 endfunction
 
 function hackline#encoding() abort

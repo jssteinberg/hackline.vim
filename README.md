@@ -2,7 +2,7 @@
 
 # hackline.vim
 
-A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. Enjoy the minimalism! Yet it's quite fully featured, with some features through optional plugins.
+A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. Enjoy the simplicity! Yet it's quite fully featured, with some features through optional plugins.
 
 - **No prerequisites** like icons or patched font, but there are simple variables for adding it.
 - **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
@@ -12,7 +12,7 @@ A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. 
 
 Integrations:
 
-- **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch).
+- **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
 - **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig).
 And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
 - **ALE** errors and warnings if active for buffer.
@@ -24,6 +24,10 @@ Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.
 ![insert](https://user-images.githubusercontent.com/729055/176217647-9c464f60-91d3-405f-8fc0-c66feaca1541.png)
 ![visual](https://user-images.githubusercontent.com/729055/176217668-2f5a1ccd-4f0a-469f-8912-fad630dd0e03.png)
 ![replace](https://user-images.githubusercontent.com/729055/176217697-f548262d-d277-4752-8419-b064d6e0df67.png)
+
+## Why another statusline plugin?
+
+hackline.vim is hacked to be the lightest statusline plugin for experienced Vimmers, with no config needed for a full experience (this especially includes no need to have a patched font).
 
 ## Options
 
@@ -47,7 +51,13 @@ let g:hackline_fileformat = 1
 
 " Separators and signs:
 let g:hackline_separators = #{ l: '›', r: '‹' }
-let g:hackline_branch_sign = "* "
+let g:hackline_branch_sign = "*"
+" only for vgit
+let g:hackline_git_signs = #{
+			\added: "+",
+			\removed: "-",
+			\changed: "~",
+			\}
 
 " Mode labels:
 let g:hackline_sign = has("nvim") ? "Neo" : "Vim"
@@ -74,6 +84,7 @@ let g:hackline_highlight_command = 'DiffAdd'
 let g:hackline_highlight_terminal = 'DiffAdd'
 let g:hackline_highlight_secondary = 'Comment'
 let g:hackline_highlight_items = 'Normal'
+let g:hackline_highlight_modified = 'Search'
 let g:hackline_hightlight_branch = 'String'
 let g:hackline_highlight_end = 'StatusLine'
 ```
@@ -179,7 +190,7 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 ### *Future*
 
+- Rm direct git plugin support, add support for bring-your-own Git info.
 - Add Vim help documentation.
 - Nvim LSP number of buffer warning/errors?
-- Update/add dirty Git branch (through plugin support---vgit?).
 - Support hi `StatusLineTerm` and `StatusLineTermNC`?

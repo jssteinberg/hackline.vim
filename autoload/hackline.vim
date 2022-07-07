@@ -3,6 +3,7 @@
 function hackline#highlight_groups() abort
 	let l:highlight_groups = #{
 				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
+				\ mod: get(g:, "hackline_highlight_modified", hackline#modified() == 2 ? "Search" : "Normal"),
 				\ modes: #{
 				\   i:  get(g:, "hackline_highlight_insert",   "Todo"),
 				\   v:  get(g:, "hackline_highlight_visual",   "PmenuSel"),
@@ -22,7 +23,7 @@ function hackline#highlight_groups() abort
 				\ inactive: get(g:, "hackline_highlight_inactive", "StatusLineNC"),
 				\ }
 
-	return hackline#utils#getStatuslineHighlights( l:highlight_groups )
+	return hackline#util#getStatuslineHighlights( l:highlight_groups )
 endfunction
 
 function hackline#modified() abort
@@ -30,9 +31,9 @@ function hackline#modified() abort
 endfunction
 
 function hackline#signature() abort
-	let l:fallback_sign = &modified && hackline#modified() == "2" ? "/+/" : has("nvim") ? "Neo" : "Vim"
+	let l:fallback_sign = has("nvim") ? "Neo" : "Vim"
 
-	return get(g:, "hackline_sign", l:fallback_sign)
+	return &modified && hackline#modified() == "2" ? "/+/" : get(g:, "hackline_sign", l:fallback_sign)
 endfunction
 
 function hackline#mode_labels() abort
@@ -50,10 +51,6 @@ endfunction
 
 function hackline#separators() abort
 	return get(g:, "hackline_separators", #{ l: '›', r: '‹' })
-endfunction
-
-function hackline#branch_sign() abort
-	return get(g:, "hackline_branch_sign", "* ")
 endfunction
 
 function hackline#custom_end() abort
@@ -94,6 +91,18 @@ function hackline#git() abort
 	return get(g:, "hackline_git", "1")
 endfunction
 
+function hackline#branch_sign() abort
+	return get(g:, "hackline_branch_sign", "*")
+endfunction
+
+function hackline#git_signs() abort
+	return get(g:, "hackline_git_signs", #{
+				\added: "+",
+				\removed: "-",
+				\changed: "~",
+				\})
+endfunction
+
 function hackline#encoding() abort
 	return get(g:, "hackline_encoding", "1")
 endfunction
@@ -106,10 +115,14 @@ function hackline#laststatus() abort
 	return get(g:, 'hackline_laststatus', '2')
 endfunction
 
+function hackline#breakpoints() abort
+	return #{ md: 60, lg: 90, xl: 120 }
+endfunction
+
 function hackline#statusline() abort
-	return hackline#statusline#val('active')
+	return hackline#ui#statusline#val('active')
 endfunction
 
 function hackline#statusline_nc() abort
-	return hackline#statusline#val()
+	return hackline#ui#statusline#val()
 endfunction

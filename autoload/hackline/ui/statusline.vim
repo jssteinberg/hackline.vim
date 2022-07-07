@@ -78,10 +78,12 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	endif
 
 	" Show filepath, active and bigger screen gets highlight groups
-	if l:active && hackline#util#has_winwidth("md")
+	if l:active && hackline#util#has_winwidth("lg")
 		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#directories('.l:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
+	elseif l:active && hackline#util#has_winwidth("md")
+		let l:statusline .= '%('.l:hi.tail.'%t %)%(%<%)'.l:hi.mid
 	else
-		let l:statusline .= '%(%{hackline#base#directories('.l:w.lg.')}%t%) %(%<%) '
+		let l:statusline .= '%(%t %)%(%<%) '
 	endif
 
 	" Statusline Right Side

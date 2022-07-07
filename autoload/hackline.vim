@@ -119,7 +119,7 @@ function hackline#laststatus() abort
 endfunction
 
 function hackline#breakpoints() abort
-	return #{ md: 60, lg: 90, xl: 120 }
+	return #{ md: 70, lg: 90, xl: 120 }
 endfunction
 
 function hackline#statusline() abort

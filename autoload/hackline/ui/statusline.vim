@@ -81,7 +81,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	if l:active && hackline#util#has_winwidth("md")
 		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#directories('.l:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
 	else
-		let l:statusline .= '%(%<%)%(%{hackline#base#directories('.l:w.lg.')}%t %)'
+		let l:statusline .= '%(%{hackline#base#directories('.l:w.lg.')}%t%) %(%<%) '
 	endif
 
 	" Statusline Right Side
@@ -120,13 +120,11 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	let l:statusline .= hackline#util#has_winwidth("md") && l:active ? ' '.l:hi.end.' ' : '  '
 
 	" Show misc. file info
-	if hackline#util#has_winwidth("xl")
-		if hackline#encoding()
-			let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
-		endif
-		if hackline#fileformat()
-			let l:statusline .= '%( %{&fileformat} %)'
-		endif
+	if hackline#encoding()
+		let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
+	endif
+	if hackline#fileformat()
+		let l:statusline .= '%( %{&fileformat} %)'
 	endif
 
 	" show custom end content

@@ -56,9 +56,14 @@ function hackline#separators() abort
 endfunction
 
 function hackline#custom_end() abort
+	if get(g:, "hackline_fileformat", "0") == 1
+		echom "Deprecated `g:hackline_fileformat`! Add `%( %{&fileformat} %)` to `g:hackline_custom_end`."
+	endif
+
 	return get(g:, "hackline_custom_end", "
-				\ %P/%L 
-				\")
+				\%( %{&fileformat} %)
+				\ %P/%L
+				\ ")
 endfunction
 
 function hackline#mode() abort
@@ -107,10 +112,6 @@ endfunction
 
 function hackline#encoding() abort
 	return get(g:, "hackline_encoding", "1")
-endfunction
-
-function hackline#fileformat() abort
-	return get(g:, "hackline_fileformat", "1")
 endfunction
 
 function hackline#laststatus() abort

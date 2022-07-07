@@ -67,6 +67,8 @@ let g:hackline_label_terminal = "«T»"
 let g:hackline_label_visual   = "«V»"
 let g:hackline_label_select   = "«S»"
 let g:hackline_label_replace  = "«R»"
+" modified flag for `g:hackline_modified=2`
+let g:hackline_label_modified  = "«+»"
 
 " A valid statusline value that will be added to end of statusline:
 let g:hackline_custom_end = '
@@ -84,7 +86,7 @@ let g:hackline_highlight_command = 'DiffAdd'
 let g:hackline_highlight_terminal = 'DiffAdd'
 let g:hackline_highlight_secondary = 'Comment'
 let g:hackline_highlight_items = 'Normal'
-let g:hackline_highlight_modified = 'Search'
+let g:hackline_highlight_modified = g:hackline_modified == 2 ? "Search" : "Normal"),
 let g:hackline_hightlight_branch = 'String'
 let g:hackline_highlight_end = 'StatusLine'
 ```
@@ -124,6 +126,25 @@ let g:hackline_custom_end = '
 			\ %P/%L 
 			\'
 ```
+
+<details>
+<summary>More examples</summary>
+
+/Slash style:
+
+```lua
+vim.g.hackline_modified       = "2"
+vim.g.hackline_separators     = { l = "/", r = "/" }
+vim.g.hackline_label_command  = "/ C"
+vim.g.hackline_label_insert   = "/ I"
+vim.g.hackline_label_terminal = "/ T"
+vim.g.hackline_label_visual   = "/ V"
+vim.g.hackline_label_select   = "/ S"
+vim.g.hackline_label_replace  = "/ R"
+vim.g.hackline_label_modified = "/ +"
+```
+
+</details>
 
 ---
 

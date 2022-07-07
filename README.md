@@ -149,7 +149,8 @@ vim.g.hackline_separators = { l = "", r = "" }
 
 Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer version that supports re-evaluating expression results as a statusline format string. Not tested on Vim without lua. For Mac, Vim from Homebrew works.
 
-Neovim install:
+<details>
+<summary>packer.nvim Lua</summary>
 
 ```lua
 -- packer.nvim
@@ -165,7 +166,10 @@ use { 'jssteinberg/hackline.vim', event = 'CursorHold' }
 use { 'itchyny/vim-gitbranch', event = 'CursorHold' }
 ```
 
-Vim install:
+</details>
+
+<details>
+<summary>Different Vim installs</summary>
 
 ```vim
 " minpac
@@ -179,6 +183,8 @@ call jetpack#add('jssteinberg/hackline.vim')
 ```
 
 (And it should be equally simple with vim-plug).
+
+</details>
 
 ## About development
 

@@ -91,9 +91,7 @@ let g:hackline_hightlight_branch = 'String'
 let g:hackline_highlight_end = 'StatusLine'
 ```
 
----
-
-Some examples
+### Some examples
 
 ```vim
 " Add your own signature (three letters to avoid 'layout' shifts):

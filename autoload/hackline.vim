@@ -31,7 +31,7 @@ function hackline#modified() abort
 endfunction
 
 function hackline#signature() abort
-	let l:fallback_sign = has("nvim") ? "Neo" : "Vim"
+	let l:fallback_sign = "Vim"
 
 	return &modified && hackline#modified() == "2"
 				\ ? get(g:, "hackline_label_modified", "«+»")

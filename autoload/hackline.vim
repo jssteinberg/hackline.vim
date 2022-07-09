@@ -3,6 +3,7 @@
 function hackline#highlight_groups() abort
 	let l:highlight_groups = #{
 				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
+				\ mod: get(g:, "hackline_highlight_modified", hackline#modified() == 2 ? "Search" : "Normal"),
 				\ modes: #{
 				\   i:  get(g:, "hackline_highlight_insert",   "Todo"),
 				\   v:  get(g:, "hackline_highlight_visual",   "PmenuSel"),
@@ -22,13 +23,19 @@ function hackline#highlight_groups() abort
 				\ inactive: get(g:, "hackline_highlight_inactive", "StatusLineNC"),
 				\ }
 
-	return hackline#utils#getStatuslineHighlights( l:highlight_groups )
+	return hackline#util#getStatuslineHighlights( l:highlight_groups )
+endfunction
+
+function hackline#modified() abort
+	return get(g:, "hackline_modified", "1")
 endfunction
 
 function hackline#signature() abort
-	let l:fallback_sign = has("nvim") ? "Neo" : "Vim"
+	let l:fallback_sign = "Vim"
 
-	return get(g:, "hackline_sign", l:fallback_sign)
+	return &modified && hackline#modified() == "2"
+				\ ? get(g:, "hackline_label_modified", "«+»")
+				\ : get(g:, "hackline_sign", l:fallback_sign)
 endfunction
 
 function hackline#mode_labels() abort
@@ -48,14 +55,15 @@ function hackline#separators() abort
 	return get(g:, "hackline_separators", #{ l: '›', r: '‹' })
 endfunction
 
-function hackline#branch_sign() abort
-	return get(g:, "hackline_branch_sign", "* ")
-endfunction
-
 function hackline#custom_end() abort
+	if get(g:, "hackline_fileformat", "0") == 1
+		echom "Deprecated `g:hackline_fileformat`! Add `%( %{&fileformat} %)` to `g:hackline_custom_end`."
+	endif
+
 	return get(g:, "hackline_custom_end", "
-				\ %P/%L 
-				\")
+				\%( %{&fileformat} %)
+				\ %P/%L
+				\ ")
 endfunction
 
 function hackline#mode() abort
@@ -67,7 +75,11 @@ function hackline#filetype() abort
 endfunction
 
 function hackline#bufnr() abort
-	return get(g:, "hackline_bufnum", "0")
+	if get(g:, "hackline_bufnum", "0")
+		echom "Deprecated `g:hackline_bufnum`! Use `g:hackline_bufnr` for hackline.vim number of buffer."
+	endif
+
+	return get(g:, "hackline_bufnr", "0")
 endfunction
 
 function hackline#ale() abort
@@ -86,22 +98,34 @@ function hackline#git() abort
 	return get(g:, "hackline_git", "1")
 endfunction
 
-function hackline#encoding() abort
-	return get(g:, "hackline_encoding", "1")
+function hackline#branch_sign() abort
+	return get(g:, "hackline_branch_sign", "*")
 endfunction
 
-function hackline#fileformat() abort
-	return get(g:, "hackline_fileformat", "1")
+function hackline#git_signs() abort
+	return get(g:, "hackline_git_signs", #{
+				\added: "+",
+				\removed: "-",
+				\changed: "~",
+				\})
+endfunction
+
+function hackline#encoding() abort
+	return get(g:, "hackline_encoding", "1")
 endfunction
 
 function hackline#laststatus() abort
 	return get(g:, 'hackline_laststatus', '2')
 endfunction
 
+function hackline#breakpoints() abort
+	return #{ md: 70, lg: 90, xl: 130 }
+endfunction
+
 function hackline#statusline() abort
-	return hackline#statusline#val('active')
+	return hackline#ui#statusline#val('active')
 endfunction
 
 function hackline#statusline_nc() abort
-	return hackline#statusline#val()
+	return hackline#ui#statusline#val()
 endfunction

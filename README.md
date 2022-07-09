@@ -1,4 +1,4 @@
-![normal](https://user-images.githubusercontent.com/729055/176217352-d0942b97-e04d-4de4-b9e1-dd2f75cda5cc.png)
+![normal](https://user-images.githubusercontent.com/729055/178103015-5e28dd0a-4d0e-451e-96c3-212b27167c2e.jpg)
 
 # hackline.vim
 
@@ -19,7 +19,7 @@ And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if ac
 
 *Someone should confirm loading time. Low right?*
 
-Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/):
+Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/) (note that the LSP info has improved a bit):
 
 ![insert](https://user-images.githubusercontent.com/729055/176217647-9c464f60-91d3-405f-8fc0-c66feaca1541.png)
 ![visual](https://user-images.githubusercontent.com/729055/176217668-2f5a1ccd-4f0a-469f-8912-fad630dd0e03.png)

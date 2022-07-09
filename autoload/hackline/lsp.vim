@@ -1,3 +1,5 @@
+" nvim lsp
+
 function hackline#lsp#length_connected() abort
 	if !has('nvim') | return '' | endif
 

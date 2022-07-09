@@ -71,9 +71,10 @@ let g:hackline_label_replace  = "«R»"
 let g:hackline_label_modified  = "«+»"
 
 " A valid statusline value that will be added to end of statusline:
-let g:hackline_custom_end = '
-			\ %P/%L 
-			\'
+let g:hackline_custom_end = "
+			\%( %{&fileformat} %)
+			\ %P/%L
+			\ ")
 
 " Highlight groups:
 let g:hackline_highlight_inactive = 'StatusLineNC'

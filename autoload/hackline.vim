@@ -83,15 +83,15 @@ function hackline#bufnr() abort
 endfunction
 
 function hackline#ale() abort
-	return get(g:, "hackline_ale", "0")
+	return get(g:, "hackline_ale", "0") && get(b:, "hackline_get_ale", "0")
 endfunction
 
 function hackline#nvim_lsp() abort
-	return get(g:, "hackline_nvim_lsp", "1")
+	return get(g:, "hackline_nvim_lsp", "1") && has("nvim")
 endfunction
 
 function hackline#vim_lsp() abort
-	return get(g:, "hackline_vim_lsp", "1") && exists("b:hackline_get_vim_lsp")
+	return get(g:, "hackline_vim_lsp", "1") && get(b: "hackline_get_vim_lsp", "0")
 endfunction
 
 function hackline#git() abort

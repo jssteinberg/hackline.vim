@@ -170,7 +170,7 @@ call jetpack#add('jssteinberg/hackline.vim')
 
 ## About development
 
-This is v2.0.0-1.
+This is v2.0.0-2.
 
 Version 1: See branch v1.
 

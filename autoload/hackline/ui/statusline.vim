@@ -4,6 +4,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	let l:labels = hackline#mode_labels()
 	let l:hi = hackline#highlight_groups()
 	let l:sep = hackline#separators()
+	let l:big_sep = hackline#big_separators()
 
 	let l:statusline=''
 
@@ -54,11 +55,11 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 
 	" Change highlight group or add sign
 	if hackline#util#has_winwidth("md") && l:active
-		let l:statusline .= ' ' . l:hi.mid . ' '
+		let l:statusline .= ' ' . l:big_sep.l .. l:hi.mid_item .. l:big_sep.lr .. l:hi.mid . ' '
 	elseif hackline#modified() == "1"
-		let l:statusline .= l:sep.l .. l:sep.l
+		let l:statusline .= l:sep.l .. l:sep.l .. l:big_sep.l .. l:big_sep.lr
 	else
-		let l:statusline .= '  '
+		let l:statusline .= ' ' . l:big_sep.l .. l:big_sep.lr . ' '
 	endif
 
 	" Show buffer number dependent on state/width
@@ -66,8 +67,6 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(   %{bufnr()}  %)'
 	elseif hackline#bufnr()
 		let l:statusline .= l:active ? '%(:b%{bufnr()}   %)' : '%(  b%{bufnr()}  %)'
-	else
-		let l:statusline .= ' '
 	endif
 
 	" Modified flag
@@ -96,7 +95,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 
 	" Ale
 	if l:active && hackline#util#has_winwidth("md") && hackline#ale()
-		let l:statusline .=  '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)'
+		let l:statusline .=  '%('.l:sep.r.'  '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)'
 	endif
 	" Nvim LSP
 	if hackline#nvim_lsp()
@@ -104,9 +103,9 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	endif
 	" Vim LSP
 	if l:active && hackline#vim_lsp() && hackline#util#has_winwidth("md")
-		let l:statusline .= l:sep.r . ' ' . l:hi.mid_item . 'LSP' . l:hi.mid . ' '
+		let l:statusline .= l:sep.r . '  ' . l:hi.mid_item . 'LSP' . l:hi.mid . ' '
 	elseif l:active && hackline#vim_lsp()
-		let l:statusline .= l:sep.r.' LSP '
+		let l:statusline .= l:sep.r.'  LSP '
 	endif
 
 	" Git info
@@ -115,7 +114,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	endif
 
 	" Change highlight group if active and bigger screen
-	let l:statusline .= hackline#util#has_winwidth("md") && l:active ? ' '.l:hi.end.' ' : '  '
+	let l:statusline .= hackline#util#has_winwidth("md") && l:active ? ' ' . l:hi.mid_item .. l:big_sep.rl . l:hi.end .. l:big_sep.r . ' ' : ' ' . l:big_sep.rl .. l:big_sep.r . ' '
 
 	" Show misc. file info
 	if hackline#encoding()

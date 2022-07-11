@@ -96,7 +96,7 @@ let g:hackline_highlight_end = 'StatusLine'
 
 ```vim
 " Add your own signature (three letters to avoid 'layout' shifts):
-let g:hackline_sign = "Hck"
+let g:hackline_sign = "Neo"
 " ..or signal 'normal mode':
 let g:hackline_sign = "«N»"
 ```

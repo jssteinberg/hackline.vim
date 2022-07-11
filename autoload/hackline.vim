@@ -56,7 +56,7 @@ function hackline#separators() abort
 endfunction
 
 function hackline#big_separators() abort
-	return get(g:, "hackline_big_separators", #{ l: "", r: "" })
+	return get(g:, "hackline_big_separators", #{ l: "", lr: "", r: "", rl: "" })
 endfunction
 
 function hackline#custom_end() abort
@@ -95,7 +95,7 @@ function hackline#nvim_lsp() abort
 endfunction
 
 function hackline#vim_lsp() abort
-	return get(g:, "hackline_vim_lsp", "1") && get(b: "hackline_get_vim_lsp", "0")
+	return get(g:, "hackline_vim_lsp", "1") && get(b:, "hackline_get_vim_lsp", "0")
 endfunction
 
 function hackline#git() abort

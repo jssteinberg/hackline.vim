@@ -119,6 +119,12 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	if hackline#encoding()
 		let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
 	endif
+	" if hackline#format()
+	" 	...
+	" endif
+	" if hackline#tab_info()
+	" 	...
+	" endif
 
 	" show custom end content
 	if hackline#custom_end() != ''

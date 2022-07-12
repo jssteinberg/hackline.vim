@@ -62,9 +62,16 @@ function hackline#custom_end() abort
 
 	return get(g:, "hackline_custom_end", "
 				\%( %{&fileformat} %)
-				\ %P/%L
+				\ %P/L%L c%c
 				\ ")
 endfunction
+
+" if hackline#format()
+" 	...
+" endif
+" if hackline#tab_info()
+" 	...
+" endif
 
 function hackline#mode() abort
 	return get(g:, "hackline_mode", "1")

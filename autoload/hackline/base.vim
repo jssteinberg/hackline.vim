@@ -14,14 +14,6 @@ function hackline#base#directories(width = 100) abort
 	return ''
 endfunction
 
-function hackline#base#fileencoding() abort
-	if &fileencoding !=# ''
-		return &fileencoding
-	endif
-
-	return &encoding
-endfunction
-
 function hackline#base#wordcount() abort
 	return wordcount().words
 endfunction

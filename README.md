@@ -46,8 +46,6 @@ let g:hackline_ale = 0 " ALE errors and warnings if available
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 let g:hackline_git = 1 " Current branch if available from plugins
-let g:hackline_encoding = 1
-let g:hackline_fileformat = 1
 
 " Separators and signs:
 let g:hackline_separators = #{ l: '›', r: '‹' }
@@ -60,7 +58,7 @@ let g:hackline_git_signs = #{
 			\}
 
 " Mode labels:
-let g:hackline_sign = has("nvim") ? "Neo" : "Vim"
+let g:hackline_sign = "Vim"
 let g:hackline_label_command  = "«C»"
 let g:hackline_label_insert   = "«I»"
 let g:hackline_label_terminal = "«T»"
@@ -72,8 +70,10 @@ let g:hackline_label_modified  = "«+»"
 
 " A valid statusline value that will be added to end of statusline:
 let g:hackline_custom_end = "
+			\%( %{hackline#fileencoding#info()} %)
 			\%( %{&fileformat} %)
-			\ %P/%L
+			\%( %{hackline#tab#info()} %)
+			\ %P/%LL c%c
 			\ ")
 
 " Highlight groups:
@@ -87,7 +87,7 @@ let g:hackline_highlight_command = 'DiffAdd'
 let g:hackline_highlight_terminal = 'DiffAdd'
 let g:hackline_highlight_secondary = 'Comment'
 let g:hackline_highlight_items = 'Normal'
-let g:hackline_highlight_modified = g:hackline_modified == 2 ? "Search" : "Normal"),
+let g:hackline_highlight_modified = g:hackline_modified == 2 ? "Search" : "Normal"
 let g:hackline_hightlight_branch = 'String'
 let g:hackline_highlight_end = 'StatusLine'
 ```
@@ -96,7 +96,7 @@ let g:hackline_highlight_end = 'StatusLine'
 
 ```vim
 " Add your own signature (three letters to avoid 'layout' shifts):
-let g:hackline_sign = "Hck"
+let g:hackline_sign = "Neo"
 " ..or signal 'normal mode':
 let g:hackline_sign = "«N»"
 ```

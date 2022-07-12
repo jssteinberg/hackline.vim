@@ -13,7 +13,7 @@ function hackline#highlight_groups() abort
 				\   c:  get(g:, "hackline_highlight_command",  "DiffAdd"),
 				\   t:  get(g:, "hackline_highlight_terminal", "DiffAdd"),
 				\ },
-				\ mid: get(g:, "hackline_highlight_secondary", "Comment"),
+				\ mid: get(g:, "hackline_highlight_secondary", "NonText"),
 				\ mid_item: get(g:, "hackline_highlight_items", "Normal"),
 				\ dir: get(g:, "hackline_highlight_secondary", "Comment"),
 				\ tail: get(g:, "hackline_highlight_items", "Normal"),
@@ -56,13 +56,19 @@ function hackline#separators() abort
 endfunction
 
 function hackline#custom_end() abort
-	if get(g:, "hackline_fileformat", "0") == 1
+	if get(g:, "hackline_fileformat", "1") == 0
 		echom "Deprecated `g:hackline_fileformat`! Add `%( %{&fileformat} %)` to `g:hackline_custom_end`."
 	endif
 
+	if get(g:, "hackline_fileencoding", "1") == 0
+		echom "Deprecated `g:hackline_fileencoding`! Add `%( %{hackline#fileenconding#info()} %)` to `g:hackline_custom_end`."
+	endif
+
 	return get(g:, "hackline_custom_end", "
+				\%( %{hackline#fileencoding#info()} %)
 				\%( %{&fileformat} %)
-				\ %P/%L
+				\%( %{hackline#tab#info()} %)
+				\ %P/%LL c%c
 				\ ")
 endfunction
 
@@ -83,15 +89,15 @@ function hackline#bufnr() abort
 endfunction
 
 function hackline#ale() abort
-	return get(g:, "hackline_ale", "0")
+	return get(g:, "hackline_ale", "0") && get(b:, "hackline_get_ale", "0")
 endfunction
 
 function hackline#nvim_lsp() abort
-	return get(g:, "hackline_nvim_lsp", "1")
+	return get(g:, "hackline_nvim_lsp", "1") && has("nvim")
 endfunction
 
 function hackline#vim_lsp() abort
-	return get(g:, "hackline_vim_lsp", "1") && exists("b:hackline_get_vim_lsp")
+	return get(g:, "hackline_vim_lsp", "1") && get(b:, "hackline_get_vim_lsp", "0")
 endfunction
 
 function hackline#git() abort
@@ -108,10 +114,6 @@ function hackline#git_signs() abort
 				\removed: "-",
 				\changed: "~",
 				\})
-endfunction
-
-function hackline#encoding() abort
-	return get(g:, "hackline_encoding", "1")
 endfunction
 
 function hackline#laststatus() abort

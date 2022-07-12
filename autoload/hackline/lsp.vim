@@ -1,8 +1,6 @@
 " nvim lsp
 
 function hackline#lsp#length_connected() abort
-	if !has('nvim') | return '' | endif
-
 	let l:res = 0
 
 	try
@@ -13,8 +11,6 @@ function hackline#lsp#length_connected() abort
 endfunction
 
 function hackline#lsp#names_connected() abort
-	if !has('nvim') | return '' | endif
-
 	let l:res = ''
 
 	try

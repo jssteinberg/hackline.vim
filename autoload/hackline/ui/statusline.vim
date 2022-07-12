@@ -60,21 +60,24 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	else
 		let l:statusline .= '  '
 	endif
+	if hackline#modified() == "2" && !hackline#bufnr()
+		let l:statusline .= ' '
+	endif
 
 	" Show buffer number dependent on state/width
 	if hackline#bufnr() && hackline#util#has_winwidth("md")
-		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(   %{bufnr()}  %)'
+		let l:statusline .= l:active ? '%( :b' . l:hi.mid_item . '%{bufnr()}' . l:hi.mid . ' ' . l:sep.l . '%)' : '%(   %{bufnr()}  %)'
 	elseif hackline#bufnr()
-		let l:statusline .= l:active ? '%(:b%{bufnr()}   %)' : '%(  b%{bufnr()}  %)'
-	else
-		let l:statusline .= ' '
+		let l:statusline .= l:active ? '%( :b%{bufnr()}  %)' : '%(  b%{bufnr()}  %)'
 	endif
 
 	" Modified flag
 	if l:active && hackline#util#has_winwidth("md") && hackline#modified() == "1"
-		let l:statusline .= '%(['.l:hi.mod.'%M'.l:hi.mid.']%) '
+		let l:statusline .= '%( ['.l:hi.mod.'%M'.l:hi.mid.']%) '
 	elseif hackline#modified() == "1"
-		let l:statusline .= '%( %M %) '
+		let l:statusline .= '%(  %M %) '
+	elseif hackline#modified() == "2" && hackline#bufnr()
+		let l:statusline .= ' '
 	endif
 
 	" Show filepath, active and bigger screen gets highlight groups
@@ -117,12 +120,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	" Change highlight group if active and bigger screen
 	let l:statusline .= hackline#util#has_winwidth("md") && l:active ? ' '.l:hi.end.' ' : '  '
 
-	" Show misc. file info
-	if hackline#encoding()
-		let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
-	endif
-
-	" show custom end content
+	" Show end custom content
 	if hackline#custom_end() != ''
 		let l:statusline .= '%{%hackline#custom_end()%}'
 	endif

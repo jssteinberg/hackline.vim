@@ -60,10 +60,13 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	else
 		let l:statusline .= '  '
 	endif
+	if hackline#modified() == "2" && !hackline#bufnr()
+		let l:statusline .= ' '
+	endif
 
 	" Show buffer number dependent on state/width
 	if hackline#bufnr() && hackline#util#has_winwidth("md")
-		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(   %{bufnr()}  %)'
+		let l:statusline .= l:active ? '%( :b' . l:hi.mid_item . '%{bufnr()}' . l:hi.mid . ' ' . l:sep.l . '%)' : '%(   %{bufnr()}  %)'
 	elseif hackline#bufnr()
 		let l:statusline .= l:active ? '%( :b%{bufnr()}  %)' : '%(  b%{bufnr()}  %)'
 	endif
@@ -73,6 +76,8 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 		let l:statusline .= '%( ['.l:hi.mod.'%M'.l:hi.mid.']%) '
 	elseif hackline#modified() == "1"
 		let l:statusline .= '%(  %M %) '
+	elseif hackline#modified() == "2" && hackline#bufnr()
+		let l:statusline .= ' '
 	endif
 
 	" Show filepath, active and bigger screen gets highlight groups

@@ -13,7 +13,7 @@ function hackline#highlight_groups() abort
 				\   c:  get(g:, "hackline_highlight_command",  "DiffAdd"),
 				\   t:  get(g:, "hackline_highlight_terminal", "DiffAdd"),
 				\ },
-				\ mid: get(g:, "hackline_highlight_secondary", "Comment"),
+				\ mid: get(g:, "hackline_highlight_secondary", "NonText"),
 				\ mid_item: get(g:, "hackline_highlight_items", "Normal"),
 				\ dir: get(g:, "hackline_highlight_secondary", "Comment"),
 				\ tail: get(g:, "hackline_highlight_items", "Normal"),

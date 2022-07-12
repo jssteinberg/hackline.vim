@@ -1,4 +1,4 @@
-![normal](https://user-images.githubusercontent.com/729055/178103015-5e28dd0a-4d0e-451e-96c3-212b27167c2e.jpg)
+![normal](https://user-images.githubusercontent.com/729055/178598591-5198524e-73e6-404e-a9fe-1ec5971d30bf.png)
 
 # hackline.vim
 

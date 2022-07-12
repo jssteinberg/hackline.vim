@@ -115,18 +115,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	" Change highlight group if active and bigger screen
 	let l:statusline .= hackline#util#has_winwidth("md") && l:active ? ' '.l:hi.end.' ' : '  '
 
-	" Show misc. file info
-	if hackline#encoding()
-		let l:statusline .= '%( %{hackline#base#fileencoding()} %)'
-	endif
-	" if hackline#format()
-	" 	...
-	" endif
-	" if hackline#tab_info()
-	" 	...
-	" endif
-
-	" show custom end content
+	" Show end custom content
 	if hackline#custom_end() != ''
 		let l:statusline .= '%{%hackline#custom_end()%}'
 	endif

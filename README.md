@@ -46,8 +46,6 @@ let g:hackline_ale = 0 " ALE errors and warnings if available
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 let g:hackline_git = 1 " Current branch if available from plugins
-let g:hackline_encoding = 1
-let g:hackline_fileformat = 1
 
 " Separators and signs:
 let g:hackline_separators = #{ l: '›', r: '‹' }
@@ -60,7 +58,7 @@ let g:hackline_git_signs = #{
 			\}
 
 " Mode labels:
-let g:hackline_sign = has("nvim") ? "Neo" : "Vim"
+let g:hackline_sign = "Vim"
 let g:hackline_label_command  = "«C»"
 let g:hackline_label_insert   = "«I»"
 let g:hackline_label_terminal = "«T»"
@@ -72,8 +70,10 @@ let g:hackline_label_modified  = "«+»"
 
 " A valid statusline value that will be added to end of statusline:
 let g:hackline_custom_end = "
+			\%( %{hackline#fileencoding#info()} %)
 			\%( %{&fileformat} %)
-			\ %P/%L
+			\%( %{hackline#tab#info()} %)
+			\ %P/%LL c%c
 			\ ")
 
 " Highlight groups:

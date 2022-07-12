@@ -56,22 +56,21 @@ function hackline#separators() abort
 endfunction
 
 function hackline#custom_end() abort
-	if get(g:, "hackline_fileformat", "0") == 1
+	if get(g:, "hackline_fileformat", "1") == 0
 		echom "Deprecated `g:hackline_fileformat`! Add `%( %{&fileformat} %)` to `g:hackline_custom_end`."
 	endif
 
+	if get(g:, "hackline_fileencoding", "1") == 0
+		echom "Deprecated `g:hackline_fileencoding`! Add `%( %{hackline#fileenconding#info()} %)` to `g:hackline_custom_end`."
+	endif
+
 	return get(g:, "hackline_custom_end", "
+				\%( %{hackline#fileencoding#info()} %)
 				\%( %{&fileformat} %)
-				\ %P/L%L c%c
+				\%( %{hackline#tab#info()} %)
+				\ %P/%LL c%c
 				\ ")
 endfunction
-
-" if hackline#format()
-" 	...
-" endif
-" if hackline#tab_info()
-" 	...
-" endif
 
 function hackline#mode() abort
 	return get(g:, "hackline_mode", "1")
@@ -115,10 +114,6 @@ function hackline#git_signs() abort
 				\removed: "-",
 				\changed: "~",
 				\})
-endfunction
-
-function hackline#encoding() abort
-	return get(g:, "hackline_encoding", "1")
 endfunction
 
 function hackline#laststatus() abort

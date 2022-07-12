@@ -55,10 +55,6 @@ function hackline#separators() abort
 	return get(g:, "hackline_separators", #{ l: '›', r: '‹' })
 endfunction
 
-function hackline#big_separators() abort
-	return get(g:, "hackline_big_separators", #{ l: "", r: "" })
-endfunction
-
 function hackline#custom_end() abort
 	if get(g:, "hackline_fileformat", "0") == 1
 		echom "Deprecated `g:hackline_fileformat`! Add `%( %{&fileformat} %)` to `g:hackline_custom_end`."
@@ -95,7 +91,7 @@ function hackline#nvim_lsp() abort
 endfunction
 
 function hackline#vim_lsp() abort
-	return get(g:, "hackline_vim_lsp", "1") && get(b: "hackline_get_vim_lsp", "0")
+	return get(g:, "hackline_vim_lsp", "1") && get(b:, "hackline_get_vim_lsp", "0")
 endfunction
 
 function hackline#git() abort

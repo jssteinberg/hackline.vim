@@ -66,8 +66,6 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 		let l:statusline .= l:active ? '%( :b'.l:hi.mid_item.'%{bufnr()}'.l:hi.mid.' '.l:sep.l.'%)' : '%(   %{bufnr()}  %)'
 	elseif hackline#bufnr()
 		let l:statusline .= l:active ? '%(:b%{bufnr()}   %)' : '%(  b%{bufnr()}  %)'
-	else
-		let l:statusline .= ' '
 	endif
 
 	" Modified flag

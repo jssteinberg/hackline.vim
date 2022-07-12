@@ -17,7 +17,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 	if !l:active
 		" A certain number of spaces here so content is equally placed on active and inactive
 		" statusline to avoid that main statusline content jumps around.
-		let l:statusline .= '      '
+		let l:statusline .= repeat(" ", strlen(hackline#signature())) . '   '
 	elseif l:active && hackline#mode() && mode() != 'n'
 
 		if mode() == "i"

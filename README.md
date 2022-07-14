@@ -73,7 +73,7 @@ let g:hackline_custom_end = "
 			\%( %{hackline#fileencoding#info()} %)
 			\%( %{&fileformat} %)
 			\%( %{hackline#tab#info()} %)
-			\ %P/%LL c%c
+			\ %P/%LL:c%c
 			\ ")
 
 " Highlight groups:
@@ -118,19 +118,9 @@ let g:hackline_branch_sign = " "
 
 ![power](https://user-images.githubusercontent.com/729055/176217828-f5642220-9b6f-4306-a5f3-ec166eee31a9.png)
 
-```vim
-" Custom end is avaluated as statusline content:
-let g:hackline_custom_end = '
-			\%( %{hackline#base#filesize()} %)
-			\ %P/%L 
-			\'
-```
-
 In Neovim, you can configure with Lua like so:
 
 ```lua
-vim.g.hackline_custom_end  = "%( %{hackline#tab#info(1)} %)"
-		.. " %P/%L "
 vim.g.hackline_laststatus  = 3
 vim.g.hackline_branch_sign = " "
 vim.g.hackline_separators  = { l = "", r = "" }

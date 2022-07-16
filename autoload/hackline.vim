@@ -57,18 +57,18 @@ endfunction
 
 function hackline#custom_end() abort
 	if get(g:, "hackline_fileformat", "1") == 0
-		echom "Deprecated `g:hackline_fileformat`! Add `%( %{&fileformat} %)` to `g:hackline_custom_end`."
+		echom "Deprecated `g:hackline_fileformat`! `%( %{&fileformat} %)` is used with `g:hackline_custom_end`."
 	endif
 
 	if get(g:, "hackline_fileencoding", "1") == 0
-		echom "Deprecated `g:hackline_fileencoding`! Add `%( %{hackline#fileenconding#info()} %)` to `g:hackline_custom_end`."
+		echom "Deprecated `g:hackline_fileencoding`! `%( %{hackline#fileenconding#info()} %)` is used with `g:hackline_custom_end`."
 	endif
 
 	return get(g:, "hackline_custom_end", "
 				\%( %{hackline#fileencoding#info()} %)
 				\%( %{&fileformat} %)
 				\%( %{hackline#tab#info()} %)
-				\ %P/%LL c%c
+				\ %P/%LL:c%c
 				\ ")
 endfunction
 

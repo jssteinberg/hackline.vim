@@ -7,6 +7,8 @@ set cpo&vim
 if &laststatus != 3 | exe('set laststatus=' . hackline#laststatus()) | endif
 if hackline#mode() | set noshowmode | endif
 
+" TODO: if has nvim and version above native lua, dev/use lua version
+" if !has("nvim")
 aug init_hackline_statusline
 	au!
 	" BufReadPre to initially set inactive statusline

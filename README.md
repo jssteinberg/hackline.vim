@@ -15,9 +15,7 @@ A lightweight Neovim/Vim statusline plugin. No setup or prerequisites required. 
 Integrations:
 
 - **Git** info by using the one of the following packages/plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
-- **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig).
-And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
-- **ALE** errors and warnings if active for buffer.
+- **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig). And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
 
 *Someone should confirm loading time. Low right?*
 
@@ -43,14 +41,14 @@ Default values:
 let g:hackline_laststatus = 2
 
 " Toggle statusline info:
+let g:hackline_modified = 1 " 0, 1 or 2. 2 shows modified flag over normal mode (sign)
 let g:hackline_mode = 1
 let g:hackline_bufnr = 0
-let g:hackline_modified = 1 " 0, 1 or 2. 2 shows modified flag over normal mode (sign)
 let g:hackline_filetype = 1
-let g:hackline_ale = 0 " ALE errors and warnings if available
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 let g:hackline_git = 1 " Current branch if available from plugins
+let g:hackline_ale = 0 " 1 for ALE errors and warnings when relevant
 
 " Set separators and signs:
 let g:hackline_separators = #{ l: '›', r: '‹' }

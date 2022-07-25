@@ -27,7 +27,7 @@ Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.
 
 ## Why another statusline plugin?
 
-hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for a full experience.
+hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for full functionality.
 There's no patched font or icons dependency.
 
 ## Options

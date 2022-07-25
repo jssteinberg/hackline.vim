@@ -30,6 +30,47 @@ Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.
 hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for all features.
 There's no patched font or icons dependency.
 
+## Installation
+
+Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer version that supports re-evaluating expression results as a statusline format string. Not tested on Vim without lua. For Mac, Vim from Homebrew works.
+
+<details>
+<summary>packer.nvim Lua</summary>
+
+```lua
+-- packer.nvim
+use{'jssteinberg/hackline.vim'}
+```
+
+```lua
+-- packer.nvim with git info (without gitsigns or fugitive)
+use{'jssteinberg/hackline.vim', requires = {'itchyny/vim-gitbranch'}}
+
+-- Even lazyload it (does that makes sense?):
+use { 'jssteinberg/hackline.vim', event = 'CursorHold' }
+use { 'itchyny/vim-gitbranch', event = 'CursorHold' }
+```
+
+</details>
+
+<details>
+<summary>Different Vim installs</summary>
+
+```vim
+" minpac
+call minpac#add('jssteinberg/hackline.vim')
+
+" Vim packager
+call packager#add('jssteinberg/hackline.vim')
+
+" vim-jetpack
+call jetpack#add('jssteinberg/hackline.vim')
+```
+
+(And it should be equally simple with vim-plug).
+
+</details>
+
 ## Options
 
 Global variables for simple customization.
@@ -155,46 +196,6 @@ vim.g.hackline_label_modified = "/ +"
 - **Tabs or spaces**, and their size, function: `hackline#tab#info()` (pass parameter `1` to truncate info).
 - Also see `:help statusline`
 
-## Installation
-
-Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer version that supports re-evaluating expression results as a statusline format string. Not tested on Vim without lua. For Mac, Vim from Homebrew works.
-
-<details>
-<summary>packer.nvim Lua</summary>
-
-```lua
--- packer.nvim
-use{'jssteinberg/hackline.vim'}
-```
-
-```lua
--- packer.nvim with git info (without gitsigns or fugitive)
-use{'jssteinberg/hackline.vim', requires = {'itchyny/vim-gitbranch'}}
-
--- Even lazyload it (does that makes sense?):
-use { 'jssteinberg/hackline.vim', event = 'CursorHold' }
-use { 'itchyny/vim-gitbranch', event = 'CursorHold' }
-```
-
-</details>
-
-<details>
-<summary>Different Vim installs</summary>
-
-```vim
-" minpac
-call minpac#add('jssteinberg/hackline.vim')
-
-" Vim packager
-call packager#add('jssteinberg/hackline.vim')
-
-" vim-jetpack
-call jetpack#add('jssteinberg/hackline.vim')
-```
-
-(And it should be equally simple with vim-plug).
-
-</details>
 
 ## About development
 

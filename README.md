@@ -26,6 +26,9 @@ Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.
 ![visual](https://user-images.githubusercontent.com/729055/176217668-2f5a1ccd-4f0a-469f-8912-fad630dd0e03.png)
 ![replace](https://user-images.githubusercontent.com/729055/176217697-f548262d-d277-4752-8419-b064d6e0df67.png)
 
+*Why another statusline plugin?* hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for all features.
+There's no patched font or icons dependency.
+
 ## Installation and Vim version 
 
 <details>
@@ -197,9 +200,6 @@ vim.g.hackline_label_modified = "/ +"
 
 
 ## About development
-
-Why another statusline plugin? hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for all features.
-There's no patched font or icons dependency.
 
 This is v2.0.0-3.
 

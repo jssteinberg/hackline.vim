@@ -1,6 +1,6 @@
-function hackline#ui#statusline#val (status = 'inactive') abort
+function hackline#ui#statusline#set (status = v:false) abort
 	let l:w = hackline#breakpoints()
-	let l:active = a:status == 'active'
+	let l:active = a:status
 	let l:labels = hackline#mode_labels()
 	let l:hi = hackline#highlight_groups()
 	let l:sep = hackline#separators()

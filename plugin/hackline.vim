@@ -9,17 +9,7 @@ if hackline#mode() | set noshowmode | endif
 
 " TODO: if has nvim and version above native lua, dev/use lua version
 " if !has("nvim")
-aug init_hackline_statusline
-	au!
-	" BufReadPre to initially set inactive statusline
-	au BufReadPre,WinLeave,FocusLost * setlocal statusline=%!hackline#statusline_nc()
-	" CursorHold to set active for the often strangeness that is netrw
-	au CursorHold,BufEnter,WinEnter,FocusGained * setlocal statusline=%!hackline#statusline()
-	" Detect vim-lsp
-	au User lsp_buffer_enabled let b:hackline_get_vim_lsp=1
-	" Detect ALE
-	au User ALEJobStarted let b:hackline_get_ale=1
-aug END
+call hackline#init()
 
 let &cpo = s:save_cpo
 

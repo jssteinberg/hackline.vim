@@ -30,9 +30,7 @@ Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.
 hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for all features.
 There's no patched font or icons dependency.
 
-## Installation
-
-Requires a newer version of Vim > 8.2.1[something] or Neovim. Basically a newer version that supports re-evaluating expression results as a statusline format string. Not tested on Vim without lua. For Mac, Vim from Homebrew works.
+## Installation and Requirements 
 
 <details>
 <summary>packer.nvim Lua</summary>
@@ -70,6 +68,11 @@ call jetpack#add('jssteinberg/hackline.vim')
 (And it should be equally simple with vim-plug).
 
 </details>
+
+Requires Neovim or Vim version > 8.2.1[something]---basically a newer version that supports re-evaluating expression results as a statusline format string.
+For Mac, you can use Vim from Homebrew.
+
+hackline.vim is tested on Neovim and Vim compiled with lua (but should work without Lua).
 
 ## Options
 

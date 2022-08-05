@@ -82,7 +82,7 @@ function hackline#custom_end() abort
 				\%( %{hackline#fileencoding#info()} %)
 				\%( %{&fileformat} %)
 				\%( %{hackline#tab#info()} %)
-				\ %P/%LL:c%c
+				\ %LL:%P  %l:%c
 				\ ")
 endfunction
 

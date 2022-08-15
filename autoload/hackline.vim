@@ -1,5 +1,19 @@
 " Default config for hackline.vim
 
+function hackline#init() abort
+	aug init_hackline_statusline
+		au!
+		" BufReadPre to initially set inactive statusline
+		au BufReadPre,WinLeave,FocusLost * setlocal statusline=%!hackline#ui#statusline#set()
+		" CursorHold to set active for the often strangeness that is netrw
+		au CursorHold,BufEnter,WinEnter,FocusGained * setlocal statusline=%!hackline#ui#statusline#set(v:true)
+		" Detect vim-lsp
+		au User lsp_buffer_enabled let b:hackline_get_vim_lsp=1
+		" Detect ALE
+		au User ALEJobStarted let b:hackline_get_ale=1
+	aug END
+endfunction
+
 function hackline#highlight_groups() abort
 	let l:highlight_groups = #{
 				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
@@ -68,7 +82,7 @@ function hackline#custom_end() abort
 				\%( %{hackline#fileencoding#info()} %)
 				\%( %{&fileformat} %)
 				\%( %{hackline#tab#info()} %)
-				\ %P/%LL:c%c
+				\ %LL:%P  %l:%c
 				\ ")
 endfunction
 
@@ -122,12 +136,4 @@ endfunction
 
 function hackline#breakpoints() abort
 	return #{ md: 70, lg: 90, xl: 130 }
-endfunction
-
-function hackline#statusline() abort
-	return hackline#ui#statusline#val('active')
-endfunction
-
-function hackline#statusline_nc() abort
-	return hackline#ui#statusline#val()
 endfunction

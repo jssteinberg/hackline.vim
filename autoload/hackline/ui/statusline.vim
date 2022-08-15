@@ -1,6 +1,6 @@
-function hackline#ui#statusline#val (status = 'inactive') abort
+function hackline#ui#statusline#set (status = v:false) abort
 	let l:w = hackline#breakpoints()
-	let l:active = a:status == 'active'
+	let l:active = a:status
 	let l:labels = hackline#mode_labels()
 	let l:hi = hackline#highlight_groups()
 	let l:sep = hackline#separators()
@@ -19,21 +19,7 @@ function hackline#ui#statusline#val (status = 'inactive') abort
 		" statusline to avoid that main statusline content jumps around.
 		let l:statusline .= repeat(" ", strlen(hackline#signature())) . '   '
 	elseif l:active && hackline#mode() && mode() != 'n'
-
-		if mode() == "i"
-			let l:statusline .= l:hi.modes.i.'  '.l:labels.i.' '
-		elseif mode() == "c"
-			let l:statusline .= l:hi.modes.c.'  '.l:labels.c.' '
-		elseif mode() == "t"
-			let l:statusline .= l:hi.modes.t.'  '.l:labels.t.' '
-		elseif mode() == "r"
-			let l:statusline .= l:hi.modes.r.'  '.l:labels.r.' '
-		elseif mode() == "s"
-			let l:statusline .= l:hi.modes.s.'  '.l:labels.s.' '
-		else
-			let l:statusline .= l:hi.modes.v.'  '.l:labels.v.' '
-		endif
-
+		let l:statusline .= hackline#ui#mode#info(l:hi.modes, l:labels)
 	elseif (!hackline#mode() || mode() == 'n') && hackline#modified() == "2" && &modified
 		let l:statusline .= l:active ? l:hi.mod : ''
 		let l:statusline .= '  '.l:labels.n.' '

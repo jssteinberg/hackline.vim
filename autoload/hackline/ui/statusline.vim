@@ -51,10 +51,8 @@ function hackline#ui#statusline#set (status = v:false) abort
 	endif
 
 	" Show buffer number dependent on state/width
-	if hackline#bufnr() && hackline#util#has_winwidth("md")
-		let l:statusline .= l:active ? '%( :b' . l:hi.mid_item . '%{bufnr()}' . l:hi.mid . ' ' . l:sep.l . '%)' : '%(   %{bufnr()}  %)'
-	elseif hackline#bufnr()
-		let l:statusline .= l:active ? '%( :b%{bufnr()}  %)' : '%(  b%{bufnr()}  %)'
+	if hackline#bufnr()
+		let l:statusline .= hackline#ui#bufnr#info(l:active, l:hi, l:sep)
 	endif
 
 	" Modified flag
@@ -89,7 +87,7 @@ function hackline#ui#statusline#set (status = v:false) abort
 	endif
 	" Nvim LSP
 	if hackline#nvim_lsp()
-		let l:statusline .= hackline#ui#nvim_lsp#info(l:active, l:sep, l:hi)
+		let l:statusline .= hackline#ui#nvim_lsp#info(l:active, l:hi, l:sep)
 	endif
 	" Vim LSP
 	if l:active && hackline#vim_lsp() && hackline#util#has_winwidth("md")

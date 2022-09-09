@@ -11,7 +11,6 @@ function hackline#git#branch() abort
 		let l:branch = gitbranch#name()
 	endif
 
-	" return l:branch !=# '' ? l:branch : ''
 	return l:branch
 endfunction
 

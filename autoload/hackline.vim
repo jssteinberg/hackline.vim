@@ -9,15 +9,12 @@ function hackline#init() abort
 		au CursorHold,BufEnter,WinEnter,FocusGained * setlocal statusline=%!hackline#ui#statusline#set(v:true)
 		" Detect vim-lsp
 		au User lsp_buffer_enabled let b:hackline_get_vim_lsp=1
-		" Detect ALE
-		au User ALEJobStarted let b:hackline_get_ale=1
 	aug END
 endfunction
 
 function hackline#highlight_groups() abort
 	let l:highlight_groups = #{
 				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
-				\ mod: get(g:, "hackline_highlight_modified", hackline#modified() == 2 ? "Search" : "Normal"),
 				\ modes: #{
 				\   i:  get(g:, "hackline_highlight_insert",   "Todo"),
 				\   v:  get(g:, "hackline_highlight_visual",   "PmenuSel"),
@@ -40,70 +37,37 @@ function hackline#highlight_groups() abort
 	return hackline#util#getStatuslineHighlights( l:highlight_groups )
 endfunction
 
-function hackline#modified() abort
-	return get(g:, "hackline_modified", "1")
-endfunction
-
 function hackline#signature() abort
 	let l:fallback_sign = "Vim"
 
-	return &modified && hackline#modified() == "2"
-				\ ? get(g:, "hackline_label_modified", "«+»")
-				\ : get(g:, "hackline_sign", l:fallback_sign)
+	return get(g:, "hackline_sign", l:fallback_sign)
 endfunction
 
 function hackline#mode_labels() abort
 	return #{
 				\ n: hackline#signature(),
-				\ c: get(g:, "hackline_label_command", "«C»"),
-				\ i: get(g:, "hackline_label_insert", "«I»"),
-				\ t: get(g:, "hackline_label_terminal", "«T»"),
-				\ v: get(g:, "hackline_label_visual", "«V»"),
-				\ vb: get(g:, "hackline_label_visual", "«V»"),
-				\ s: get(g:, "hackline_label_select", "«S»"),
-				\ r: get(g:, "hackline_label_replace", "«R»"),
+				\ c: get(g:, "hackline_label_command", "Command"),
+				\ i: get(g:, "hackline_label_insert", "Insert"),
+				\ t: get(g:, "hackline_label_terminal", "Terminal"),
+				\ v: get(g:, "hackline_label_visual", "Visual"),
+				\ s: get(g:, "hackline_label_select", "Select"),
+				\ r: get(g:, "hackline_label_replace", "Replace"),
 				\ }
 endfunction
 
 function hackline#separators() abort
-	return get(g:, "hackline_separators", #{ l: '›', r: '‹' })
+	return get(g:, "hackline_separators", #{ l: ' / ', r: ' / ' })
 endfunction
 
 function hackline#custom_end() abort
-	if get(g:, "hackline_fileformat", "1") == 0
-		echom "Deprecated `g:hackline_fileformat`! `%( %{&fileformat} %)` is used with `g:hackline_custom_end`."
-	endif
-
-	if get(g:, "hackline_fileencoding", "1") == 0
-		echom "Deprecated `g:hackline_fileencoding`! `%( %{hackline#fileenconding#info()} %)` is used with `g:hackline_custom_end`."
-	endif
-
 	return get(g:, "hackline_custom_end", "
-				\%( %{hackline#fileencoding#info()} %)
-				\%( %{&fileformat} %)
-				\%( %{hackline#tab#info()} %)
-				\ %LL:%P  %l:%c
-				\ ")
+				\%(%{hackline#tab#info()} " . hackline#separators().r . "%)
+				\ %lL:%P L%l:C%c
+				\")
 endfunction
 
 function hackline#mode() abort
 	return get(g:, "hackline_mode", "1")
-endfunction
-
-function hackline#filetype() abort
-	return get(g:, "hackline_filetype", "1")
-endfunction
-
-function hackline#bufnr() abort
-	if get(g:, "hackline_bufnum", "0")
-		echom "Deprecated `g:hackline_bufnum`! Use `g:hackline_bufnr` for hackline.vim number of buffer."
-	endif
-
-	return get(g:, "hackline_bufnr", "0")
-endfunction
-
-function hackline#ale() abort
-	return get(g:, "hackline_ale", "0") && get(b:, "hackline_get_ale", "0")
 endfunction
 
 function hackline#nvim_lsp() abort
@@ -119,7 +83,7 @@ function hackline#git() abort
 endfunction
 
 function hackline#branch_sign() abort
-	return get(g:, "hackline_branch_sign", "*")
+	return get(g:, "hackline_branch_sign", "Git *")
 endfunction
 
 function hackline#git_signs() abort

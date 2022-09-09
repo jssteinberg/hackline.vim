@@ -84,14 +84,10 @@ Default values:
 let g:hackline_laststatus = 2
 
 " Toggle statusline info:
-let g:hackline_modified = 1 " 0, 1 or 2. 2 shows modified flag over normal mode (sign)
 let g:hackline_mode = 1
-let g:hackline_bufnr = 0
-let g:hackline_filetype = 1
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 let g:hackline_git = 1 " Current branch if available from plugins
-let g:hackline_ale = 0 " 1 for ALE errors and warnings when relevant
 
 " Set separators and signs:
 let g:hackline_separators = #{ l: '›', r: '‹' }
@@ -104,15 +100,12 @@ let g:hackline_git_signs = #{
 			\}
 
 " Set mode labels:
-let g:hackline_sign = "Vim"
 let g:hackline_label_command  = "«C»"
 let g:hackline_label_insert   = "«I»"
 let g:hackline_label_terminal = "«T»"
 let g:hackline_label_visual   = "«V»"
 let g:hackline_label_select   = "«S»"
 let g:hackline_label_replace  = "«R»"
-" modified flag for `g:hackline_modified=2`
-let g:hackline_label_modified  = "«+»"
 
 " Set statusline value for the end of the statusline:
 let g:hackline_custom_end = "

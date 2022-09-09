@@ -108,6 +108,7 @@ let g:hackline_label_select   = "«S»"
 let g:hackline_label_replace  = "«R»"
 
 " Set statusline value for the end of the statusline:
+
 let g:hackline_custom_end = "
 			\%( %{hackline#fileencoding#info()} %)
 			\%( %{&fileformat} %)
@@ -132,13 +133,6 @@ let g:hackline_highlight_end = 'StatusLine'
 ```
 
 ### Some examples
-
-```vim
-" Add your own signature:
-let g:hackline_sign = "Neo"
-" ..or signal 'normal mode':
-let g:hackline_sign = "«N»"
-```
 
 ```vim
 " You can define your own highlight groups:
@@ -166,25 +160,6 @@ vim.g.hackline_separators  = { l = "", r = "" }
 -- ...etc.
 ```
 
-<details>
-<summary>More examples</summary>
-
-**/Slash style:**
-
-```lua
-vim.g.hackline_modified       = "2"
-vim.g.hackline_separators     = { l = "/", r = "/" }
-vim.g.hackline_label_command  = "/ C"
-vim.g.hackline_label_insert   = "/ I"
-vim.g.hackline_label_terminal = "/ T"
-vim.g.hackline_label_visual   = "/ V"
-vim.g.hackline_label_select   = "/ S"
-vim.g.hackline_label_replace  = "/ R"
-vim.g.hackline_label_modified = "/ +"
-```
-
-</details>
-
 ### Extra functions
 
 - **File size** function (originally from skyline.vim): `hackline#base#filesize()`
@@ -194,14 +169,13 @@ vim.g.hackline_label_modified = "/ +"
 
 ## About development
 
-This is v2.0.0-3.
-
-Version 1: See branch v1.
+This is v3.0.0-0.
 
 Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/skyline.vim) which has a different look.
 
 ### *Future*
 
+- Mv tabinfo from custom end
 - Rm direct git plugin support, add support for bring-your-own Git info.
 - Add Vim help documentation.
 - Nvim LSP number of buffer warning/errors?

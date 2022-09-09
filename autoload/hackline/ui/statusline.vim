@@ -49,7 +49,7 @@ function hackline#ui#statusline#set (status = v:false) abort
 
 	if l:active && hackline#mode() && mode() != 'n'
 		let l:line .= ' ' . l:sep.r
-		let l:line .= hackline#ui#mode#info(l:hi.modes, l:labels)
+		let l:line .= ' ' . hackline#ui#mode#info(l:hi.modes, l:labels)
 	endif
 
 	let l:line .= '  '

@@ -89,7 +89,7 @@ let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
 " Set separators and signs:
-let g:hackline_separators = #{ l: '›', r: '‹' }
+let g:hackline_separators = #{ l: '\', r: '/' }
 let g:hackline_branch_sign = "*"
 " For vgit
 let g:hackline_git_signs = #{
@@ -99,21 +99,15 @@ let g:hackline_git_signs = #{
 			\}
 
 " Set mode labels:
-let g:hackline_label_command  = "«C»"
-let g:hackline_label_insert   = "«I»"
-let g:hackline_label_terminal = "«T»"
-let g:hackline_label_visual   = "«V»"
-let g:hackline_label_select   = "«S»"
-let g:hackline_label_replace  = "«R»"
+let g:hackline_label_command  = "Command"
+let g:hackline_label_insert   = "Insert"
+let g:hackline_label_terminal = "Terminal"
+let g:hackline_label_visual   = "Visual"
+let g:hackline_label_select   = "Select"
+let g:hackline_label_replace  = "Replace"
 
-" Set statusline value for the end of the statusline:
-
-let g:hackline_custom_end = "
-			\%( %{hackline#fileencoding#info()} %)
-			\%( %{&fileformat} %)
-			\%( %{hackline#tab#info()} %)
-			\ %P/%LL:c%c
-			\ ")
+" Set statusline value for the far right of the statusline:
+let g:hackline_right = "Ln %l/%L Col %c"
 
 " Set highlight groups:
 let g:hackline_highlight_inactive = 'StatusLineNC'
@@ -124,11 +118,6 @@ let g:hackline_highlight_replace = 'IncSearch'
 let g:hackline_highlight_select = 'IncSearch'
 let g:hackline_highlight_command = 'DiffAdd'
 let g:hackline_highlight_terminal = 'DiffAdd'
-let g:hackline_highlight_secondary = 'Comment'
-let g:hackline_highlight_items = 'Normal'
-let g:hackline_highlight_modified = g:hackline_modified == 2 ? "Search" : "Normal"
-let g:hackline_hightlight_branch = 'String'
-let g:hackline_highlight_end = 'StatusLine'
 ```
 
 ### Some examples
@@ -174,7 +163,6 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 ### *Future*
 
-- Mv tabinfo from custom end
 - Rm direct git plugin support, add support for bring-your-own Git info.
 - Add Vim help documentation.
 - Nvim LSP number of buffer warning/errors?

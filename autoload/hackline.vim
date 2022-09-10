@@ -16,36 +16,22 @@ function hackline#highlight_groups() abort
 	let l:highlight_groups = #{
 				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
 				\ modes: #{
-				\   i:  get(g:, "hackline_highlight_insert",   "Todo"),
-				\   v:  get(g:, "hackline_highlight_visual",   "PmenuSel"),
-				\   vb: get(g:, "hackline_highlight_visual",   "PmenuSel"),
+				\   i:  get(g:, "hackline_highlight_insert",   "IncSearch"),
+				\   v:  get(g:, "hackline_highlight_visual",   "IncSearch"),
+				\   vb: get(g:, "hackline_highlight_visual",   "IncSearch"),
 				\   r:  get(g:, "hackline_highlight_replace",  "IncSearch"),
 				\   s:  get(g:, "hackline_highlight_select",   "IncSearch"),
-				\   c:  get(g:, "hackline_highlight_command",  "DiffAdd"),
-				\   t:  get(g:, "hackline_highlight_terminal", "DiffAdd"),
+				\   c:  get(g:, "hackline_highlight_command",  "IncSearch"),
+				\   t:  get(g:, "hackline_highlight_terminal", "IncSearch"),
 				\ },
-				\ mid: get(g:, "hackline_highlight_secondary", "NonText"),
-				\ mid_item: get(g:, "hackline_highlight_items", "Normal"),
-				\ dir: get(g:, "hackline_highlight_secondary", "Comment"),
-				\ tail: get(g:, "hackline_highlight_items", "Normal"),
-				\ branch: get(g:, "hackline_hightlight_branch", "String"),
-				\ end: get(g:, "hackline_highlight_end", "StatusLine"),
-				\ active_sm: get(g:, "hackline_highlight_normal", "StatusLine"),
 				\ inactive: get(g:, "hackline_highlight_inactive", "StatusLineNC"),
 				\ }
 
 	return hackline#util#getStatuslineHighlights( l:highlight_groups )
 endfunction
 
-function hackline#signature() abort
-	let l:fallback_sign = "Vim"
-
-	return get(g:, "hackline_sign", l:fallback_sign)
-endfunction
-
 function hackline#mode_labels() abort
 	return #{
-				\ n: hackline#signature(),
 				\ c: get(g:, "hackline_label_command", "Command"),
 				\ i: get(g:, "hackline_label_insert", "Insert"),
 				\ t: get(g:, "hackline_label_terminal", "Terminal"),
@@ -59,8 +45,8 @@ function hackline#separators() abort
 	return get(g:, "hackline_separators", #{ l: ' \ ', r: ' / ' })
 endfunction
 
-function hackline#custom_end() abort
-	return get(g:, "hackline_custom_end", "Ln %l/%L Col %c")
+function hackline#right() abort
+	return get(g:, "hackline_right", "Ln %l/%L Col %c")
 endfunction
 
 function hackline#mode() abort

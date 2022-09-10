@@ -10,20 +10,19 @@ function hackline#ui#statusline#set (status = v:false) abort
 	" length separator items
 	let l:len_i = repeat(' ', strlen(l:sep_i))
 	" Set initial highlight group (color)
-	let l:line = ' '
-	let l:line .= l:active ? hackline#util#has_winwidth("md") ? l:hi.start : l:hi.active_sm : l:hi.inactive
+	let l:line = ''
+	let l:line .= l:active ? l:hi.start : l:hi.inactive
 
 	" Statusline Left Side
 	" --------------------
 
 	if l:active && hackline#mode() && mode() != 'n'
-		let l:line .= l:len_i .. hackline#ui#mode#info(l:hi.modes, l:labels)
+		let l:line .= hackline#ui#mode#info(l:hi.modes, l:labels, l:len_i)
 		let l:line .= l:len_i .. l:sep.l
 	endif
 	let l:line .= '%(' . l:sep_i . '%M' . l:len_i .. l:sep.l . '%)'
 	let l:line .= '%(' . l:len_i . 'Buf %{bufnr()}%)'
 	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
-
 	" Truncation point
 	let l:line .= l:len_i . '%<'
 	let l:line .= '%(%{hackline#fileencoding#info()}%)'
@@ -32,12 +31,12 @@ function hackline#ui#statusline#set (status = v:false) abort
 	let l:line .= '' . l:sep_i . '' . l:sep.l
 	let l:line .= '%(' . l:sep_i . '%{hackline#base#directories(' . l:w.xl . ')}%t%)'
 
-	" Statusline Middle (Right)
-	" -------------------------
+	" Statusline Middle/Right
+	" -----------------------
 
 	let l:line .= '%='
 	if l:active
-		let l:line .= l:len_i .. l:sep.r .. l:len_i .. hackline#ui#git#info()
+		let l:line .= l:len_i .. hackline#ui#git#info()
 	endif
 
 	let l:line .= '%='
@@ -54,9 +53,9 @@ function hackline#ui#statusline#set (status = v:false) abort
 	" ---------------------
 
 	let l:line .= '%='
-	if hackline#custom_end() != ''
+	if hackline#right() != ''
 		let l:line .= l:len_i .. l:sep.r
-		let l:line .= l:len_i . '%{%hackline#custom_end()%}'
+		let l:line .= l:len_i . '%{%hackline#right()%}'
 	endif
 	let l:line .= ' ' . l:len_i
 

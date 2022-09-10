@@ -1,8 +1,8 @@
 function hackline#ui#tab#info(truncate = 0) abort
-	let l:info = !a:truncate ? 'tab ' : ''
+	let l:info = 'tab'
 
 	if &expandtab
-		let l:info = !a:truncate ? 'expandtab ' : 'et '
+		let l:info = !a:truncate ? 'expandtab ' : 'space '
 	endif
 
 	if shiftwidth() > 0 && shiftwidth() != &tabstop
@@ -14,7 +14,7 @@ function hackline#ui#tab#info(truncate = 0) abort
 	elseif &expandtab
 		let l:info .= shiftwidth()
 	elseif &tabstop > 0
-		let l:info .= 'ts='
+		let l:info = !a:truncate ? 'tabstop ' : 'tab '
 		let l:info .= &tabstop
 	endif
 

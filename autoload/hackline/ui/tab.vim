@@ -1,16 +1,20 @@
 function hackline#ui#tab#info(truncate = 0) abort
-	let l:info = !a:truncate ? 'tabs' : 'tabs'
+	let l:info = !a:truncate ? 'tab ' : ''
 
 	if &expandtab
-		let l:info = !a:truncate ? 'expandtab(sw=' : 'et/sw='
-		let l:info .= shiftwidth()
-	elseif shiftwidth() > 0 && shiftwidth() != &tabstop
+		let l:info = !a:truncate ? 'expandtab ' : 'et '
+	endif
+
+	if shiftwidth() > 0 && shiftwidth() != &tabstop
 		" Tabs but differing tabstop and shiftwidth vals = strangenest
-		let l:info = 'ts='
+		let l:info .= 'sw/ts '
+		let l:info .= shiftwidth()
+		let l:info .= '/'
 		let l:info .= &tabstop
-		let l:info .= '/sw=' . shiftwidth()
+	elseif &expandtab
+		let l:info .= shiftwidth()
 	elseif &tabstop > 0
-		let l:info = !a:truncate ? 'tabs/ts=' : 'ts='
+		let l:info .= 'ts='
 		let l:info .= &tabstop
 	endif
 

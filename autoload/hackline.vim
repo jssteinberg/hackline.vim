@@ -60,7 +60,7 @@ function hackline#separators() abort
 endfunction
 
 function hackline#custom_end() abort
-	return get(g:, "hackline_custom_end", "%p%%/%L Ln %l Col %c")
+	return get(g:, "hackline_custom_end", "Ln %l/%L Col %c")
 endfunction
 
 function hackline#mode() abort

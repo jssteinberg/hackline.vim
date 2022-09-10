@@ -61,8 +61,7 @@ endfunction
 
 function hackline#custom_end() abort
 	return get(g:, "hackline_custom_end", "
-				\%(%{hackline#tab#info()} " . hackline#separators().r . "%)
-				\ %lL:%P L%l:C%c
+				\%lL:%P L%l:C%c
 				\")
 endfunction
 
@@ -83,7 +82,7 @@ function hackline#git() abort
 endfunction
 
 function hackline#branch_sign() abort
-	return get(g:, "hackline_branch_sign", "Git *")
+	return get(g:, "hackline_branch_sign", "*")
 endfunction
 
 function hackline#git_signs() abort

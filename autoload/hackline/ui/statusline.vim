@@ -15,15 +15,15 @@ function hackline#ui#statusline#set (status = v:false) abort
 
 	let l:line .= '%( #%{bufnr()}%)'
 	let l:line .= '%( %{&filetype}%)'
-	let l:line .= ' ' . l:sep.l
+	" let l:line .= ' ' . l:sep.l
 	let l:line .= '%<'
 	let l:line .= '%( %{hackline#fileencoding#info()}%)'
 	let l:line .= '%( %{&fileformat}%)'
+	let l:line .= '%( %{hackline#ui#tab#info()}%)'
 	let l:line .= ' ' . l:sep.l
-	let l:line .= '%( “%{hackline#base#directories('.l:w.xl.')}%t%)”'
+	let l:line .= '%( “%{hackline#base#directories(' . l:w.xl . ')}%t”%)'
 	if l:active && hackline#git()
-		let l:line .= ' ' . l:sep.l
-		let l:line .= ' ' . hackline#ui#git#info(l:active)
+		let l:line .= ' ' . hackline#ui#git#info()
 	endif
 
 	" Statusline Right Side
@@ -38,15 +38,13 @@ function hackline#ui#statusline#set (status = v:false) abort
 	if l:active && hackline#vim_lsp()
 		let l:line .= l:sep.r.' LSP'
 	endif
-	let l:line .= ' %='
 
+	let l:line .= ' %='
 	if hackline#custom_end() != ''
 		let l:line .= ' ' . l:sep.r
 		let l:line .= ' %{%hackline#custom_end()%}'
 	endif
-
 	let l:line .= '%( ' . l:sep.r . ' %M%)'
-
 	if l:active && hackline#mode() && mode() != 'n'
 		let l:line .= ' ' . l:sep.r
 		let l:line .= ' ' . hackline#ui#mode#info(l:hi.modes, l:labels)

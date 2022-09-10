@@ -5,19 +5,25 @@ function hackline#ui#statusline#set (status = v:false) abort
 	let l:hi = hackline#highlight_groups()
 	let l:sep = hackline#separators()
 	let l:sep_i = '  '
-	let l:line = l:sep_i . ' '
-
-	" Statusline Left Side
-	" --------------------
+	let l:line = ' '
 
 	" Set initial highlight group (color)
 	let l:line .= l:active ? hackline#util#has_winwidth("md") ? l:hi.start : l:hi.active_sm : l:hi.inactive
 
-	let l:line .= '%(#%{bufnr()}%)'
+	" Statusline Left Side
+	" --------------------
+
+	if l:active && hackline#mode() && mode() != 'n'
+		let l:line .= l:sep_i .. hackline#ui#mode#info(l:hi.modes, l:labels)
+		let l:line .= l:sep_i .. l:sep.l
+	endif
+	let l:line .= '%(' . l:sep_i . '%M' . l:sep_i .. l:sep.l . '%)'
+	let l:line .= '%(' . l:sep_i . '#%{bufnr()}%)'
 	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
-	" let l:line .= ' ' . l:sep.l
-	let l:line .= '%<'
-	let l:line .= '%(' . l:sep_i . '%{hackline#fileencoding#info()}%)'
+
+	" Truncation point
+	let l:line .= l:sep_i . '%<'
+	let l:line .= '%(%{hackline#fileencoding#info()}%)'
 	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
 	let l:line .= '' . l:sep_i . '' . l:sep.l
@@ -47,13 +53,7 @@ function hackline#ui#statusline#set (status = v:false) abort
 		let l:line .= l:sep_i .. l:sep.r
 		let l:line .= l:sep_i . '%{%hackline#custom_end()%}'
 	endif
-	let l:line .= '%(' . l:sep_i .. l:sep.r .. l:sep_i . '%M%)'
-	if l:active && hackline#mode() && mode() != 'n'
-		let l:line .= l:sep_i .. l:sep.r
-		let l:line .= l:sep_i .. hackline#ui#mode#info(l:hi.modes, l:labels)
-	endif
-
-	let l:line .= l:sep_i . ' '
+	let l:line .= ' ' . l:sep_i
 
 	return l:line
 endfunction

@@ -56,13 +56,11 @@ function hackline#mode_labels() abort
 endfunction
 
 function hackline#separators() abort
-	return get(g:, "hackline_separators", #{ l: ' / ', r: ' / ' })
+	return get(g:, "hackline_separators", #{ l: ' \ ', r: ' / ' })
 endfunction
 
 function hackline#custom_end() abort
-	return get(g:, "hackline_custom_end", "
-				\%lL:%P L%l:C%c
-				\")
+	return get(g:, "hackline_custom_end", "%p%%/%L L. %l C. %c")
 endfunction
 
 function hackline#mode() abort
@@ -75,10 +73,6 @@ endfunction
 
 function hackline#vim_lsp() abort
 	return get(g:, "hackline_vim_lsp", "1") && get(b:, "hackline_get_vim_lsp", "0")
-endfunction
-
-function hackline#git() abort
-	return get(g:, "hackline_git", "1")
 endfunction
 
 function hackline#branch_sign() abort

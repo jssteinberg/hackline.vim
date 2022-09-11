@@ -31,33 +31,28 @@ function hackline#ui#statusline#set (status = v:false) abort
 	let l:line .= '' . l:sep_i . '' . l:sep.l
 	let l:line .= '%(' . l:sep_i . '%{hackline#base#directories(' . l:w.xl . ')}%t%)'
 
-	" Statusline Middle/Right
-	" -----------------------
+	" Statusline Right Side
+	" ---------------------
 
 	let l:line .= '%='
 	if l:active
 		let l:line .= l:len_i .. hackline#ui#git#info()
 	endif
-
-	let l:line .= '%='
 	" Nvim LSP
 	if l:active && hackline#nvim_lsp()
+		let l:line .= l:len_i .. l:sep.r .. l:len_i
 		let l:line .= hackline#ui#nvim_lsp#info(l:len_i, l:sep)
 	endif
 	" Vim LSP
 	if l:active && hackline#vim_lsp()
 		let l:line .= l:len_i .. l:sep.r .. l:len_i .. 'LSP'
 	endif
-
-	" Statusline Right Side
-	" ---------------------
-
-	let l:line .= '%='
+	" Right side info
 	if hackline#right() != ''
 		let l:line .= l:len_i .. l:sep.r
 		let l:line .= l:len_i . '%{%hackline#right()%}'
 	endif
-	let l:line .= ' ' . l:len_i
+	let l:line .= l:len_i
 
 	return l:line
 endfunction

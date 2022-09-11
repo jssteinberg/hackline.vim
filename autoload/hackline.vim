@@ -32,17 +32,17 @@ endfunction
 
 function hackline#mode_labels() abort
 	return #{
-				\ c: get(g:, "hackline_label_command", "Command"),
-				\ i: get(g:, "hackline_label_insert", "Insert"),
-				\ t: get(g:, "hackline_label_terminal", "Terminal"),
-				\ v: get(g:, "hackline_label_visual", "Visual"),
-				\ s: get(g:, "hackline_label_select", "Select"),
-				\ r: get(g:, "hackline_label_replace", "Replace"),
+				\ c: get(g:, "hackline_label_command", "COMMAND"),
+				\ i: get(g:, "hackline_label_insert", "INSERT"),
+				\ t: get(g:, "hackline_label_terminal", "TERMINAL"),
+				\ v: get(g:, "hackline_label_visual", "VISUAL"),
+				\ s: get(g:, "hackline_label_select", "SELECT"),
+				\ r: get(g:, "hackline_label_replace", "REPLACE"),
 				\ }
 endfunction
 
 function hackline#separators() abort
-	return get(g:, "hackline_separators", #{ l: ' \ ', r: ' / ' })
+	return get(g:, "hackline_separators", #{ l: ' / ', r: ' / ' })
 endfunction
 
 function hackline#right() abort

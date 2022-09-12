@@ -40,7 +40,6 @@ function hackline#ui#statusline#set (status = v:false) abort
 	endif
 	" Nvim LSP
 	if l:active && hackline#nvim_lsp()
-		let l:line .= l:len_i .. l:sep.r .. l:len_i
 		let l:line .= hackline#ui#nvim_lsp#info(l:len_i, l:sep)
 	endif
 	" Vim LSP

@@ -164,6 +164,7 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 ### *Future*
 
 - Rm direct git plugin support, add support for bring-your-own Git info.
+- mv separators to level based separators, e.g., "sep_inner" something.
 - Add Vim help documentation.
 - mode contextual information such as number of characters, words in visual selection.
 - Nvim LSP number of buffer warning/errors?

@@ -165,5 +165,6 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 - Rm direct git plugin support, add support for bring-your-own Git info.
 - Add Vim help documentation.
+- mode contextual information such as number of characters, words in visual selection.
 - Nvim LSP number of buffer warning/errors?
 - Support hi `StatusLineTerm` and `StatusLineTermNC`?

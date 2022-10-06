@@ -15,8 +15,8 @@ No setup or prerequisites required. Enjoy the simplicity! Yet it's quite fully f
 
 Integrations:
 
-- **Git** info by using the one of the following plugins. hackline.vim connects in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
 - **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig). And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
+- **Git** info is bring-your-own function (from a plugin usually), or by opting-in to the built-in support for one of the following plugins (though maintenance of plugin support can not be ensured) connected to in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
 
 *Someone should confirm loading time. Low right?*
 
@@ -29,29 +29,30 @@ Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.
 *Why another statusline plugin?* hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for all features.
 There's no patched font or icons dependency.
 
-## Installation and Vim version 
+## Installation
 
-<details>
-<summary>packer.nvim Lua</summary>
-
-```lua
--- packer.nvim
-use{'jssteinberg/hackline.vim'}
-```
+Neovim example with packer.nvim:
 
 ```lua
--- packer.nvim with git info (without gitsigns or fugitive)
-use{'jssteinberg/hackline.vim', requires = {'itchyny/vim-gitbranch'}}
-
--- Even lazyload it (does that makes sense?):
-use { 'jssteinberg/hackline.vim', event = 'CursorHold' }
-use { 'itchyny/vim-gitbranch', event = 'CursorHold' }
+use {
+	"jssteinberg/hackline.vim",
+	requires = { "itchyny/vim-gitbranch" },
+	config = function()
+		vim.opt.showmode = false
+		vim.g.hackline_label_command  = "—C—"
+		vim.g.hackline_label_insert   = "–I–"
+		vim.g.hackline_label_terminal = "–T–"
+		vim.g.hackline_label_visual   = "–V–"
+		vim.g.hackline_label_select   = "–S–"
+		vim.g.hackline_label_replace  = "–R–"
+		-- opting-in to built-in git plugin support (maintenance can not be ensured---you can also bring-you-own Git function)
+		vim.g.hackline_git_info = true
+	end
+}
 ```
 
-</details>
-
 <details>
-<summary>Different Vim installs</summary>
+<summary>For Vim</summary>
 
 ```vim
 " minpac
@@ -68,7 +69,7 @@ call jetpack#add('jssteinberg/hackline.vim')
 
 </details>
 
-Requires Neovim or Vim version > 8.2.1[something]---basically a newer version that supports re-evaluating expression results as a statusline format string.
+hackline.vim requires Neovim or Vim version > 8.2.1[something]---basically a newer version that supports re-evaluating expression results as a statusline format string.
 For Mac, you can use Vim from Homebrew.
 
 hackline.vim is tested on Neovim and Vim compiled with lua (but should work without Lua).
@@ -89,7 +90,7 @@ let g:hackline_laststatus = 2
 
 " Toggle statusline info:
 let g:hackline_mode = 1 " Only for removing modes when `noshowmode`
-let g:hackline_git_info = "" " Bring your own git fn or `1`/`v:true` for built-in
+let g:hackline_git_info = "" " Bring your own function or `1`/`v:true` for built-in
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
@@ -166,7 +167,6 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 ### *Future*
 
-- Rm direct git plugin support, add support for bring-your-own Git info (for lower maintenance).
 - mv separators to level based separators, e.g., "sep_inner" something.
 - Add Vim help documentation.
 - mode contextual information such as number of characters, words in visual selection.

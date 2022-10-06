@@ -61,6 +61,10 @@ function hackline#vim_lsp() abort
 	return get(g:, "hackline_vim_lsp", "1") && get(b:, "hackline_get_vim_lsp", "0")
 endfunction
 
+function hackline#git_info() abort
+	return get(g:, "hackline_git_info", "")
+endfunction
+
 function hackline#branch_sign() abort
 	return get(g:, "hackline_branch_sign", "*")
 endfunction

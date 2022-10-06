@@ -89,6 +89,7 @@ let g:hackline_laststatus = 2
 
 " Toggle statusline info:
 let g:hackline_mode = 1 " Only for removing modes when `noshowmode`
+let g:hackline_git_info = "" " Bring your own git fn or `1`/`v:true` for built-in
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 

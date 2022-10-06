@@ -9,7 +9,7 @@ No setup or prerequisites required. Enjoy the simplicity! Yet it's quite fully f
 
 - **No prerequisites** like icons or patched font, but there are simple variables for adding it.
 - **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
-- **Minimal mode flag** for Vim professionals! Sets `noshowmode` if on---on by default.
+- **Mode flag** when not normal mode. `noshowmode` must be set.
 - **Responsive**---adjusts statusline for smaller widths.
 - **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
 
@@ -75,23 +75,27 @@ hackline.vim is tested on Neovim and Vim compiled with lua (but should work with
 
 ## Options
 
-Global variables for simple customization.
+Modes in statusline will show by default if `noshowmode` is set. E.g., set it in your init.vim:
 
-Default values:
+```vim
+set noshowmode
+```
+
+Global variables for simple customization. Default values:
 
 ```vim
 " Set option:
 let g:hackline_laststatus = 2
 
 " Toggle statusline info:
-let g:hackline_mode = 1
+let g:hackline_mode = 1 " Only for removing modes when `noshowmode`
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
 " Set separators and signs:
-let g:hackline_separators = #{ l: '\', r: '/' }
+let g:hackline_separators = #{ l: '/', r: '/' }
 let g:hackline_branch_sign = "*"
-" For vgit
+" for vgit
 let g:hackline_git_signs = #{
 			\added: "+",
 			\removed: "-",
@@ -137,8 +141,6 @@ let g:hackline_separators = #{ l: "", r: "" }
 let g:hackline_branch_sign = " "
 ```
 
-![power](https://user-images.githubusercontent.com/729055/176217828-f5642220-9b6f-4306-a5f3-ec166eee31a9.png)
-
 In Neovim, you can configure with Lua like so:
 
 ```lua
@@ -163,7 +165,7 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 ### *Future*
 
-- Rm direct git plugin support, add support for bring-your-own Git info.
+- Rm direct git plugin support, add support for bring-your-own Git info (for lower maintenance).
 - mv separators to level based separators, e.g., "sep_inner" something.
 - Add Vim help documentation.
 - mode contextual information such as number of characters, words in visual selection.

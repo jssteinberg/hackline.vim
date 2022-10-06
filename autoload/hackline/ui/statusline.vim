@@ -23,6 +23,7 @@ function hackline#ui#statusline#set (status = v:false) abort
 	let l:line .= '%(' . l:sep_i . '%M' . l:len_i .. l:sep.l . '%)'
 	let l:line .= '%(' . l:len_i . 'Buf %{bufnr()}%)'
 	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
+	let l:line .= l:len_i .. l:sep.l
 	" Truncation point
 	let l:line .= l:len_i . '%<'
 	let l:line .= '%(%{hackline#fileencoding#info()}%)'

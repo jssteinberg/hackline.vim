@@ -50,7 +50,7 @@ function hackline#right() abort
 endfunction
 
 function hackline#mode() abort
-	return get(g:, "hackline_mode", "1") && !&showmode
+	return get(g:, "hackline_mode", "0") || !&showmode
 endfunction
 
 function hackline#nvim_lsp() abort

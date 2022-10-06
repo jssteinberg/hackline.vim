@@ -9,7 +9,7 @@ No setup or prerequisites required. Enjoy the simplicity! Yet it's quite fully f
 
 - **No prerequisites** like icons or patched font, but there are simple variables for adding it.
 - **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
-- **Mode flag** when not normal mode. `noshowmode` must be set.
+- **Mode flag** when not normal mode (set to activate).
 - **Responsive**---adjusts statusline for smaller widths.
 - **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
 
@@ -38,14 +38,16 @@ use {
 	"jssteinberg/hackline.vim",
 	requires = { "itchyny/vim-gitbranch" },
 	config = function()
+		-- activates mode flag (can also use variable)
 		vim.opt.showmode = false
+		-- custom flags
 		vim.g.hackline_label_command  = "—C—"
 		vim.g.hackline_label_insert   = "–I–"
 		vim.g.hackline_label_terminal = "–T–"
 		vim.g.hackline_label_visual   = "–V–"
 		vim.g.hackline_label_select   = "–S–"
 		vim.g.hackline_label_replace  = "–R–"
-		-- opting-in to built-in git plugin support (maintenance can not be ensured---you can also bring-you-own Git function)
+		-- built-in git plugin support (maintenance can not be ensured---you can bring-you-own Git function for safety)
 		vim.g.hackline_git_info = true
 	end
 }
@@ -89,8 +91,8 @@ Global variables for simple customization. Default values:
 let g:hackline_laststatus = 2
 
 " Toggle statusline info:
-let g:hackline_mode = 1 " Only for removing modes when `noshowmode`
-let g:hackline_git_info = "" " Bring your own function or `1`/`v:true` for built-in
+let g:hackline_mode = 0 " To activate mode flags and not deactivating `showmode`
+let g:hackline_git_info = "" " Set to a function or use `1`/`v:true` for built-in
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 

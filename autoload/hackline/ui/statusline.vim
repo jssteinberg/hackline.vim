@@ -20,8 +20,8 @@ function hackline#ui#statusline#set(status = v:false) abort
 
 	if l:active && hackline#mode() && mode() != 'n'
 		" modes
-		let l:line .= hackline#ui#mode#info(l:hi.modes, l:labels, l:px)
-		let l:line .= l:len_i .. l:sep.l
+		let l:line .= hackline#ui#mode#info(l:hi.modes, l:labels, l:len_i)
+		let l:line .= l:len_i .. l:sep.l .. l:len_i
 	else
 		" ...or only inline padding
 		let l:line .= l:px
@@ -69,7 +69,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 		let l:line .= l:len_i .. l:sep.r
 		let l:line .= l:len_i . '%{%hackline#right()%}'
 	endif
-	let l:line .= l:px
+	let l:line .= l:len_i
 
 	return l:line
 endfunction

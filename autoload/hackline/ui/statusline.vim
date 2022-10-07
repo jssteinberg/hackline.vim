@@ -9,7 +9,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 	" length separator items
 	let l:len_i = repeat(' ', strlen(l:sep_i))
 	" inline padding
-	let l:px = repeat(' ', get(g:, 'hackline_px', 2))
+	let l:px_start = repeat(' ', get(g:, 'hackline_px_start', 2))
 	" Set initial highlight group (color)
 	let l:line = ''
 	let l:line .= l:active ? l:hi.start : l:hi.inactive
@@ -23,7 +23,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 		let l:line .= l:len_i .. l:sep.l .. l:len_i
 	else
 		" ...or only inline padding
-		let l:line .= l:px
+		let l:line .= l:px_start
 	endif
 	" modified flag
 	let l:line .= '%(%M' . l:len_i .. l:sep.l .. l:len_i . '%)'

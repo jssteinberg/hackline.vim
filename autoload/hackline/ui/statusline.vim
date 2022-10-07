@@ -1,4 +1,4 @@
-function hackline#ui#statusline#set (status = v:false) abort
+function hackline#ui#statusline#set(status = v:false) abort
 	let l:w = hackline#breakpoints()
 	let l:active = a:status
 	let l:labels = hackline#mode_labels()
@@ -9,6 +9,8 @@ function hackline#ui#statusline#set (status = v:false) abort
 	let l:sep_i = '  '
 	" length separator items
 	let l:len_i = repeat(' ', strlen(l:sep_i))
+	" inline padding
+	let l:px = repeat(' ', get(g:, 'hackline_px', 2))
 	" Set initial highlight group (color)
 	let l:line = ''
 	let l:line .= l:active ? l:hi.start : l:hi.inactive
@@ -17,12 +19,20 @@ function hackline#ui#statusline#set (status = v:false) abort
 	" --------------------
 
 	if l:active && hackline#mode() && mode() != 'n'
-		let l:line .= hackline#ui#mode#info(l:hi.modes, l:labels, l:len_i)
+		" modes
+		let l:line .= hackline#ui#mode#info(l:hi.modes, l:labels, l:px)
 		let l:line .= l:len_i .. l:sep.l
+	else
+		" ...or only inline padding
+		let l:line .= l:px
 	endif
-	let l:line .= '%(' . l:sep_i . '%M' . l:len_i .. l:sep.l . '%)'
-	let l:line .= '%(' . l:len_i . 'Buf %{bufnr()}%)'
+	" modified flag
+	let l:line .= '%(%M' . l:len_i .. l:sep.l .. l:len_i . '%)'
+	" buffern number
+	let l:line .= '%(Buf %{bufnr()}%)'
+	" filetype
 	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
+	" sep
 	let l:line .= l:len_i .. l:sep.l
 	" Truncation point
 	let l:line .= l:len_i . '%<'
@@ -59,7 +69,7 @@ function hackline#ui#statusline#set (status = v:false) abort
 		let l:line .= l:len_i .. l:sep.r
 		let l:line .= l:len_i . '%{%hackline#right()%}'
 	endif
-	let l:line .= l:len_i
+	let l:line .= l:px
 
 	return l:line
 endfunction

@@ -49,6 +49,8 @@ use {
 		vim.g.hackline_label_replace  = "–R–"
 		-- built-in git plugin support (maintenance can not be ensured---you can bring-you-own Git function for safety)
 		vim.g.hackline_git_info = true
+		-- no inline padding (padding x-axis)
+		vim.g.hackline_px = 0
 	end
 }
 ```
@@ -88,7 +90,8 @@ Global variables for simple customization. Default values:
 
 ```vim
 " Set option:
-let g:hackline_laststatus = 2
+let g:hackline_laststatus = 2 " same as `laststatus`
+let g:hackline_px = 0 " inline padding (padding x-axis)
 
 " Toggle statusline info:
 let g:hackline_mode = 0 " To activate mode flags and not deactivating `showmode`

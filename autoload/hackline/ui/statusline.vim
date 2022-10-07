@@ -1,7 +1,6 @@
 function hackline#ui#statusline#set(status = v:false) abort
 	let l:w = hackline#breakpoints()
 	let l:active = a:status
-	let l:labels = hackline#mode_labels()
 	let l:hi = hackline#highlight_groups()
 	" separator sections
 	let l:sep = hackline#separators()
@@ -20,7 +19,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 
 	if l:active && hackline#mode() && mode() != 'n'
 		" modes
-		let l:line .= hackline#ui#mode#info(l:hi.modes, l:labels, l:len_i)
+		let l:line .= hackline#ui#mode#info(l:len_i)
 		let l:line .= l:len_i .. l:sep.l .. l:len_i
 	else
 		" ...or only inline padding
@@ -39,6 +38,8 @@ function hackline#ui#statusline#set(status = v:false) abort
 	let l:line .= '%(%{hackline#fileencoding#info()}%)'
 	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
+	let l:line .= '' . l:sep_i . '' . l:sep.l
+	let l:line .= '%(' . l:sep_i .. hackline#cwd() . '%)'
 	let l:line .= '' . l:sep_i . '' . l:sep.l
 	let l:line .= '%(' . l:sep_i . '%{hackline#base#directories(' . l:w.xl . ')}%t%)'
 

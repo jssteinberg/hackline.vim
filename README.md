@@ -95,6 +95,7 @@ let g:hackline_px = 0 " inline padding (padding x-axis)
 
 " Toggle statusline info:
 let g:hackline_mode = 0 " To activate mode flags and not deactivating `showmode`
+let g:hackline_cwd = 0 " Show truncated CWD
 let g:hackline_git_info = "" " Set to a function or use `1`/`v:true` for built-in
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available

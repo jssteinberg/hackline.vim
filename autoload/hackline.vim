@@ -15,15 +15,6 @@ endfunction
 function hackline#highlight_groups() abort
 	let l:highlight_groups = #{
 				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
-				\ modes: #{
-				\   i:  get(g:, "hackline_highlight_insert",   "IncSearch"),
-				\   v:  get(g:, "hackline_highlight_visual",   "IncSearch"),
-				\   vb: get(g:, "hackline_highlight_visual",   "IncSearch"),
-				\   r:  get(g:, "hackline_highlight_replace",  "IncSearch"),
-				\   s:  get(g:, "hackline_highlight_select",   "IncSearch"),
-				\   c:  get(g:, "hackline_highlight_command",  "IncSearch"),
-				\   t:  get(g:, "hackline_highlight_terminal", "IncSearch"),
-				\ },
 				\ inactive: get(g:, "hackline_highlight_inactive", "StatusLineNC"),
 				\ }
 
@@ -39,6 +30,14 @@ function hackline#mode_labels() abort
 				\ s: get(g:, "hackline_label_select", "SELECT"),
 				\ r: get(g:, "hackline_label_replace", "REPLACE"),
 				\ }
+endfunction
+
+function hackline#cwd() abort
+	if (get(g:, "hackline_cwd", v:false))
+		return "%{pathshorten(getcwd())}"
+	endif
+
+	return ""
 endfunction
 
 function hackline#separators() abort

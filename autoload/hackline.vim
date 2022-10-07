@@ -21,17 +21,6 @@ function hackline#highlight_groups() abort
 	return hackline#util#getStatuslineHighlights( l:highlight_groups )
 endfunction
 
-function hackline#mode_labels() abort
-	return #{
-				\ c: get(g:, "hackline_label_command", "COMMAND"),
-				\ i: get(g:, "hackline_label_insert", "INSERT"),
-				\ t: get(g:, "hackline_label_terminal", "TERMINAL"),
-				\ v: get(g:, "hackline_label_visual", "VISUAL"),
-				\ s: get(g:, "hackline_label_select", "SELECT"),
-				\ r: get(g:, "hackline_label_replace", "REPLACE"),
-				\ }
-endfunction
-
 function hackline#cwd() abort
 	if (get(g:, "hackline_cwd", v:false))
 		return "%{pathshorten(getcwd())}"

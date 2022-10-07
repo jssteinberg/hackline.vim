@@ -3,6 +3,8 @@ function hackline#ui#tab#info(truncate = 0) abort
 
 	if &expandtab
 		let l:info = 'expandtab '
+	else
+		let l:info = 'tab '
 	endif
 
 	if shiftwidth() > 0 && shiftwidth() != &tabstop

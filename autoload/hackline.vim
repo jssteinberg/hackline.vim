@@ -23,7 +23,7 @@ endfunction
 
 function hackline#cwd() abort
 	if (get(g:, "hackline_cwd", v:false))
-		return "%{pathshorten(getcwd())}"
+		return "%{split(getcwd(), '/')[-1]}"
 	endif
 
 	return ""

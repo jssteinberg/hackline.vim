@@ -6,7 +6,7 @@ The minimalist's statusline plugin for Neovim/Vim. It's lightweight, loads in no
 
 - **No prerequisites** like icons or patched font, but there are simple variables for adding it.
 - **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
-- **Mode flag** when not normal mode (`set noshowmode` to activate).
+- **Mode flag** (minimal by default) when not normal mode.
 - **Responsive**---adjusts statusline for smaller widths.
 - **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
 
@@ -27,18 +27,11 @@ use {
 	"jssteinberg/hackline.vim",
 	requires = { "itchyny/vim-gitbranch" },
 	config = function()
-		-- activates mode flag (can also use variable)
+		-- disable command line mode flag
 		vim.opt.showmode = false
-		-- custom flags
-		vim.g.hackline_label_command  = "—C—"
-		vim.g.hackline_label_insert   = "–I–"
-		vim.g.hackline_label_terminal = "–T–"
-		vim.g.hackline_label_visual   = "–V–"
-		vim.g.hackline_label_select   = "–S–"
-		vim.g.hackline_label_replace  = "–R–"
 		-- built-in git plugin support (maintenance can not be ensured---you can bring-you-own Git function for safety)
 		vim.g.hackline_git_info = true
-		-- show CWD
+		-- show CWD folder
 		vim.g.hackline_cwd = true
 		-- no inline padding (padding x-axis)
 		vim.g.hackline_normal_px = 0
@@ -71,12 +64,6 @@ hackline.vim is tested on Neovim and Vim compiled with lua (but should work with
 
 ## Options
 
-Modes in statusline will show by default if `noshowmode` is set. E.g., set it in your init.vim:
-
-```vim
-set noshowmode
-```
-
 Global variables for simple customization. Default values:
 
 ```vim
@@ -85,13 +72,13 @@ let g:hackline_laststatus = 2 " same as `laststatus`
 let g:hackline_normal_px = 0 " inline padding (padding x-axis) for normal mode
 
 " Toggle statusline info:
-let g:hackline_mode = 0 " To activate mode flags and not deactivating `showmode`
-let g:hackline_cwd = 0 " Show truncated CWD
+let g:hackline_mode = 1 " To activate mode flags and not deactivating `showmode`
+let g:hackline_cwd = 0 " Show current Vim working folder
 let g:hackline_git_info = "" " Set to a function or use `1`/`v:true` for built-in
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
-" Set separators and signs:
+" Separators and signs:
 let g:hackline_separators = #{ l: '/', r: '/' }
 let g:hackline_branch_sign = "*"
 " for vgit
@@ -101,13 +88,13 @@ let g:hackline_git_signs = #{
 			\changed: "~",
 			\}
 
-" Set mode labels:
-let g:hackline_label_command  = "Command"
-let g:hackline_label_insert   = "Insert"
-let g:hackline_label_terminal = "Terminal"
-let g:hackline_label_visual   = "Visual"
-let g:hackline_label_select   = "Select"
-let g:hackline_label_replace  = "Replace"
+" Mode labels:
+let g:hackline_label_command  = "—C—"
+let g:hackline_label_insert   = "–I–"
+let g:hackline_label_terminal = "–T–"
+let g:hackline_label_visual   = "–V–"
+let g:hackline_label_select   = "–S–"
+let g:hackline_label_replace  = "–R–"
 
 " Set statusline value for the far right of the statusline:
 let g:hackline_right = "Ln %l/%L Col %c"

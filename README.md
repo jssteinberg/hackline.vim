@@ -4,8 +4,7 @@
 
 *hackline.vim 'hacks' your statusline so you don't have to.*
 
-A lightweight statusline plugin for Neovim (nvim) and Vim.
-No setup or prerequisites required. Enjoy the simplicity! Yet it's quite fully featured, with some features through optional plugins.
+The minimalist's statusline plugin for Neovim/Vim. It's lightweight, but quite fully featured, with some features through optional plugins.
 
 - **No prerequisites** like icons or patched font, but there are simple variables for adding it.
 - **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.

@@ -52,7 +52,7 @@ use {
 		-- show CWD
 		vim.g.hackline_cwd = true
 		-- no inline padding (padding x-axis)
-		vim.g.hackline_px_start = 0
+		vim.g.hackline_normal_px = 0
 	end
 }
 ```
@@ -93,7 +93,7 @@ Global variables for simple customization. Default values:
 ```vim
 " Set option:
 let g:hackline_laststatus = 2 " same as `laststatus`
-let g:hackline_px_start = 0 " inline padding (padding x-axis)
+let g:hackline_normal_px = 0 " inline padding (padding x-axis) for normal mode
 
 " Toggle statusline info:
 let g:hackline_mode = 0 " To activate mode flags and not deactivating `showmode`

@@ -16,7 +16,7 @@ endfunction
 
 
 function hackline#util#has_winwidth ( w = "" ) abort
-	let l:w = hackline#breakpoints()
+	let l:w = hackline#config#breakpoints()
 
 	if &laststatus == 3
 		return v:true

@@ -1,9 +1,9 @@
 function hackline#ui#statusline#set(status = v:false) abort
-	let l:w = hackline#breakpoints()
+	let l:w = hackline#config#breakpoints()
 	let l:active = a:status
-	let l:hi = hackline#highlight_groups()
+	let l:hi = hackline#config#highlight_groups()
 	" separator sections
-	let l:sep = hackline#separators()
+	let l:sep = hackline#config#separators()
 	" separator items
 	let l:sep_i = '  '
 	" length separator items
@@ -17,7 +17,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 	" Statusline Left Side
 	" --------------------
 
-	if l:active && hackline#mode() && mode() != 'n'
+	if l:active && hackline#config#mode() && mode() != 'n'
 		" modes
 		let l:line .= hackline#ui#mode#info(l:len_i)
 		let l:line .= l:len_i .. l:sep.l .. l:len_i
@@ -39,7 +39,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
 	let l:line .= '' . l:sep_i . '' . l:sep.l
-	let l:line .= '%(' . l:sep_i .. hackline#cwd() . '%)'
+	let l:line .= '%(' . l:sep_i .. hackline#config#cwd() . '%)'
 	let l:line .= '' . l:sep_i . '' . l:sep.l
 	let l:line .= '%(' . l:sep_i . '%{hackline#base#directories(' . l:w.xl . ')}%t%)'
 
@@ -49,26 +49,26 @@ function hackline#ui#statusline#set(status = v:false) abort
 	let l:line .= '%='
 	" Git
 	if l:active
-		if hackline#git_info() == 1
+		if hackline#config#git_info() == 1
 			" built in
 			let l:line .= l:len_i .. hackline#ui#git#info()
 		else
 			" bring your own
-			let l:line .= "%(" . l:len_i . "%{%hackline#git_info()%}"
+			let l:line .= "%(" . l:len_i . "%{%hackline#config#git_info()%}"
 		endif
 	endif
 	" Nvim LSP
-	if l:active && hackline#nvim_lsp()
+	if l:active && hackline#config#nvim_lsp()
 		let l:line .= hackline#ui#nvim_lsp#info(l:len_i, l:sep)
 	endif
 	" Vim LSP
-	if l:active && hackline#vim_lsp()
+	if l:active && hackline#config#vim_lsp()
 		let l:line .= l:len_i .. l:sep.r .. l:len_i .. 'LSP'
 	endif
 	" Right side info
-	if hackline#right() != ''
+	if hackline#config#right() != ''
 		let l:line .= l:len_i .. l:sep.r
-		let l:line .= l:len_i . '%{%hackline#right()%}'
+		let l:line .= l:len_i . '%{%hackline#config#right()%}'
 	endif
 	" End spacing
 	let l:line .= l:active && mode() == "n" ? l:normal_px : l:len_i

@@ -1,14 +1,12 @@
-![normal](https://user-images.githubusercontent.com/729055/178598591-5198524e-73e6-404e-a9fe-1ec5971d30bf.png)
-
 # hackline.vim
 
 *hackline.vim 'hacks' your statusline so you don't have to.*
 
-The minimalist's statusline plugin for Neovim/Vim. It's lightweight, but quite fully featured, with some features through optional plugins.
+The minimalist's statusline plugin for Neovim/Vim. It's lightweight, loads in no-time, but quite fully featured, with some features through optional plugins.
 
 - **No prerequisites** like icons or patched font, but there are simple variables for adding it.
 - **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
-- **Mode flag** when not normal mode (set to activate).
+- **Mode flag** when not normal mode (`set noshowmode` to activate).
 - **Responsive**---adjusts statusline for smaller widths.
 - **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
 
@@ -16,14 +14,6 @@ Integrations:
 
 - **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig). And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
 - **Git** info is bring-your-own function (from a plugin usually), or by opting-in to the built-in support for one of the following plugins (though maintenance of plugin support can not be ensured) connected to in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
-
-*Someone should confirm loading time. Low right?*
-
-Default colors depends on your colorscheme. Here with [Iceberg](https://cocopon.github.io/iceberg.vim/) (note that the LSP info has improved a bit):
-
-![insert](https://user-images.githubusercontent.com/729055/176217647-9c464f60-91d3-405f-8fc0-c66feaca1541.png)
-![visual](https://user-images.githubusercontent.com/729055/176217668-2f5a1ccd-4f0a-469f-8912-fad630dd0e03.png)
-![replace](https://user-images.githubusercontent.com/729055/176217697-f548262d-d277-4752-8419-b064d6e0df67.png)
 
 *Why another statusline plugin?* hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for all features.
 There's no patched font or icons dependency.

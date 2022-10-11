@@ -7,20 +7,22 @@ function hackline#config#highlight_groups() abort
 	return hackline#util#getStatuslineHighlights( l:highlight_groups )
 endfunction
 
-function hackline#config#cwd() abort
-	if (get(g:, "hackline_cwd", v:false))
-		return "%{split(getcwd(), '/')[-1]}"
-	endif
-
-	return ""
-endfunction
-
 function hackline#config#separators() abort
-	return get(g:, "hackline_separators", #{ l: ' / ', r: ' / ' })
+	let l:sep = get(g:, "hackline_separators", #{
+				\l: ' / ',
+				\r: ' / ',
+				\})
+
+	return #{
+				\l: l:sep.l,
+				\r: l:sep.r,
+				\il: get(g:, "hackline_sep_inner_left", l:sep.l),
+				\ir: get(g:, "hackline_sep_inner_right", l:sep.r),
+				\}
 endfunction
 
 function hackline#config#right() abort
-	return get(g:, "hackline_right", "Ln %l/%L Col %c")
+	return get(g:, "hackline_statusline_items_end", "Ln %l/%L Col %c")
 endfunction
 
 function hackline#config#mode() abort

@@ -10,4 +10,3 @@ function hackline#ui#nvim_lsp#info(...) abort
 
 	return l:statusline
 endfunction
-

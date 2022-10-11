@@ -5,8 +5,8 @@ function hackline#ui#statusline#set(status = v:false) abort
 	" separator sections
 	let l:sep = hackline#config#separators()
 	" separator items
-	let l:sep_i = '  '
-	" length separator items
+	let l:sep_i = get(g:, "hackline_sep_items", "  ")
+	" length separator items/inline
 	let l:len_i = repeat(' ', strlen(l:sep_i))
 	" inline padding
 	let l:normal_px = repeat(' ', get(g:, 'hackline_normal_px', 2))
@@ -18,30 +18,38 @@ function hackline#ui#statusline#set(status = v:false) abort
 	" --------------------
 
 	if l:active && hackline#config#mode() && mode() != 'n'
-		" modes
+		" mode not normal
 		let l:line .= hackline#ui#mode#info(l:len_i)
+		" sep
 		let l:line .= l:len_i .. l:sep.l .. l:len_i
 	else
 		" ...or only inline padding
 		let l:line .= l:normal_px
 	endif
-	" modified flag
-	let l:line .= '%(%M' . l:len_i .. l:sep.l .. l:len_i . '%)'
 	" buffern number
 	let l:line .= '%(Buf %{bufnr()}%)'
 	" filetype
 	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
 	" sep
 	let l:line .= l:len_i .. l:sep.l
-	" Truncation point
+	" truncation point
 	let l:line .= l:len_i . '%<'
+	" encoding
 	let l:line .= '%(%{hackline#fileencoding#info()}%)'
+	" format
 	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
+	" tabs/spaces
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
-	let l:line .= '' . l:sep_i . '' . l:sep.l
-	let l:line .= '%(' . l:sep_i .. hackline#config#cwd() . '%)'
-	let l:line .= '' . l:sep_i . '' . l:sep.l
-	let l:line .= '%(' . l:sep_i . '%{hackline#base#directories(' . l:w.xl . ')}%t%)'
+	" CWD
+	let l:line .= get(g:, "hackline_cwd", v:false)
+				\? '%(' . l:len_i . '' . l:sep.l . '' . l:len_i . "%{split(getcwd(), '/')[-1]}%)"
+				\: ""
+	" sep
+	let l:line .= '' . l:len_i . '' . l:sep.il
+	" file path
+	let l:line .= '%(' . l:len_i . '%{hackline#base#directories(' . l:w.xl . ')}%t%)'
+	" modified flag
+	let l:line .= '%( %m%)'
 
 	" Statusline Right Side
 	" ---------------------
@@ -67,8 +75,10 @@ function hackline#ui#statusline#set(status = v:false) abort
 	endif
 	" Right side info
 	if hackline#config#right() != ''
-		let l:line .= l:len_i .. l:sep.r
-		let l:line .= l:len_i . '%{%hackline#config#right()%}'
+		try
+			let l:line .= l:len_i .. l:sep.r
+			let l:line .= l:len_i . '%{%hackline#config#right()%}'
+		catch | endtry
 	endif
 	" End spacing
 	let l:line .= mode() == "n" ? l:normal_px : l:len_i

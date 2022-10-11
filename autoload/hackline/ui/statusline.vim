@@ -10,7 +10,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 	let l:len_i = repeat(' ', strlen(l:sep_i))
 	" inline padding
 	let l:normal_px = repeat(' ', get(g:, 'hackline_normal_px', 2))
-	" Set initial highlight group (color)
+	" set initial highlight group (color)
 	let l:line = ''
 	let l:line .= l:active ? l:hi.start : l:hi.inactive
 
@@ -71,7 +71,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 		let l:line .= l:len_i . '%{%hackline#config#right()%}'
 	endif
 	" End spacing
-	let l:line .= l:active && mode() == "n" ? l:normal_px : l:len_i
+	let l:line .= l:normal_px
 
 	return l:line
 endfunction

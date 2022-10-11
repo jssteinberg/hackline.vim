@@ -71,7 +71,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 		let l:line .= l:len_i . '%{%hackline#config#right()%}'
 	endif
 	" End spacing
-	let l:line .= l:normal_px
+	let l:line .= mode() == "n" ? l:normal_px : l:len_i
 
 	return l:line
 endfunction

@@ -21,7 +21,7 @@ function hackline#ui#statusline#set(status = v:false) abort
 		" mode not normal
 		let l:line .= hackline#ui#mode#info(l:len_i)
 		" sep
-		let l:line .= l:len_i .. l:sep.l .. l:len_i
+		let l:line .= l:sep.l
 	else
 		" ...or only inline padding
 		let l:line .= l:normal_px
@@ -31,23 +31,23 @@ function hackline#ui#statusline#set(status = v:false) abort
 	" filetype
 	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
 	" sep
-	let l:line .= l:len_i .. l:sep.l
+	let l:line .= l:sep.l
 	" truncation point
-	let l:line .= l:len_i . '%<'
+	let l:line .= '%<'
 	" encoding
 	let l:line .= '%(%{hackline#fileencoding#info()}%)'
 	" format
 	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
 	" tabs/spaces
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
+	" sep
+	let l:line .= l:sep.l
 	" CWD
 	let l:line .= get(g:, "hackline_cwd", v:false)
-				\? '%(' . l:len_i . '' . l:sep.l . '' . l:len_i . "%{split(getcwd(), '/')[-1]}%)"
+				\? "%(%{split(getcwd(), '/')[-1]}" . l:sep.il . "%)"
 				\: ""
-	" sep
-	let l:line .= '' . l:len_i . '' . l:sep.il
 	" file path
-	let l:line .= '%(' . l:len_i . '%{hackline#base#directories(' . l:w.xl . ')}%t%)'
+	let l:line .= '%(%{hackline#base#directories(' . l:w.xl . ')}%t%)'
 	" modified flag
 	let l:line .= '%( %m%)'
 
@@ -71,13 +71,13 @@ function hackline#ui#statusline#set(status = v:false) abort
 	endif
 	" Vim LSP
 	if l:active && hackline#config#vim_lsp()
-		let l:line .= l:len_i .. l:sep.r .. l:len_i .. 'LSP'
+		let l:line .= l:sep.r .. 'LSP'
 	endif
 	" Right side info
 	if hackline#config#right() != ''
 		try
-			let l:line .= l:len_i .. l:sep.r
-			let l:line .= l:len_i . '%{%hackline#config#right()%}'
+			let l:line .= l:sep.r
+			let l:line .= '%{%hackline#config#right()%}'
 		catch | endtry
 	endif
 	" End spacing

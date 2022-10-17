@@ -59,15 +59,15 @@ function hackline#ui#statusline#set(status = v:false) abort
 	if l:active
 		if hackline#config#git_info() == 1
 			" built in
-			let l:line .= l:len_i .. hackline#ui#git#info()
+			let l:line .= hackline#ui#git#info()
 		else
 			" bring your own
-			let l:line .= "%(" . l:len_i . "%{%hackline#config#git_info()%}"
+			let l:line .= "%( %{%hackline#config#git_info()%}"
 		endif
 	endif
 	" Nvim LSP
 	if l:active && hackline#config#nvim_lsp()
-		let l:line .= hackline#ui#nvim_lsp#info(l:len_i, l:sep)
+		let l:line .= hackline#ui#nvim_lsp#info(l:sep.r)
 	endif
 	" Vim LSP
 	if l:active && hackline#config#vim_lsp()

@@ -2,18 +2,18 @@
 
 *hackline.vim 'hacks' your statusline so you don't have to.*
 
-The minimalist's statusline plugin for Neovim/Vim. It's lightweight, loads in no-time, but quite fully featured, with some features through optional plugins.
+The minimalist's statusline plugin for Neovim/Vim. It's lightweight, loads in no-time, still quite fully featured, with some features through optional plugins.
 
-- **No prerequisites** like icons or patched font, but there are simple variables for adding it.
-- **Uses your colorscheme.** Uses already exisiting highlight groups, but can be customized if needed.
+- **No prerequisites** like icons or patched font, but simple options for pimping separators.
+- **Supports any colorscheme** by being a normal Vim statusline. Highlight groups can be changed per mode, but changes the entire statusline for its context.
 - **Mode flag** (minimal by default) when not normal mode.
-- **Responsive**---adjusts statusline for smaller widths.
+- **Responsive**---adjusts and truncates on priority for smaller widths.
 - **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
 
 Integrations:
 
 - **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig). And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
-- **Git** info is bring-your-own function (from a plugin usually), or by opting-in to the built-in support for one of the following plugins (though maintenance of plugin support can not be ensured) connected to in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
+- **Git** info is bring-your-own function (from a plugin usually), or falls back to the built-in support for one of the following plugins (though maintenance of plugin support can not be ensured) connected to in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
 
 *Why another statusline plugin?* hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for all features.
 There's no patched font or icons dependency.
@@ -29,10 +29,10 @@ use {
 	config = function()
 		-- disable command line mode flag
 		vim.opt.showmode = false
-		-- built-in git plugin support (maintenance can not be ensured---you can bring-you-own Git function for safety)
-		vim.g.hackline_git_info = true
 		-- show CWD folder
 		vim.g.hackline_cwd = true
+		-- change inner separator before file path
+		vim.g.hackline_sep_inner_left = ": "
 		-- no inline padding (padding x-axis)
 		vim.g.hackline_normal_px = 0
 	end
@@ -45,12 +45,6 @@ use {
 ```vim
 " minpac
 call minpac#add('jssteinberg/hackline.vim')
-
-" Vim packager
-call packager#add('jssteinberg/hackline.vim')
-
-" vim-jetpack
-call jetpack#add('jssteinberg/hackline.vim')
 ```
 
 (And it should be equally simple with vim-plug).
@@ -74,12 +68,13 @@ let g:hackline_normal_px = 0 " inline padding (padding x-axis) for normal mode
 " Toggle statusline info:
 let g:hackline_mode = 1 " To activate mode flags and not deactivating `showmode`
 let g:hackline_cwd = 0 " Show current Vim working folder
-let g:hackline_git_info = "" " Set to a function or use `1`/`v:true` for built-in
+let g:hackline_git_info = 1 " Set to a function for bring-your-own Git info
 let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
 " Separators and signs:
 let g:hackline_separators = #{ l: '/', r: '/' }
+let g:hackline_sep_inner_left = g:hackline_sep_inner_left.l
 let g:hackline_branch_sign = "*"
 " for vgit
 let g:hackline_git_signs = #{
@@ -151,7 +146,6 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 ### *Future*
 
-- mv separators to level based separators, e.g., "sep_inner" something.
 - Add Vim help documentation.
 - mode contextual information such as number of characters, words in visual selection.
 - Nvim LSP number of buffer warning/errors?

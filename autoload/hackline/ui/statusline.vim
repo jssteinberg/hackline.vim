@@ -40,12 +40,10 @@ function hackline#ui#statusline#set(status = v:false) abort
 	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
 	" tabs/spaces
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
-	" sep
-	let l:line .= l:sep.l
 	" CWD
 	let l:line .= get(g:, "hackline_cwd", v:false)
-				\? "%(%{split(getcwd(), '/')[-1]}" . l:sep.il . "%)"
-				\: ""
+				\? l:sep.l . "%(%{split(getcwd(), '/')[-1]}" . l:sep.il . "%)"
+				\: l:sep.il
 	" file path
 	let l:line .= '%(%{hackline#base#directories(' . l:w.xl . ')}%t%)'
 	" modified flag

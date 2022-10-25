@@ -38,7 +38,7 @@ function hackline#config#vim_lsp() abort
 endfunction
 
 function hackline#config#git_info() abort
-	return get(g:, "hackline_git_info", "")
+	return get(g:, "hackline_git_info", "1")
 endfunction
 
 function hackline#config#branch_sign() abort

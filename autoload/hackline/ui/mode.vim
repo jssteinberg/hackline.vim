@@ -1,5 +1,5 @@
 " l:len_i
-function hackline#ui#mode#info(...) abort
+function! hackline#ui#mode#info(...) abort
 	if mode() == "i"
 		return "%#" . get(g:, "hackline_highlight_insert",   "IncSearch") . "#" . a:1 .. get(g:, "hackline_label_insert", "—I—")
 	elseif mode() == "c"

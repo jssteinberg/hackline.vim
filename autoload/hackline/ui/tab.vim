@@ -1,4 +1,4 @@
-function hackline#ui#tab#info(truncate = 0) abort
+function! hackline#ui#tab#info(truncate = 0) abort
 	let l:info = ''
 
 	if &expandtab

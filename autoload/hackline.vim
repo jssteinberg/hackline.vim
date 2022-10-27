@@ -1,6 +1,6 @@
 " Default config for hackline.vim
 
-function hackline#init() abort
+function! hackline#init() abort
 	aug init_hackline_statusline
 		au!
 		" BufReadPre to initially set inactive statusline

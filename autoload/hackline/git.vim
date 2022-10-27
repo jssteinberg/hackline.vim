@@ -1,4 +1,4 @@
-function hackline#git#branch() abort
+function! hackline#git#branch() abort
 
 	" gitsigns
 	let l:branch = get(b:,'gitsigns_head','')
@@ -14,7 +14,7 @@ function hackline#git#branch() abort
 	return l:branch
 endfunction
 
-function hackline#git#status() abort
+function! hackline#git#status() abort
 	" gitsigns
 	let l:status = get(b:,'gitsigns_status','')
 

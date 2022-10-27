@@ -1,5 +1,5 @@
 " sep.r
-function hackline#ui#nvim_lsp#info(...) abort
+function! hackline#ui#nvim_lsp#info(...) abort
 	let l:statusline = ''
 
 	if hackline#util#has_winwidth("xl")

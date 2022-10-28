@@ -69,7 +69,7 @@ function! hackline#ui#statusline#set(status = v:false) abort
 	endif
 	" Vim LSP
 	if l:active && hackline#config#vim_lsp()
-		let l:line .= l:sep.r .. 'LSP'
+		let l:line .= l:sep.r .. 'Lsp'
 	endif
 	" Right side info
 	if hackline#config#right() != ''

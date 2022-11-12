@@ -41,7 +41,7 @@ function! hackline#ui#statusline#set(status = v:false) abort
 	" tabs/spaces
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
 	" CWD
-	let l:line .= get(g:, "hackline_cwd", v:false)
+	let l:line .= get(g:, "hackline_cwd", v:false) && len(getcwd())
 				\? l:sep.l . "%(%{split(getcwd(), '/')[-1]}" . l:sep.il . "%)"
 				\: l:sep.il
 	" file path

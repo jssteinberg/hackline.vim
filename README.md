@@ -146,6 +146,7 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 ### *Future*
 
+- Highlight group for unsaved
 - Add Vim help documentation.
 - mode contextual information such as number of characters, words in visual selection.
 - Nvim LSP number of buffer warning/errors?

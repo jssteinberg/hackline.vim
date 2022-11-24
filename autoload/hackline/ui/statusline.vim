@@ -54,16 +54,14 @@ function! hackline#ui#statusline#set(status = v:false) abort
 	" Statusline Right Side
 	" ---------------------
 
-	let l:line .= '%='
+	let l:line .= l:len_i . '%='
 	" Git
-	if l:active
-		if hackline#config#git_info() == 1
-			" built in
-			let l:line .= hackline#ui#git#info()
-		else
-			" bring your own
-			let l:line .= "%( %{%hackline#config#git_info()%}"
-		endif
+	if l:active && hackline#config#git_info() == 1
+		" built in
+		let l:line .= hackline#ui#git#info()
+	elseif l:active && type(hackline#config#git_info()) == v:t_func
+		" bring your own
+		let l:line .= "%(%{%hackline#config#git_info()%}"
 	endif
 	" Nvim LSP
 	if l:active && hackline#config#nvim_lsp()

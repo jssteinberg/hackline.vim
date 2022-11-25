@@ -1,6 +1,6 @@
 " Basic content for statusline
 
-function hackline#base#directories(width = 100) abort
+function! hackline#base#directories(width = 100) abort
 	let l:path = expand('%:p:.:h')
 
 	if winwidth(0) <= a:width
@@ -14,11 +14,11 @@ function hackline#base#directories(width = 100) abort
 	return ''
 endfunction
 
-function hackline#base#wordcount() abort
+function! hackline#base#wordcount() abort
 	return wordcount().words
 endfunction
 
-function hackline#base#filesize() abort
+function! hackline#base#filesize() abort
 	let l:size = getfsize(expand('%'))
 	if l:size == 0 || l:size == -1 || l:size == -2
 		return ''
@@ -34,6 +34,6 @@ function hackline#base#filesize() abort
 	endif
 endfunction
 
-function hackline#base#tab_info(...) abort
+function! hackline#base#tab_info(...) abort
 	echom "Deprecated `hackline#base#tab_info()`! Use `hackline#tab#info()` for hackline.vim tab info."
 endfunction

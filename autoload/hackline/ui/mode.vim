@@ -1,16 +1,16 @@
-" l:hi.modes, l:labels
-function hackline#ui#mode#info(...) abort
+" l:len_i
+function! hackline#ui#mode#info(...) abort
 	if mode() == "i"
-		return a:1.i.'  '.a:2.i.' '
+		return "%#" . get(g:, "hackline_highlight_insert",   "IncSearch") . "#" . a:1 .. get(g:, "hackline_label_insert", "—I—")
 	elseif mode() == "c"
-		return a:1.c.'  '.a:2.c.' '
+		return "%#" . get(g:, "hackline_highlight_command",   "IncSearch") . "#" . a:1 .. get(g:, "hackline_label_command", "—C—")
 	elseif mode() == "t"
-		return a:1.t.'  '.a:2.t.' '
+		return "%#" . get(g:, "hackline_highlight_terminal", "IncSearch") . "#" . a:1 .. get(g:, "hackline_label_terminal", "—T—")
 	elseif mode() == "r"
-		return a:1.r.'  '.a:2.r.' '
+		return "%#" . get(g:, "hackline_highlight_replace", "IncSearch") . "#" . a:1 .. get(g:, "hackline_label_replace", "—R—")
 	elseif mode() == "s"
-		return a:1.s.'  '.a:2.s.' '
+		return "%#" . get(g:, "hackline_highlight_select", "IncSearch") . "#" . a:1 .. get(g:, "hackline_label_select", "—S—")
 	else
-		return a:1.v.'  '.a:2.v.' '
+		return "%#" . get(g:, "hackline_highlight_visual",   "IncSearch") . "#" . a:1 .. get(g:, "hackline_label_visual", "—V—")
 	endif
 endfunction

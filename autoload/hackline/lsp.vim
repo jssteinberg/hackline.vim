@@ -1,6 +1,6 @@
 " nvim lsp
 
-function hackline#lsp#length_connected() abort
+function! hackline#lsp#length_connected() abort
 	let l:res = 0
 
 	try
@@ -10,7 +10,7 @@ function hackline#lsp#length_connected() abort
 	return l:res != 0 ? l:res : ''
 endfunction
 
-function hackline#lsp#names_connected() abort
+function! hackline#lsp#names_connected() abort
 	let l:res = ''
 
 	try

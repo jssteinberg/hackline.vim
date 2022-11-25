@@ -1,4 +1,4 @@
-function hackline#fileencoding#info() abort
+function! hackline#fileencoding#info() abort
 	if &fileencoding !=# ''
 		return &fileencoding
 	endif

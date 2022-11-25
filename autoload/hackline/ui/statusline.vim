@@ -1,118 +1,85 @@
-function hackline#ui#statusline#set (status = v:false) abort
-	let l:w = hackline#breakpoints()
+function! hackline#ui#statusline#set(status = v:false) abort
+	let l:w = hackline#config#breakpoints()
 	let l:active = a:status
-	let l:labels = hackline#mode_labels()
-	let l:hi = hackline#highlight_groups()
-	let l:sep = hackline#separators()
-
-	let l:statusline=''
+	let l:hi = hackline#config#highlight_groups()
+	" separator sections
+	let l:sep = hackline#config#separators()
+	" separator items
+	let l:sep_i = get(g:, "hackline_sep_items", "  ")
+	" length separator items/inline
+	let l:len_i = repeat(' ', strlen(l:sep_i))
+	" inline padding
+	let l:normal_px = repeat(' ', get(g:, 'hackline_normal_px', 2))
+	" set initial highlight group (color)
+	let l:line = ''
+	let l:line .= l:active ? l:hi.start : l:hi.inactive
 
 	" Statusline Left Side
 	" --------------------
 
-	" Set initial highlight group (color)
-	let l:statusline .= l:active ? hackline#util#has_winwidth("md") ? l:hi.start : l:hi.active_sm : l:hi.inactive
-
-	" Logic for modes
-	if !l:active
-		" A certain number of spaces here so content is equally placed on active and inactive
-		" statusline to avoid that main statusline content jumps around.
-		let l:statusline .= repeat(" ", strlen(hackline#signature())) . '   '
-	elseif l:active && hackline#mode() && mode() != 'n'
-		let l:statusline .= hackline#ui#mode#info(l:hi.modes, l:labels)
-	elseif (!hackline#mode() || mode() == 'n') && hackline#modified() == "2" && &modified
-		let l:statusline .= l:active ? l:hi.mod : ''
-		let l:statusline .= '  '.l:labels.n.' '
-	elseif !hackline#mode() || mode() == 'n'
-		let l:statusline .= '  '.l:labels.n.' '
+	if l:active && hackline#config#mode() && mode() != 'n'
+		" mode not normal
+		let l:line .= hackline#ui#mode#info(l:len_i)
+		" sep
+		let l:line .= l:sep.l
 	else
-		let l:statusline .= ''
+		" ...or only inline padding
+		let l:line .= l:normal_px
 	endif
-
-	" Show filetype
-	if hackline#filetype()
-		if l:active
-			let l:statusline .= '%('.l:sep.l.' %{&filetype} %)'
-		else
-			let l:statusline .= '%(  %{&filetype} %)'
-		endif
-	endif
-
-	" Change highlight group or add sign
-	if hackline#util#has_winwidth("md") && l:active
-		let l:statusline .= ' ' . l:hi.mid . ' '
-	elseif hackline#modified() == "1"
-		let l:statusline .= l:sep.l .. l:sep.l
-	else
-		let l:statusline .= '  '
-	endif
-	if hackline#modified() == "2" && !hackline#bufnr()
-		let l:statusline .= ' '
-	endif
-
-	" Show buffer number dependent on state/width
-	if hackline#bufnr() && hackline#util#has_winwidth("md")
-		let l:statusline .= l:active ? '%( :b' . l:hi.mid_item . '%{bufnr()}' . l:hi.mid . ' ' . l:sep.l . '%)' : '%(   %{bufnr()}  %)'
-	elseif hackline#bufnr()
-		let l:statusline .= l:active ? '%( :b%{bufnr()}  %)' : '%(  b%{bufnr()}  %)'
-	endif
-
-	" Modified flag
-	if l:active && hackline#util#has_winwidth("md") && hackline#modified() == "1"
-		let l:statusline .= '%( ['.l:hi.mod.'%M'.l:hi.mid.']%) '
-	elseif hackline#modified() == "1"
-		let l:statusline .= '%(  %M %) '
-	elseif hackline#modified() == "2" && hackline#bufnr()
-		let l:statusline .= ' '
-	endif
-
-	" Show filepath, active and bigger screen gets highlight groups
-	if l:active && hackline#util#has_winwidth("lg")
-		let l:statusline .= '%(%<%)%('.l:hi.dir.'%{hackline#base#directories('.l:w.lg.')}'.l:hi.tail.'%t %)'.l:hi.mid
-	elseif l:active && hackline#util#has_winwidth("md")
-		let l:statusline .= '%('.l:hi.tail.'%t %)%(%<%)'.l:hi.mid
-	else
-		let l:statusline .= '%(%t %)%(%<%) '
-	endif
+	" buffern number
+	let l:line .= '%(Buf %{bufnr()}%)'
+	" filetype
+	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
+	" sep
+	let l:line .= l:sep.l
+	" truncation point
+	let l:line .= '%<'
+	" encoding
+	let l:line .= '%(%{hackline#fileencoding#info()}%)'
+	" format
+	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
+	" tabs/spaces
+	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
+	" CWD
+	let l:line .= !get(g:, "hackline_cwd", v:false)
+				\ ? l:sep.il
+				\ : len(getcwd()) > 1
+				\ ? l:sep.l . "%(%{split(getcwd(), '/')[-1]}" . l:sep.il . "%)"
+				\ : l:sep.l
+	" file path
+	let l:line .= '%(%{hackline#base#directories(' . l:w.xl . ')}%t%)'
+	" modified flag
+	let l:line .= '%( %m%)'
 
 	" Statusline Right Side
 	" ---------------------
-	let l:statusline .= ' %='
 
-	if l:active && hackline#util#has_winwidth("md")
-		let l:statusline .= l:hi.mid
-	endif
-
-	" Ale
-	if l:active && hackline#util#has_winwidth("md") && hackline#ale()
-		let l:statusline .=  '%('.l:sep.r.' '.l:hi.mid_item.'%{hackline#ale#status()}'.l:hi.mid.' %)'
+	let l:line .= '%='
+	" Git
+	if l:active && hackline#config#git_info() == 1
+		" built in
+		let l:line .= hackline#ui#git#info()
+	elseif l:active && type(hackline#config#git_info()) == v:t_func
+		" bring your own
+		let l:line .= "%( %{%hackline#config#git_info()%}"
 	endif
 	" Nvim LSP
-	if hackline#nvim_lsp()
-		let l:statusline .= hackline#ui#nvim_lsp#info(l:active, l:sep, l:hi)
+	if l:active && hackline#config#nvim_lsp()
+		let l:line .= hackline#ui#nvim_lsp#info(l:sep.r)
 	endif
 	" Vim LSP
-	if l:active && hackline#vim_lsp() && hackline#util#has_winwidth("md")
-		let l:statusline .= l:sep.r . ' ' . l:hi.mid_item . 'LSP' . l:hi.mid . ' '
-	elseif l:active && hackline#vim_lsp()
-		let l:statusline .= l:sep.r.' LSP '
+	if l:active && hackline#config#vim_lsp()
+		let l:line .= l:sep.r .. 'Lsp'
 	endif
-
-	" Git info
-	if hackline#git()
-		let l:statusline .= hackline#ui#git#info(l:active, l:sep, l:hi)
+	" Right side info
+	if hackline#config#right() != ''
+		try
+			let l:line .= l:sep.r
+			let l:line .= '%{%hackline#config#right()%}'
+		catch | endtry
 	endif
+	" End spacing
+	let l:line .= mode() == "n" ? l:normal_px : l:len_i
 
-	" Change highlight group if active and bigger screen
-	let l:statusline .= hackline#util#has_winwidth("md") && l:active ? ' '.l:hi.end.' ' : '  '
-
-	" Show end custom content
-	if hackline#custom_end() != ''
-		let l:statusline .= '%{%hackline#custom_end()%}'
-	endif
-
-	" Spacing
-	let l:statusline .= ' '
-
-	return l:statusline
+	return l:line
 endfunction

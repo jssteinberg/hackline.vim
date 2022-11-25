@@ -1,9 +1,8 @@
-" active, sep, hi
-function hackline#ui#git#info(...) abort
-	if a:1 && hackline#util#has_winwidth("md")
+function! hackline#ui#git#info() abort
+	if hackline#util#has_winwidth("md")
 		return ''
-					\ . '%('.a:2.r.' ' . a:3.mid_item..hackline#branch_sign()..a:3.branch.'%{hackline#git#branch()}'.a:3.mid.'%)'
-					\ . '%(('.a:3.mid_item.'%{hackline#git#status()}'.a:3.mid.')%) '
+					\ . '%( ' . hackline#config#branch_sign() . '%{hackline#git#branch()}%)'
+					\ . '%( %{hackline#git#status()}%)'
 	else
 		return ''
 	endif

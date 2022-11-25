@@ -9,7 +9,7 @@ end
 M.get_connected_client_names = function()
 	local connected_clients = {}
 	local clients = vim.lsp.get_active_clients()
-	local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+	local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 
 	for _, client in pairs(clients) do
 		local filetypes = client.config.filetypes
@@ -25,7 +25,7 @@ end
 M.names_connected = function()
 	local connected = M.get_connected_client_names()
 
-	return table.concat(connected, "/")
+	return table.concat(connected, " ")
 end
 
 M.length_connected = function()

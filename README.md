@@ -2,9 +2,9 @@
 
 *hackline.vim 'hacks' your statusline so you don't have to.*
 
-The minimalist's statusline plugin for Neovim/Vim. It's lightweight, loads in no-time, still quite fully featured, with some features through optional plugins.
+The minimalist's statusline package/plugin for Vim and Neovim. It's lightweight, loads in no-time, still quite fully featured, with some features through optional plugins.
 
-- **No prerequisites** like icons or patched font, but simple options for pimping separators.
+- **No prerequisites** like icons or patched font, but simple options for changing separators.
 - **Supports any colorscheme** by being a normal Vim statusline. Highlight groups can be changed per mode, but changes the entire statusline for its context.
 - **Mode flag** (minimal by default) when not normal mode.
 - **Responsive**---adjusts and truncates on priority for smaller widths.
@@ -31,8 +31,6 @@ use {
 		vim.opt.showmode = false
 		-- show CWD folder
 		vim.g.hackline_cwd = true
-		-- change inner separator before file path
-		vim.g.hackline_sep_inner_left = ": "
 		-- no inline padding (padding x-axis)
 		vim.g.hackline_normal_px = 0
 	end
@@ -74,7 +72,6 @@ let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
 " Separators and signs:
 let g:hackline_separators = #{ l: '/', r: '/' }
-let g:hackline_sep_inner_left = g:hackline_sep_inner_left.l
 let g:hackline_branch_sign = "*"
 " for vgit
 let g:hackline_git_signs = #{

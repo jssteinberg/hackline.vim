@@ -16,8 +16,6 @@ function! hackline#config#separators() abort
 	return #{
 				\l: l:sep.l,
 				\r: l:sep.r,
-				\il: get(g:, "hackline_sep_inner_left", l:sep.l),
-				\ir: get(g:, "hackline_sep_inner_right", l:sep.r),
 				\}
 endfunction
 

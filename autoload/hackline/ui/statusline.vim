@@ -52,7 +52,7 @@ function! hackline#ui#statusline#set(status = v:false) abort
 	let l:line .= '%='
 	" CWD
 	if get(g:, "hackline_cwd", v:false) && l:active && len(getcwd()) > 1
-		let l:line .= l:sep.l . "%(%{split(getcwd(), '/')[-1]}%)"
+		let l:line .= "%( (%{split(getcwd(), '/')[-1]}/)%)"
 	endif
 	" Git
 	if l:active && hackline#config#git_info() == 1

@@ -71,7 +71,7 @@ let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
 " Separators and signs:
-let g:hackline_separators = #{ l: '/', r: '/' }
+let g:hackline_separators = #{ l: '  /  ', r: '  /  ' }
 let g:hackline_branch_sign = "*"
 " for vgit
 let g:hackline_git_signs = #{

@@ -49,20 +49,7 @@ function! hackline#ui#statusline#set(status = v:false) abort
 	" Statusline Right Side
 	" ---------------------
 
-	let l:line .= '%='
-	" CWD
-	if get(g:, "hackline_cwd", v:false) && l:active && len(getcwd()) > 1
-		let l:line .= "%( %{split(getcwd(), '/')[-1]}/%)"
-	endif
-	" Git
-	if l:active && hackline#config#git_info() == 1
-		" built in
-		let l:line .= hackline#ui#git#info()
-	elseif l:active && type(hackline#config#git_info()) == v:t_func
-		" bring your own
-		let l:line .= "%{%hackline#config#git_info()%}"
-	endif
-	let l:line .= l:len_i
+	let l:line .= '%=' . l:len_i
 	" Nvim LSP
 	if l:active && hackline#config#nvim_lsp()
 		let l:line .= hackline#ui#nvim_lsp#info(l:sep.r)
@@ -71,6 +58,20 @@ function! hackline#ui#statusline#set(status = v:false) abort
 	if l:active && hackline#config#vim_lsp()
 		let l:line .= 'LSP' .. l:sep.r
 	endif
+	" CWD
+	if l:active && len(getcwd()) > 1
+		let l:line .= "%(%{split(getcwd(), '/')[-1]}/%)"
+	endif
+	" Git
+	if l:active && hackline#config#git_info() == 1
+		" built in
+		let l:line .= hackline#ui#git#info()
+	elseif l:active && type(hackline#config#git_info()) == v:t_func
+		" bring your own
+		let l:line .= "%( %{%hackline#config#git_info()%}%)"
+	endif
+	" sep to right info item
+	let l:line .= l:len_i
 	" Right side info
 	if hackline#config#right() != ''
 		try

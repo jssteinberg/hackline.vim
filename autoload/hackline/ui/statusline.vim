@@ -6,7 +6,7 @@ function! hackline#ui#statusline#set(status = v:false) abort
 	let l:sep = hackline#config#separators()
 	" separator items
 	let l:sep_i = get(g:, "hackline_sep_items", "  ")
-	" length separator items/inline
+	" length in spaces for item separator
 	let l:len_i = repeat(' ', strlen(l:sep_i))
 	" inline padding
 	let l:normal_px = repeat(' ', get(g:, 'hackline_normal_px', 2))
@@ -52,7 +52,7 @@ function! hackline#ui#statusline#set(status = v:false) abort
 	let l:line .= '%='
 	" CWD
 	if get(g:, "hackline_cwd", v:false) && l:active && len(getcwd()) > 1
-		let l:line .= "%( (%{split(getcwd(), '/')[-1]}/)%)"
+		let l:line .= "%( %{split(getcwd(), '/')[-1]}/%)"
 	endif
 	" Git
 	if l:active && hackline#config#git_info() == 1
@@ -60,20 +60,20 @@ function! hackline#ui#statusline#set(status = v:false) abort
 		let l:line .= hackline#ui#git#info()
 	elseif l:active && type(hackline#config#git_info()) == v:t_func
 		" bring your own
-		let l:line .= "%( %{%hackline#config#git_info()%}"
+		let l:line .= "%{%hackline#config#git_info()%}"
 	endif
+	let l:line .= l:len_i
 	" Nvim LSP
 	if l:active && hackline#config#nvim_lsp()
 		let l:line .= hackline#ui#nvim_lsp#info(l:sep.r)
 	endif
 	" Vim LSP
 	if l:active && hackline#config#vim_lsp()
-		let l:line .= l:sep.r .. 'Lsp'
+		let l:line .= 'LSP' .. l:sep.r
 	endif
 	" Right side info
 	if hackline#config#right() != ''
 		try
-			let l:line .= l:sep.r
 			let l:line .= '%{%hackline#config#right()%}'
 		catch | endtry
 	endif

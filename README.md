@@ -4,19 +4,19 @@
 
 The minimalist's statusline package/plugin for Vim and Neovim. It's lightweight, loads in no-time, still quite fully featured, with some features through optional plugins.
 
-- **No prerequisites** like icons or patched font, but simple options for changing separators.
+- **No prerequisites** like patched icon fonts. It has simple options for changing separators.
 - **Supports any colorscheme** by being a normal Vim statusline. Highlight groups can be changed per mode, but changes the entire statusline for its context.
-- **Mode flag** (minimal by default) when not normal mode.
-- **Responsive**---adjusts and truncates on priority for smaller widths.
-- **All buffer types** uses same settings---no specific buffer targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
+- **Mode flag** when not normal mode. Minimal by default.
+- **Responsive design** adjusts and truncates on priority for smaller widths.
+- **All buffers** uses same settings. No bloat with specific buffer/file type targeting. hackline.vim is just setup as dynamically as possible in how items are sorted and truncated, but still keeping them nice and logical for main buffers.
 
 Integrations:
 
 - **LSP** flag if connected to buffer. Supports [Neovim's LSP](https://github.com/neovim/nvim-lspconfig). And [vim-lsp](https://github.com/prabirshrestha/vim-lsp) (only simple flag if active LSP in buffer).
 - **Git** info is bring-your-own function (from a plugin usually), or falls back to the built-in support for one of the following plugins (though maintenance of plugin support can not be ensured) connected to in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
 
-*Why another statusline plugin?* hackline.vim is hacked to be the lightest statusline plugin for experienced Vim users, with no config needed for all features.
-There's no patched font or icons dependency.
+*Why another statusline plugin?*
+Hackline.vim needs no customizing, no patched icon font. It’s not for the shallow, but hacked to be the lightest statusline plugin for pragmatic speed freak vimmers. In all honesty, the barebones Vim features hackline.vim uses has drawbacks, but that’s worked around by hackline‘s design choices and not noticeable. The advantage is load time. Also, it’s fast.
 
 ## Installation
 

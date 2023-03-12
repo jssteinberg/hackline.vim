@@ -51,10 +51,6 @@ function! hackline#config#git_signs() abort
 				\})
 endfunction
 
-function! hackline#config#laststatus() abort
-	return get(g:, 'hackline_laststatus', '2')
-endfunction
-
 function! hackline#config#breakpoints() abort
 	return #{ md: 70, lg: 90, xl: 130 }
 endfunction

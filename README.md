@@ -58,7 +58,7 @@ Global variables for simple customization. Default values:
 
 ```vim
 " Set option:
-let g:hackline_laststatus = 2 " same as `laststatus`
+let g:hackline_laststatus = 2 " corresponds to `laststatus`
 let g:hackline_normal_px = 0 " inline padding (padding x-axis) for normal mode
 
 " Toggle statusline info:

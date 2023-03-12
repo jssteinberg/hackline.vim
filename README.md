@@ -2,7 +2,7 @@
 
 *hackline.vim 'hacks' your statusline so you don't have to.*
 
-The minimalist's statusline package/plugin for Vim and Neovim. It's lightweight, loads in no-time, still quite fully featured, with some features through optional plugins.
+An opinionated minimalistic statusline plugin for Vim and Neovim. It's lightweight, loads in no-time, still quite fully featured, with some features through optional plugins.
 
 - **No prerequisites** like patched icon fonts. It has simple options for changing separators.
 - **Supports any colorscheme** by being a normal Vim statusline. Highlight groups can be changed per mode, but changes the entire statusline for its context.
@@ -16,7 +16,7 @@ Integrations:
 - **Git** info is bring-your-own function (from a plugin usually), or falls back to the built-in support for one of the following plugins (though maintenance of plugin support can not be ensured) connected to in order: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim), [vim-fugitive](https://github.com/tpope/vim-fugitive), [vim-gitbranch](https://github.com/itchyny/vim-gitbranch). [VGit](https://github.com/tanvirtin/vgit.nvim) can supplement the two latter with Git status.
 
 *Why another statusline plugin?*
-Hackline.vim needs no customizing or no patched icon font. It’s not for the shallow, but hacked to be the lightest statusline plugin for pragmatic speed freak vimmers. In all honesty, the barebones Vim features hackline.vim uses has drawbacks, but that’s worked around by hackline‘s design choices and are not really noticeable. The advantage is load time. Also, hackline.vi is generally fast.
+Hackline.vim needs no customizing or no patched icon font. It’s not for the shallow, but hacked to be the lightest statusline plugin for pragmatic vimmers. In all honesty, the minimalism and barebones Vim features hackline.vim uses has drawbacks, but that’s worked around by hackline‘s design choices and are not really noticeable. Except the opinionated nature. The advantage is load time. Also, hackline.vim is generally fast.
 
 ## Installation
 

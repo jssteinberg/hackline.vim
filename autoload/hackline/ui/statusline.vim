@@ -70,12 +70,10 @@ function! hackline#ui#statusline#set(status = v:false) abort
 		" bring your own
 		let l:line .= "%( %{%hackline#config#git_info()%}%)"
 	endif
-	" sep to right info item
-	let l:line .= l:len_i
 	" Right side info
 	if hackline#config#right() != ''
 		try
-			let l:line .= '%{%hackline#config#right()%}'
+			let l:line .= '%(' . l:sep.r . '%{%hackline#config#right()%}%)'
 		catch | endtry
 	endif
 	" End spacing

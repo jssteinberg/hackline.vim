@@ -1,4 +1,4 @@
-function! hackline#ui#statusline#set(status = v:false) abort
+function! hackline#ui#statusline(status = v:false) abort
 	let l:w = hackline#config#breakpoints()
 	let l:active = a:status
 	let l:hi = hackline#config#highlight_groups()

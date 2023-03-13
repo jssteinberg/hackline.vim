@@ -26,7 +26,7 @@ function! hackline#ui#statusline(status = v:false) abort
 		let l:line .= l:normal_px
 	endif
 	" buffern number
-	let l:line .= '%(Buf %{bufnr()}%)'
+	let l:line .= '%(Bufnr %{bufnr()}%)'
 	" filetype
 	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
 	" sep
@@ -58,16 +58,12 @@ function! hackline#ui#statusline(status = v:false) abort
 		let l:line .= 'LSP' .. l:sep.r
 	endif
 	" Arglist length
-	if l:active && argc()
-		if hackline#util#has_winwidth("xl")
-			let l:line .= "Ar %{join(argv(), ' ')}" .. l:sep.r
-		elseif hackline#util#has_winwidth("md")
-			let l:line .= "Ar %{argc()}" .. l:sep.r
-		endif
+	if l:active && argc() && hackline#util#has_winwidth("md")
+		let l:line .= "Argc %{argc()}" .. l:sep.r
 	endif
 	" CWD
 	if l:active && len(getcwd()) > 1
-		let l:line .= "%(CWD %{split(getcwd(), '/')[-1]}%)"
+		let l:line .= "%(CD %{split(getcwd(), '/')[-1]}%)"
 	endif
 	" Git
 	if l:active && hackline#config#git_info() == 1
@@ -77,8 +73,9 @@ function! hackline#ui#statusline(status = v:false) abort
 		" bring your own
 		let l:line .= "%( %{%hackline#config#git_info()%}%)"
 	endif
+	let l:line .= l:sep.r
 	" Right side info
-	let l:line .= l:sep.r . "Ln %l/%L Col %c"
+	let l:line .= "Line %l/%L Col %c"
 	" End spacing
 	let l:line .= mode() == "n" ? l:normal_px : l:len_i
 

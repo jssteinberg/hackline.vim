@@ -1,5 +1,4 @@
 function! hackline#ui#statusline(status = v:false) abort
-	let l:w = hackline#config#breakpoints()
 	let l:active = a:status
 	let l:hi = hackline#config#highlight_groups()
 	" separator sections
@@ -42,7 +41,7 @@ function! hackline#ui#statusline(status = v:false) abort
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
 	let l:line .= l:sep.l
 	" file path
-	let l:line .= '%(%{hackline#base#directories(' . l:w.xl . ')}%t%)'
+	let l:line .= '%(%{hackline#ui#dir#info("xl")}%t%)'
 	" modified flag
 	let l:line .= '%( %m%)'
 
@@ -58,6 +57,14 @@ function! hackline#ui#statusline(status = v:false) abort
 	if l:active && hackline#config#vim_lsp()
 		let l:line .= 'LSP' .. l:sep.r
 	endif
+	" Arglist length
+	if l:active && argc()
+		if hackline#util#has_winwidth("xl")
+			let l:line .= "Ar %{join(argv(), ' ')}" .. l:sep.r
+		elseif hackline#util#has_winwidth("md")
+			let l:line .= "Ar %{argc()}" .. l:sep.r
+		endif
+	endif
 	" CWD
 	if l:active && len(getcwd()) > 1
 		let l:line .= "%(CWD %{split(getcwd(), '/')[-1]}%)"
@@ -71,11 +78,7 @@ function! hackline#ui#statusline(status = v:false) abort
 		let l:line .= "%( %{%hackline#config#git_info()%}%)"
 	endif
 	" Right side info
-	if hackline#config#right() != ''
-		try
-			let l:line .= '%(' . l:sep.r . '%{%hackline#config#right()%}%)'
-		catch | endtry
-	endif
+	let l:line .= l:sep.r . "Ln %l/%L Col %c"
 	" End spacing
 	let l:line .= mode() == "n" ? l:normal_px : l:len_i
 

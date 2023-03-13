@@ -85,9 +85,6 @@ let g:hackline_label_visual   = "–V–"
 let g:hackline_label_select   = "–S–"
 let g:hackline_label_replace  = "–R–"
 
-" Set statusline items for the far right of the statusline:
-let g:hackline_statusline_items_end = "Ln %l/%L Col %c"
-
 " Set highlight groups:
 let g:hackline_highlight_inactive = 'StatusLineNC'
 let g:hackline_highlight_normal = 'StatusLine'

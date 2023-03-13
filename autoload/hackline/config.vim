@@ -19,10 +19,6 @@ function! hackline#config#separators() abort
 				\}
 endfunction
 
-function! hackline#config#right() abort
-	return get(g:, "hackline_statusline_items_end", "Ln %l/%L Col %c")
-endfunction
-
 function! hackline#config#mode() abort
 	return get(g:, "hackline_mode", "1")
 endfunction

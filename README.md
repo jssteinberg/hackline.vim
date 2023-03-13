@@ -124,14 +124,13 @@ vim.g.hackline_separators  = { l = "", r = "" }
 
 ### Extra functions
 
-- **File size** function (originally from skyline.vim): `hackline#base#filesize()`
 - **Tabs or spaces**, and their size, function: `hackline#tab#info()` (pass parameter `1` to truncate info).
 - Also see `:help statusline`
 
 
 ## About development
 
-This is v3.0.0-0.
+This is v4.0.0-0.
 
 Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/skyline.vim) which has a different look.
 
@@ -139,6 +138,6 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 
 - Highlight group for unsaved
 - Add Vim help documentation.
-- mode contextual information such as number of characters, words in visual selection.
+- Visual mode contextual information such column/line range, words in visual selection, etc.
 - Nvim LSP number of buffer warning/errors?
 - Support hi `StatusLineTerm` and `StatusLineTermNC`?

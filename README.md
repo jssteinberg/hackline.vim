@@ -18,6 +18,7 @@ Integrations:
 *Why another statusline plugin?*
 Hackline.vim needs no customizing or no patched icon font. It’s not for the shallow, but hacked to be the lightest statusline plugin for pragmatic vimmers. In all honesty, the minimalism and barebones Vim features hackline.vim uses has drawbacks, but that’s worked around by hackline‘s design choices and are not really noticeable. Except the opinionated nature. The advantage is load time. Also, hackline.vim is generally fast.
 
+
 ## Installation
 
 Neovim example with packer.nvim:
@@ -51,6 +52,7 @@ hackline.vim requires Neovim or Vim version > 8.2.1[something]---basically a new
 For Mac, you can use Vim from Homebrew.
 
 hackline.vim is tested on Neovim and Vim compiled with lua (but should work without Lua).
+
 
 ## Options
 

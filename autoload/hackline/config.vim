@@ -23,18 +23,6 @@ function! hackline#config#mode() abort
 	return get(g:, "hackline_mode", "1")
 endfunction
 
-function! hackline#config#nvim_lsp() abort
-	return get(g:, "hackline_nvim_lsp", "1") && has("nvim")
-endfunction
-
-function! hackline#config#vim_lsp() abort
-	return get(g:, "hackline_vim_lsp", "1") && get(b:, "hackline_get_vim_lsp", "0")
-endfunction
-
-function! hackline#config#git_info() abort
-	return get(g:, "hackline_git_info", "1")
-endfunction
-
 function! hackline#config#branch_sign() abort
 	return get(g:, "hackline_branch_sign", "*")
 endfunction

@@ -41,7 +41,7 @@ function! hackline#ui#statusline(status = v:false) abort
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
 	let l:line .= l:sep.l
 	" file path
-	let l:line .= '%(%{hackline#ui#dir#info("xl")}%t%)'
+	let l:line .= '%("%{hackline#ui#dir#info("xl")}%t"%)'
 	" modified flag
 	let l:line .= '%( %m%)'
 
@@ -50,11 +50,11 @@ function! hackline#ui#statusline(status = v:false) abort
 
 	let l:line .= '%=' . l:len_i
 	" Nvim LSP
-	if l:active && hackline#config#nvim_lsp()
+	if l:active && has("nvim")
 		let l:line .= hackline#ui#nvim_lsp#info("", l:sep.r)
 	endif
 	" Vim LSP
-	if l:active && hackline#config#vim_lsp()
+	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active
 		let l:line .= 'LSP' .. l:sep.r
 	endif
 	" Arglist length
@@ -63,15 +63,11 @@ function! hackline#ui#statusline(status = v:false) abort
 	endif
 	" CWD
 	if l:active && len(getcwd()) > 1
-		let l:line .= "%(CD %{split(getcwd(), '/')[-1]}%)"
+		let l:line .= '%(CD "%{split(getcwd(), "/")[-1]}"%)'
 	endif
 	" Git
-	if l:active && hackline#config#git_info() == 1
-		" built in
+	if l:active
 		let l:line .= hackline#ui#git#info()
-	elseif l:active && type(hackline#config#git_info()) == v:t_func
-		" bring your own
-		let l:line .= "%( %{%hackline#config#git_info()%}%)"
 	endif
 	let l:line .= l:sep.r
 	" Right side info

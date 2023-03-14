@@ -63,8 +63,6 @@ let g:hackline_normal_px = 0 " inline padding (padding x-axis) for normal mode
 
 " Toggle statusline info:
 let g:hackline_mode = 1 " To activate mode flags and not deactivating `showmode`
-let g:hackline_git_info = 1 " Set to a function for bring-your-own Git info
-let g:hackline_nvim_lsp = 1 " Native nvim LSP info if available
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
 " Separators and signs:

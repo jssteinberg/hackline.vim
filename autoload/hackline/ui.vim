@@ -51,7 +51,7 @@ function! hackline#ui#statusline(status = v:false) abort
 	let l:line .= '%=' . l:len_i
 	" Nvim LSP
 	if l:active && hackline#config#nvim_lsp()
-		let l:line .= hackline#ui#nvim_lsp#info(l:sep.r)
+		let l:line .= hackline#ui#nvim_lsp#info("", l:sep.r)
 	endif
 	" Vim LSP
 	if l:active && hackline#config#vim_lsp()

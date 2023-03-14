@@ -67,7 +67,6 @@ let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
 " Separators and signs:
 let g:hackline_separators = #{ l: '  /  ', r: '  /  ' }
-let g:hackline_branch_sign = "*"
 " for vgit
 let g:hackline_git_signs = #{
 			\added: "+",
@@ -108,14 +107,12 @@ hi HacklineNormal guibg=... guifg=...
 ```vim
 " If you have a patched font, you can get a minor powerline feel:
 let g:hackline_separators = #{ l: "", r: "" }
-let g:hackline_branch_sign = " "
 ```
 
 In Neovim, you can configure with Lua like so:
 
 ```lua
 vim.g.hackline_laststatus  = 3
-vim.g.hackline_branch_sign = " "
 vim.g.hackline_separators  = { l = "", r = "" }
 -- ...etc.
 ```

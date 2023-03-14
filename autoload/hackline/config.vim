@@ -23,10 +23,6 @@ function! hackline#config#mode() abort
 	return get(g:, "hackline_mode", "1")
 endfunction
 
-function! hackline#config#branch_sign() abort
-	return get(g:, "hackline_branch_sign", "*")
-endfunction
-
 function! hackline#config#git_signs() abort
 	return get(g:, "hackline_git_signs", #{
 				\added: "+",

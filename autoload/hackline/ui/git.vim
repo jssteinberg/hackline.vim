@@ -1,7 +1,7 @@
-function! hackline#ui#git#info() abort
+function! hackline#ui#git#info(sep_l = "*", sep_r = "", breakpoint = "md") abort
 	if hackline#util#has_winwidth("md")
 		return ''
-					\ . '%( ' . hackline#config#branch_sign() . '%{hackline#git#branch()}%)'
+					\ . '%(' . a:sep_l . '%{hackline#git#branch()}%)'
 					\ . '%( %{hackline#git#status()}%)'
 	else
 		return ''

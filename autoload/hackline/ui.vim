@@ -67,7 +67,7 @@ function! hackline#ui#statusline(status = v:false) abort
 	endif
 	" Git
 	if l:active
-		let l:line .= hackline#ui#git#info()
+		let l:line .= hackline#ui#git#info(" *")
 	endif
 	let l:line .= l:sep.r
 	" Right side info

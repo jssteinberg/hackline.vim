@@ -18,6 +18,7 @@ Integrations:
 *Why another statusline plugin?*
 Hackline.vim needs no customizing or no patched icon font. It’s not for the shallow, but hacked to be the lightest statusline plugin for pragmatic vimmers. In all honesty, the minimalism and barebones Vim features hackline.vim uses has drawbacks, but that’s worked around by hackline‘s design choices and are not really noticeable. Except the opinionated nature. The advantage is load time. Also, hackline.vim is generally fast.
 
+
 ## Installation
 
 Neovim example with packer.nvim:
@@ -52,6 +53,7 @@ For Mac, you can use Vim from Homebrew.
 
 hackline.vim is tested on Neovim and Vim compiled with lua (but should work without Lua).
 
+
 ## Options
 
 Global variables for simple customization. Default values:
@@ -67,7 +69,6 @@ let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
 " Separators and signs:
 let g:hackline_separators = #{ l: '  /  ', r: '  /  ' }
-let g:hackline_branch_sign = "*"
 " for vgit
 let g:hackline_git_signs = #{
 			\added: "+",
@@ -108,14 +109,12 @@ hi HacklineNormal guibg=... guifg=...
 ```vim
 " If you have a patched font, you can get a minor powerline feel:
 let g:hackline_separators = #{ l: "", r: "" }
-let g:hackline_branch_sign = " "
 ```
 
 In Neovim, you can configure with Lua like so:
 
 ```lua
 vim.g.hackline_laststatus  = 3
-vim.g.hackline_branch_sign = " "
 vim.g.hackline_separators  = { l = "", r = "" }
 -- ...etc.
 ```

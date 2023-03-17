@@ -40,6 +40,17 @@ function! hackline#ui#statusline(status = v:false) abort
 	" tabs/spaces
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
 	let l:line .= l:sep.l
+	" Arglist length
+	if argc()
+		let l:line .= "Argc %{argc()}" .. l:sep.l
+	endif
+	" CWD
+	if len(getcwd(0)) > 1
+		let l:line .= '%(CD "%{split(getcwd(0), "/")[-1]}"%)'
+	endif
+	" Git
+	let l:line .= hackline#ui#git#info(" *")
+	let l:line .= l:sep.l
 	" file path
 	let l:line .= '%("%{hackline#ui#dir#info("xl")}%t"%)'
 	" modified flag
@@ -57,19 +68,6 @@ function! hackline#ui#statusline(status = v:false) abort
 	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active
 		let l:line .= 'LSP' .. l:sep.r
 	endif
-	" Arglist length
-	if l:active && argc() && hackline#util#has_winwidth("md")
-		let l:line .= "Argc %{argc()}" .. l:sep.r
-	endif
-	" CWD
-	if len(getcwd(0)) > 1
-		let l:line .= '%(CD "%{split(getcwd(0), "/")[-1]}"%)'
-	endif
-	" Git
-	if l:active
-		let l:line .= hackline#ui#git#info(" *")
-	endif
-	let l:line .= l:sep.r
 	" Right side info
 	let l:line .= "Line %l/%L Col %c"
 	" End spacing

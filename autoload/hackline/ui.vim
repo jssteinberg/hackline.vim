@@ -7,8 +7,6 @@ function! hackline#ui#statusline(status = v:false) abort
 	let l:sep_i = get(g:, "hackline_sep_items", "  ")
 	" length in spaces for item separator
 	let l:len_i = repeat(' ', strlen(l:sep_i))
-	" inline padding
-	let l:normal_px = repeat(' ', get(g:, 'hackline_normal_px', 2))
 	" set initial highlight group (color)
 	let l:line = ''
 	let l:line .= l:active ? l:hi.start : l:hi.inactive
@@ -18,12 +16,11 @@ function! hackline#ui#statusline(status = v:false) abort
 
 	if l:active && hackline#config#mode() && mode() != 'n'
 		" mode not normal
-		let l:line .= hackline#ui#mode#info(l:len_i)
+		let l:line .= hackline#ui#mode#info(" ")
 		" sep
 		let l:line .= l:sep.l
 	else
-		" ...or only inline padding
-		let l:line .= l:normal_px
+		let l:line .= " "
 	endif
 	" buffern number
 	let l:line .= '%(Bufnr %{bufnr()}%)'
@@ -71,7 +68,7 @@ function! hackline#ui#statusline(status = v:false) abort
 	" Right side info
 	let l:line .= "Line %l/%L Col %c"
 	" End spacing
-	let l:line .= mode() == "n" ? l:normal_px : l:len_i
+	let l:line .= " "
 
 	return l:line
 endfunction

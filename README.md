@@ -30,8 +30,6 @@ use {
 	config = function()
 		-- disable command line mode flag
 		vim.opt.showmode = false
-		-- no inline padding (padding x-axis)
-		vim.g.hackline_normal_px = 0
 	end
 }
 ```
@@ -61,7 +59,6 @@ Global variables for simple customization. Default values:
 ```vim
 " Set option:
 let g:hackline_laststatus = 2 " corresponds to `laststatus`
-let g:hackline_normal_px = 0 " inline padding (padding x-axis) for normal mode
 
 " Toggle statusline info:
 let g:hackline_mode = 1 " To activate mode flags and not deactivating `showmode`

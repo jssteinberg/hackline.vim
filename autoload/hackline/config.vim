@@ -1,12 +1,3 @@
-function! hackline#config#highlight_groups() abort
-	let l:highlight_groups = #{
-				\ start: get(g:, "hackline_highlight_normal", "StatusLine"),
-				\ inactive: get(g:, "hackline_highlight_inactive", "StatusLineNC"),
-				\ }
-
-	return hackline#util#getStatuslineHighlights( l:highlight_groups )
-endfunction
-
 function! hackline#config#separators() abort
 	let l:sep = get(g:, "hackline_separators", #{
 				\l: '  /  ',

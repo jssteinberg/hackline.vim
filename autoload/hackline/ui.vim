@@ -1,16 +1,5 @@
-function! s:ShowMode(sep_l = "", sep_r = "") abort
-	if mode() == "i"     | return "%#IncSearch#" . a:sep_l . "I" . a:sep_r
-	elseif mode() == "c" | return "%#IncSearch#" . a:sep_l . "C" . a:sep_r
-	elseif mode() == "t" | return "%#IncSearch#" . a:sep_l . "T" . a:sep_r
-	elseif mode() == "r" | return "%#IncSearch#" . a:sep_l . "R" . a:sep_r
-	elseif mode() == "s" | return "%#IncSearch#" . a:sep_l . "S" . a:sep_r
-	else                 | return "%#IncSearch#" . a:sep_l . "V" . a:sep_r
-	endif
-endfunction
-
 function! hackline#ui#render(status = v:false) abort
 	let l:active = a:status
-	let l:hi = hackline#config#highlight_groups()
 	" separator sections
 	let l:sep = hackline#config#separators()
 	" separator items
@@ -19,7 +8,7 @@ function! hackline#ui#render(status = v:false) abort
 	let l:len_i = repeat(' ', strlen(l:sep_i))
 	" set initial highlight group (color)
 	let l:line = ''
-	let l:line .= l:active ? l:hi.start : l:hi.inactive
+	let l:line .= l:active ? "%#StatusLine#" : "%#StatusLineNC#"
 
 	" Statusline Left Side
 	" --------------------
@@ -81,3 +70,14 @@ function! hackline#ui#render(status = v:false) abort
 
 	return l:line
 endfunction
+
+function! s:ShowMode(sep_l = "", sep_r = "") abort
+	if mode() == "i"     | return "%#IncSearch#" . a:sep_l . "I" . a:sep_r
+	elseif mode() == "c" | return "%#IncSearch#" . a:sep_l . "C" . a:sep_r
+	elseif mode() == "t" | return "%#IncSearch#" . a:sep_l . "T" . a:sep_r
+	elseif mode() == "r" | return "%#IncSearch#" . a:sep_l . "R" . a:sep_r
+	elseif mode() == "s" | return "%#IncSearch#" . a:sep_l . "S" . a:sep_r
+	else                 | return "%#IncSearch#" . a:sep_l . "V" . a:sep_r
+	endif
+endfunction
+

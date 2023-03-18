@@ -1,3 +1,13 @@
+function! s:ShowMode(sep_l = "", sep_r = "") abort
+	if mode() == "i"     | return "%#IncSearch#" . a:sep_l . "I" . a:sep_r
+	elseif mode() == "c" | return "%#IncSearch#" . a:sep_l . "C" . a:sep_r
+	elseif mode() == "t" | return "%#IncSearch#" . a:sep_l . "T" . a:sep_r
+	elseif mode() == "r" | return "%#IncSearch#" . a:sep_l . "R" . a:sep_r
+	elseif mode() == "s" | return "%#IncSearch#" . a:sep_l . "S" . a:sep_r
+	else                 | return "%#IncSearch#" . a:sep_l . "V" . a:sep_r
+	endif
+endfunction
+
 function! hackline#ui#render(status = v:false) abort
 	let l:active = a:status
 	let l:hi = hackline#config#highlight_groups()
@@ -15,8 +25,7 @@ function! hackline#ui#render(status = v:false) abort
 	" --------------------
 
 	if l:active && hackline#config#mode() && mode() != 'n'
-		" mode not normal
-		let l:line .= hackline#ui#mode#info(" ")
+		let l:line .= s:ShowMode(" —", "—")
 		" sep
 		let l:line .= l:sep.l
 	else

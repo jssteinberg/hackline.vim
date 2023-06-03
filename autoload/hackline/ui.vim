@@ -35,10 +35,6 @@ function! hackline#ui#render(status = v:false) abort
 	" tabs/spaces
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
 	let l:line .= l:sep.l
-	" Arglist length
-	if argc()
-		let l:line .= "Argc %{argc()}" .. l:sep.l
-	endif
 	" CWD
 	if len(getcwd(0)) > 1
 		let l:line .= '%(CD %{split(getcwd(0), "/")[-1]}%)'

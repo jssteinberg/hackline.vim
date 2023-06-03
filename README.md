@@ -57,10 +57,11 @@ hackline.vim is tested on Neovim and Vim compiled with lua (but should work with
 Global variables for simple customization. Default values:
 
 ```vim
-" Set option:
+" Options:
 let g:hackline_laststatus = 2 " corresponds to `laststatus`
+let g:hackline_aggressive = 0 " or 1 for aggressive rerendering of statusline
 
-" Toggle statusline info:
+" Items:
 let g:hackline_mode = 1 " To activate mode flags and not deactivating `showmode`
 let g:hackline_vim_lsp = 1 " Vim LSP info if available
 
@@ -94,26 +95,12 @@ let g:hackline_highlight_terminal = 'DiffAdd'
 
 ### Some examples
 
-```vim
-" You can define your own highlight groups:
-let g:hackline_highlight_normal = 'HacklineNormal'
-" ...and something:
-hi! link HacklineNormal Search
-" ...or something else:
-hi HacklineNormal guibg=... guifg=...
-```
+Define your global Hackline function to customize.
 
 ```vim
-" If you have a patched font, you can get a minor powerline feel:
-let g:hackline_separators = #{ l: "", r: "" }
-```
-
-In Neovim, you can configure with Lua like so:
-
-```lua
-vim.g.hackline_laststatus  = 3
-vim.g.hackline_separators  = { l = "", r = "" }
--- ...etc.
+function! Hackline(status) abort
+	return ""
+endfunction
 ```
 
 ### Extra functions

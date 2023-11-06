@@ -188,4 +188,3 @@ Originally a fork of the lightweight [skyline.vim](https://github.com/ourigen/sk
 - Add Vim help documentation.
 - Visual mode contextual information such column/line range, words in visual selection, etc.
 - Nvim LSP number of buffer warning/errors?
-- Support hi `StatusLineTerm` and `StatusLineTermNC`?

@@ -172,7 +172,7 @@ endfunction
 
 ### Extra functions
 
-- **Tabs or spaces**, and their size, function: `hackline#tab#info()` (pass parameter `1` to truncate info).
+- **Tabs or spaces**, and their size, function: `hackline#tab#info()` (pass parameter `"min"` to truncate info).
 - Also see `:help statusline`
 
 

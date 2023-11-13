@@ -37,11 +37,11 @@ function! hackline#ui#render(status = v:false) abort
 	let l:line .= l:sep.l
 	" CWD
 	if len(getcwd(0)) > 1
-		let l:line .= '%(CD %{split(getcwd(0), "/")[-1]}%)'
+		let l:line .= '%(%{split(getcwd(0), "/")[-1]}%)'
 	endif
 	" Git
 	let l:line .= hackline#ui#git#info(" *")
-	let l:line .= l:sep.l
+	let l:line .= ':' . repeat(' ', strlen(l:sep_i))
 	" file path
 	let l:line .= '%(%{hackline#ui#dir#info("xl")}%t%)'
 	" modified flag

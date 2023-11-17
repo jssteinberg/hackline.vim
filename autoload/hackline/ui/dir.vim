@@ -6,7 +6,7 @@ function! hackline#ui#dir#info(breakpoint = "xl") abort
 	endif
 
 	if l:path !=# '.' && l:path !=# ''
-		return l:path == '/' ? l:path : l:path.'/'
+		return l:path
 	endif
 
 	return ''

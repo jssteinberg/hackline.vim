@@ -43,7 +43,7 @@ function! hackline#ui#render(status = v:false) abort
 	let l:line .= hackline#ui#git#info(" *")
 	let l:line .= ':' . repeat(' ', strlen(l:sep_i))
 	" file path
-	let l:line .= '%(%{hackline#ui#dir#info("xl")}%t%)'
+	let l:line .= '%(%{hackline#ui#dir#info("xl")}/%)%t'
 	" modified flag
 	let l:line .= '%( %m%)'
 

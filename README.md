@@ -84,6 +84,13 @@ function! Hackline(status) abort
 endfunction
 ```
 
+#### Hackline provided functions
+
+- `hackline#ui#dir"info()` -- default parameter `breakpoint = "xl"` (possible values: `"md" | "lg" | "xl"`) -- return current buffer relative directory, shortened below breakpoint.
+- **Tabs or spaces**, and their size, function: `hackline#tab#info()` (pass parameter `"min"` to truncate info).
+- Also see `:help statusline`
+
+
 <details>
 <summary>Full example</summary>
 
@@ -169,11 +176,6 @@ endfunction
 ```
 
 </details>
-
-### Extra functions
-
-- **Tabs or spaces**, and their size, function: `hackline#tab#info()` (pass parameter `"min"` to truncate info).
-- Also see `:help statusline`
 
 
 ## About development

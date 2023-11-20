@@ -6,7 +6,7 @@ function! hackline#ui#tab#info(style = "max") abort
 	if &expandtab
 		let l:info = !l:truncate ? 'expandtab ' : ''
 	else
-		let l:info = !l:truncate ? 'tab ' : ''
+		let l:info = ''
 	endif
 
 	if shiftwidth() > 0 && shiftwidth() != &tabstop
@@ -17,7 +17,7 @@ function! hackline#ui#tab#info(style = "max") abort
 		let l:info .= &tabstop
 	elseif &expandtab
 		" Spaces
-		let l:info .= !l:truncate ? 'sw=' : ''
+		let l:info .= 'sw='
 		let l:info .= shiftwidth()
 	elseif &tabstop > 0
 		" Tab indent size

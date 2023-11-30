@@ -1,7 +1,7 @@
-function! hackline#ui#git#info(sep_l = "*", sep_r = "", breakpoint = "md") abort
-	if hackline#util#has_winwidth("md")
+function! hackline#ui#git#info(append_left = "*", display_breakpoint = "md") abort
+	if hackline#util#has_winwidth(a:display_breakpoint)
 		return ''
-					\ . '%(' . a:sep_l . '%{hackline#git#branch()}%)'
+					\ . '%(' . a:append_left . '%{hackline#git#branch()}%)'
 					\ . '%( %{hackline#git#status()}%)'
 	else
 		return ''

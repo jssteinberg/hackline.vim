@@ -86,8 +86,9 @@ endfunction
 
 #### Hackline provided functions
 
-- `hackline#ui#dir"info()` -- default params `breakpoint = "xl"` (possible values: `"md" | "lg" | "xl"`) -- return current buffer relative directory, shortened below breakpoint.
-- `hackline#ui#tab#info()` -- default params `style = "max` (use  `"min"` to truncate info) -- returns tabs or spaces, and their size.
+- `hackline#ui#dir"info()` -- params `breakpoint = "xl"` (possible values: `"md" | "lg" | "xl"`) -- return current buffer relative directory, shortened below breakpoint.
+- `hackline#ui#tab#info()` -- params `style = "max"` (use  `"min"` to truncate info) -- returns tabs or spaces, and their size.
+- `hackline#ui#nvim_lsp#info()` -- params `append_left = " ", label = "LSP", preped_label = " ", seperator_servers = " ", prepend_right = " ", truncation_breakpoint = "xl"` (possible `truncation_breakpoint` values: `"md" | "lg" | "xl"`) -- returns LSP connected servers by name/length (above/below breakpoint)
 - Also see `:help statusline`
 
 

@@ -100,16 +100,17 @@ endfunction
 function! Hackline(status) abort
 	let l:active = a:status
 	" separator sections
-	let l:sep = #{l: "  ", r: "  "}
+	let l:sep = #{l: " ", r: " "}
 	" separator items
 	let l:sep_i = "/"
-	" length in spaces for item separator
+	" length in spaces for separators
+	let l:len_l = repeat(" ", strlen(l:sep.l))
 	let l:len_i = repeat(" ", strlen(l:sep_i))
-	let l:line = ""
 
 	" Statusline Left Side
 	" --------------------
 
+	let l:line = ""
 	" set statusline default color
 	let l:line .= l:active ? "%#StatusLine#" : "%#StatusLineNC#"
 	" set mode style
@@ -118,26 +119,31 @@ function! Hackline(status) abort
 	endif
 	let l:line .= " "
 	" modified flag
-	let l:line .= "%(%m" . l:sep.l . "%)"
+	let l:line .= "%(%M" . l:sep_i . "%)"
 	" buffern number
-	let l:line .= "%(#%{bufnr()}%)"
+	let l:line .= "%(b%{bufnr()}%)"
 	" filetype
 	let l:line .= "%(" . l:sep_i . "%{&filetype}%)"
 	" filename
-	let l:line .= "%(" . l:sep.l . "%t%)"
-	" truncation point
-	let l:line .= l:sep.l . "%<"
+	let l:line .= "%(: %t%)"
 	" CWD
 	if len(getcwd(0)) > 1
+		let l:line .= " ("
+		" truncation point
+		let l:line .= "%<"
 		let l:line .= "%(%{split(getcwd(0), '/')[-1]}%)"
 		" Git
 		let l:line .= hackline#ui#git#info("*")
 		" file path
-		let l:line .= "%( %{hackline#ui#dir#info('xl')}%)"
+		let l:line .= "%(, %{hackline#ui#dir#info('xl')}%)"
+		let l:line .= ")"
+		" sep l
+		let l:line .= l:sep.l
+	else
+		" truncation point
+		let l:line .= l:sep.l . "%<"
 	endif
-	" sep l
-	let l:line .= l:sep.l
-	" Lang
+	" spelllang
 	if l:active && &spell == 1
 		let l:line .= "%(%{&spelllang}" . l:sep_i . "%)"
 	endif
@@ -149,7 +155,7 @@ function! Hackline(status) abort
 	let l:line .= "%(" . l:sep_i . "%{hackline#ui#tab#info('min')}%)"
 	" Nvim LSP
 	if l:active && has("nvim")
-		let l:line .= hackline#ui#nvim_lsp#info(l:sep.l, l:len_i)
+		let l:line .= hackline#ui#nvim_lsp#info(l:sep.l, "LSP", l:sep_i, l:sep_i, l:len_l)
 	endif
 	" Vim LSP
 	if l:active && get(b:, "hackline_use_vim_lsp", "0")
@@ -161,7 +167,7 @@ function! Hackline(status) abort
 	let l:line .= "%=" . l:len_i
 
 	" Cursor position
-	let l:line .= "%l/%L:%c"
+	let l:line .= "Line %l/%L Col %c"
 	" End spacing
 	let l:line .= " "
 

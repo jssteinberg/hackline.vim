@@ -3,7 +3,7 @@ function! hackline#ui#nvim_lsp#info(append_left = " ", label = "LSP", prepend_la
 	let l:statusline = ''
 
 	if hackline#util#has_winwidth(a:truncation_breakpoint)
-		let l:statusline .= '%(' . a:append_left . a:label . a:prepend_label . '%{hackline#lsp#names_connected(' . a:seperator_servers . ')}' . a:prepend_right . '%)'
+		let l:statusline .= '%(' . a:append_left . a:label . a:prepend_label . '%{hackline#lsp#names_connected("a:seperator_servers")}' . a:prepend_right . '%)'
 	else
 		let l:statusline .= '%(' . a:append_left . a:label . a:prepend_label . '%{hackline#lsp#length_connected()}' . a:prepend_right . '%)'
 	endif

@@ -10,11 +10,11 @@ function! hackline#lsp#length_connected() abort
 	return l:res != 0 ? l:res : ''
 endfunction
 
-function! hackline#lsp#names_connected(sep_i) abort
+function! hackline#lsp#names_connected(sep_i = " ") abort
 	let l:res = ''
 
 	try
-		let l:res = luaeval("require('hackline.lsp').names_connected()")
+		let l:res = luaeval("require('hackline.lsp').names_connected(" . a:sep_i . ")")
 	catch | endtry
 
 	return l:res != '' ? l:res : ''

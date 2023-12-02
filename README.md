@@ -92,7 +92,16 @@ endfunction
 - `hackline#ui#nvim_lsp#info()` -- params `append_left = " ", label = "LSP", preped_label = " ", seperator_servers = " ", prepend_right = " ", truncation_breakpoint = "xl"` (possible `truncation_breakpoint` values: `"md" | "lg" | "xl"`) -- returns LSP connected servers by name/length (above/below breakpoint)
 - Also see `:help statusline`
 
-The default breakpoints are `#{ md: 70, lg: 90, xl: 130 }`. Note that breakpoints are ignored `if &laststatus == 3`
+Breakpoints can be redefined with `g:hackline_breakpoints`. E.g.:
+
+```vim
+" default
+let g:hackline_breakpoints = #{
+	md: 70, lg: 90, xl: 130
+}
+```
+
+Number values refer to `winwidth(0)`. Note that breakpoints are ignored `if &laststatus == 3`.
 
 <details>
 <summary>Full example</summary>

@@ -23,5 +23,5 @@ function! hackline#config#git_signs() abort
 endfunction
 
 function! hackline#config#breakpoints() abort
-	return #{ md: 70, lg: 90, xl: 130 }
+	return get(g:, "hackline_breakpoints", #{ md: 70, lg: 90, xl: 130 })
 endfunction

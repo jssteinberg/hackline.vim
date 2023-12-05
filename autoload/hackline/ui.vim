@@ -53,7 +53,7 @@ function! hackline#ui#render(status = v:false) abort
 	let l:line .= '%=' . l:len_i
 	" Nvim LSP
 	if l:active && has("nvim")
-		let l:line .= hackline#ui#nvim_lsp#info("", l:sep.r)
+		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", " ", " ", l:sep.r)
 	endif
 	" Vim LSP
 	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active

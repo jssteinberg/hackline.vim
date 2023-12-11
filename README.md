@@ -90,7 +90,7 @@ endfunction
 - `hackline#ui#git#info()` -- params `append_left = "*", display_breakpoint = "md"` (possible `display_breakpoint` values: `"md" | "lg" | "xl"`) -- returns git info from gitsigns, fugitive, vim-branch, or vgit.
 - `hackline#ui#tab#info()` -- params `style = "max"` (use  `"min"` to truncate info) -- returns tabs or spaces, and their size.
 - `hackline#ui#nvim_lsp#info()` -- params `append_left = " ", label = "LSP", preped_label = " ", seperator_servers = " ", prepend_right = " ", truncation_breakpoint = "xl"` (possible `truncation_breakpoint` values: `"md" | "lg" | "xl"`) -- returns LSP connected servers by name/length (above/below breakpoint)
-- Also see `:help statusline`
+- Also see `:help statusline`, https://jdhao.github.io/2019/11/03/vim_custom_statusline
 
 Breakpoints can be redefined with `g:hackline_breakpoints`. E.g.:
 

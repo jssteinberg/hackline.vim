@@ -26,31 +26,17 @@ function! hackline#ui#render(status = v:false) abort
 	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
 	" sep
 	let l:line .= l:sep.l
-	" truncation point
-	let l:line .= '%<'
-	" encoding
-	let l:line .= '%(%{hackline#fileencoding#info()}%)'
-	" format
-	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
-	" tabs/spaces
-	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
-	let l:line .= l:sep.l
-	" CWD
-	if len(getcwd(0)) > 1
-		let l:line .= '%(%{split(getcwd(0), "/")[-1]}%)'
-	endif
-	" Git
-	let l:line .= hackline#ui#git#info(" *")
-	let l:line .= ':' . repeat(' ', strlen(l:sep_i))
 	" file path
 	let l:line .= '%(%{hackline#ui#dir#info("xl")}/%)%t'
 	" modified flag
 	let l:line .= '%( %m%)'
+	" truncation point
+	let l:line .= l:len_i . '%<'
 
 	" Statusline Right Side
 	" ---------------------
 
-	let l:line .= '%=' . l:len_i
+	let l:line .= '%='
 	" Nvim LSP
 	if l:active && has("nvim")
 		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", " ", " ", l:sep.r)
@@ -59,8 +45,22 @@ function! hackline#ui#render(status = v:false) abort
 	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active
 		let l:line .= 'LSP' .. l:sep.r
 	endif
+	" encoding
+	let l:line .= '%(%{hackline#fileencoding#info()}%)'
+	" format
+	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
+	" tabs/spaces
+	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
+	let l:line .= l:sep.r
 	" Right side info
 	let l:line .= "Line %l/%L Col %c"
+	" CWD
+	if len(getcwd(0)) > 1
+		let l:line .= l:sep.r
+		let l:line .= '%(%{split(getcwd(0), "/")[-1]}%)'
+		" Git
+		let l:line .= hackline#ui#git#info(" *")
+	endif
 	" End spacing
 	let l:line .= " "
 

@@ -1,6 +1,6 @@
 function! hackline#config#separators() abort
 	let l:sep = get(g:, "hackline_separators", #{
-				\l: '  /  ',
+				\l: '  –  ',
 				\r: '  /  ',
 				\})
 

@@ -21,7 +21,7 @@ function! hackline#ui#render(status = v:false) abort
 		let l:line .= "  "
 	endif
 	" buffern number
-	let l:line .= '%(Bufnr %{bufnr()}%)'
+	let l:line .= '%(:b%{bufnr()}%)'
 	" filetype
 	let l:line .= '%(' . l:sep_i . '%{&filetype}%)'
 	" sep
@@ -30,6 +30,10 @@ function! hackline#ui#render(status = v:false) abort
 	let l:line .= '%(%{hackline#ui#dir#info("xl")}/%)%t'
 	" modified flag
 	let l:line .= '%( %m%)'
+	" sep
+	let l:line .= l:sep.l
+	" Cursor info
+	let l:line .= "l-%l/%L c-%c"
 	" truncation point
 	let l:line .= l:len_i . '%<'
 
@@ -37,6 +41,7 @@ function! hackline#ui#render(status = v:false) abort
 	" ---------------------
 
 	let l:line .= '%='
+	" let l:line .= '%(%{codeium#GetStatusString()} AI' . l:sep.r . '%)'
 	" Nvim LSP
 	if l:active && has("nvim")
 		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", " ", " ", l:sep.r)
@@ -51,9 +56,6 @@ function! hackline#ui#render(status = v:false) abort
 	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
 	" tabs/spaces
 	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
-	let l:line .= l:sep.r
-	" Right side info
-	let l:line .= "Line %l/%L Col %c"
 	" CWD
 	if len(getcwd(0)) > 1
 		let l:line .= l:sep.r

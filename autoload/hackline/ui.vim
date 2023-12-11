@@ -14,7 +14,7 @@ function! hackline#ui#render(status = v:false) abort
 	" --------------------
 
 	if l:active && hackline#config#mode() && mode() != 'n'
-		let l:line .= s:ShowMode("  —", "—")
+		let l:line .= s:ShowMode("  ")
 		" sep
 		let l:line .= l:sep.l
 	else

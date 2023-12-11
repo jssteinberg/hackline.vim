@@ -14,11 +14,11 @@ function! hackline#ui#render(status = v:false) abort
 	" --------------------
 
 	if l:active && hackline#config#mode() && mode() != 'n'
-		let l:line .= s:ShowMode(" —", "—")
+		let l:line .= s:ShowMode("  —", "—")
 		" sep
 		let l:line .= l:sep.l
 	else
-		let l:line .= " "
+		let l:line .= "  "
 	endif
 	" buffern number
 	let l:line .= '%(Bufnr %{bufnr()}%)'
@@ -62,7 +62,7 @@ function! hackline#ui#render(status = v:false) abort
 		let l:line .= hackline#ui#git#info(" *")
 	endif
 	" End spacing
-	let l:line .= " "
+	let l:line .= "  "
 
 	return l:line
 endfunction

@@ -50,12 +50,16 @@ function! hackline#ui#render(status = v:false) abort
 	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active
 		let l:line .= 'LSP' .. l:sep.r
 	endif
+	" spelllang
+	if l:active && &spell == 1
+		let l:line .= "%(spl=%{&spelllang}" . l:sep_i . "%)"
+	endif
+	" tabs/spaces
+	let l:line .= '%(%{hackline#ui#tab#info()}' . l:sep_i . '%)'
 	" encoding
 	let l:line .= '%(%{hackline#fileencoding#info()}%)'
 	" format
 	let l:line .= '%(' . l:sep_i . '%{&fileformat}%)'
-	" tabs/spaces
-	let l:line .= '%(' . l:sep_i . '%{hackline#ui#tab#info()}%)'
 	" CWD
 	if len(getcwd(0)) > 1
 		let l:line .= l:sep.r
@@ -71,7 +75,7 @@ endfunction
 
 function! s:ShowMode(sep_l = "", sep_r = "") abort
 	if mode() == "i"     | return "%#IncSearch#" . a:sep_l . "I" . a:sep_r
-	elseif mode() == "c" | return "%#IncSearch#" . a:sep_l . "C" . a:sep_r
+	elseif mode() == "c" | return a:sep_l . "C" . a:sep_r
 	elseif mode() == "t" | return "%#IncSearch#" . a:sep_l . "T" . a:sep_r
 	elseif mode() == "r" | return "%#IncSearch#" . a:sep_l . "R" . a:sep_r
 	elseif mode() == "s" | return "%#IncSearch#" . a:sep_l . "S" . a:sep_r

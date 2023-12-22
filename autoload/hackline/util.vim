@@ -15,10 +15,11 @@ function! hackline#util#getStatuslineHighlights( highlights ) abort
 endfunction
 
 
-function! hackline#util#has_winwidth (w = "") abort
+function! hackline#util#has_winwidth(w = "") abort
 	let l:w = hackline#config#breakpoints()
+	let l:wrong_config = !(type(l:w) is v:t_dict || (type(l:w.md) is v:t_number && type(l:w.lg) is v:t_number && type(l:w.xl) is v:t_number))
 
-	if &laststatus == 3 || type(l:w) is v:t_dict || (type(l:w.md) is v:t_number && type(l:w.lg) is v:t_number && type(l:w.xl) is v:t_number)
+	if &laststatus == 3 || l:wrong_config
 		return v:true
 	elseif a:w == "md" && type(l:w.md) is v:t_number && winwidth(0) > l:w.md
 		return v:true

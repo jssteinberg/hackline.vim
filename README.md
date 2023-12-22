@@ -21,9 +21,24 @@ Hackline.vim needs no customizing or no patched icon font. It’s not for the sh
 
 ## Installation
 
-Neovim example with packer.nvim:
+For lazy.nvim (Neovim Lua):
 
 ```lua
+{
+	"jssteinberg/hackline.vim",
+	dependencies = "itchyny/vim-gitbranch",
+	config = function()
+		-- to disable cmdline mode flag
+		vim.opt.showmode = false
+	end,
+}
+```
+
+<details>
+<summary>More examples</summary>
+
+```lua
+-- packer example (Neovim Lua)
 use {
 	"jssteinberg/hackline.vim",
 	requires = { "itchyny/vim-gitbranch" },
@@ -34,15 +49,10 @@ use {
 }
 ```
 
-<details>
-<summary>For Vim</summary>
-
 ```vim
-" minpac
+" minpac (vimscript)
 call minpac#add('jssteinberg/hackline.vim')
 ```
-
-(And it should be equally simple with vim-plug).
 
 </details>
 
@@ -86,7 +96,9 @@ endfunction
 
 #### Hackline provided functions
 
-- `hackline#ui#dir#info()` -- params `breakpoint = "xl"` (possible values: `"md" | "lg" | "xl"`) -- returns current buffer relative directory, shortened below breakpoint.
+Vimscript:
+
+- `hackline#ui#dir#info()` -- params `min_breakpoint = "lg", max_breakpoint = "xl"` (possible values: `"md" | "lg" | "xl"`) -- returns current buffer relative directory, shortened between breakpoint, empty below `min_breakpoint`.
 - `hackline#ui#git#info()` -- params `append_left = "*", display_breakpoint = "md"` (possible `display_breakpoint` values: `"md" | "lg" | "xl"`) -- returns git info from gitsigns, fugitive, vim-branch, or vgit.
 - `hackline#ui#tab#info()` -- params `style = "max"` (use  `"min"` to truncate info) -- returns tabs or spaces, and their size.
 - `hackline#ui#nvim_lsp#info()` -- params `append_left = " ", label = "LSP", preped_label = " ", seperator_servers = " ", prepend_right = " ", truncation_breakpoint = "xl"` (possible `truncation_breakpoint` values: `"md" | "lg" | "xl"`) -- returns LSP connected servers by name/length (above/below breakpoint)
@@ -107,91 +119,107 @@ Number values refer to `winwidth(0)`. Note that breakpoints are ignored `if &las
 <summary>Full example</summary>
 
 ```vim
+function! StatuslineModeLabels(sep_l = "", sep_r = "") abort
+	if mode() == "i"     | return "I"
+	elseif mode() == "c" | return "C"
+	elseif mode() == "t" | return "T"
+	elseif mode() == "r" | return "R"
+	elseif mode() == "s" | return "S"
+	else                 | return "V"
+	endif
+endfunction
+
 function! Hackline(status) abort
 	let l:active = a:status
+	" separator label
+	let l:sep_l = " "
 	" separator sections
-	let l:sep = #{l: " ", r: " "}
+	let l:sep = #{l: "  --  ", r: "  /  "}
+	" seperator secondary
+	let l:sep_s = #{l: "  " , r: " "}
 	" separator items
-	let l:sep_i = "/"
-	" length in spaces for separators
-	let l:len_l = repeat(" ", strlen(l:sep.l))
-	let l:len_i = repeat(" ", strlen(l:sep_i))
+	let l:sep_i = #{l: " " , r: " "}
 
-	" Statusline Left Side
-	" --------------------
-
+	" Statusline Start
+	" ----------------
 	let l:line = ""
+
 	" set statusline default color
 	let l:line .= l:active ? "%#StatusLine#" : "%#StatusLineNC#"
-	" set mode style
-	if l:active && mode() != "n"
-		let l:line .= s:ShowMode()
-	endif
+	" set some mode colors
+	let l:line .= l:active && matchstr(mode(), "[itr]") != "" ? "%#IncSearch#" : ""
+	" Start spacing
 	let l:line .= " "
-	" modified flag
-	let l:line .= "%(%M" . l:sep_i . "%)"
-	" buffern number
-	let l:line .= "%(b%{bufnr()}%)"
-	" filetype
-	let l:line .= "%(" . l:sep_i . "%{&filetype}%)"
-	" filename
-	let l:line .= "%(: %t%)"
-	" CWD
-	if len(getcwd(0)) > 1
-		let l:line .= " ("
-		" truncation point
-		let l:line .= "%<"
-		let l:line .= "%(%{split(getcwd(0), '/')[-1]}%)"
-		" Git
-		let l:line .= hackline#ui#git#info("*")
-		" file path
-		let l:line .= "%(, %{hackline#ui#dir#info('xl')}%)"
-		let l:line .= ")"
-		" sep l
-		let l:line .= l:sep.l
+
+	if l:active && matchstr(mode(), "[nc]") == ""
+		" (not normal or command mode)
+		let l:line .= "%1(%{StatuslineModeLabels()}%)"
 	else
-		" truncation point
-		let l:line .= l:sep.l . "%<"
+		" modified flag, fixed width 1
+		let l:line .= "%1(%M%)"
 	endif
+
+	" spacing
+	let l:line .= " "
+
+	" buffern number
+	let l:line .= "%(:b%{bufnr()}%)"
+
+	" filetype
+	let l:line .= "%(" . l:sep_i.l . "%{&filetype}%)"
+
+	let l:line .= l:sep.l
+
+	" file path
+	let l:line .= "%(%{hackline#ui#dir#info()}/%)"
+	" filename
+	let l:line .= "%(%t%)"
+
+	let l:line .= l:sep.l
+
+	" Cursor position
+	let l:line .= "l-%l/%L c-%c"
+
+	" Statusline END
+	" --------------
+	let l:line .= "%=" . l:sep_s.r
+
+	" truncation point
+	let l:line .= "%<"
+
+	" vim lsp
+	if l:active && get(b:, "hackline_use_vim_lsp", "0")
+		let l:line .= "LSP" . l:sep.r
+	endif
+
+	" nvim LSP
+	if l:active && has("nvim")
+		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", l:sep_l, l:sep_i.r, l:sep.r)
+	endif
+
 	" spelllang
 	if l:active && &spell == 1
-		let l:line .= "%(%{&spelllang}" . l:sep_i . "%)"
+		let l:line .= "%(spl=%{&spelllang}" . l:sep_i.r . "%)"
 	endif
+	" tabs/spaces
+	let l:line .= "%(%{hackline#ui#tab#info('min')}" . l:sep_i.r . "%)"
 	" encoding
 	let l:line .= "%(%{hackline#fileencoding#info()}%)"
 	" format
-	let l:line .= "%(" . l:sep_i . "%{&fileformat}%)"
-	" tabs/spaces
-	let l:line .= "%(" . l:sep_i . "%{hackline#ui#tab#info('min')}%)"
-	" Nvim LSP
-	if l:active && has("nvim")
-		let l:line .= hackline#ui#nvim_lsp#info(l:sep.l, "LSP", l:sep_i, l:sep_i, l:len_l)
-	endif
-	" Vim LSP
-	if l:active && get(b:, "hackline_use_vim_lsp", "0")
-		let l:line .= l:sep.l . "LSP" . l:len_i
+	let l:line .= "%(" . l:sep_i.r . "%{&fileformat}%)"
+
+	" CWD
+	if len(getcwd(0)) > 1
+		let l:line .= l:sep.r
+		let l:line .= "%(%{split(getcwd(0), '/')[-1]}%)"
+		" Git
+		let l:line .= hackline#ui#git#info(" *")
 	endif
 
-	" Statusline Right Side
-	" ---------------------
-	let l:line .= "%=" . l:len_i
-
-	" Cursor position
-	let l:line .= "Line %l/%L Col %c"
 	" End spacing
-	let l:line .= " "
+	let l:line .= "   "
 
 	return l:line
-endfunction
-
-function! s:ShowMode(sep_l = "", sep_r = "") abort
-	if mode() == "i"     | return "%#IncSearch#"
-	elseif mode() == "c" | return "%#IncSearch#"
-	elseif mode() == "t" | return "%#IncSearch#"
-	elseif mode() == "r" | return "%#IncSearch#"
-	elseif mode() == "s" | return "%#IncSearch#"
-	else                 | return "%#IncSearch#"
-	endif
 endfunction
 ```
 

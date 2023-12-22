@@ -27,7 +27,7 @@ function! hackline#ui#render(status = v:false) abort
 	" sep
 	let l:line .= l:sep.l
 	" file path
-	let l:line .= '%(%{hackline#ui#dir#info("xl")}/%)%t'
+	let l:line .= '%(%{hackline#ui#dir#info()}/%)%t'
 	" modified flag
 	let l:line .= '%( %m%)'
 	" sep

@@ -115,6 +115,14 @@ let g:hackline_breakpoints = #{
 
 Number values refer to `winwidth(0)`. Note that breakpoints are ignored `if &laststatus == 3`.
 
+For [vim-lsp](https://github.com/prabirshrestha/vim-lsp) there's a buffer local variable that tells if LSP is active:
+
+```vim
+if get(b:, "hackline_use_vim_lsp", "0")
+	" LSP is active for buffer
+endif
+```
+
 <details>
 <summary>Full example</summary>
 

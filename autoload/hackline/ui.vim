@@ -44,12 +44,14 @@ function! hackline#ui#render(status = v:false) abort
 	" let l:line .= '%(%{codeium#GetStatusString()} AI' . l:sep.r . '%)'
 	" Nvim LSP
 	if l:active && has("nvim")
-		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", " ", " ", l:sep.r)
+		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", " ", " ", "")
 	endif
 	" Vim LSP
 	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active
-		let l:line .= 'LSP' .. l:sep.r
+		let l:line .= 'LSP'
 	endif
+	" seperator right
+	let l:line .= l:sep.r
 	" spelllang
 	if l:active && &spell == 1
 		let l:line .= "%(spl=%{&spelllang}" . l:sep_i . "%)"

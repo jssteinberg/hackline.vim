@@ -22,10 +22,11 @@ M.get_connected_client_names = function()
 	return connected_clients
 end
 
-M.names_connected = function()
+M.names_connected = function(sep)
+	sep = sep or " "
 	local connected = M.get_connected_client_names()
 
-	return table.concat(connected, " ")
+	return table.concat(connected, sep)
 end
 
 M.length_connected = function()

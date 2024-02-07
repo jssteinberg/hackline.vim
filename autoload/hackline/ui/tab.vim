@@ -1,10 +1,12 @@
-function! hackline#ui#tab#info(truncate = 0) abort
+" Optional string parmater `style` ["min"|"max"]
+function! hackline#ui#tab#info(style = "max") abort
 	let l:info = ''
+	let l:truncate = a:style == "min"
 
 	if &expandtab
-		let l:info = 'expandtab '
+		let l:info = !l:truncate ? 'expandtab ' : ''
 	else
-		let l:info = 'tab '
+		let l:info = ''
 	endif
 
 	if shiftwidth() > 0 && shiftwidth() != &tabstop
@@ -14,10 +16,12 @@ function! hackline#ui#tab#info(truncate = 0) abort
 		let l:info .= '/'
 		let l:info .= &tabstop
 	elseif &expandtab
-		let l:info .= !a:truncate ? 'sw=' : ''
+		" Spaces
+		let l:info .= 'sw='
 		let l:info .= shiftwidth()
 	elseif &tabstop > 0
-		let l:info = 'tabstop='
+		" Tab indent size
+		let l:info = !l:truncate ? 'tabstop=' : 'ts='
 		let l:info .= &tabstop
 	endif
 

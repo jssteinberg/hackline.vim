@@ -26,7 +26,7 @@ aug END
 if get(g:, "hackline_aggressive", 0)
 	aug hackline_aggressive
 		au!
-		" Aggressively set StatusLine with CursorHold for the often strangeness that is netrw
+		" Aggressively set StatusLine with CursorHold, useful for the often strangeness that is netrw
 		au CursorHold * setlocal statusline=%!hackline#statusline(v:true)
 	aug END
 endif

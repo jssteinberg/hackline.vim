@@ -14,11 +14,11 @@ function! hackline#ui#render(status = v:false) abort
 	" --------------------
 
 	if l:active && hackline#config#mode() && mode() != 'n'
-		let l:line .= s:ShowMode("  ")
-		" sep
-		let l:line .= l:sep.l
+		let l:line .= s:ShowMode(" ", l:len_i)
 	else
-		let l:line .= "  "
+		let l:line .= " "
+		" modified flag, fixed width 1
+		let l:line .= "%1(%M%)" . l:len_i
 	endif
 	" buffern number
 	let l:line .= '%(:b%{bufnr()}%)'
@@ -28,12 +28,16 @@ function! hackline#ui#render(status = v:false) abort
 	let l:line .= l:sep.l
 	" file path
 	let l:line .= '%(%{hackline#ui#dir#info()}/%)%t'
-	" modified flag
-	let l:line .= '%( %m%)'
-	" sep
-	let l:line .= l:sep.l
-	" Cursor info
-	let l:line .= "l-%l/%L c-%c"
+	" Nvim LSP
+	if l:active && has("nvim")
+		let l:line .= l:sep.l
+		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", " ", " ", "")
+	endif
+	" Vim LSP
+	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active
+		let l:line .= l:sep.l
+		let l:line .= 'LSP'
+	endif
 	" truncation point
 	let l:line .= l:len_i . '%<'
 
@@ -42,14 +46,8 @@ function! hackline#ui#render(status = v:false) abort
 
 	let l:line .= '%='
 	" let l:line .= '%(%{codeium#GetStatusString()} AI' . l:sep.r . '%)'
-	" Nvim LSP
-	if l:active && has("nvim")
-		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", " ", " ", "")
-	endif
-	" Vim LSP
-	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active
-		let l:line .= 'LSP'
-	endif
+	" Cursor info
+	let l:line .= "l-%l/%L c-%c"
 	" seperator right
 	let l:line .= l:sep.r
 	" spelllang
@@ -76,12 +74,13 @@ function! hackline#ui#render(status = v:false) abort
 endfunction
 
 function! s:ShowMode(sep_l = "", sep_r = "") abort
-	if mode() == "i"     | return "%#IncSearch#" . a:sep_l . "I" . a:sep_r
-	elseif mode() == "c" | return a:sep_l . "C" . a:sep_r
-	elseif mode() == "t" | return "%#IncSearch#" . a:sep_l . "T" . a:sep_r
-	elseif mode() == "r" | return "%#IncSearch#" . a:sep_l . "R" . a:sep_r
-	elseif mode() == "s" | return "%#IncSearch#" . a:sep_l . "S" . a:sep_r
-	else                 | return "%#IncSearch#" . a:sep_l . "V" . a:sep_r
+	let l:m = mode()
+	if l:m == "i"     | return "%#IncSearch#" . a:sep_l . "I" . a:sep_r
+	elseif l:m == "c" | return                  a:sep_l . "C" . a:sep_r
+	elseif l:m == "t" | return "%#IncSearch#" . a:sep_l . "T" . a:sep_r
+	elseif l:m == "r" | return "%#IncSearch#" . a:sep_l . "R" . a:sep_r
+	elseif l:m == "s" | return "%#IncSearch#" . a:sep_l . "S" . a:sep_r
+	else              | return "%#IncSearch#" . a:sep_l . "V" . a:sep_r
 	endif
 endfunction
 

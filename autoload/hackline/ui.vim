@@ -45,7 +45,6 @@ function! hackline#ui#render(status = v:false) abort
 	" ---------------------
 
 	let l:line .= '%='
-	" let l:line .= '%(%{codeium#GetStatusString()} AI' . l:sep.r . '%)'
 	" Cursor info
 	let l:line .= "l-%l/%L c-%c"
 	" seperator right

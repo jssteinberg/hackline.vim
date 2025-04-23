@@ -8,7 +8,7 @@ end
 
 M.get_connected_client_names = function()
 	local connected_clients = {}
-	local clients = vim.lsp.get_active_clients()
+	local clients = vim.lsp.get_clients() -- vim.lsp.get_active_clients()
 	local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 
 	for _, client in pairs(clients) do

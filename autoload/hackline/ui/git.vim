@@ -4,14 +4,18 @@ function! hackline#ui#git#info(append = "*", display_breakpoint = "md") abort
 	if type(a:append) == v:t_string
 		let l:append_left = a:append
 		let l:append_right = ""
-	else
+	elseif len(a:append)
 		let l:append_left = a:append[0]
-		let l:append_right = a:append[1]
+		if len(a:append) > 1
+			let l:append_right = a:append[1]
+		else
+			let l:append_right = ""
+		endif
 	endif
 	
 	if hackline#util#has_winwidth(a:display_breakpoint)
 		return ''
-					\ . '%(' . l:append_left . '%{hackline#git#branch()}%)'
+					\ . '%(' . l:append_left . '%{hackline#git#branch()}' . l:append_right . '%)'
 					\ . '%( %{hackline#git#status()}%)'
 	else
 		return ''

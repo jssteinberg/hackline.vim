@@ -16,7 +16,7 @@ function! hackline#ui#git#info(append = "*", display_breakpoint = "md") abort
 	if hackline#util#has_winwidth(a:display_breakpoint)
 		return ''
 					\ . '%(' . l:append_left . '%{hackline#git#branch()}' . l:append_right . '%)'
-					\ . '%( %{hackline#git#status()}%)'
+					\ . '%(%{hackline#git#status()}%)'
 	else
 		return ''
 	endif

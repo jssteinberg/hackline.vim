@@ -1,6 +1,6 @@
 function! hackline#git#branch() abort
 	" gitsigns
-	let l:branch = get(b:, 'gitsigns_head', '')
+	let l:branch = '' " get(b:, 'gitsigns_head', '')
 
 	if l:branch == '' && exists('*FugitiveHead')
 		" fugitive.vim

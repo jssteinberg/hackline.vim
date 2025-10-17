@@ -28,27 +28,28 @@ function! hackline#ui#render(status = v:false) abort
 	let l:line .= l:sep.l
 	" file path
 	let l:line .= '%(%{hackline#ui#dir#info()}/%)%t'
-	" Nvim LSP
-	if l:active && has("nvim")
-		let l:line .= l:sep.l
-		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", " ", " ", "")
-	endif
-	" Vim LSP
-	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active
-		let l:line .= l:sep.l
-		let l:line .= 'LSP'
-	endif
-	" truncation point
-	let l:line .= l:len_i . '%<'
 
 	" Statusline Right Side
 	" ---------------------
 
+	let l:line .= l:len_i
 	let l:line .= '%='
+	" Nvim LSP
+	if l:active && has("nvim")
+		let l:line .= hackline#ui#nvim_lsp#info("", "LSP", " ", " ", "")
+		let l:line .= l:sep.r
+	endif
+	" Vim LSP
+	if get(b:, "hackline_use_vim_lsp", "0") &&  l:active
+		let l:line .= 'LSP'
+		let l:line .= l:sep.r
+	endif
 	" Cursor info
-	let l:line .= "l-%l/%L c-%c"
+	let l:line .= "%p%%/%L L %l:%c"
 	" seperator right
 	let l:line .= l:sep.r
+	" truncation point
+	let l:line .= '%<'
 	" spelllang
 	if l:active && &spell == 1
 		let l:line .= "%(spl=%{&spelllang}" . l:sep_i . "%)"
